@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celebrity Sightings - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a class="on" href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="08-family-tree.html">← Stop 8 — The Family Tree</a> · <a href="index.html">Route map</a> · <a href="10-casino.html">Stop 10 — The Casino →</a></p>
+<h1 id="stop-9-celebrity-sightings">Stop 9 — Celebrity Sightings</h1>
+<blockquote>Two famous constants ride this road: e, whose continued fraction hides a perfect pattern, and π, whose continued fraction hides nothing we can see.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>The tour now meets its celebrities. The quadratic surds of Stop 6 loop; the rationals of Stop 2 terminate. But the two most famous transcendental numbers, <code>e</code> and <code>π</code>, do neither — and the <em>contrast</em> between them is the lesson of this stop. One wears its structure openly; the other guards it so well that basic questions about it remain unanswered to this day.</p>
+<h3 id="e-order-in-plain-sight">e: order in plain sight</h3>
+<p>Euler computed the continued fraction of <code>e</code> in <strong>1737</strong> and found a startlingly regular pattern:</p>
+<pre><code>e = [2; 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, …].</code></pre>
+<p>After the initial <code>2</code>, the terms come in blocks of three: <code>1, 2k, 1</code> for <code>k = 1, 2, 3, …</code>. Every third partial quotient is an even number <code>2, 4, 6, 8, …</code> climbing without bound; the rest are <code>1</code>s. This is not a coincidence but a theorem — the expansion can be derived from the continued fraction of the function <code>tanh</code> or from properties of the exponential integral.</p>
+<p>The pattern does real mathematical work: <strong>it proves that <code>e</code> is irrational.</strong> A continued fraction is finite exactly when its number is rational (Stop 2). Since Euler&#x27;s pattern manifestly never terminates — the even entries grow forever — <code>e</code> cannot be rational. This is arguably the cleanest irrationality proof in mathematics: exhibit the infinite continued fraction and you are done. (A closely related expansion, <code>(e−1)/(e+1) = [0; 2, 6, 10, 14, …]</code>, is even simpler and gives the same conclusion.)</p>
+<h3 id="structure-we-cannot-find">π: structure we cannot find</h3>
+<p>Now <code>π</code>:</p>
+<pre><code>π = [3; 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, …].</code></pre>
+<p>There is <strong>no known pattern</strong>. The terms wander — mostly small, but with the occasional giant like <code>292</code> (which, recall from Stop 5, is why <code>355/113</code> is so good). Worse, some of the most basic questions are <em>open problems</em>:</p>
+<ul><li>Is the sequence of partial quotients of <code>π</code> <strong>bounded</strong>, or do arbitrarily large terms keep appearing? Unknown.</li><li>Do the partial quotients follow the Gauss–Kuzmin statistics of a &quot;random&quot; number (Stop 10)? Believed yes, unproven.</li></ul>
+<p>We have computed billions of terms and they <em>look</em> random, but &quot;looks random&quot; is not a theorem. The regular continued fraction of <code>π</code>, unlike <code>e</code>&#x27;s, has never revealed a usable structure — a humbling fact given how much we know about <code>π</code> in every other respect. This gap is the seed of Stop 15&#x27;s open-problems chapter.</p>
+<h3 id="generalized-continued-fractions-order-restored">Generalized continued fractions: order restored</h3>
+<p>If the <em>regular</em> continued fraction of <code>π</code> is chaos, we can recover order by relaxing the rules. A <strong>generalized continued fraction</strong> allows numerators other than <code>1</code>:</p>
+<pre><code>b₀ + a₁/(b₁ + a₂/(b₂ + a₃/(b₃ + …))).</code></pre>
+<p>Give up the requirement that numerators be <code>1</code>, and <code>π</code> becomes beautifully patterned. <strong>Lord Brouncker (1655)</strong>, the first president of the Royal Society, found</p>
+<pre><code>4/π = 1 + 1²/(2 + 3²/(2 + 5²/(2 + 7²/(2 + …)))),</code></pre>
+<p>with the odd squares <code>1², 3², 5², …</code> marching up the numerators. There is also the classical <code>π/4 = 1 − 1/3 + 1/5 − …</code> (Leibniz), which a generalized continued fraction converges far faster than.</p>
+<p>The deepest of these is <strong>Lambert&#x27;s continued fraction for the tangent</strong> (1761):</p>
+<pre><code>tan(x) = x / (1 − x²/(3 − x²/(5 − x²/(7 − …)))).</code></pre>
+<p>From it, Johann Lambert gave the <strong>first proof that <code>π</code> is irrational</strong>: he showed <code>tan(x)</code> is irrational whenever <code>x ≠ 0</code> is rational, and since <code>tan(π/4) = 1</code> is rational, <code>π/4</code> — and hence <code>π</code> — cannot be. The regular continued fraction hides <code>π</code>&#x27;s nature; the generalized one exposes it. The two faces of the continued fraction — the self-organising <code>e</code> and the inscrutable <code>π</code> — are why this stop is called &quot;celebrity sightings&quot;: you can see the stars, but only one of them will tell you how it works.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Expand <code>e</code> and watch Euler&#x27;s <code>1, 2k, 1</code> blocks emerge. The <code>tourbus</code> engine prints enough terms to see the pattern lock in — <code>2; 1, 2, 1, 1, 4, 1, 1, 6, …</code>:</p>
+<pre><code>$ python -m tourbus demo cf e
+continued fraction of e:
+  [2; 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1, 12, 1, 1, ...]
+
+ n  a_n  p/q            value      error
+ -  ---  ------  ------------  ---------
+ 0    2  2/1     2.0000000000  +7.18e-01
+ 1    1  3/1     3.0000000000  -2.82e-01
+ 2    2  8/3     2.6666666667  +5.16e-02
+ 3    1  11/4    2.7500000000  -3.17e-02
+ 4    1  19/7    2.7142857143  +4.00e-03
+ 5    4  87/32   2.7187500000  -4.68e-04
+ 6    1  106/39  2.7179487179  +3.33e-04
+ 7    1  193/71  2.7183098592  -2.80e-05</code></pre>
+<p>The even terms <code>2, 4, 6, …</code> appear at positions <code>2, 5, 8, …</code> — every third slot — exactly Euler&#x27;s pattern, and each one (being larger than 1) marks a convergent of above-average accuracy, which is why the error drops sharply right after <code>a₅ = 4</code>.</p>
+<p>Now the contrast. Expand <code>π</code> and there is no such regularity — small terms, then a sudden <code>292</code>, then no discernible law:</p>
+<pre><code>$ python -m tourbus demo cf pi
+continued fraction of pi:
+  [3; 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, ...]
+
+ n  a_n  p/q                  value      error
+ -  ---  ------------  ------------  ---------
+ 0    3  3/1           3.0000000000  +1.42e-01
+ 1    7  22/7          3.1428571429  -1.26e-03
+ 2   15  333/106       3.1415094340  +8.32e-05
+ 3    1  355/113       3.1415929204  -2.67e-07
+ 4  292  103993/33102  3.1415926530  +5.78e-10
+ 5    1  104348/33215  3.1415926539  -3.32e-10
+ 6    1  208341/66317  3.1415926535  +1.22e-10
+ 7    1  312689/99532  3.1415926536  -2.91e-11</code></pre>
+<p>Put the two tables side by side: <code>e</code>&#x27;s terms are a machine you can predict; <code>π</code>&#x27;s are, for all anyone can prove, a coin toss.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> From the <code>e</code> demo, write down partial quotients <code>a₈</code> through <code>a₁₄</code> predicted by Euler&#x27;s pattern, then check them against the printed head of the expansion. <details><summary>Hint</summary>The blocks continue <code>1, 8, 1, 1, 10, 1, 1, …</code>; the even terms are <code>8</code> at position 8 and <code>10</code> at position 11.</details></li></ol>
+<ol><li><strong>(★)</strong> Explain, in one sentence, why Euler&#x27;s pattern proves <code>e</code> is irrational. <details><summary>Hint</summary>The expansion never terminates, and only rationals have terminating continued fractions.</details></li></ol>
+<ol><li><strong>(★★)</strong> Compute the first four convergents of Brouncker&#x27;s formula for <code>4/π</code> and compare their accuracy to the regular convergents <code>22/7</code> and <code>355/113</code>. <details><summary>Hint</summary>Generalized CFs of <code>π</code> converge much more slowly than the regular one; that is exactly why the <em>regular</em> expansion is the powerful tool for approximation.</details></li></ol>
+<ol><li><strong>(★★)</strong> Using Lambert&#x27;s <code>tan(x)</code> continued fraction, evaluate the first two convergents at <code>x = π/4</code> and see them approach <code>tan(π/4) = 1</code>. <details><summary>Hint</summary>The first convergent is <code>x</code>; the second is <code>x/(1 − x²/3) = 3x/(3 − x²)</code>.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Sketch Lambert&#x27;s argument that <code>tan(x)</code> is irrational for nonzero rational <code>x</code>, and hence that <code>π</code> is irrational. <details><summary>Hint</summary>Assume <code>x = p/q</code> rational and derive a contradiction from the infinitely-descending integer structure of the continued fraction&#x27;s remainders; the irrationality of <code>tan(1)</code> is the crux. See Appendix C.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Celebrity Sightings</strong> widget: <a href="explore.html#stop-9-celebrity"><code>site/index.html#stop-9-celebrity</code></a>. Toggle between <code>e</code> and <code>π</code> and watch one expansion fall into lockstep while the other refuses to, with Brouncker&#x27;s generalized fraction rendered alongside.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Euler, <em>De fractionibus continuis dissertatio</em> (1737) — the original computation of <code>e</code>&#x27;s continued fraction; Appendix C.</li><li>Lambert (1761), the first irrationality proof of <code>π</code>; see the modern account in Appendix C.</li><li>Hardy &amp; Wright, §§11.6–11.7, on the continued fractions of <code>e</code> and <code>π</code>.</li><li>C. D. Olds, &quot;The Simple Continued Fraction Expansion of e,&quot; <em>Amer. Math. Monthly</em> (1970).</li></ul>
+<p class="chapter-nav"><a href="08-family-tree.html">← Stop 8 — The Family Tree</a> · <a href="index.html">Route map</a> · <a href="10-casino.html">Stop 10 — The Casino →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Family Tree - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a class="on" href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="07-cattle-crossing.html">← Stop 7 — The Cattle Crossing</a> · <a href="index.html">Route map</a> · <a href="09-celebrity.html">Stop 9 — Celebrity Sightings →</a></p>
+<h1 id="stop-8-the-family-tree">Stop 8 — The Family Tree</h1>
+<blockquote>Every positive fraction has exactly one address in a single infinite tree — and the directions to it are its continued fraction.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>We have been treating rationals one at a time. Now we organise <em>all</em> of them into a single structure that contains each positive rational exactly once, in lowest terms, with no repeats and no gaps: the <strong>Stern–Brocot tree</strong>. It was found independently by the German number theorist <strong>Moritz Stern (1858)</strong> and the French <strong>clockmaker Achille Brocot (1861)</strong>, who needed good gear ratios (Stop 5 again) and wanted a systematic way to list them. The tree turns out to be the continued fraction wearing a different hat.</p>
+<h3 id="the-mediant">The mediant</h3>
+<p>The engine of the tree is the <strong>mediant</strong> of two fractions:</p>
+<pre><code>mediant(a/b, c/d) = (a + c)/(b + d).</code></pre>
+<p>This is the &quot;wrong&quot; way to add fractions that every schoolchild is warned against — and it is exactly right here. If <code>a/b &lt; c/d</code> are neighbours, their mediant lies strictly between them: <code>a/b &lt; (a+c)/(b+d) &lt; c/d</code>. Start with the two &quot;boundary&quot; fractions <code>0/1</code> and <code>1/0</code> (the latter a formal <code>+∞</code>). Repeatedly insert mediants between adjacent pairs, and you generate a binary tree whose nodes are:</p>
+<pre><code>                1/1
+          ┌──────┴──────┐
+         1/2           2/1
+       ┌──┴──┐       ┌──┴──┐
+      1/3   2/3     3/2   3/1</code></pre>
+<p><strong>Every positive rational appears exactly once, already in lowest terms.</strong> No fraction is missing, and none is duplicated — a complete, non-redundant enumeration of the rationals, which is remarkable given how easy it is to double-count them.</p>
+<h3 id="address-continued-fraction">Address = continued fraction</h3>
+<p>Each node has an address: the string of <strong>L</strong>eft and <strong>R</strong>ight turns from the root <code>1/1</code>. And here is the punchline that unifies this stop with all the earlier ones:</p>
+<blockquote>The run-lengths of the L/R address are the partial quotients of the node&#x27;s continued fraction (with the final run one short).</blockquote>
+<p>Reading <code>355/113 = [3; 7, 16]</code>, the path is 3 rights, then 7 lefts, then 15 rights — run-lengths <code>3, 7, 15</code>, the last being <code>16 − 1</code>. The off-by-one in the last run is precisely the two-representations ambiguity of Stop 2: <code>[…, aₙ]</code> and <code>[…, aₙ − 1, 1]</code> are the two ways to finish the walk. Descending the tree <em>is</em> running the continued-fraction expansion; the convergents of Stop 3 are the fractions where the path changes direction.</p>
+<h3 id="farey-neighbours">Farey neighbours</h3>
+<p>Take all fractions in <code>[0, 1]</code> with denominator at most <code>n</code>, in order: that is the <strong>Farey sequence</strong> <code>Fₙ</code>. Its defining property is that adjacent fractions <code>a/b &lt; c/d</code> satisfy</p>
+<pre><code>b·c − a·d = 1</code></pre>
+<p>— the same unit-determinant &quot;neighbour&quot; condition we met for consecutive convergents at Stop 3. The Stern–Brocot tree and the Farey sequences are two cross-sections of one structure: neighbours in a Farey sequence are exactly parent-and-child (or the two fractions flanking a mediant) in the tree. The mediant of two Farey neighbours is the next fraction to appear between them as <code>n</code> grows.</p>
+<h3 id="fusc-and-the-calkin-wilf-enumeration">fusc, and the Calkin–Wilf enumeration</h3>
+<p>There is a slicker enumeration still. <strong>Stern&#x27;s diatomic sequence</strong> — Dijkstra affectionately called its function <code>fusc</code> — is defined by <code>fusc(0) = 0</code>, <code>fusc(1) = 1</code>, <code>fusc(2n) = fusc(n)</code>, <code>fusc(2n+1) = fusc(n) + fusc(n+1)</code>. The consecutive ratios <code>fusc(n)/fusc(n+1)</code> list <strong>every</strong> positive rational exactly once, with no need to check for lowest terms — the <strong>Calkin–Wilf</strong> enumeration (2000). It is the breadth-first reading of a cousin of the Stern–Brocot tree, and it gives an explicit bijection between the naturals and the positive rationals that a computer can walk with two integers and a bit of recursion.</p>
+<h3 id="minkowski-s-question-mark">Minkowski&#x27;s question mark</h3>
+<p>Finally, a bridge to Stop 6. <strong>Minkowski&#x27;s question-mark function</strong> <code>?(x)</code> reads a number&#x27;s continued fraction and re-emits it as a binary expansion of the tree address:</p>
+<pre><code>?([0; a₁, a₂, a₃, …]) = 2·(2⁻ᵃ¹ − 2⁻⁽ᵃ¹⁺ᵃ²⁾ + 2⁻⁽ᵃ¹⁺ᵃ²⁺ᵃ³⁾ − …).</code></pre>
+<p>It is a strictly increasing, continuous function on <code>[0, 1]</code> that maps the <strong>quadratic irrationals</strong> (the periodic surds of Stop 6) exactly onto the <strong>rationals</strong> — it &quot;rationalises&quot; the loop-road numbers. For example <code>?(1/3) = 1/4</code> and <code>?(1/φ) = 2/3</code>. Its graph is the famous <em>slippery devil&#x27;s staircase</em>: continuous and increasing yet with zero derivative almost everywhere. It is the analytic incarnation of the fact that the Stern–Brocot address is the continued fraction.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Find the tree address of the π-convergent <code>355/113</code>. The path is three rights, seven lefts, fifteen rights — run-lengths that are the continued fraction <code>[3; 7, 16]</code> with the last term reduced by one:</p>
+<pre><code>$ python -m tourbus demo stern-brocot 355/113
+Stern-Brocot address of 355/113:
+  RRRLLLLLLLRRRRRRRRRRRRRRR
+  round-trips to 355/113</code></pre>
+<p>Count the letters: <code>RRR</code> (3), <code>LLLLLLL</code> (7), then fifteen <code>R</code>s. Against <code>355/113 = [3; 7, 16]</code>, the run-lengths <code>3, 7, 15</code> recover the partial quotients with the final <code>16</code> split as <code>15 + 1</code>. The <code>round-trips</code> line confirms the address decodes back to the original fraction — the bijection is exact.</p>
+<p>A smaller example makes the run-length rule easy to check by eye. The fraction <code>3/8 = [0; 2, 1, 2]</code> sits at address <code>LLRL</code>:</p>
+<pre><code>$ python -m tourbus demo stern-brocot 3/8
+Stern-Brocot address of 3/8:
+  LLRL
+  round-trips to 3/8</code></pre>
+<p>The runs are <code>LL</code> (2), <code>R</code> (1), <code>L</code> (1). Reading <code>[0; 2, 1, 2]</code>: the leading <code>0</code> means we start by turning left, the runs <code>2, 1</code> match the middle quotients, and the final quotient <code>2</code> shows up as <code>1 + 1</code> across the last two runs.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Compute the mediant of <code>1/2</code> and <code>2/3</code>, and confirm it lies between them and is in lowest terms. <details><summary>Hint</summary><code>(1+2)/(2+3) = 3/5</code>, and <code>1/2 &lt; 3/5 &lt; 2/3</code>.</details></li></ol>
+<ol><li><strong>(★)</strong> Use <code>demo stern-brocot 8/5</code> and match the address <code>RLRL</code> to the continued fraction of <code>8/5</code>. <details><summary>Hint</summary><code>8/5 = [1; 1, 1, 1, 1]</code>; the alternating single-letter runs are the string of <code>1</code>s.</details></li></ol>
+<ol><li><strong>(★★)</strong> Verify the Farey-neighbour condition <code>bc − ad = 1</code> for the adjacent pair <code>2/5</code> and <code>3/7</code> in <code>F₇</code>. <details><summary>Hint</summary><code>5·3 − 2·7 = 15 − 14 = 1</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Compute <code>fusc(0)</code> through <code>fusc(8)</code> and list the Calkin–Wilf fractions <code>fusc(n)/fusc(n+1)</code> for <code>n = 1, …, 7</code>. Confirm none repeats. <details><summary>Hint</summary>The sequence is <code>0,1,1,2,1,3,2,3,1,…</code>; the ratios are <code>1/1, 1/2, 2/1, 1/3, 3/2, 2/3, 3/1, …</code>.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Show <code>?(1/φ) = 2/3</code> directly from the series, using <code>1/φ = [0; 1, 1, 1, …]</code>. <details><summary>Hint</summary>All <code>aₖ = 1</code>, so the partial sums are <code>2⁻¹</code>; the series is <code>2·(2⁻¹ − 2⁻² + 2⁻³ − …) = 2·(1/3) = 2/3</code>.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Family Tree</strong> widget: <a href="explore.html#stop-8-family"><code>site/index.html#stop-8-family</code></a>. Click L and R to descend the Stern–Brocot tree, or type a fraction and watch the path light up, with the mediant computed at every branch.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Graham, Knuth &amp; Patashnik, <em>Concrete Mathematics</em>, §4.5 — the definitive account of the Stern–Brocot tree and <code>fusc</code>. See Appendix C.</li><li>Calkin &amp; Wilf, &quot;Recounting the Rationals,&quot; <em>American Mathematical Monthly</em> (2000).</li><li>Hardy &amp; Wright, §3.1–3.7 on Farey sequences.</li><li>A. Denjoy / H. Minkowski on the question-mark function; see Appendix C.</li></ul>
+<p class="chapter-nav"><a href="07-cattle-crossing.html">← Stop 7 — The Cattle Crossing</a> · <a href="index.html">Route map</a> · <a href="09-celebrity.html">Stop 9 — Celebrity Sightings →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

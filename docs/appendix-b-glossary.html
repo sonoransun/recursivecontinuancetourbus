@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix B - Glossary - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a class="on" href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="appendix-a-proofs.html">← Appendix A — Proofs</a> · <a href="index.html">Route map</a> · <a href="appendix-c-references.html">Appendix C — References →</a></p>
+<h1 id="appendix-b-glossary">Appendix B — Glossary</h1>
+<p>The vocabulary of the tour, in alphabetical order. Each entry names the stop where the term is introduced.</p>
+<h3 id="best-approximation-of-the-first-kind">Best approximation of the first kind</h3>
+<p>A fraction <code>p/q</code> that minimises the <em>absolute</em> distance <code>|x − p/q|</code> among all fractions with denominator at most <code>q</code>. These include the convergents <strong>and</strong> certain semiconvergents. Contrast with the second kind. <em>(Stop 5.)</em></p>
+<h3 id="best-approximation-of-the-second-kind">Best approximation of the second kind</h3>
+<p>A fraction <code>p/q</code> that minimises <code>|q·x − p|</code> — the distance weighted by the denominator — among all fractions with denominator at most <code>q</code>. By <strong>Lagrange&#x27;s theorem</strong>, these are <em>exactly</em> the continued-fraction convergents. This is the stronger, cleaner notion, and the one usually meant by &quot;best rational approximation.&quot; <em>(Stop 5.)</em></p>
+<h3 id="bihomographic-transform">Bihomographic transform</h3>
+<p>A function of two variables <code>z(x, y) = (a·xy + b·x + c·y + d)/(e·xy + f·x + g·y + h)</code> with an eight-integer state, used by Gosper&#x27;s algorithm to compute <code>x + y</code>, <code>x · y</code>, and other binary operations directly on continued-fraction streams. It has three moves — ingest from <code>x</code>, ingest from <code>y</code>, or emit an output term. <em>(Stop 11.)</em></p>
+<h3 id="complete-quotient">Complete quotient</h3>
+<p>The value <code>xₙ = [aₙ; aₙ₊₁, aₙ₊₂, …]</code> of the entire tail of a continued fraction from position <code>n</code> onward. Always <code>≥ 1</code> for <code>n ≥ 1</code>, and satisfies <code>x = (xₙ pₙ₋₁ + pₙ₋₂)/(xₙ qₙ₋₁ + qₙ₋₂)</code>. The tool of the error-bound proof in Appendix A. <em>(Stop 3.)</em></p>
+<h3 id="convergent">Convergent</h3>
+<p>The rational <code>pₙ/qₙ = [a₀; a₁, …, aₙ]</code> obtained by truncating a continued fraction after <code>n + 1</code> terms. Convergents are automatically in lowest terms, straddle the true value in alternation, and are the best approximations of the second kind. <em>(Stop 3.)</em></p>
+<h3 id="corecursion">Corecursion</h3>
+<p>A definition scheme that <em>produces</em> an infinite structure on demand, rather than consuming a finite input down to a base case (ordinary recursion). Gosper&#x27;s stream arithmetic is corecursive: it has no base case and is judged correct by how it keeps emitting valid terms forever, not by how it halts. <em>(Stop 11.)</em></p>
+<h3 id="farey-sequence-f">Farey sequence <code>Fₙ</code></h3>
+<p>The ascending list of all fractions in <code>[0, 1]</code> with denominator at most <code>n</code>, in lowest terms. Adjacent fractions <code>a/b &lt; c/d</code> satisfy the neighbour relation <code>bc − ad = 1</code>, and the mediant of two neighbours is the next fraction to appear between them. Closely tied to the Stern–Brocot tree. <em>(Stop 8.)</em></p>
+<h3 id="gauss-map">Gauss map</h3>
+<p>The transformation <code>T(x) = {1/x} = 1/x − ⌊1/x⌋</code> on <code>(0, 1)</code>, which strips the first partial quotient off a continued fraction and shifts the rest forward. It preserves the <strong>Gauss measure</strong> <code>dμ = (1/ln 2)·1/(1+x) dx</code> and is ergodic; the statistics of continued fractions are the dynamics of this one map. <em>(Stop 10.)</em></p>
+<h3 id="homographic-transform">Homographic transform</h3>
+<p>A function of one variable <code>z(x) = (a·x + b)/(c·x + d)</code> with integer state <code>(a, b, c, d)</code> — also called a Möbius or fractional-linear transform. The one-input building block of Gosper&#x27;s algorithm, with two moves: ingest an input term or emit an output term when the floor is determined. A <strong>purely periodic</strong> continued fraction is a fixed point of such a map. <em>(Stops 11, 13.)</em></p>
+<h3 id="mediant">Mediant</h3>
+<p>The fraction <code>(a + c)/(b + d)</code> formed from <code>a/b</code> and <code>c/d</code> by adding numerators and denominators separately. It lies strictly between two neighbours and is the generating operation of the Stern–Brocot tree and the Farey sequences. <em>(Stop 8.)</em></p>
+<h3 id="partial-quotient">Partial quotient</h3>
+<p>One of the terms <code>aₙ</code> in <code>[a₀; a₁, a₂, …]</code>. The first, <code>a₀</code>, is any integer; every later one is a positive integer <code>aₙ ≥ 1</code>. For a rational, the partial quotients are exactly the quotients produced by Euclid&#x27;s algorithm. <em>(Stops 1, 2.)</em></p>
+<h3 id="primitive-recursion">Primitive recursion</h3>
+<p>The class of functions built from basic functions (zero, successor, projection) by composition and <em>bounded</em> recursion — essentially, everything computable with <code>for</code>-loops whose bounds are known in advance. The Ackermann function is total and computable but <strong>not</strong> primitive recursive: it grows faster than any function in this class. <em>(Stop 12.)</em></p>
+<h3 id="quadratic-irrational-quadratic-surd">Quadratic irrational (quadratic surd)</h3>
+<p>An irrational root of an integer quadratic <code>ax² + bx + c = 0</code>, equivalently a number of the form <code>(P + √d)/Q</code> with <code>d</code> a non-square positive integer. By <strong>Lagrange&#x27;s theorem</strong>, these are exactly the numbers with eventually periodic continued fractions. <em>(Stop 6.)</em></p>
+<h3 id="reduced-surd">Reduced surd</h3>
+<p>A quadratic irrational <code>x</code> with <code>x &gt; 1</code> whose conjugate <code>x̄</code> (the other root, <code>√d ↦ −√d</code>) lies strictly in <code>(−1, 0)</code>. By <strong>Galois&#x27; theorem</strong>, a surd&#x27;s continued fraction is <em>purely</em> periodic (periodic from the very first term) if and only if it is reduced. <em>(Stop 6.)</em></p>
+<h3 id="semiconvergent">Semiconvergent</h3>
+<p>An intermediate fraction obtained by using a partial quotient <code>1 ≤ k &lt; aₙ</code> in the convergent recurrence: <code>(k·pₙ₋₁ + pₙ₋₂)/(k·qₙ₋₁ + qₙ₋₂)</code>. Semiconvergents fill the gaps between successive convergents and appear among the best approximations of the first kind, though not the second. <em>(Stop 5.)</em></p>
+<h3 id="similarity-dimension">Similarity dimension</h3>
+<p>For a self-similar set made of <code>N</code> copies of itself each scaled by <code>r &lt; 1</code>, the number <code>d = ln N / ln(1/r)</code>. It generalises ordinary dimension to fractional values: Cantor set <code>≈ 0.6309</code>, Koch curve <code>≈ 1.2619</code>, Sierpiński triangle <code>≈ 1.5850</code>, and space-filling curves (dragon, Hilbert) exactly <code>2</code>. <em>(Stop 13.)</em></p>
+<h3 id="stern-brocot-tree">Stern–Brocot tree</h3>
+<p>The infinite binary tree of all positive rationals, each appearing exactly once in lowest terms, generated by repeatedly inserting mediants between <code>0/1</code> and <code>1/0</code>. A node&#x27;s Left/Right address has run-lengths equal to its continued fraction&#x27;s partial quotients (last run off by one). <em>(Stop 8.)</em></p>
+<h2 id="see-also">See also</h2>
+<ul><li>Appendix A for the proofs that use these terms.</li><li>Appendix C for the sources where each is developed in full.</li></ul>
+<p class="chapter-nav"><a href="appendix-a-proofs.html">← Appendix A — Proofs</a> · <a href="index.html">Route map</a> · <a href="appendix-c-references.html">Appendix C — References →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

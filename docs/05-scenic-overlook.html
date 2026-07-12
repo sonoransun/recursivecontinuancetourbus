@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenic Overlook - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a class="on" href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="04-golden.html">← Stop 4 — The Golden Milestone</a> · <a href="index.html">Route map</a> · <a href="06-loop-road.html">Stop 6 — The Loop Road →</a></p>
+<h1 id="stop-5-scenic-overlook">Stop 5 — Scenic Overlook</h1>
+<blockquote>A place to stop and admire the view: continued fractions give the best rational approximations there are, and calendars, clockwork, and π all lean on them.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>We pause at the overlook to appreciate what the engine of Stop 3 has been building. Convergents are not merely <em>good</em> approximations — they are, in a precise sense, the <em>best</em> ones. This is why a Persian astronomer, a Dutch clockmaker, and a Chinese mathematician all independently rediscovered the same fractions. Continued fractions are the mathematics of &quot;close enough with the smallest possible parts.&quot;</p>
+<h3 id="best-approximation-of-the-second-kind">Best approximation of the second kind</h3>
+<p>Call <code>p/q</code> a <strong>best rational approximation of the second kind</strong> if every other fraction with a denominator <code>q′ ≤ q</code> is strictly farther from <code>x</code>: <code>|q′x − p′| &gt; |qx − p|</code> for all such <code>p′/q′</code>. <strong>Lagrange&#x27;s theorem</strong> identifies these exactly:</p>
+<blockquote>The best rational approximations of the second kind to a real number are precisely its continued-fraction convergents.</blockquote>
+<p>No fraction with a denominator up to <code>qₙ</code> beats <code>pₙ/qₙ</code>. Truncating a decimal only gives you the best fraction with a <em>power-of-ten</em> denominator; truncating the continued fraction gives you the best fraction, full stop. (There are also best approximations &quot;of the first kind,&quot; which minimise <code>|x − p/q|</code> directly; those include the convergents plus certain <em>semiconvergents</em> — the intermediate fractions you get by using a partial quotient <code>1 ≤ k &lt; aₙ</code> in the recurrence. See Appendix B.)</p>
+<h3 id="legendre-s-converse">Legendre&#x27;s converse</h3>
+<p>Lagrange tells us convergents are good; <strong>Legendre&#x27;s criterion (1798)</strong> gives a practical converse:</p>
+<blockquote>If <code>|x − p/q| &lt; 1/(2q²)</code>, then <code>p/q</code> is a convergent of <code>x</code>.</blockquote>
+<p>So being <em>unusually</em> close — closer than half the inverse square of your denominator — is a <em>certificate</em> of being a convergent. This is not idle: at Stop 14, Wiener&#x27;s attack on RSA works precisely by manufacturing a fraction that satisfies Legendre&#x27;s bound, forcing it to appear among the convergents where the attacker can find it.</p>
+<h3 id="calendars-fitting-the-year-to-the-day">Calendars: fitting the year to the day</h3>
+<p>The tropical year is about <strong>365.2422 days</strong> — not a whole number, which is the entire problem of calendar design. We need a leap-year rule: a fraction <code>L/Y</code> of years that are leap years, approximating <code>0.2422</code>. The convergents of <code>0.2422</code> are exactly the historical answers:</p>
+<ul><li><code>1/4</code> — one leap year every four years, the <strong>Julian calendar</strong> (46 BC). Slightly too many; the year drifts by about 11 minutes annually.</li><li><code>7/29</code> and then <code>8/33</code> — eight leap years every 33 years, the rule of the <strong>Jalali calendar</strong> designed by a committee including Omar Khayyam in <strong>1079</strong>, and astonishingly accurate.</li><li><code>31/128</code> — thirty-one leap years per 128 years, more accurate still and occasionally proposed as a reform.</li></ul>
+<p>The familiar <strong>Gregorian</strong> rule (<code>97/400</code> — drop three leap days every four centuries) is <em>not</em> a convergent. It is a deliberate administrative compromise: <code>97/400 = 0.2425</code> is less accurate than <code>8/33 = 0.242424…</code>, but base-100 century boundaries are far easier to teach and remember than a 33-year cycle. It is a rare case where humanity knowingly chose a <em>worse</em> approximation for the sake of usability — the exception that proves how strong the convergents&#x27; pull normally is.</p>
+<h3 id="clockwork-and-gears">Clockwork and gears</h3>
+<p>The same problem appears whenever two rotations must be linked by a gear train: the ratio of teeth must approximate an irrational or awkward ratio. <strong>Christiaan Huygens</strong>, building a mechanical planetarium in the 1680s, needed a gear ratio for Saturn&#x27;s period relative to Earth&#x27;s — roughly <code>2640858/77708431</code>. He used a continued-fraction convergent, <code>206/7</code>, cutting gears of 206 and 7 teeth instead of tens of thousands. The convergent is the best ratio achievable with a gear you can actually machine.</p>
+<h3 id="and-the-race-for-355-113">π and the race for 355/113</h3>
+<p>For <code>π = [3; 7, 15, 1, 292, …]</code> the convergents are <code>3, 22/7, 333/106, 355/113</code>. Two are legendary:</p>
+<ul><li><code>22/7 ≈ 3.142857</code>, <strong>Archimedes&#x27;</strong> bound (c. 250 BC), accurate to two decimals.</li><li><code>355/113 ≈ 3.14159292</code>, found by <strong>Zu Chongzhi</strong> around <strong>480 AD</strong>, accurate to <em>six</em> decimals. It is so good because the next partial quotient, <code>292</code>, is huge (Stop 3): <code>355/113</code> is the best rational approximation to <code>π</code> with a denominator under <strong>16600</strong>, and it held that record unmatched for over a thousand years.</li></ul>
+<h2 id="worked-examples">Worked examples</h2>
+<p>The <code>calendar</code> demo lists the convergents of <code>0.2422</code> with their leap-year meaning. Every row but the reform proposals is a real calendar somebody used:</p>
+<pre><code>$ python -m tourbus demo calendar
+Leap-year rules from the convergents of 0.2422:
+ rule    value     meaning                      
+ ------  --------  -----------------------------
+ 1/4     0.250000  1 leap year every 4 years    
+ 7/29    0.241379  7 leap years every 29 years  
+ 8/33    0.242424  8 leap years every 33 years  
+ 31/128  0.242188  31 leap years every 128 years</code></pre>
+<p>Notice the values straddle <code>0.2422</code> in the alternating pattern the determinant identity guarantees: <code>0.25</code> (over), <code>0.2414</code> (under), <code>0.2424</code> (over), <code>0.2422</code> (under). Each is the best leap-year rule with a cycle no longer than its denominator — and <code>8/33</code>, the 900-year-old Jalali rule, is more accurate than the Gregorian calendar the world actually uses.</p>
+<p>The <code>π</code> convergents underlie the whole story of approximating the circle. Run <code>demo cf pi</code> and read off <code>22/7</code> and <code>355/113</code> in the <code>p/q</code> column, with the telltale <code>292</code> marking why <code>355/113</code> is so extraordinarily good:</p>
+<pre><code>$ python -m tourbus demo cf pi
+continued fraction of pi:
+  [3; 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, ...]
+
+ n  a_n  p/q                  value      error
+ -  ---  ------------  ------------  ---------
+ 0    3  3/1           3.0000000000  +1.42e-01
+ 1    7  22/7          3.1428571429  -1.26e-03
+ 2   15  333/106       3.1415094340  +8.32e-05
+ 3    1  355/113       3.1415929204  -2.67e-07
+ 4  292  103993/33102  3.1415926530  +5.78e-10
+ 5    1  104348/33215  3.1415926539  -3.32e-10
+ 6    1  208341/66317  3.1415926535  +1.22e-10
+ 7    1  312689/99532  3.1415926536  -2.91e-11</code></pre>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> The Gregorian rule is <code>97/400 = 0.2425</code>. Is it closer to <code>0.2422</code> than <code>8/33 = 0.242424…</code>? Which would a mathematician prefer, and why did civil society choose otherwise? <details><summary>Hint</summary>Compare <code>|0.2425 − 0.2422|</code> with <code>|0.242424 − 0.2422|</code>. The Jalali rule wins on accuracy; the Gregorian wins on a memorable century-based rule.</details></li></ol>
+<ol><li><strong>(★)</strong> Using the <code>π</code> table, verify that <code>355/113</code> satisfies Legendre&#x27;s criterion <code>|π − p/q| &lt; 1/(2q²)</code>. <details><summary>Hint</summary><code>1/(2·113²) ≈ 3.9e-5</code>, and the actual error is <code>2.67e-7</code>, comfortably smaller — so <code>355/113</code> <em>must</em> be a convergent.</details></li></ol>
+<ol><li><strong>(★★)</strong> Find the best rational approximation to <code>√2</code> with denominator at most 100, using <code>demo cf sqrt2</code>, and confirm no fraction <code>p/q</code> with <code>q ≤ 70</code> does better than <code>99/70</code>. <details><summary>Hint</summary>Read the convergents off the table; <code>99/70</code> is the last with <code>q ≤ 100</code>, and Lagrange guarantees its optimality.</details></li></ol>
+<ol><li><strong>(★★)</strong> A gear train must realise the ratio <code>√2 : 1</code> with each gear under 50 teeth. Which convergent should the machinist cut? <details><summary>Hint</summary><code>17/12</code> and <code>41/29</code> are the candidates with both parts under 50; <code>41/29</code> is more accurate.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Prove Legendre&#x27;s criterion: if <code>|x − p/q| &lt; 1/(2q²)</code> with <code>p/q</code> in lowest terms, then <code>p/q</code> is a convergent. <details><summary>Hint</summary>Expand <code>x</code> as a continued fraction whose final term is chosen so that <code>p/q</code> is the last convergent, and show the tail value exceeds 1 exactly when the <code>1/(2q²)</code> bound holds. See Appendix A&#x27;s discussion for the Wiener application.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Scenic Overlook</strong> widget: <a href="explore.html#stop-5-overlook"><code>site/index.html#stop-5-overlook</code></a>. Drag a slider for the target ratio and watch the best-approximation fractions update live, with the calendar, gear, and π presets one click away.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Khinchin, <em>Continued Fractions</em>, §6 (best approximations, Legendre&#x27;s criterion). See Appendix C.</li><li>Hardy &amp; Wright, §§10.15–10.16 on the theory of best approximation.</li><li>V. F. Rich / J. Dutka on the history of calendar reform and the 33-year cycle.</li><li>Appendix A of this tour for the approximation bounds behind Legendre&#x27;s criterion.</li></ul>
+<p class="chapter-nav"><a href="04-golden.html">← Stop 4 — The Golden Milestone</a> · <a href="index.html">Route map</a> · <a href="06-loop-road.html">Stop 6 — The Loop Road →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

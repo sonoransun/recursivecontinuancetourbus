@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Cattle Crossing - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a class="on" href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="06-loop-road.html">← Stop 6 — The Loop Road</a> · <a href="index.html">Route map</a> · <a href="08-family-tree.html">Stop 8 — The Family Tree →</a></p>
+<h1 id="stop-7-the-cattle-crossing">Stop 7 — The Cattle Crossing</h1>
+<blockquote>A herd blocks the road, and the toll is an ancient equation: x² − d·y² = 1, whose solutions fall straight out of the loop we just drove.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>The looping road of Stop 6 was not just pretty; it is a solution machine. The period of <code>√d</code> hands us, for free, the smallest solution of <strong>Pell&#x27;s equation</strong></p>
+<pre><code>x² − d·y² = ±1,</code></pre>
+<p>for any non-square positive integer <code>d</code>. This equation is one of the oldest in number theory — studied in India by Brahmagupta (7th century) and Bhāskara II (12th century), rediscovered by Fermat, and misnamed after John Pell by Euler in a footnote that stuck. It is also, thanks to Archimedes, the reason there is a cattle crossing at this stop at all.</p>
+<h3 id="convergents-solve-pell">Convergents solve Pell</h3>
+<p>Here is the connection. Suppose <code>√d</code> has period length <code>ℓ</code>, so <code>√d = [a₀; (a₁, …, aℓ)]</code>. Let <code>p/q = p₍ℓ₋₁₎/q₍ℓ₋₁₎</code> be the convergent taken at the <strong>end of the first period</strong>. Then <code>(x, y) = (p, q)</code> is the <strong>fundamental solution</strong> — the smallest positive solution — of Pell&#x27;s equation. Which sign it solves depends on the <strong>parity of the period</strong>:</p>
+<ul><li>If <code>ℓ</code> is <strong>even</strong>, then <code>p² − d q² = +1</code>. The equation <code>x² − d y² = −1</code> has <strong>no solution</strong> at all.</li><li>If <code>ℓ</code> is <strong>odd</strong>, then <code>p² − d q² = −1</code>. Squaring this <em>unit</em> — that is, taking <code>(p + q√d)²</code> — produces the fundamental solution of the <code>+1</code> equation.</li></ul>
+<p>The reason is the palindrome of Stop 6: the convergent at the period boundary satisfies <code>pₙ² − d qₙ² = (−1)ⁿ</code> by the determinant identity of Stop 3, evaluated right where the road closes its loop. All larger solutions are powers of the fundamental one: if <code>x₁ + y₁√d</code> is fundamental, then <code>xₖ + yₖ√d = (x₁ + y₁√d)ᵏ</code> runs through <em>all</em> positive solutions. One convergent unlocks infinitely many.</p>
+<h3 id="the-wild-growth-of-solutions">The wild growth of solutions</h3>
+<p>Small <code>d</code> can hide enormous fundamental solutions. For <code>d = 2</code> the answer is a gentle <code>(3, 2)</code>: <code>3² − 2·2² = 9 − 8 = 1</code>. For <code>d = 13</code> it is already <code>(649, 180)</code>. And <code>d = 61</code> — the case <strong>Fermat posed as a challenge in 1657</strong> to the English mathematicians, knowing full well how brutal it is — has fundamental solution</p>
+<pre><code>x = 1766319049,   y = 226153980,</code></pre>
+<p>a ten-digit <code>x</code> for a two-digit <code>d</code>. There is no smooth relationship between the size of <code>d</code> and the size of its smallest solution; it depends entirely on the length of the period of <code>√d</code>, which behaves erratically. This is what makes Pell&#x27;s equation a genuine test of method rather than patience — brute-force search over <code>y</code> would never reach <code>226153980</code>, but the continued fraction walks straight to it.</p>
+<h3 id="archimedes-cattle">Archimedes&#x27; cattle</h3>
+<p>The most famous Pell equation is disguised as a poem. <strong>Archimedes&#x27; cattle problem</strong> (c. 250 BC) asks for the number of bulls and cows of the Sun god&#x27;s herd, in four colours, subject to a list of ratio and square/triangular constraints. Reduced, it becomes a Pell equation <code>x² − 4729494·y² = 1</code>. Its <strong>smallest solution has 206,545 digits</strong> — the total herd is a number so vast it would fill a book. Archimedes almost certainly could not have computed it (it was first fully evaluated in 1965 with a computer), but the fact that the problem is <em>well-posed</em> and has a definite, finite, astronomically large answer is itself a triumph of the continued-fraction method. The herd exists; it just does not fit in the universe.</p>
+<h3 id="units-in-quadratic-fields">Units in quadratic fields</h3>
+<p>For the algebraically inclined: solving <code>x² − d y² = ±1</code> is the same as finding the <strong>units</strong> of the ring <code>ℤ[√d]</code> — the elements with a multiplicative inverse. The fundamental solution is the <em>fundamental unit</em>, and Dirichlet&#x27;s unit theorem guarantees exactly this infinite cyclic structure. Pell&#x27;s equation is the first place the continued fraction reaches out of arithmetic and into the algebra of number fields, a thread that runs through much of modern number theory.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Solve Fermat&#x27;s challenge case, <code>d = 61</code>, and watch a two-digit input produce a ten-digit answer — the fundamental solution the continued fraction of <code>√61</code> delivers at the end of its (odd) period, then squared to reach <code>+1</code>:</p>
+<pre><code>$ python -m tourbus demo pell 61
+x^2 - 61 y^2 = 1  fundamental solution:
+  x = 1766319049
+  y = 226153980
+  verifies: True</code></pre>
+<p>Check it by hand if you dare: <code>1766319049² − 61·226153980² = 1</code>, exactly. For contrast, the gentle cases <code>d = 2</code> and <code>d = 13</code> show how wildly the difficulty swings with <code>d</code>:</p>
+<pre><code>$ python -m tourbus demo pell 2
+x^2 - 2 y^2 = 1  fundamental solution:
+  x = 3
+  y = 2
+  verifies: True</code></pre>
+<pre><code>$ python -m tourbus demo pell 13
+x^2 - 13 y^2 = 1  fundamental solution:
+  x = 649
+  y = 180
+  verifies: True</code></pre>
+<p><code>d = 2</code> (period 1, <code>√2 = [1; (2)]</code>) gives <code>(3, 2)</code> from the very first convergent; <code>d = 13</code> needs a longer period and lands on <code>(649, 180)</code>; <code>d = 61</code> explodes. The size of the answer is the length of the loop road, nothing else.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Verify the <code>d = 2</code> solution by hand, and find the <em>next</em> solution after <code>(3, 2)</code> by computing <code>(3 + 2√2)²</code>. <details><summary>Hint</summary><code>(3 + 2√2)² = 17 + 12√2</code>, so the next solution is <code>(17, 12)</code>; check <code>17² − 2·12² = 1</code>.</details></li></ol>
+<ol><li><strong>(★)</strong> From <code>demo cf sqrt2</code>, read off the convergent at the end of the first period and confirm it is the Pell solution <code>(3, 2)</code>. <details><summary>Hint</summary>The period of <code>√2</code> has length 1, so the fundamental solution is the convergent <code>p₁/q₁ = 3/2</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> The period of <code>√13</code> is odd. Predict whether <code>x² − 13 y² = −1</code> has a solution, and find the smallest one. <details><summary>Hint</summary>Odd period means <code>−1</code> <em>is</em> solvable; <code>18² − 13·5² = 324 − 325 = −1</code>, so <code>(18, 5)</code> works, and its square gives <code>(649, 180)</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Explain why <code>x² − 4 y² = 1</code> has no interesting solutions, connecting to Stop 6. <details><summary>Hint</summary><code>4</code> is a perfect square, so <code>√4 = 2</code> is rational and its continued fraction does not loop — there is no period to read a solution from.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Show that if <code>(x₁, y₁)</code> is the fundamental solution of <code>+1</code>, then every positive solution is <code>(xₖ, yₖ)</code> with <code>xₖ + yₖ√d = (x₁ + y₁√d)ᵏ</code>. <details><summary>Hint</summary>The solutions form a group under multiplication in <code>ℤ[√d]</code>; a fundamental unit generates the whole positive cone. See Appendix A / C on units.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Cattle Crossing</strong> widget: <a href="explore.html#stop-7-cattle"><code>site/index.html#stop-7-cattle</code></a>. Enter a <code>d</code> and watch the convergents of <code>√d</code> scroll by until the one at the period boundary lights up as the Pell solution, with a running check of <code>x² − d y²</code>.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>H. W. Lenstra, &quot;Solving the Pell Equation,&quot; <em>Notices of the AMS</em> (2002) — a superb modern survey; Appendix C.</li><li>Hardy &amp; Wright, §§10.11–10.12 on Pell&#x27;s equation via continued fractions.</li><li>I. Vardi, &quot;Archimedes&#x27; Cattle Problem,&quot; <em>American Mathematical Monthly</em> (1998).</li><li>Appendix A of this tour for the parity-of-period argument.</li></ul>
+<p class="chapter-nav"><a href="06-loop-road.html">← Stop 6 — The Loop Road</a> · <a href="index.html">Route map</a> · <a href="08-family-tree.html">Stop 8 — The Family Tree →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

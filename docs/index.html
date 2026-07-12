@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recursive Continuance Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home on" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content">
+<section class="hero">
+  <div class="eyebrow">Line R &middot; Recursion &amp; Continued Fractions</div>
+  <h1>Recursive Continuance Tour Bus</h1>
+  <p class="tagline">A guided ride through the numbers that describe themselves &mdash;
+  from Euclid's leftovers to Gosper's stream arithmetic, the Markov spectrum, and a
+  constant nobody can write in closed form.</p>
+  <div class="cta-row">
+    <a class="cta primary" href="explore.html">Open the interactive exposition &nbsp;&#8599;</a>
+    <a class="cta" href="01-depot.html">Start the tour &nbsp;&#8594;</a>
+  </div>
+  <div class="route-strip">&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679;&#9472;&#9472;&#9679; &nbsp; 15 stops, no transfers</div>
+</section>
+
+<section>
+  <h2>The Tour</h2>
+  <p>Fifteen numbered stops, each with a chapter here, a live section in the
+  interactive exposition, and a command-line demonstration you can run with
+  <code>python -m tourbus stop N</code>.</p>
+  <div class="card-grid"><a class="card" href="01-depot.html"><span class="card-num">1</span><span class="card-title">The Depot</span></a>
+<a class="card" href="02-unfolding-road.html"><span class="card-num">2</span><span class="card-title">The Unfolding Road</span></a>
+<a class="card" href="03-engine-room.html"><span class="card-num">3</span><span class="card-title">The Engine Room</span></a>
+<a class="card" href="04-golden.html"><span class="card-num">4</span><span class="card-title">The Golden Milestone</span></a>
+<a class="card" href="05-scenic-overlook.html"><span class="card-num">5</span><span class="card-title">Scenic Overlook</span></a>
+<a class="card" href="06-loop-road.html"><span class="card-num">6</span><span class="card-title">The Loop Road</span></a>
+<a class="card" href="07-cattle-crossing.html"><span class="card-num">7</span><span class="card-title">The Cattle Crossing</span></a>
+<a class="card" href="08-family-tree.html"><span class="card-num">8</span><span class="card-title">The Family Tree</span></a>
+<a class="card" href="09-celebrity.html"><span class="card-num">9</span><span class="card-title">Celebrity Sightings</span></a>
+<a class="card" href="10-casino.html"><span class="card-num">10</span><span class="card-title">The Casino</span></a>
+<a class="card" href="11-assembly-line.html"><span class="card-num">11</span><span class="card-title">The Infinite Assembly Line</span></a>
+<a class="card" href="12-tower.html"><span class="card-num">12</span><span class="card-title">The Tower</span></a>
+<a class="card" href="13-hall-of-mirrors.html"><span class="card-num">13</span><span class="card-title">The Hall of Mirrors</span></a>
+<a class="card" href="14-souvenir-shop.html"><span class="card-num">14</span><span class="card-title">The Souvenir Shop</span></a>
+<a class="card" href="15-terminus.html"><span class="card-num">15</span><span class="card-title">Terminus</span></a></div>
+</section>
+
+<section>
+  <h2>The Express Line</h2>
+  <p>Six deeper, stranger stops past the terminus &mdash; each still computed
+  exactly (or rigorously) on the same engine. See
+  <a href="appendix-d-frontier.html">the Fringe Avenues</a>.</p>
+  <div class="card-grid"><a class="card express" href="appendix-d-frontier.html#e1"><span class="card-num">E1</span><span class="card-title">The Markov Spectrum</span><span class="card-note">The numbers after the golden ratio.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e2"><span class="card-num">E2</span><span class="card-title">Continuants</span><span class="card-note">The polynomial inside every convergent.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e3"><span class="card-num">E3</span><span class="card-title">Algebraic Irrationals</span><span class="card-note">Cube roots and an open problem.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e4"><span class="card-num">E4</span><span class="card-title">Continued-Fraction Variants</span><span class="card-note">Nearest-integer and minus expansions.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e5"><span class="card-num">E5</span><span class="card-title">The Three-Distance Theorem</span><span class="card-note">A surprise in an irrational rotation.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e6"><span class="card-num">E6</span><span class="card-title">The Gauss-Kuzmin-Wirsing Constant</span><span class="card-note">Computed from the transfer operator.</span></a></div>
+</section>
+
+<section>
+  <h2>The Web of Ideas</h2>
+  <p>Recursion, continued fractions, π, and physics turn out to be one gesture &mdash;
+  <em>the infinite defined by finite self-application</em> &mdash; seen from four
+  directions. Fixed points and the Y combinator; the Gauss map as renormalization;
+  the golden ratio as the most stable orbit in KAM theory; mode-locking and the
+  devil's staircase; the Hofstadter butterfly; and two elastic blocks that collide
+  exactly <b>π</b> times.</p>
+  <div class="cta-row">
+    <a class="cta primary" href="appendix-e-web-of-ideas.html">Read the synthesis &nbsp;&#8594;</a>
+    <a class="cta" href="appendix-d-frontier.html">The Express Line &nbsp;&#8594;</a>
+  </div>
+</section>
+
+<section>
+  <h2>The Cross-Domain Line</h2>
+  <p>One three-term recurrence &mdash; the continuant behind every
+  continued-fraction convergent &mdash; turns out to be the energy levels of a
+  molecule, the Hofstadter butterfly of an electron in a magnetic field, the
+  impedance of a circuit, the stability of a control loop, and the best rational
+  summary of a divergent series; the golden ratio, meanwhile, quietly optimizes
+  sunflowers and quasicrystals. Every claim is computed live on the same engine
+  with <code>python -m tourbus crossdomain</code>.</p>
+  <div class="cta-row">
+    <a class="cta primary" href="appendix-f-cross-domain.html">The Cross-Domain Line &nbsp;&#8594;</a>
+  </div>
+</section>
+
+<section>
+  <h2>Reference &amp; running it</h2>
+  <ul class="ref-list">
+    <li><a href="appendix-a-proofs.html">Appendix A &mdash; Proofs</a></li>
+    <li><a href="appendix-b-glossary.html">Appendix B &mdash; Glossary</a></li>
+    <li><a href="appendix-c-references.html">Appendix C &mdash; References</a></li>
+  </ul>
+  <p>The whole tour is powered by <code>tourbus</code>, a standard-library-only
+  Python package. Ride it in your terminal:</p>
+  <pre><code>python -m tourbus            # the interactive tour
+python -m tourbus --all      # the whole tour as a transcript
+python -m tourbus frontier   # the Express Line
+python -m tourbus demo gkw   # the Gauss-Kuzmin-Wirsing constant, from scratch</code></pre>
+</section>
+</main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

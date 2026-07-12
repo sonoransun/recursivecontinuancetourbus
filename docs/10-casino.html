@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Casino - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a class="on" href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="09-celebrity.html">← Stop 9 — Celebrity Sightings</a> · <a href="index.html">Route map</a> · <a href="11-assembly-line.html">Stop 11 — The Infinite Assembly Line →</a></p>
+<h1 id="stop-10-the-casino">Stop 10 — The Casino</h1>
+<blockquote>The partial quotients of a &quot;typical&quot; number are not patternless — they obey iron statistical laws, and the house always wins by the same constant.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>At Stop 9 the partial quotients of <code>π</code> <em>looked</em> random. This stop makes that precise. If you pick a real number at random, its continued fraction is unpredictable term by term — but <em>in aggregate</em> it obeys laws as rigid as a casino&#x27;s odds. Three constants govern the tables here: the Gauss–Kuzmin distribution, Khinchin&#x27;s constant, and Lévy&#x27;s constant. Almost every number pays out the same, and the exceptions (rationals, quadratic surds, and a few famous constants like <code>e</code>) are a measure-zero set of lucky gamblers.</p>
+<h3 id="the-gauss-map">The Gauss map</h3>
+<p>The dealer is the <strong>Gauss map</strong>:</p>
+<pre><code>T(x) = {1/x} = 1/x − ⌊1/x⌋,    for x ∈ (0, 1),</code></pre>
+<p>the fractional part of the reciprocal. Applied to <code>x = [0; a₁, a₂, a₃, …]</code> it strips off the first partial quotient and shifts the rest forward: <code>T(x) = [0; a₂, a₃, …]</code>. So iterating <code>T</code> deals out the partial quotients one at a time — <code>a₁ = ⌊1/x⌋</code>, then <code>a₂ = ⌊1/T(x)⌋</code>, and so on. Studying the statistics of continued fractions is studying the <strong>dynamics</strong> of this one map, which is why this branch of the subject is called the <em>ergodic theory</em> of continued fractions.</p>
+<p>Gauss found (in an 1812 letter to Laplace) that <code>T</code> preserves a special probability distribution, the <strong>Gauss measure</strong></p>
+<pre><code>dμ = (1/ln 2) · 1/(1 + x) dx    on [0, 1].</code></pre>
+<p>The map spreads points out according to this density and never disturbs it — it is the invariant &quot;house edge.&quot; Because <code>T</code> is also <em>ergodic</em>, time averages along one number&#x27;s orbit equal space averages over all numbers: what one typical continued fraction does over the long run is what almost every number does.</p>
+<h3 id="gauss-kuzmin-the-odds-on-each-digit">Gauss–Kuzmin: the odds on each digit</h3>
+<p>From the invariant measure comes the distribution of the partial quotients themselves. The <strong>Gauss–Kuzmin theorem</strong> (Gauss conjectured it; Kuzmin proved a rate in 1928) states that for almost every <code>x</code>, the fraction of partial quotients equal to <code>k</code> tends to</p>
+<pre><code>P(aₙ = k) → log₂(1 + 1/(k(k+2))).</code></pre>
+<p>The odds decay fast. A partial quotient is <code>1</code> about <code>log₂(4/3) ≈ 41.5%</code> of the time, <code>2</code> about <code>17.0%</code>, <code>3</code> about <code>9.3%</code>, and so on. So a &quot;typical&quot; continued fraction is dominated by small terms, with <code>1</code> alone accounting for over two-fifths of them — which is why numbers like <code>φ</code> (all <code>1</code>s) and the Fibonacci worst case of Stop 1 sit at the boundary of typical behaviour.</p>
+<h3 id="khinchin-s-constant">Khinchin&#x27;s constant</h3>
+<p>Here is the theorem that makes this a casino. <strong>Khinchin proved in 1935</strong> that for almost every real <code>x</code>, the <strong>geometric mean</strong> of the first <code>n</code> partial quotients converges to a single universal constant, <em>independent of <code>x</code></em>:</p>
+<pre><code>(a₁ · a₂ · … · aₙ)^{1/n} → K₀ = 2.6854520010…</code></pre>
+<p>Read that again: the <em>same</em> number <code>K₀</code> for almost every <code>x</code>. Your number and mine, chosen at random, produce partial quotients that multiply out to the same average in the limit. Khinchin&#x27;s constant is defined by the product <code>K₀ = ∏_{k≥1} (1 + 1/(k(k+2)))^{log₂ k}</code>. The measure-zero exceptions are the usual suspects — rationals (finite), quadratic surds (periodic, so their geometric mean is the mean of one period), and, curiously, <code>e</code>, whose growing even terms drag its geometric mean to infinity. Whether famous constants like <code>π</code> actually hit <code>K₀</code> is, like so much of Stop 9, unknown.</p>
+<h3 id="l-vy-s-constant">Lévy&#x27;s constant</h3>
+<p>A companion law governs the <em>denominators</em>. <strong>Lévy&#x27;s constant</strong> (Khinchin and Lévy, 1930s) says the convergent denominators grow at a universal exponential rate for almost every <code>x</code>:</p>
+<pre><code>qₙ^{1/n} → e^{π²/(12 ln 2)} = 3.2758229187…</code></pre>
+<p>This ties back to the error bound of Stop 3: since <code>|x − pₙ/qₙ| ≈ 1/qₙ²</code>, the approximation error of a typical number shrinks like <code>e^{−π²n/(6 ln 2)}</code> — a fixed exponential rate, the same for almost everybody. The house edge is a constant, and it is spelled <code>π²/(12 ln 2)</code>.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Estimate Khinchin&#x27;s constant by sampling random numbers, expanding each, and taking the geometric mean of all their partial quotients. With several thousand terms the estimate is already close to <code>K₀ = 2.68545…</code> (convergence is famously slow, so it will not be exact):</p>
+<pre><code>$ python -m tourbus demo khinchin
+geometric mean of 11849 partial quotients:
+  2.65801   (Khinchin&#x27;s constant = 2.68545...)</code></pre>
+<p>The estimate <code>2.65801</code> lands within about 1% of the true value from a few thousand terms — remarkable, given that these partial quotients came from <em>unrelated</em> random numbers yet conspire to the same mean, exactly as Khinchin&#x27;s theorem demands.</p>
+<p>Now the digit distribution. The <code>gauss</code> demo tallies how often each partial quotient value appears across many random expansions and compares it to the Gauss–Kuzmin prediction:</p>
+<pre><code>$ python -m tourbus demo gauss
+Gauss-Kuzmin digit frequencies (observed vs predicted):
+   1 ██████████████████████████████ 0.5094   (predict 0.4150)
+   2 █████████████ 0.2124   (predict 0.1699)
+   3 ███████ 0.1164   (predict 0.0931)
+   4 ████ 0.0721   (predict 0.0589)
+   5 ███ 0.0514   (predict 0.0406)
+   6 ██ 0.0383   (predict 0.0297)</code></pre>
+<p>The <em>shape</em> is unmistakable — a steep decay with <code>1</code> the most common value by far, each successive value roughly halving — and it tracks the Gauss–Kuzmin law across the board. (The observed frequencies here sit a little above the predictions because the sample draws finite truncations of dyadic rationals, a mild bias; with longer, less structured expansions the two columns converge.) The dealer&#x27;s odds are visible even in a rough sample.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Compute the Gauss–Kuzmin probabilities for <code>k = 1, 2, 3</code> by hand and confirm they match the <code>predict</code> column above. <details><summary>Hint</summary><code>log₂(1 + 1/(1·3)) = log₂(4/3) ≈ 0.415</code>; <code>log₂(1 + 1/(2·4)) = log₂(9/8) ≈ 0.170</code>.</details></li></ol>
+<ol><li><strong>(★)</strong> Apply the Gauss map to <code>x = 1/√2 ≈ 0.7071</code> twice by hand and read off the first two partial quotients. <details><summary>Hint</summary><code>1/x ≈ 1.414</code>, so <code>a₁ = 1</code> and <code>T(x) = 0.414…</code>; then <code>1/0.414 ≈ 2.414</code>, so <code>a₂ = 2</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Why is <code>e</code> an exception to Khinchin&#x27;s theorem? Estimate the geometric mean of <code>e</code>&#x27;s first nine partial quotients and note the trend. <details><summary>Hint</summary>The even terms <code>2, 4, 6, …</code> grow without bound, so the geometric mean diverges to infinity rather than to <code>K₀</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Run <code>demo khinchin</code> a few times (the sample is seeded) and note how close the estimate stays to <code>2.685</code>. Why is convergence so slow? <details><summary>Hint</summary>The geometric mean is dominated by rare large partial quotients, whose contribution has heavy-tailed variance — the sum <code>Σ log aₙ</code> converges slowly.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Derive that <code>T</code> preserves the Gauss measure: show that the density <code>1/(1+x)</code> satisfies the transfer-operator fixed-point equation <code>ρ(x) = Σ_{k≥1} ρ(1/(x+k)) · 1/(x+k)²</code>. <details><summary>Hint</summary>Substitute <code>ρ(x) = 1/(1+x)</code> and telescope the sum <code>Σ_k [1/(x+k) − 1/(x+k+1)]</code>.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Casino</strong> widget: <a href="explore.html#stop-10-casino"><code>site/index.html#stop-10-casino</code></a>. Spin up thousands of random continued fractions and watch the Gauss–Kuzmin histogram fill in and the running geometric mean settle toward Khinchin&#x27;s constant.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Khinchin, <em>Continued Fractions</em>, §§14–16 — the source, including the proof of Khinchin&#x27;s theorem. See Appendix C.</li><li>Rockett &amp; Szüsz, <em>Continued Fractions</em>, Chapters IV–V, on the Gauss map and ergodic theory; Appendix C.</li><li>D. H. Bailey, J. M. Borwein &amp; R. Crandall, &quot;On the Khintchine Constant,&quot; <em>Math. Comp.</em> (1997), for high-precision computation of <code>K₀</code>.</li><li>P. Lévy, <em>Théorie de l&#x27;addition des variables aléatoires</em> (1937), for Lévy&#x27;s constant.</li></ul>
+<p class="chapter-nav"><a href="09-celebrity.html">← Stop 9 — Celebrity Sightings</a> · <a href="index.html">Route map</a> · <a href="11-assembly-line.html">Stop 11 — The Infinite Assembly Line →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

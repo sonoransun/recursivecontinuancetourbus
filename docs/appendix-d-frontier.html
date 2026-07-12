@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Express Line - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a class="on" href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus</a></p>
+<h1 id="appendix-d-the-express-line-fringe-avenues">Appendix D — The Express Line: Fringe Avenues</h1>
+<p>Past the end of the main route lie six deeper, stranger stops. Each still computes live and exactly (or rigorously) on the same engine. Ride them all with</p>
+<pre><code>python -m tourbus frontier</code></pre>
+<p>or one at a time with <code>python -m tourbus frontier N</code>, or reach the individual demonstrations through <code>python -m tourbus demo &lt;name&gt;</code>.</p>
+<hr>
+<h2 id="e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio</h2>
+<p>The Golden Milestone (Stop 4) crowned φ the hardest number to approximate, with Hurwitz&#x27;s constant √5. What is <em>second</em>-hardest? The answer is a discrete ladder — the <strong>Lagrange spectrum</strong> below 3 — governed by the <strong>Markov equation</strong></p>
+<pre><code>x² + y² + z² = 3·x·y·z.</code></pre>
+<p>Its positive integer solutions, the <strong>Markov triples</strong>, grow from <code>(1, 1, 1)</code> by <em>Vieta jumping</em>: fix two coordinates and the third satisfies a quadratic with a second integer root. The largest entries are the <strong>Markov numbers</strong> 1, 2, 5, 13, 29, 34, 89, …; each <code>m</code> gives a <strong>Lagrange number</strong> <code>L_m = √(9m² − 4)/m</code>, and these are exactly the spectrum below 3, accumulating at 3.</p>
+<p>The miracle that ties it back to continued fractions: <code>L_m</code> is the <strong>Markov value</strong> of a periodic CF word in {1, 2} — the largest, over all cyclic positions, of the forward continued fraction plus the backward one. φ = <code>[1;(1)]</code> sits at √5; the silver ratio <code>1 + √2 = [2;(2)]</code> at √8; the word <code>[2,2,1,1]</code> at √221/5.</p>
+<pre><code>$ python -m tourbus demo markov
+The Markov / Lagrange spectrum below 3:
+ Markov m  L_m                    value
+ --------  ------------------  --------
+        1  sqrt(5)             2.236068
+        2  2*sqrt(2)           2.828427
+        5  1/5*sqrt(221)       2.973214
+       13  1/13*sqrt(1517)     2.996053
+       29  1/29*sqrt(7565)     2.999207
+       34  10/17*sqrt(26)      2.999423
+       89  1/89*sqrt(71285)    2.999916
+      169  1/169*sqrt(257045)  2.999977
+      194  2/97*sqrt(21170)    2.999982</code></pre>
+<p>Above <strong>Freiman&#x27;s constant</strong> (≈ 4.5278) the spectrum stops being discrete and becomes a solid ray <code>[F, ∞)</code>; the structure in between is a Cantor-like set still under active study.</p>
+<p><strong>Exercises.</strong> (★) Verify a Markov triple satisfies the equation. (★★) Show the silver ratio <code>1 + √2</code> achieves √8 by computing <code>q²·|x − p/q|</code> along its convergents. (★★★) Prove Vieta jumping never leaves the positive integers.</p>
+<hr>
+<h2 id="e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent</h2>
+<p>The convergent numerators and denominators are not merely numbers; they are values of one polynomial family, the <strong>continuants</strong> <code>K(a₁, …, aₙ)</code>, defined by the <em>same</em> three-term recurrence and satisfying <code>pₙ = K(a₀, …, aₙ)</code>, <code>qₙ = K(a₁, …, aₙ)</code>. Two gems:</p>
+<ul><li><strong>Palindrome:</strong> <code>K(a₁, …, aₙ) = K(aₙ, …, a₁)</code> — reversing the partial quotients leaves the value unchanged.</li><li><strong>Euler&#x27;s rule:</strong> the continuant equals the sum, over every way of striking out disjoint <em>adjacent</em> pairs, of the product of what remains. So <code>K(1, 1, …, 1)</code> (n ones) counts domino-and-square tilings and equals the Fibonacci number <code>F_{n+1}</code>.</li></ul>
+<pre><code>$ python -m tourbus demo continuant 1 2 3 4 5
+Continuant K(1, 2, 3, 4, 5):
+  recurrence = 225
+  Euler rule = 225
+  reversed   = K(5, 4, 3, 2, 1) = 225 (equal)</code></pre>
+<p><strong>Exercises.</strong> (★) Compute <code>K(a, b, c)</code> by hand and match <code>abc + a + c</code>. (★★) Prove the palindrome identity by induction. (★★★) Show <code>K(1,…,1)</code> (n ones) is <code>F_{n+1}</code>.</p>
+<hr>
+<h2 id="e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem</h2>
+<p>Quadratic irrationals have periodic continued fractions (Lagrange, Stop 6). Cube roots do <strong>not</strong> — and, remarkably, <em>nobody knows whether their partial quotients are bounded</em>. Numerically they behave like a &quot;random&quot; real: geometric mean near Khinchin&#x27;s constant, with occasional enormous terms.</p>
+<pre><code>$ python -m tourbus demo cbrt 2
+Continued fraction of 2^(1/3):
+  [1, 3, 1, 5, 1, 1, 4, 1, 1, 8, 1, 14, 1, 10, 2, 1] ...
+  max term 534, geometric mean 2.763 (Khinchin-typical; boundedness OPEN)</code></pre>
+<p>The <strong>plastic number</strong> ρ (real root of <code>x³ = x + 1</code>, the cubic cousin of φ) is a famous specimen — its expansion produces a <code>141</code> at position 12, out of nowhere:</p>
+<pre><code>$ python -m tourbus demo plastic
+The plastic number (x^3 = x + 1):
+  [1, 3, 12, 1, 1, 3, 2, 3, 2, 4, 2, 141, 80, 2] ...
+  note the 141 at position 12 -- out of nowhere.</code></pre>
+<p>Contrast with √2 = <code>[1; (2)]</code>, whose partial quotients are eternally bounded by 2. Whether <code>2^(1/3)</code> has bounded partial quotients is open, a relative of the Littlewood conjecture (Stop 15). These expansions are computed rigorously: a high-precision decimal seed becomes an interval, and only certified terms are emitted.</p>
+<p><strong>Exercises.</strong> (★) Confirm the plastic number is a root of <code>x³ − x − 1</code>. (★★) Compare the geometric mean of the first 40 partial quotients of <code>2^(1/3)</code> and of <code>√2</code>. (★★★) Read about the Littlewood conjecture and its link to bounded partial quotients.</p>
+<hr>
+<h2 id="e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and &quot;minus&quot;</h2>
+<p>The floor is not the only way to unfold a number.</p>
+<ul><li>The <strong>nearest-integer continued fraction (NICF)</strong> rounds to the <em>closest</em> integer at each step, allowing negative partial quotients with <code>|aᵢ| ≥ 2</code>. It converges faster than the regular expansion.</li><li>The <strong>minus (Hirzebruch–Jung) continued fraction</strong> writes <code>a₀ − 1/(a₁ − 1/(a₂ − …))</code> with every <code>aᵢ ≥ 2</code>. It is the language algebraic geometers use to resolve cyclic quotient singularities: the <code>aᵢ</code> are the self-intersection numbers of the exceptional curves.</li></ul>
+<pre><code>$ python -m tourbus demo nicf 87/32
+Three continued fractions of 87/32:
+  regular:         [2, 1, 2, 1, 1, 4]
+  nearest-integer: [3, -4, 2, 4]
+  minus (a&gt;=2):    [3, 4, 3, 2, 2, 2]</code></pre>
+<p>Notice the NICF is shorter (fewer terms for the same number) and carries a negative quotient where the regular expansion had a run of 1s.</p>
+<p><strong>Exercises.</strong> (★) Fold each expansion back to <code>87/32</code>. (★★) Find a fraction whose NICF is strictly shorter than its regular CF. (★★★) Look up how the minus-CF of <code>n/q</code> gives the resolution of the <code>1/n(1, q)</code> cyclic quotient singularity.</p>
+<hr>
+<h2 id="e5-the-three-distance-theorem">E5 — The three-distance theorem</h2>
+<p>Scatter the points <code>0, α, 2α, …, (N−1)α</code> (mod 1) around a circle. However you choose α and N, they cut the circle into arcs of <strong>at most three distinct lengths</strong> — and when there are three, the largest is the sum of the other two. Steinhaus conjectured it; it was proved in the 1950s.</p>
+<p>The continued fraction of α is exactly what controls it: the gap lengths are the quantities <code>‖qₖ·α‖</code> at the convergent denominators, so the point set&#x27;s &quot;resolution&quot; jumps precisely at the convergents. Rational approximation and equidistribution turn out to be one subject.</p>
+<pre><code>$ python -m tourbus demo three-distance 8/13 12
+Three-distance theorem for a=8/13, N=12:
+  2 distinct gap lengths: 1/13, 2/13
+  largest = sum of the others: True</code></pre>
+<p><strong>Exercises.</strong> (★) Verify the three-gap property for α = 1/φ ≈ Fibonacci ratios. (★★) Show the gap lengths total 1. (★★★) Relate the three lengths to <code>‖qₖα‖</code> for consecutive convergent denominators.</p>
+<hr>
+<h2 id="e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch</h2>
+<p>How fast does the Gauss–Kuzmin distribution (Stop 10) set in? The rate is the <strong>second eigenvalue</strong> of the Gauss map&#x27;s <em>transfer operator</em></p>
+<pre><code>(L f)(x) = Σ_{n≥1}  1/(n+x)² · f(1/(n+x)).</code></pre>
+<p>Its largest eigenvalue is exactly 1 (with the Gauss density as eigenfunction); the second is the <strong>Gauss–Kuzmin–Wirsing constant</strong> λ ≈ −0.3036300289…, and the error in the Gauss–Kuzmin theorem decays like <code>|λ|ⁿ</code>. Wirsing computed it in 1974; no closed form is known.</p>
+<p>We recover it with no special functions: discretize <code>L</code> as a matrix on a grid, then power-iterate from a <strong>mean-zero</strong> start (because <code>L</code> preserves the integral, the eigenvalue-1 component of a mean-zero function is zero, so the iteration lands on the second eigenvalue).</p>
+<pre><code>$ python -m tourbus demo gkw
+Gauss-Kuzmin-Wirsing constant (from the transfer operator):
+  computed  lambda = -0.3036601
+  Wirsing&#x27;s value  = -0.3036630 (error 2.9e-06)</code></pre>
+<p><strong>Exercises.</strong> (★) Confirm the leading eigenvalue is 1 to three digits. (★★) Show <code>∫₀¹ (Lf) dx = ∫₀¹ f dx</code> (the reason 1 is an eigenvalue). (★★★) Improve the estimate by refining the grid, and watch the error shrink.</p>
+<hr>
+<p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

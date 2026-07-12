@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tower - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a class="on" href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="11-assembly-line.html">← Stop 11 — The Infinite Assembly Line</a> · <a href="index.html">Route map</a> · <a href="13-hall-of-mirrors.html">Stop 13 — The Hall of Mirrors →</a></p>
+<h1 id="stop-12-the-tower">Stop 12 — The Tower</h1>
+<blockquote>A recursion so powerful it outruns every loop you could ever write: the Ackermann function, and the combinator that conjures recursion from nothing.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>Every recursion on the tour so far has been <em>tame</em>: Euclid descends to a base case, convergents build up term by term, Gosper&#x27;s machine emits on demand. This stop climbs a tower of recursions so steep that ordinary iteration cannot keep up — and then asks the vertiginous question of where recursion itself comes from. It is the most computer-science-flavoured stop, and the least about continued fractions, but it is where &quot;recursive continuance&quot; is pushed to its logical extreme.</p>
+<h3 id="hyperoperations">Hyperoperations</h3>
+<p>Start with a ladder of operations, each defined by iterating the one below:</p>
+<pre><code>addition:        a + n   = a + 1 + 1 + … + 1   (n times)
+multiplication:  a · n   = a + a + … + a       (n times)
+exponentiation:  aⁿ      = a · a · … · a        (n times)
+tetration:       ⁿa      = a^(a^(a^…))          (n times, a tower of a&#x27;s)</code></pre>
+<p>and onward. <strong>Knuth&#x27;s up-arrow notation</strong> names them: <code>a↑n = aⁿ</code>, <code>a↑↑n</code> is tetration, <code>a↑↑↑n</code> the next rung. Each level is defined by recursion over the previous, and the values explode: <code>3↑↑3 = 3^27 ≈ 7.6 trillion</code>, while <code>3↑↑↑3</code> is a tower of threes <code>3↑↑3 ≈ 7.6 trillion</code> levels high — a number with no meaningful decimal representation.</p>
+<h3 id="the-ackermann-p-ter-function">The Ackermann–Péter function</h3>
+<p>The <strong>Ackermann function</strong> packages this whole ladder into one two-argument recursion. In Rózsa Péter&#x27;s tidy form:</p>
+<pre><code>A(0, n)     = n + 1
+A(m+1, 0)   = A(m, 1)
+A(m+1, n+1) = A(m, A(m+1, n)).</code></pre>
+<p>The <code>m</code> coordinate selects the rung of the hyperoperation ladder: <code>A(1, n) = n + 2</code>, <code>A(2, n) = 2n + 3</code>, <code>A(3, n) = 2ⁿ⁺³ − 3</code>, and <code>A(4, n) = 2↑↑(n+3) − 3</code> is tetrational. The function is <strong>total</strong> (it halts for every input) and <strong>computable</strong> (the definition above is a program), yet it is <strong>not primitive recursive</strong> — it grows faster than any function you can build from bounded <code>for</code>-loops alone. Ackermann&#x27;s 1928 function was the first concrete example proving that the total computable functions strictly <em>contain</em> the primitive recursive ones: some things are computable only with unbounded recursion (<code>while</code>), not mere iteration.</p>
+<p>The double recursion in the third line is the whole story: to compute <code>A(m+1, n+1)</code> you must first compute <code>A(m+1, n)</code> and feed the result <em>back in as an argument</em> to <code>A(m, ·)</code>. That inner-value-as-outer-argument nesting is what makes it outrun the primitive recursive functions. It also makes it explode: <code>A(4, 2) = 2↑↑5 − 3 = 2^65536 − 3</code>, a number with <strong>19,729 decimal digits</strong> — which is why the <code>tourbus</code> demo politely refuses to print it in full.</p>
+<h3 id="the-y-combinator-recursion-from-nothing">The Y combinator: recursion from nothing</h3>
+<p>If recursion is a function calling itself <em>by name</em>, where does the name come from? In the pure lambda calculus there are no names — only anonymous functions. Yet recursion is still available, through a <strong>fixed-point combinator</strong>. The most famous is Curry&#x27;s <strong>Y combinator</strong>:</p>
+<pre><code>Y = λf. (λx. f (x x)) (λx. f (x x)),      with the property   Y f = f (Y f).</code></pre>
+<p>Applied to a function <code>f</code> that <em>describes one unrolling</em> of a recursive definition, <code>Y f</code> is the fixed point — the fully recursive function — with no self-reference anywhere in sight. <code>Y</code> manufactures the loop from a function that only knows how to take one step. It is the Stop 4 fixed-point idea (<code>φ = 1 + 1/φ</code>) lifted to the level of <em>functions</em>: <code>Y f</code> is to <code>f</code> what <code>φ</code> is to <code>x ↦ 1 + 1/x</code>. Recursion, it turns out, is not a primitive; it is a fixed point you can build.</p>
+<h3 id="mccarthy-s-91-function">McCarthy&#x27;s 91 function</h3>
+<p>A gentler puzzle closes the tower. John McCarthy&#x27;s <strong>91 function</strong> is</p>
+<pre><code>M(n) = n − 10           if n &gt; 100,
+M(n) = M(M(n + 11))     if n ≤ 100.</code></pre>
+<p>The nested <code>M(M(…))</code> looks alarming, but the astonishing fact is that <code>M(n) = 91</code> for <strong>every</strong> <code>n ≤ 100</code>, and <code>n − 10</code> for <code>n &gt; 100</code>. It is a textbook case of a recursion whose <em>behaviour</em> is far simpler than its <em>definition</em> — a reminder that a nested recursion can hide a trivial function, just as Gosper&#x27;s stall (Stop 11) hid a trivial answer. Proving <code>M(n) = 91</code> requires reasoning about the <em>total</em> function, not tracing any single call, and is a classic exercise in program verification.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Evaluate <code>A(3, 5)</code>. By the formula <code>A(3, n) = 2ⁿ⁺³ − 3</code>, this should be <code>2⁸ − 3 = 253</code> — and the recursion, unwound through hundreds of nested calls, agrees exactly:</p>
+<pre><code>$ python -m tourbus demo ackermann 3 5
+A(3, 5) = 253</code></pre>
+<p>Smaller inputs show the ladder&#x27;s rungs. <code>A(2, 4) = 2·4 + 3 = 11</code> sits on the &quot;multiplication&quot; rung, and <code>A(3, 3) = 2⁶ − 3 = 61</code> on the &quot;exponentiation&quot; rung:</p>
+<pre><code>$ python -m tourbus demo ackermann 2 4
+A(2, 4) = 11</code></pre>
+<pre><code>$ python -m tourbus demo ackermann 3 3
+A(3, 3) = 61</code></pre>
+<p>Step up to the tetrational rung and the values leave the printable universe. <code>A(4, 2) = 2^65536 − 3</code> has nearly twenty thousand digits, so the demo names it rather than printing it:</p>
+<pre><code>$ python -m tourbus demo ackermann 4 2
+A(4,2) = 2^65536 - 3 has 19729 digits; refusing to print it all.</code></pre>
+<p>That single guard is the whole point of the tower: <code>A(4, 2)</code> is a perfectly definite, computable integer, and it is already too large to write down. Climb one more rung to <code>A(4, 3)</code> and the number of <em>digits</em> itself becomes astronomical.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Compute <code>A(1, 5)</code> and <code>A(2, 2)</code> by hand from the recurrence and check the formulas <code>A(1, n) = n + 2</code>, <code>A(2, n) = 2n + 3</code>. <details><summary>Hint</summary><code>A(1, 5) = 7</code> and <code>A(2, 2) = 7</code> as well — the ladder rungs cross at small values.</details></li></ol>
+<ol><li><strong>(★)</strong> Using <code>A(3, n) = 2ⁿ⁺³ − 3</code>, predict <code>A(3, 7)</code> before running the demo. <details><summary>Hint</summary><code>2¹⁰ − 3 = 1021</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Trace <code>M(99)</code> for McCarthy&#x27;s function and confirm it returns <code>91</code>. <details><summary>Hint</summary><code>M(99) = M(M(110)) = M(100) = M(M(111)) = M(101) = 91</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Show that <code>A(2, n)</code> <em>is</em> primitive recursive but <code>A(m, n)</code> as a function of both arguments is not. What breaks the primitive-recursive bound? <details><summary>Hint</summary>Fixing <code>m</code> gives a simple closed form; it is the recursion <em>on <code>m</code></em> (the diagonal <code>A(n, n)</code>) that outgrows every primitive recursive function.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Verify the fixed-point property <code>Y f = f (Y f)</code> by β-reducing <code>Y f</code> one step, and explain how it yields recursion without a named function. <details><summary>Hint</summary>Reduce <code>(λx. f (x x)) (λx. f (x x))</code> to <code>f ((λx. f (x x)) (λx. f (x x)))</code>, which is <code>f (Y f)</code>.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Tower</strong> widget: <a href="explore.html#stop-12-tower"><code>site/index.html#stop-12-tower</code></a>. Watch the Ackermann call tree unfold — the nested <code>A(m, A(m+1, n))</code> calls fanning out — and see the digit count of <code>A(4, n)</code> outrun the screen.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>W. Ackermann (1928) and R. Péter&#x27;s simplified two-argument form; see the historical account in Appendix C.</li><li>Graham, Knuth &amp; Patashnik, <em>Concrete Mathematics</em>, on hyperoperations and fast-growing functions. See Appendix C.</li><li>H. P. Barendregt, <em>The Lambda Calculus</em>, for the Y combinator and fixed-point theory.</li><li>Z. Manna &amp; J. McCarthy on the 91 function and recursion induction.</li></ul>
+<p class="chapter-nav"><a href="11-assembly-line.html">← Stop 11 — The Infinite Assembly Line</a> · <a href="index.html">Route map</a> · <a href="13-hall-of-mirrors.html">Stop 13 — The Hall of Mirrors →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

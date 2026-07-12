@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Engine Room - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a class="on" href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="02-unfolding-road.html">← Stop 2 — The Unfolding Road</a> · <a href="index.html">Route map</a> · <a href="04-golden.html">Stop 4 — The Golden Milestone →</a></p>
+<h1 id="stop-3-the-engine-room">Stop 3 — The Engine Room</h1>
+<blockquote>Down among the pistons: the convergent recurrence that turns a list of partial quotients into a sequence of ever-better fractions.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>The unfolding road gives us a list of partial quotients, but a list is not yet an approximation. In the engine room we meet the machine that turns <code>[a₀; a₁, a₂, …]</code> into a sequence of fractions <code>pₙ/qₙ</code>, the <strong>convergents</strong>, each the best rational approximation of its size. The engine is a pair of coupled recurrences, and almost every theorem on the rest of the tour is bolted to it.</p>
+<h3 id="the-fundamental-recurrence">The fundamental recurrence</h3>
+<p>Define numerators <code>pₙ</code> and denominators <code>qₙ</code> by the <em>same</em> recurrence, differing only in their seeds:</p>
+<pre><code>pₙ = aₙ·pₙ₋₁ + pₙ₋₂,      p₋₁ = 1,  p₋₂ = 0,
+qₙ = aₙ·qₙ₋₁ + qₙ₋₂,      q₋₁ = 0,  q₋₂ = 1.</code></pre>
+<p>Then <code>pₙ/qₙ = [a₀; a₁, …, aₙ]</code>, the truncation of the road after <code>n+1</code> terms. The proof is a clean induction (Appendix A): replacing the tail <code>aₙ</code> by the real value <code>aₙ + 1/xₙ₊₁</code> in these formulas recovers <code>x</code> exactly, so the recurrence is just bookkeeping for the nested reciprocals of Stop 2. The important point is that it uses <strong>only integer additions and multiplications</strong> — no division, no rounding. This is why the <code>tourbus</code> engine can compute convergents <em>exactly</em> with Python&#x27;s arbitrary-precision integers, and why every worked example on this tour is reproducible to the last digit.</p>
+<h3 id="the-determinant-identity">The determinant identity</h3>
+<p>The two sequences are locked together by a beautiful relation:</p>
+<pre><code>pₙ·qₙ₋₁ − pₙ₋₁·qₙ = (−1)ⁿ⁻¹.</code></pre>
+<p>Read as a <code>2×2</code> determinant, it says the matrix <code>[[pₙ, pₙ₋₁], [qₙ, qₙ₋₁]]</code> has determinant <code>±1</code> — the convergents form a chain of <strong>unimodular</strong> matrices. Three consequences follow immediately:</p>
+<ul><li>Every convergent <code>pₙ/qₙ</code> is <strong>already in lowest terms</strong>: any common factor of <code>pₙ</code> and <code>qₙ</code> would have to divide <code>±1</code>. The engine never needs to reduce.</li><li>Successive convergents differ by exactly <code>pₙ/qₙ − pₙ₋₁/qₙ₋₁ = (−1)ⁿ⁻¹/(qₙ qₙ₋₁)</code>, a fraction whose size is controlled purely by the denominators.</li><li>Because the sign alternates, the convergents <strong>straddle</strong> the true value: even-indexed ones sit below <code>x</code>, odd-indexed ones above, each pair squeezing tighter. You can watch the <code>error</code> column flip sign row by row in every <code>cf</code> demo.</li></ul>
+<p>Appendix A proves the identity by a one-line induction on the recurrence.</p>
+<h3 id="how-good-and-how-fast">How good, and how fast</h3>
+<p>Combining the straddle with the recurrence gives the headline error bound:</p>
+<pre><code>|x − pₙ/qₙ| &lt; 1/(qₙ · qₙ₊₁) ≤ 1/qₙ².</code></pre>
+<p>An approximation whose error is smaller than one over the <em>square</em> of its denominator is extraordinary — a random fraction <code>p/q</code> is only within about <code>1/q</code> of a target. Convergents are quadratically good, and the size of the next partial quotient <code>aₙ₊₁</code> tells you <em>how</em> good: since <code>qₙ₊₁ = aₙ₊₁ qₙ + qₙ₋₁</code>, a large <code>aₙ₊₁</code> means an unusually accurate <code>pₙ/qₙ</code>. That is the secret behind <code>355/113</code> for <code>π</code>, which we will exploit at Stop 5.</p>
+<p>How fast do the denominators grow? Since every <code>aₙ ≥ 1</code>, the recurrence <code>qₙ = aₙ qₙ₋₁ + qₙ₋₂ ≥ qₙ₋₁ + qₙ₋₂</code> dominates the Fibonacci recurrence, so</p>
+<pre><code>qₙ ≥ F₍ₙ₊₁₎.</code></pre>
+<p>Denominators grow <strong>at least exponentially</strong> (like <code>φⁿ</code>), which is why a handful of convergents already pins a number down to many decimal places — and why the slowest-growing case, all <code>aₙ = 1</code>, is the golden ratio waiting at Stop 4.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Watch the engine turn on <code>π</code>. The convergents <code>3, 22/7, 333/106, 355/113</code> appear in order, denominators leaping ahead, and the error column halving its exponent every row or two:</p>
+<pre><code>$ python -m tourbus demo cf pi
+continued fraction of pi:
+  [3; 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14, 2, 1, 1, 2, 2, 2, 2, ...]
+
+ n  a_n  p/q                  value      error
+ -  ---  ------------  ------------  ---------
+ 0    3  3/1           3.0000000000  +1.42e-01
+ 1    7  22/7          3.1428571429  -1.26e-03
+ 2   15  333/106       3.1415094340  +8.32e-05
+ 3    1  355/113       3.1415929204  -2.67e-07
+ 4  292  103993/33102  3.1415926530  +5.78e-10
+ 5    1  104348/33215  3.1415926539  -3.32e-10
+ 6    1  208341/66317  3.1415926535  +1.22e-10
+ 7    1  312689/99532  3.1415926536  -2.91e-11</code></pre>
+<p>Two features to notice. First, the error signs alternate — <code>+, −, +, −, …</code> — the determinant identity&#x27;s straddle made visible. Second, the jump in accuracy from row 3 to row 4 (from <code>2.67e-07</code> to <code>5.78e-10</code>, a factor of nearly 500) is caused by the enormous partial quotient <code>a₄ = 292</code>: <code>355/113</code> is so good <em>because</em> the next term is so large. We come back to this at Stop 5.</p>
+<p>For contrast, a rational road terminates and the error falls straight to zero:</p>
+<pre><code>$ python -m tourbus demo cf 415/93
+continued fraction of 415/93:
+  [4; 2, 6, 7]
+
+ n  a_n  p/q            value      error
+ -  ---  ------  ------------  ---------
+ 0    4  4/1     4.0000000000  +4.62e-01
+ 1    2  9/2     4.5000000000  -3.76e-02
+ 2    6  58/13   4.4615384615  +8.27e-04
+ 3    7  415/93  4.4623655914  +0.00e+00</code></pre>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> From the <code>π</code> table, verify the determinant identity for the pair <code>333/106</code> and <code>355/113</code>: compute <code>355·106 − 333·113</code>. <details><summary>Hint</summary>You should get <code>±1</code>. Here <code>n = 3</code>, so the sign is <code>(−1)² = +1</code>.</details></li></ol>
+<ol><li><strong>(★)</strong> Using only the recurrence and <code>a = [3; 7, 15, 1]</code>, reconstruct the convergent <code>355/113</code> from <code>333/106</code> and <code>22/7</code>. <details><summary>Hint</summary><code>p₃ = 1·333 + 22</code>, <code>q₃ = 1·106 + 7</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Show that the error bound <code>1/(qₙ qₙ₊₁)</code> predicts the row-3 error of <code>π</code> to within an order of magnitude. (<code>q₃ = 113</code>, <code>q₄ = 33102</code>.) <details><summary>Hint</summary><code>1/(113·33102) ≈ 2.7e-7</code>, matching the <code>2.67e-07</code> in the table almost exactly.</details></li></ol>
+<ol><li><strong>(★★)</strong> Prove <code>qₙ ≥ F₍ₙ₊₁₎</code> for all <code>n ≥ 0</code> by induction on the denominator recurrence. <details><summary>Hint</summary>Base cases <code>q₀ = 1 = F₁</code>, <code>q₁ = a₁ ≥ 1 = F₂</code>; then <code>qₙ ≥ qₙ₋₁ + qₙ₋₂</code>.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Deduce from the determinant identity that consecutive convergents <code>pₙ₋₁/qₙ₋₁</code> and <code>pₙ/qₙ</code> are <em>Farey neighbours</em> — that is, <code>pₙ qₙ₋₁ − pₙ₋₁ qₙ = ±1</code>. Why does this foreshadow Stop 8? <details><summary>Hint</summary>That unit determinant is exactly the neighbour condition in the Stern–Brocot tree; convergents are the tree&#x27;s turning points.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Engine Room</strong> widget: <a href="explore.html#stop-3-engine"><code>site/index.html#stop-3-engine</code></a>. Step the recurrence forward one term at a time and see <code>pₙ, qₙ</code>, the running error, and the alternating straddle bracket the target from above and below.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Khinchin, <em>Continued Fractions</em>, §§1–2 for the recurrence and the error bounds. See Appendix C.</li><li>Hardy &amp; Wright, Chapter X, §§10.3–10.7 (convergents, the determinant identity, and approximation).</li><li>Appendix A of this tour, for the induction proofs of the recurrence, the determinant identity, and the error bound.</li></ul>
+<p class="chapter-nav"><a href="02-unfolding-road.html">← Stop 2 — The Unfolding Road</a> · <a href="index.html">Route map</a> · <a href="04-golden.html">Stop 4 — The Golden Milestone →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

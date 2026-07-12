@@ -1,0 +1,2360 @@
+<title>Recursive Continuance Tour Bus</title>
+<style>
+/* ============================================================
+   RECURSIVE CONTINUANCE TOUR BUS
+   Design identity: "transit diagram meets mathematical drafting"
+   ============================================================ */
+.rct{
+  /* ---- LIGHT palette (default) ---- */
+  --page:#eceef1; --surface:#fafbfc; --ink:#12161c; --ink-2:#4a525c;
+  --muted:#8b95a1; --grid:#dbe0e6; --border:rgba(18,22,28,.12); --brass:#b5751a;
+  --s1:#2a78d6; --s2:#1baf7a; --s3:#c8860f; --s4:#008300; --s5:#4a3aa7; --s6:#d1483f;
+
+  --font-sign: ui-sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-read: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+  --font-data: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  color:var(--ink);
+  background:var(--page);
+  font-family:var(--font-read);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-text-size-adjust:100%;
+  position:relative;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+@media (prefers-color-scheme: dark){
+  .rct{
+    --page:#0b0e13; --surface:#12171f; --ink:#eef2f7; --ink-2:#aeb7c2;
+    --muted:#6b7480; --grid:#1c232d; --border:rgba(238,242,247,.12); --brass:#e0a63e;
+    --s1:#4b93e6; --s2:#22b183; --s3:#e0a63e; --s4:#2f9e46; --s5:#9085e9; --s6:#e5675c;
+  }
+}
+/* explicit toggle wins over the media query in BOTH directions */
+:root[data-theme="light"] .rct{
+  --page:#eceef1; --surface:#fafbfc; --ink:#12161c; --ink-2:#4a525c;
+  --muted:#8b95a1; --grid:#dbe0e6; --border:rgba(18,22,28,.12); --brass:#b5751a;
+  --s1:#2a78d6; --s2:#1baf7a; --s3:#c8860f; --s4:#008300; --s5:#4a3aa7; --s6:#d1483f;
+}
+:root[data-theme="dark"] .rct{
+  --page:#0b0e13; --surface:#12171f; --ink:#eef2f7; --ink-2:#aeb7c2;
+  --muted:#6b7480; --grid:#1c232d; --border:rgba(238,242,247,.12); --brass:#e0a63e;
+  --s1:#4b93e6; --s2:#22b183; --s3:#e0a63e; --s4:#2f9e46; --s5:#9085e9; --s6:#e5675c;
+}
+
+.rct *{box-sizing:border-box}
+.rct :focus-visible{outline:2px solid var(--brass); outline-offset:2px; border-radius:2px}
+
+/* ---------- Type ---------- */
+.rct h1,.rct h2,.rct h3{font-family:var(--font-sign); font-weight:800; line-height:1.1; text-wrap:balance; margin:0}
+.rct h2{font-size:clamp(1.5rem,3.4vw,2.15rem); letter-spacing:-.01em}
+.rct h3{font-size:1.05rem; letter-spacing:.01em}
+.rct p{margin:0 0 1rem}
+.rct a{color:var(--brass); text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--brass) 40%, transparent)}
+.rct a:hover{border-bottom-color:var(--brass)}
+.rct .eyebrow{font-family:var(--font-data); text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; font-weight:600; color:var(--brass)}
+.rct .routenote{font-family:var(--font-sign); font-size:.9rem; color:var(--ink-2); font-style:italic; margin:.15rem 0 1rem}
+.rct .mono{font-family:var(--font-data); font-variant-numeric:tabular-nums}
+.rct .prose{max-width:68ch}
+
+/* ---------- Top-right wordmark + theme toggle ---------- */
+.rct-topbar{
+  position:fixed; top:.55rem; right:.7rem; z-index:60;
+  display:flex; align-items:center; gap:.5rem;
+}
+.rct-wordmark{
+  font-family:var(--font-sign); font-weight:800; font-size:.72rem;
+  text-transform:uppercase; letter-spacing:.06em; color:var(--ink);
+  background:var(--surface); border:1px solid var(--border);
+  padding:.35rem .55rem; border-radius:3px; line-height:1;
+}
+.rct-wordmark b{color:var(--brass)}
+.rct-toggle{
+  font-family:var(--font-data); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em;
+  background:var(--surface); color:var(--ink); border:1px solid var(--border);
+  padding:.4rem .55rem; border-radius:3px; cursor:pointer; line-height:1;
+}
+.rct-toggle:hover{border-color:var(--brass); color:var(--brass)}
+
+/* ---------- Left route rail (>=1100px) ---------- */
+.rct-rail{display:none}
+@media (min-width:1100px){
+  .rct-rail{
+    display:block; position:fixed; left:0; top:0; height:100vh; width:92px; z-index:40;
+    pointer-events:none;
+  }
+  .rct-rail svg{width:100%; height:100%; overflow:visible}
+  .rct-rail .st-bullet{pointer-events:all; cursor:pointer}
+  .rct-rail .st-hit{pointer-events:all; cursor:pointer; fill:transparent}
+  .rct-rail .st-label{
+    font-family:var(--font-sign); font-size:11px; font-weight:700; fill:var(--ink);
+    opacity:0; transition:opacity .15s; paint-order:stroke; stroke:var(--surface); stroke-width:3px;
+  }
+  .rct-rail .st-num{font-family:var(--font-data); font-size:9px; fill:var(--surface); font-weight:700; pointer-events:none}
+  .rct-main{padding-left:96px}
+}
+@media (prefers-reduced-motion: reduce){
+  .rct-rail .st-label{transition:none}
+}
+
+/* ---------- Mobile nav (<1100px) ---------- */
+.rct-mobilenav{
+  position:sticky; top:0; z-index:45; background:color-mix(in srgb,var(--page) 88%, transparent);
+  backdrop-filter:blur(6px); border-bottom:1px solid var(--border);
+}
+.rct-progress{height:3px; background:transparent}
+.rct-progress i{display:block; height:100%; width:0%; background:var(--brass); transition:width .1s linear}
+.rct-mobilenav details{padding:.3rem .7rem}
+.rct-mobilenav summary{
+  font-family:var(--font-data); text-transform:uppercase; letter-spacing:.08em; font-size:.72rem;
+  color:var(--ink-2); cursor:pointer; padding:.35rem 0; list-style:none;
+}
+.rct-mobilenav summary::-webkit-details-marker{display:none}
+.rct-mobilenav summary::before{content:"▸ "; color:var(--brass)}
+.rct-mobilenav details[open] summary::before{content:"▾ "}
+.rct-mobilenav ol{margin:.3rem 0 .6rem; padding-left:1.4rem; columns:2; font-family:var(--font-sign); font-size:.82rem}
+.rct-mobilenav ol a{color:var(--ink-2); border:none}
+.rct-mobilenav ol a:hover{color:var(--brass)}
+@media (min-width:1100px){ .rct-mobilenav{display:none} }
+
+/* ---------- Layout ---------- */
+.rct-main{max-width:1180px; margin:0 auto; padding:0 clamp(1rem,4vw,2.5rem) 5rem}
+.rct section{padding:2.6rem 0 2rem; border-top:1px solid var(--border)}
+.rct section:first-of-type{border-top:none}
+.rct .band{max-width:880px; margin:1.6rem auto 0}
+
+/* ---------- Hero ---------- */
+.rct-hero{
+  padding:clamp(2.5rem,7vw,5rem) 0 2.6rem; border-top:none;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 30px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/30px 100%;
+  background-position:center;
+  border-bottom:1px solid var(--border);
+  margin:0 calc(-1 * clamp(1rem,4vw,2.5rem));
+  padding-left:clamp(1rem,4vw,2.5rem); padding-right:clamp(1rem,4vw,2.5rem);
+}
+.rct-hero .inner{max-width:880px; margin:0 auto}
+.rct-hero h1{
+  font-size:clamp(2.1rem,6.2vw,4rem); letter-spacing:-.02em; line-height:1.02;
+}
+.rct-hero .tagline{font-family:var(--font-sign); font-weight:500; color:var(--ink-2); font-size:clamp(1rem,2.4vw,1.25rem); margin:.7rem 0 0; max-width:52ch}
+.rct-hero .phi-stage{
+  margin:2rem 0 1rem; padding:1.6rem 1rem; text-align:center;
+  font-family:var(--font-read); font-size:clamp(1.1rem,3.2vw,1.7rem); color:var(--ink);
+  min-height:9rem; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.2em;
+}
+.rct-hero .phi-eq{font-family:var(--font-data); font-size:1.1em; color:var(--brass); font-weight:600; margin-right:.15em}
+.rct-hero .phi-val{display:block; width:100%; margin-top:1rem; font-family:var(--font-data); font-size:.9rem; color:var(--muted); letter-spacing:.02em}
+.frac{display:inline-flex; flex-direction:column; text-align:center; vertical-align:middle; margin:0 .12em}
+.frac>.num{padding:0 .35em; line-height:1.2}
+.frac>.den{border-top:2px solid currentColor; padding:.05em .35em 0; line-height:1.2}
+.rct-hero .routesummary{
+  font-family:var(--font-data); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--ink-2); border-top:1px dashed var(--border); padding-top:1rem; margin-top:.6rem;
+}
+.rct-hero .routesummary b{color:var(--brass); font-weight:600}
+
+/* ---------- Widget cards ("instrument panels") ---------- */
+.widget{
+  border:1px solid var(--border); border-radius:4px; margin:1.4rem 0 .4rem;
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px) 0 0/100% 22px,
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/22px 100%,
+    var(--surface);
+  overflow:hidden;
+}
+.widget>.wlabel{
+  display:flex; justify-content:space-between; align-items:center; gap:.5rem;
+  font-family:var(--font-data); text-transform:uppercase; letter-spacing:.11em; font-size:.68rem;
+  color:var(--ink-2); border-bottom:1px solid var(--border); padding:.5rem .8rem;
+  background:color-mix(in srgb,var(--surface) 80%, var(--page));
+}
+.widget>.wlabel .tag{color:var(--brass); font-weight:700}
+.widget>.wbody{padding:.9rem .9rem 1.1rem}
+.wrow{display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:.2rem 0 .7rem}
+.wrow .lbl{font-family:var(--font-data); font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted)}
+
+/* ---------- Controls ---------- */
+.rct .btn,.rct .chip{
+  font-family:var(--font-sign); font-weight:600; font-size:.82rem;
+  background:var(--surface); color:var(--ink); border:1px solid var(--border);
+  padding:.4rem .7rem; border-radius:3px; cursor:pointer; line-height:1.1;
+}
+.rct .chip{font-family:var(--font-data); font-size:.74rem; padding:.32rem .55rem}
+.rct .btn:hover,.rct .chip:hover{border-color:var(--brass); color:var(--brass)}
+.rct .btn:active{transform:translateY(1px)}
+.rct .btn.primary{background:var(--brass); color:#fff; border-color:var(--brass)}
+.rct .btn.primary:hover{filter:brightness(1.06); color:#fff}
+.rct .chip.on{background:var(--brass); color:#fff; border-color:var(--brass)}
+.rct .btn[disabled]{opacity:.45; cursor:not-allowed}
+.rct input[type="text"],.rct input[type="number"],.rct select{
+  font-family:var(--font-data); font-size:.82rem; background:var(--surface); color:var(--ink);
+  border:1px solid var(--border); border-radius:3px; padding:.36rem .5rem;
+}
+.rct input[type="text"]{min-width:8rem}
+.rct input[type="range"]{accent-color:var(--brass); vertical-align:middle}
+.rct label.ck{font-family:var(--font-sign); font-size:.82rem; display:inline-flex; align-items:center; gap:.3rem; cursor:pointer}
+.rct label.ck input{accent-color:var(--brass)}
+.rct .field{display:inline-flex; flex-direction:column; gap:.15rem}
+.rct .field .lbl{margin:0}
+
+/* ---------- Readouts / tables ---------- */
+.readout{font-family:var(--font-data); font-size:.78rem; line-height:1.55}
+.tablewrap{overflow-x:auto; margin:.6rem 0; border:1px solid var(--border); border-radius:3px}
+.rct table{border-collapse:collapse; width:100%; font-family:var(--font-data); font-size:.76rem; font-variant-numeric:tabular-nums}
+.rct th,.rct td{text-align:right; padding:.3rem .55rem; white-space:nowrap; border-bottom:1px solid var(--border)}
+.rct th{color:var(--ink-2); text-transform:uppercase; letter-spacing:.04em; font-size:.66rem; font-weight:600; position:sticky; top:0; background:var(--surface)}
+.rct th:first-child,.rct td:first-child{text-align:left}
+.rct tr.hot td{background:color-mix(in srgb,var(--brass) 14%, transparent)}
+.rct td.ok{color:var(--s2)} .rct td.no{color:var(--s6)}
+
+.card-note{border:1px dashed var(--border); border-radius:3px; padding:.6rem .8rem; margin:.6rem 0; font-size:.86rem; color:var(--ink-2); background:color-mix(in srgb,var(--surface) 60%, transparent)}
+.card-note b{color:var(--ink)}
+.ledger{font-family:var(--font-data); font-size:.8rem; line-height:1.7; white-space:pre-wrap; word-break:break-word}
+.ledger .q{color:var(--brass); font-weight:700}
+.chips-row{display:flex; flex-wrap:wrap; gap:.4rem; margin:.3rem 0 .7rem}
+
+/* ---------- Chart svg ---------- */
+.chart{width:100%; height:auto; display:block; touch-action:pan-y}
+.chart .grid{stroke:var(--grid); stroke-width:1; shape-rendering:crispEdges}
+.chart .axis{stroke:var(--border); stroke-width:1}
+.chart .axlabel{font-family:var(--font-data); font-size:9px; fill:var(--ink-2)}
+.chart .axtitle{font-family:var(--font-sign); font-size:10px; font-weight:600; fill:var(--ink-2)}
+.chart .series{fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round}
+.chart .pt{stroke:var(--surface); stroke-width:1}
+.chart .guide{stroke:var(--muted); stroke-dasharray:4 3; stroke-width:1.5; fill:none}
+.chart .hair{stroke:var(--brass); stroke-width:1; stroke-dasharray:3 2}
+.chart .endlabel{font-family:var(--font-data); font-size:9px; font-weight:700}
+.legend{display:flex; flex-wrap:wrap; gap:.5rem .9rem; margin:.4rem 0 .2rem; font-family:var(--font-sign); font-size:.76rem}
+.legend .k{display:inline-flex; align-items:center; gap:.3rem}
+.legend .sw{width:14px; height:3px; border-radius:2px; display:inline-block}
+.tooltip{
+  position:absolute; pointer-events:none; background:var(--ink); color:var(--surface);
+  font-family:var(--font-data); font-size:.68rem; padding:.25rem .4rem; border-radius:3px;
+  transform:translate(-50%,-130%); white-space:nowrap; opacity:0; transition:opacity .08s; z-index:5;
+}
+.chart-wrap{position:relative}
+
+/* keyboard */
+.kbd{display:inline-block; font-family:var(--font-data); font-size:.7rem; border:1px solid var(--border); border-bottom-width:2px; border-radius:3px; padding:0 .3rem; background:var(--surface); color:var(--ink-2)}
+
+/* piano */
+.piano{position:relative; height:120px; display:flex; user-select:none; max-width:520px}
+.piano .wk{flex:1; border:1px solid var(--border); background:var(--surface); border-radius:0 0 3px 3px; cursor:pointer; position:relative; z-index:1}
+.piano .wk.lit{background:color-mix(in srgb,var(--brass) 30%, var(--surface))}
+.piano .bk{position:absolute; top:0; width:8%; height:62%; background:var(--ink); border-radius:0 0 3px 3px; z-index:2; cursor:pointer; transform:translateX(-50%)}
+.piano .bk.lit{background:var(--brass)}
+
+.next-stop{display:inline-block; margin-top:1.4rem; font-family:var(--font-sign); font-weight:600; font-size:.86rem}
+.next-stop::after{content:" \2192"}
+
+.terminus{
+  border:1px solid var(--border); border-radius:4px; padding:1.4rem 1.2rem; margin-top:1rem;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 12px, color-mix(in srgb,var(--brass) 7%, transparent) 12px 13px),
+    var(--surface);
+}
+.terminus h3{color:var(--brass)}
+.reading{list-style:none; padding:0; margin:.6rem 0 0}
+.reading li{padding:.35rem 0; border-bottom:1px solid var(--border); font-size:.9rem}
+.reading li:last-child{border-bottom:none}
+.reading .src{font-family:var(--font-data); font-size:.72rem; color:var(--muted)}
+
+.small{font-size:.8rem; color:var(--ink-2)}
+.hl{color:var(--brass); font-weight:600}
+.status-ok{color:var(--s2); font-weight:700}
+.status-no{color:var(--s6); font-weight:700}
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+</style>
+
+<div class="rct" id="rct-root">
+
+  <div class="rct-topbar">
+    <span class="rct-wordmark">Recursive Continuance <b>Tour&nbsp;Bus</b></span>
+    <button class="rct-toggle" id="rct-theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  </div>
+
+  <nav class="rct-rail" aria-hidden="true"><svg id="rail-svg" viewBox="0 0 92 1000" preserveAspectRatio="xMidYMid meet"></svg></nav>
+
+  <div class="rct-mobilenav">
+    <div class="rct-progress"><i id="progbar"></i></div>
+    <details>
+      <summary>Route map — 15 stops</summary>
+      <ol id="mobile-stops"></ol>
+    </details>
+  </div>
+
+  <main class="rct-main">
+
+    <header class="rct-hero" id="stop-hero">
+      <div class="inner">
+        <div class="eyebrow">Line R &middot; Recursion &amp; Continued Fractions</div>
+        <h1>Recursive Continuance Tour Bus</h1>
+        <p class="tagline">A guided ride through the numbers that describe themselves — from Euclid's leftovers to the most irrational number alive.</p>
+        <div class="phi-stage" id="phi-stage" aria-label="Animated continued fraction for the golden ratio"></div>
+        <div class="routesummary">Route: <b>Depot</b> &rarr; Golden Milestone &rarr; Cattle Crossing &rarr; The Casino &rarr; Hall of Mirrors &rarr; <b>Terminus</b> &mdash; 15 stops, no transfers.</div>
+      </div>
+    </header>
+
+    <section id="stop-1-depot">
+      <div class="eyebrow">Stop 01</div>
+      <h2>The Depot</h2>
+      <div class="routenote">Where every route begins: Euclid's algorithm.</div>
+      <div class="prose">
+        <p>Every tour starts where Euclid did. To find gcd(a,&nbsp;b) you divide, keep the remainder, and repeat — and the sequence of quotients you were about to throw away is, quietly, the continued fraction of a/b. Nothing is wasted on this route.</p>
+        <p>Type a number or a fraction into the machine below and step through it. The quotients pile up as CF terms; the convergents are the running best guesses.</p>
+      </div>
+      <div class="band"><div id="w1a"></div></div>
+      <a class="next-stop" href="#stop-2-road">Next stop</a>
+    </section>
+
+    <section id="stop-2-road">
+      <div class="eyebrow">Stop 02</div>
+      <h2>The Unfolding Road</h2>
+      <div class="routenote">The same algorithm, run on an irrational, never arrives.</div>
+      <div class="prose">
+        <p>Run divide-and-flip on an irrational and it simply never terminates. We record the result as <span class="mono">[a<sub>0</sub>; a<sub>1</sub>, a<sub>2</sub>, …]</span> — the semicolon marks the whole-number part, the commas the reciprocal descent. A number is rational exactly when the road ends.</p>
+        <p>The machine above handles both: a finite ledger for <span class="mono">p/q</span>, an endless one (certified term-by-term) for π and e.</p>
+      </div>
+      <a class="next-stop" href="#stop-3-engine">Next stop</a>
+    </section>
+
+    <section id="stop-3-engine">
+      <div class="eyebrow">Stop 03</div>
+      <h2>The Engine Room</h2>
+      <div class="routenote">Convergents, and why they are the best deal in town.</div>
+      <div class="prose">
+        <p>Convergents are the CF's pistons: <span class="mono">p<sub>n</sub> = a<sub>n</sub>p<sub>n-1</sub> + p<sub>n-2</sub></span>, with the same recurrence driving <span class="mono">q<sub>n</sub></span>. Each convergent is the best rational approximation for its size, with error below <span class="mono">1/q<sub>n</sub>²</span>. That is how π coughs up 22/7, then the uncanny 355/113.</p>
+      </div>
+      <div class="band"><div id="mini-convergents"></div></div>
+      <a class="next-stop" href="#stop-4-golden">Next stop</a>
+    </section>
+
+    <section id="stop-4-golden">
+      <div class="eyebrow">Stop 04</div>
+      <h2>The Golden Milestone</h2>
+      <div class="routenote">All ones — the slowest climb on the whole line.</div>
+      <div class="prose">
+        <p>φ&nbsp;=&nbsp;<span class="mono">[1; 1, 1, 1, …]</span> is the slowest-converging continued fraction there is: all ones means each step gains as little as possible. Hurwitz's theorem makes this precise and crowns φ "the most irrational number." The golden spiral is what that stubbornness looks like.</p>
+      </div>
+      <div class="band"><div id="w3"></div></div>
+      <div class="band"><div id="w4"></div></div>
+      <a class="next-stop" href="#stop-5-overlook">Next stop</a>
+    </section>
+
+    <section id="stop-5-overlook">
+      <div class="eyebrow">Stop 05</div>
+      <h2>Scenic Overlook</h2>
+      <div class="routenote">Best approximation, applied to the calendar.</div>
+      <div class="prose">
+        <p>Stop for the view: convergents are the cheapest rationals that hit a target. Calendars are the case study — 8 leap days every 33 years (Khayyam, 1079) is a convergent of the tropical year; the Gregorian 97/400 is close but, tellingly, <em>not</em> one.</p>
+      </div>
+      <div class="band"><div id="w9"></div></div>
+      <a class="next-stop" href="#stop-6-loop">Next stop</a>
+    </section>
+
+    <section id="stop-6-loop">
+      <div class="eyebrow">Stop 06</div>
+      <h2>The Loop Road</h2>
+      <div class="routenote">Periodic continued fractions and the quadratic irrationals.</div>
+      <div class="prose">
+        <p>Here the road bends back on itself. A CF is eventually periodic exactly when its value is a quadratic irrational (Lagrange), so <span class="mono">√d</span> always has a repeating block: <span class="mono">√2 = [1; 2, 2, 2, …] = [1; (2)]</span>.</p>
+      </div>
+      <div class="band"><div id="mini-sqrtcf"></div></div>
+      <a class="next-stop" href="#stop-7-cattle">Next stop</a>
+    </section>
+
+    <section id="stop-7-cattle">
+      <div class="eyebrow">Stop 07</div>
+      <h2>The Cattle Crossing</h2>
+      <div class="routenote">Pell's equation, straight out of the convergents of √d.</div>
+      <div class="prose">
+        <p>Pell's equation <span class="mono">x² − d·y² = 1</span> falls out of the convergents of <span class="mono">√d</span>. Fermat's 1657 challenge, <span class="mono">d = 61</span>, has a smallest solution so large it stampedes: <span class="mono">x = 1&nbsp;766&nbsp;319&nbsp;049</span>. Set the dial and watch a convergent land exactly on the fence.</p>
+      </div>
+      <div class="band"><div id="w7"></div></div>
+      <a class="next-stop" href="#stop-8-family">Next stop</a>
+    </section>
+
+    <section id="stop-8-family">
+      <div class="eyebrow">Stop 08</div>
+      <h2>The Family Tree</h2>
+      <div class="routenote">Every positive rational, exactly once.</div>
+      <div class="prose">
+        <p>The Stern–Brocot tree lists every positive rational exactly once, each fraction the mediant <span class="mono">(a+c)/(b+d)</span> of its neighbours. Turn left or right and you are reading off a continued fraction in disguise.</p>
+      </div>
+      <div class="band"><div id="w2"></div></div>
+      <a class="next-stop" href="#stop-9-celebrity">Next stop</a>
+    </section>
+
+    <section id="stop-9-celebrity">
+      <div class="eyebrow">Stop 09</div>
+      <h2>Celebrity Sightings</h2>
+      <div class="routenote">e keeps a pattern; π keeps a secret.</div>
+      <div class="prose">
+        <p>Not all irrationals behave alike. <span class="mono">e = [2; 1, 2, 1, 1, 4, 1, 1, 6, …]</span> hides a crisp arithmetic pattern; π's expansion marches on with no known rule at all — <span class="mono">3, 7, 15, 1, 292, …</span>. Load each into the machine and look.</p>
+      </div>
+      <div class="band"><div id="w1b"></div></div>
+      <a class="next-stop" href="#stop-10-casino">Next stop</a>
+    </section>
+
+    <section id="stop-10-casino">
+      <div class="eyebrow">Stop 10</div>
+      <h2>The Casino</h2>
+      <div class="routenote">The Gauss map, and the constant almost every number obeys.</div>
+      <div class="prose">
+        <p>The Gauss map <span class="mono">T(x) = {1/x}</span> shuffles the CF deck, dealing off one term per turn. Its statistics are iron: for almost every real, the geometric mean of the partial quotients tends to Khinchin's constant <span class="mono">K₀ ≈ 2.6854520</span> — no matter which number you sat down with.</p>
+      </div>
+      <div class="band"><div id="w5"></div></div>
+      <div class="band"><div id="w6"></div></div>
+      <a class="next-stop" href="#stop-11-assembly">Next stop</a>
+    </section>
+
+    <section id="stop-11-assembly">
+      <div class="eyebrow">Stop 11</div>
+      <h2>The Infinite Assembly Line</h2>
+      <div class="routenote">Gosper's streaming arithmetic on continued fractions.</div>
+      <div class="prose">
+        <p>Gosper's insight: you can do arithmetic on continued fractions term-by-term, as a stream, never fully evaluating anything. Feed in <span class="mono">√2</span> and <span class="mono">√3</span> and the line emits the CF of their sum, one certified quotient at a time.</p>
+      </div>
+      <div class="band"><div id="mini-gosper"></div></div>
+      <a class="next-stop" href="#stop-12-tower">Next stop</a>
+    </section>
+
+    <section id="stop-12-tower">
+      <div class="eyebrow">Stop 12</div>
+      <h2>The Tower</h2>
+      <div class="routenote">Recursion that climbs out of sight.</div>
+      <div class="prose">
+        <p>Recursion can climb terrifyingly fast. Ackermann's <span class="mono">A(4,2) = 2^65536 − 3</span> — a number we can print the size of but never the whole of. The Y combinator, at the other extreme, achieves recursion with no name to call at all: self-reference distilled.</p>
+      </div>
+      <div class="band"><div id="mini-tower"></div></div>
+      <a class="next-stop" href="#stop-13-mirrors">Next stop</a>
+    </section>
+
+    <section id="stop-13-mirrors">
+      <div class="eyebrow">Stop 13</div>
+      <h2>The Hall of Mirrors</h2>
+      <div class="routenote">Fractals: shapes that quote themselves.</div>
+      <div class="prose">
+        <p>A fractal is a shape that quotes itself. Koch's snowflake has dimension <span class="mono">ln4/ln3 ≈ 1.262</span>; Sierpiński's gasket <span class="mono">ln3/ln2 ≈ 1.585</span>; the dragon and Hilbert curves pack the plane so densely their dimension reaches 2.</p>
+      </div>
+      <div class="band"><div id="w8"></div></div>
+      <a class="next-stop" href="#stop-14-souvenir">Next stop</a>
+    </section>
+
+    <section id="stop-14-souvenir">
+      <div class="eyebrow">Stop 14</div>
+      <h2>The Souvenir Shop</h2>
+      <div class="routenote">Music, broken RSA, and an unruly sequence.</div>
+      <div class="prose">
+        <p>Souvenirs from the whole route. Equal temperament is the convergent <span class="mono">7/12</span> of <span class="mono">log₂(3/2)</span>; Wiener's attack breaks RSA when the secret exponent is too small, reading it straight off a continued fraction; and Collatz simply refuses to be tamed.</p>
+      </div>
+      <div class="band"><div id="w10"></div></div>
+      <div class="band"><div id="w11"></div></div>
+      <div class="band"><div id="w12"></div></div>
+      <a class="next-stop" href="#stop-15-terminus">Next stop</a>
+    </section>
+
+    <section id="stop-15-terminus">
+      <div class="eyebrow">Stop 15</div>
+      <h2>Terminus</h2>
+      <div class="routenote">End of the line — the questions nobody can answer yet.</div>
+      <div class="prose">
+        <p>End of the line. Is the geometric mean of π's partial quotients really Khinchin's constant? Is <span class="mono">K₀</span> itself irrational? Does every Collatz orbit reach 1? Nobody knows.</p>
+      </div>
+      <div class="band">
+        <div class="terminus">
+          <h3>Open track ahead</h3>
+          <p class="small" style="margin-top:.5rem">Three unanswered questions that this very tour walked right past:</p>
+          <ul class="reading" style="margin-bottom:1rem">
+            <li><b>Khinchin for π.</b> Numerically, π's partial quotients look like a "typical" real (geometric mean ≈ K₀), but there is no proof π is not exceptional.</li>
+            <li><b>Is K₀ irrational?</b> Khinchin's constant is not known to be irrational, let alone transcendental.</li>
+            <li><b>Collatz.</b> Verified past 2<sup>68</sup> by computer; still unproved for all n.</li>
+          </ul>
+          <h3>Reading list</h3>
+          <ul class="reading">
+            <li>A. Ya. Khinchin — <em>Continued Fractions</em> <span class="src">the slim classic; Gauss–Kuzmin, K₀</span></li>
+            <li>Graham, Knuth &amp; Patashnik — <em>Concrete Mathematics</em>, §4.5 <span class="src">Stern–Brocot, convergents</span></li>
+            <li>Beeler, Gosper &amp; Schroeppel — <em>HAKMEM</em>, item 101 <span class="src">streaming CF arithmetic</span></li>
+            <li>Hardy &amp; Wright — <em>An Introduction to the Theory of Numbers</em> <span class="src">Ch. X–XI</span></li>
+          </ul>
+          <p class="small" style="margin-top:1rem; color:var(--muted)">Mind the gap, and thanks for riding Line R.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stop-encore-blocks">
+      <div class="eyebrow">Encore</div>
+      <h2>Colliding Blocks Count π</h2>
+      <div class="routenote">Where recursion, rotation, continued fractions, and π turn out to be one idea.</div>
+      <div class="prose">
+        <p>One last stop, off the main line. Put a small block between a wall and a big one, send the big block in, and count every perfectly elastic collision. Galperin's theorem: with mass ratio <span class="mono">100ⁿ</span>, the number of collisions is the first <span class="mono">n+1</span> digits of π. The dynamics is secretly a billiard in a wedge — the collision count is a <em>rotation number</em>, exactly what continued fractions were built to measure, and π is the half-turn.</p>
+      </div>
+      <div class="band"><div id="w13"></div></div>
+      <p class="prose" style="margin-top:1rem">The whole tour closes its loop here — recursion, continued fractions, rotation numbers, and π, all one idea. Run it in the terminal with <span class="mono">python -m tourbus demo blocks</span>.</p>
+    </section>
+
+    <section id="stop-crossdomain-butterfly">
+      <div class="eyebrow">Cross-Domain</div>
+      <h2>The Hofstadter Butterfly</h2>
+      <div class="routenote">The same recurrence, now in a magnetic field: number theory drawn onto a material.</div>
+      <div class="prose">
+        <p>Put an electron on a crystal lattice in a magnetic field. Its allowed energies, plotted against the magnetic flux <span class="mono">p/q</span> through each cell, form this self-similar fractal — the Hofstadter butterfly. To compute the spectrum you count eigenvalues with the <em>Sturm sequence</em> <span class="mono">d<sub>k</sub> = (a<sub>k</sub>−E)d<sub>k−1</sub> − d<sub>k−2</sub></span> — which is the <em>continuant</em>, the very recurrence behind every continued-fraction convergent. The butterfly's gaps are labelled by the continued-fraction convergents of the flux; at irrational flux the spectrum is a Cantor set.</p>
+      </div>
+      <div class="band"><div id="w14"></div></div>
+      <p class="prose" style="margin-top:1rem">Every wing is computed live by the continuant. The whole Cross-Domain Line — chemistry, condensed matter, engineering, dynamics, biology — is one <span class="mono">python -m tourbus crossdomain</span> away.</p>
+    </section>
+
+  </main>
+</div>
+
+<script>
+"use strict";
+/* ==================================================================
+   RECURSIVE CONTINUANCE TOUR BUS — inline engine + widgets
+   ================================================================== */
+(function(){
+const RCT = {};
+const ROOT = document.getElementById('rct-root');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------------- BigInt helpers ---------------- */
+function bgcd(a,b){ a=a<0n?-a:a; b=b<0n?-b:b; while(b){ [a,b]=[b,a%b]; } return a; }
+function babs(a){ return a<0n?-a:a; }
+function isqrt(n){
+  if(n<0n) throw new Error('isqrt<0');
+  if(n<2n) return n;
+  let x=n, y=(x+1n)/2n;
+  while(y<x){ x=y; y=(x + n/x)/2n; }
+  return x;
+}
+// approximate log10 of a positive BigInt
+function blog10(x){
+  if(x<=0n) return -Infinity;
+  const s=x.toString(); const d=s.length;
+  const lead=Number(s.slice(0,15));
+  return Math.log10(lead) + (d - Math.min(15,d));
+}
+// float value of BigInt fraction n/d (safe for huge values)
+function fracFloat(n,d){
+  let sign = 1;
+  if(n<0n){ sign=-sign; n=-n; }
+  if(d<0n){ sign=-sign; d=-d; }
+  if(d===0n) return sign*Infinity;
+  const bits = (x)=>x===0n?0:x.toString(2).length;
+  let s = Math.max(bits(n),bits(d)) - 52;
+  if(s>0){ const sh=BigInt(s); n=n>>sh; d=d>>sh; }
+  if(d===0n) return sign*Infinity;
+  return sign*(Number(n)/Number(d));
+}
+
+/* ---------------- BigFrac (reduced, d>0) ---------------- */
+function BigFrac(n,d){
+  if(!(this instanceof BigFrac)) return new BigFrac(n,d);
+  n=BigInt(n); d=(d===undefined)?1n:BigInt(d);
+  if(d===0n) throw new Error('BigFrac /0');
+  if(d<0n){ n=-n; d=-d; }
+  const g=bgcd(n,d)||1n;
+  this.n=n/g; this.d=d/g;
+}
+BigFrac.prototype.add=function(o){ return new BigFrac(this.n*o.d + o.n*this.d, this.d*o.d); };
+BigFrac.prototype.sub=function(o){ return new BigFrac(this.n*o.d - o.n*this.d, this.d*o.d); };
+BigFrac.prototype.mul=function(o){ return new BigFrac(this.n*o.n, this.d*o.d); };
+BigFrac.prototype.div=function(o){ return new BigFrac(this.n*o.d, this.d*o.n); };
+BigFrac.prototype.subInt=function(a){ a=BigInt(a); return new BigFrac(this.n - a*this.d, this.d); };
+BigFrac.prototype.recip=function(){ return new BigFrac(this.d, this.n); };
+BigFrac.prototype.cmp=function(o){ const l=this.n*o.d, r=o.n*this.d; return l<r?-1:(l>r?1:0); };
+BigFrac.prototype.floor=function(){ // true floor as BigInt (d>0)
+  let q=this.n/this.d; const r=this.n - q*this.d;
+  if(r<0n) q-=1n; return q;
+};
+BigFrac.prototype.toNumber=function(){ return fracFloat(this.n,this.d); };
+BigFrac.prototype.isZero=function(){ return this.n===0n; };
+
+/* ---------------- Continued fractions ---------------- */
+// CF of rational n/d (Euclid). Canonical: last term >= 2 when length>1.
+function cfFromFrac(n,d){
+  n=BigInt(n); d=BigInt(d);
+  if(d<0n){ n=-n; d=-d; }
+  if(d===0n) return [];
+  const t=[];
+  while(d!==0n){
+    let q=n/d; let r=n-q*d;
+    if(r<0n){ q-=1n; r+=d; }   // true floor (d>0)
+    t.push(q); n=d; d=r;
+  }
+  if(t.length>1 && t[t.length-1]===1n){ t.pop(); t[t.length-1]+=1n; }
+  return t;
+}
+// convergents from term list -> [{h,k}] (h/k = p/q)
+function convergents(terms){
+  const out=[]; let h1=1n,h2=0n,k1=0n,k2=1n;
+  for(const a of terms){
+    const h=a*h1+h2, k=a*k1+k2;
+    out.push({h,k}); h2=h1; h1=h; k2=k1; k1=k;
+  }
+  return out;
+}
+// certified CF terms from a rational bracket [lo,hi] (BigFrac). Emits only sure floors.
+function cfFromInterval(lo,hi,maxTerms){
+  const t=[];
+  for(let i=0;i<maxTerms;i++){
+    const fl=lo.floor(), fh=hi.floor();
+    if(fl!==fh) break;
+    const a=fl; t.push(a);
+    const hiM=hi.subInt(a), loM=lo.subInt(a);
+    if(loM.n===0n || hiM.n===0n) break;     // would divide by zero
+    if(hiM.n<0n || loM.n<0n) break;         // left the monotone branch
+    lo=hiM.recip(); hi=loM.recip();
+  }
+  return t;
+}
+// build a +/- 1 ulp bracket from a decimal string like "3.14159..."
+function bracketFromDecimal(str){
+  str=str.trim(); let neg=false;
+  if(str[0]==='-'){ neg=true; str=str.slice(1); }
+  const dot=str.indexOf('.');
+  let digits, dec;
+  if(dot<0){ digits=str; dec=0; } else { digits=str.slice(0,dot)+str.slice(dot+1); dec=str.length-dot-1; }
+  const num=BigInt(digits.replace(/[^0-9]/g,''));
+  const den=10n**BigInt(dec);
+  let lo=new BigFrac(num-1n,den), hi=new BigFrac(num+1n,den);
+  if(neg){ const t=lo; lo=hi.mul(new BigFrac(-1n)); hi=t.mul(new BigFrac(-1n)); }
+  return {lo,hi};
+}
+
+/* ---------------- sqrt CF via PQa ---------------- */
+function sqrtCF(d){
+  d=BigInt(d);
+  const a0=isqrt(d);
+  if(a0*a0===d) return {pre:[a0], period:[]}; // perfect square
+  const period=[]; let m=0n,q=1n,a=a0;
+  do{
+    m=a*q-m;
+    q=(d-m*m)/q;
+    a=(a0+m)/q;
+    period.push(a);
+    if(period.length>100000) break;
+  }while(a!==2n*a0);
+  return {pre:[a0], period};
+}
+// Fundamental solution of x^2 - d y^2 = 1
+function pellFundamental(d){
+  d=BigInt(d);
+  const s=sqrtCF(d);
+  if(s.period.length===0) return null; // perfect square
+  const L=s.period.length;
+  const terms=[s.pre[0]].concat(s.period.slice(0,L-1)); // a0..a_{L-1}, length L
+  const cs=convergents(terms);
+  let {h:x,k:y}=cs[cs.length-1];
+  if(L%2===1){ // solves -1; square the unit
+    const nx=x*x + d*y*y, ny=2n*x*y; x=nx; y=ny;
+  }
+  return {x,y,period:L,verified:(x*x - d*y*y===1n)};
+}
+
+/* ---------------- Minkowski ? function ---------------- */
+// ?(p/q) as exact reduced fraction {num,den}. Expects 0<=p/q<=1.
+function questionMark(p,q){
+  p=BigInt(p); q=BigInt(q);
+  if(p===0n) return {num:0n,den:1n};
+  if(p===q) return {num:1n,den:1n};
+  const cf=cfFromFrac(p,q); // [0; a1, a2, ...]
+  const a=cf.slice(1);      // drop a0 (=0)
+  let val=new BigFrac(0n), S=0n, sign=1n;
+  for(let k=0;k<a.length;k++){
+    S+=a[k];
+    // term = sign * 2 * 2^{-S} = sign / 2^{S-1}
+    const term=new BigFrac(sign, (1n<<(S-1n)));
+    val=val.add(term);
+    sign=-sign;
+  }
+  return {num:val.n, den:val.d};
+}
+
+/* ---------------- PRNG (deterministic) ---------------- */
+function mulberry32(seed){
+  let a=seed>>>0;
+  return function(){
+    a|=0; a=(a+0x6D2B79F5)|0;
+    let t=Math.imul(a^(a>>>15), 1|a);
+    t=(t+Math.imul(t^(t>>>7), 61|t))^t;
+    return ((t^(t>>>14))>>>0)/4294967296;
+  };
+}
+
+/* ---------------- BigInt modular / primality (Wiener) ---------------- */
+function modpow(b,e,m){ b%=m; if(b<0n)b+=m; let r=1n; while(e>0n){ if(e&1n) r=r*b%m; b=b*b%m; e>>=1n; } return r; }
+function egcd(a,b){ let x=0n,ox=1n,y=1n,oy=0n; while(b){ const q=a/b; [a,b]=[b,a-q*b]; [ox,x]=[x,ox-q*x]; [oy,y]=[y,oy-q*y]; } return {g:a,x:ox,y:oy}; }
+function modinv(a,m){ a=((a%m)+m)%m; const {g,x}=egcd(a,m); if(g!==1n) return null; return ((x%m)+m)%m; }
+function isProbablePrime(n){
+  if(n<2n) return false;
+  for(const p of [2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n]){
+    if(n===p) return true;
+    if(n%p===0n) return false;
+  }
+  let d=n-1n, r=0n;
+  while((d&1n)===0n){ d>>=1n; r++; }
+  const witnesses=[2n,3n,5n,7n,11n,13n,17n,19n,23n,29n,31n,37n];
+  for(const a of witnesses){
+    if(a%n===0n) continue;
+    let x=modpow(a,d,n); if(x===1n||x===n-1n) continue;
+    let cont=false;
+    for(let i=0n;i<r-1n;i++){ x=x*x%n; if(x===n-1n){ cont=true; break; } }
+    if(!cont) return false;
+  }
+  return true;
+}
+function randBits(bits,rng){
+  let x=0n; for(let i=0;i<bits;i++){ x=(x<<1n)|(rng()<0.5?0n:1n); }
+  x|=1n; x|=(1n<<BigInt(bits-1)); // odd, top bit set
+  return x;
+}
+function randPrime(bits,rng){
+  for(let tries=0;tries<20000;tries++){
+    let c=randBits(bits,rng);
+    if(isProbablePrime(c)) return c;
+  }
+  return null;
+}
+
+/* embedded high-precision seeds (~60 digits) */
+const PI ="3.14159265358979323846264338327950288419716939937510582097494459";
+const E  ="2.71828182845904523536028747135266249775724709369995957496696763";
+const SQRT2="1.41421356237309504880168872420969807856967187537694807317667974";
+const SQRT3="1.73205080756887729352744634150587236694280525381038062805580698";
+
+RCT.BigFrac=BigFrac; RCT.cfFromFrac=cfFromFrac; RCT.convergents=convergents;
+RCT.cfFromInterval=cfFromInterval; RCT.bracketFromDecimal=bracketFromDecimal;
+RCT.sqrtCF=sqrtCF; RCT.pellFundamental=pellFundamental; RCT.questionMark=questionMark;
+RCT.mulberry32=mulberry32; RCT.isqrt=isqrt; RCT.blog10=blog10; RCT.fracFloat=fracFloat;
+RCT.bgcd=bgcd; RCT.modpow=modpow; RCT.modinv=modinv; RCT.isProbablePrime=isProbablePrime;
+RCT.randPrime=randPrime; RCT.PI=PI; RCT.E=E; RCT.SQRT2=SQRT2; RCT.SQRT3=SQRT3;
+/* ---------------- Theme manager ---------------- */
+(function(){
+  const KEY='rct-theme';
+  const btn=document.getElementById('rct-theme-toggle');
+  const order=['auto','light','dark'];
+  const labels={auto:'Theme: Auto',light:'Theme: Light',dark:'Theme: Dark'};
+  function store(get,val){ try{ if(get) return localStorage.getItem(KEY); localStorage.setItem(KEY,val); }catch(e){} return null; }
+  function apply(mode){
+    const de=document.documentElement;
+    if(mode==='auto') de.removeAttribute('data-theme');
+    else de.setAttribute('data-theme',mode);
+    btn.textContent=labels[mode];
+    btn.setAttribute('aria-label','Color theme: '+mode+' (click to change)');
+  }
+  let cur=store(true)||'auto';
+  if(!order.includes(cur)) cur='auto';
+  apply(cur);
+  btn.addEventListener('click',function(){
+    cur=order[(order.indexOf(cur)+1)%order.length];
+    store(false,cur); apply(cur);
+    window.dispatchEvent(new Event('themechange'));
+  });
+  // repaint when the OS theme flips while in auto
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){
+    if(cur==='auto') window.dispatchEvent(new Event('themechange'));
+  });
+})();
+// read a CSS custom property from root
+function cssvar(name){ return getComputedStyle(ROOT).getPropertyValue(name).trim(); }
+function seriesColor(i){ return cssvar('--s'+(((i)%6)+1)); }
+RCT.cssvar=cssvar; RCT.seriesColor=seriesColor;
+function onTheme(fn){ window.addEventListener('themechange',fn); }
+RCT.onTheme=onTheme;
+/* ---------------- SVG chart helper ---------------- */
+const SVGNS='http://www.w3.org/2000/svg';
+function el(tag,attrs){ const e=document.createElementNS(SVGNS,tag); if(attrs) for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
+function niceTicks(min,max,n){
+  n=n||5; const span=(max-min)||1; const step0=span/n;
+  const mag=Math.pow(10,Math.floor(Math.log10(step0)));
+  const norm=step0/mag; let step;
+  if(norm<1.5)step=1; else if(norm<3)step=2; else if(norm<7)step=5; else step=10;
+  step*=mag;
+  const start=Math.ceil(min/step-1e-9)*step; const out=[];
+  for(let v=start; v<=max+step*1e-9; v+=step) out.push(Math.abs(v)<step*1e-9?0:v);
+  return out;
+}
+function makeChart(mount,opts){
+  opts=opts||{};
+  const W=opts.width||760, H=opts.height||300;
+  const pad={l:opts.padL!=null?opts.padL:48, r:opts.padR!=null?opts.padR:18, t:opts.padT!=null?opts.padT:14, b:opts.padB!=null?opts.padB:34};
+  const wrap=document.createElement('div'); wrap.className='chart-wrap';
+  const svg=el('svg',{class:'chart',viewBox:'0 0 '+W+' '+H,role:'img'});
+  const tip=document.createElement('div'); tip.className='tooltip';
+  wrap.appendChild(svg); wrap.appendChild(tip); mount.appendChild(wrap);
+  const plotW=W-pad.l-pad.r, plotH=H-pad.t-pad.b;
+  let spec=null, hoverTargets=[], cross=null;
+
+  function xToPx(x,s){ let mn=s.xDomain[0],mx=s.xDomain[1]; if(s.xLog){x=Math.log10(x);mn=Math.log10(mn);mx=Math.log10(mx);} return pad.l + (x-mn)/((mx-mn)||1)*plotW; }
+  function yToPx(y,s){ let mn=s.yDomain[0],mx=s.yDomain[1]; if(s.yLog){y=Math.log10(y);mn=Math.log10(mn);mx=Math.log10(mx);} return pad.t + plotH - (y-mn)/((mx-mn)||1)*plotH; }
+
+  function render(sp){
+    spec=sp; while(svg.firstChild) svg.removeChild(svg.firstChild); hoverTargets=[];
+    if(sp.title) svg.setAttribute('aria-label',sp.title);
+    // ticks
+    let xt=sp.xTicks, yt=sp.yTicks;
+    if(!xt){ if(sp.xLog){ xt=[]; for(let d=Math.ceil(Math.log10(sp.xDomain[0]));d<=Math.floor(Math.log10(sp.xDomain[1]));d++) xt.push(Math.pow(10,d)); } else xt=niceTicks(sp.xDomain[0],sp.xDomain[1],sp.xTickN||5); }
+    if(!yt){ if(sp.yLog){ yt=[]; for(let d=Math.ceil(Math.log10(sp.yDomain[0]));d<=Math.floor(Math.log10(sp.yDomain[1]));d++) yt.push(Math.pow(10,d)); } else yt=niceTicks(sp.yDomain[0],sp.yDomain[1],sp.yTickN||5); }
+    const gridC=cssvar('--grid'), borderC=cssvar('--border'), inkC=cssvar('--ink-2');
+    // grid + x labels
+    xt.forEach(function(v){ const px=xToPx(v,sp);
+      svg.appendChild(el('line',{class:'grid',x1:px,y1:pad.t,x2:px,y2:pad.t+plotH}));
+      const t=el('text',{class:'axlabel',x:px,y:pad.t+plotH+13,'text-anchor':'middle'});
+      t.textContent=sp.xFmt?sp.xFmt(v):(''+ (+v.toFixed(6)));
+      svg.appendChild(t);
+    });
+    yt.forEach(function(v){ const py=yToPx(v,sp);
+      svg.appendChild(el('line',{class:'grid',x1:pad.l,y1:py,x2:pad.l+plotW,y2:py}));
+      const t=el('text',{class:'axlabel',x:pad.l-6,y:py+3,'text-anchor':'end'});
+      t.textContent=sp.yFmt?sp.yFmt(v):(''+ (+v.toFixed(6)));
+      svg.appendChild(t);
+    });
+    // axes
+    svg.appendChild(el('line',{class:'axis',x1:pad.l,y1:pad.t,x2:pad.l,y2:pad.t+plotH}));
+    svg.appendChild(el('line',{class:'axis',x1:pad.l,y1:pad.t+plotH,x2:pad.l+plotW,y2:pad.t+plotH}));
+    if(sp.xTitle){ const t=el('text',{class:'axtitle',x:pad.l+plotW,y:pad.t+plotH+30,'text-anchor':'end'}); t.textContent=sp.xTitle; svg.appendChild(t); }
+    if(sp.yTitle){ const t=el('text',{class:'axtitle',x:pad.l-38,y:pad.t-4,'text-anchor':'start'}); t.textContent=sp.yTitle; svg.appendChild(t); }
+    // guides (behind series)
+    (sp.guides||[]).forEach(function(g){
+      const pts=g.points.map(function(p){return xToPx(p.x,sp)+','+yToPx(p.y,sp);}).join(' ');
+      svg.appendChild(el('polyline',{class:'guide',points:pts}));
+      if(g.label){ const last=g.points[g.points.length-1]; const t=el('text',{class:'axlabel',x:xToPx(last.x,sp)-3,y:yToPx(last.y,sp)-3,'text-anchor':'end'}); t.textContent=g.label; svg.appendChild(t); }
+    });
+    // hairlines
+    (sp.hairs||[]).forEach(function(hr){
+      if(hr.axis==='y'){ const py=yToPx(hr.v,sp); svg.appendChild(el('line',{class:'hair',x1:pad.l,y1:py,x2:pad.l+plotW,y2:py}));
+        if(hr.label){ const t=el('text',{class:'axlabel',x:pad.l+3,y:py-3}); t.setAttribute('fill',cssvar('--brass')); t.textContent=hr.label; svg.appendChild(t); } }
+      else { const px=xToPx(hr.v,sp); svg.appendChild(el('line',{class:'hair',x1:px,y1:pad.t,x2:px,y2:pad.t+plotH}));
+        if(hr.label){ const t=el('text',{class:'axlabel',x:px+3,y:pad.t+10}); t.setAttribute('fill',cssvar('--brass')); t.textContent=hr.label; svg.appendChild(t); } }
+    });
+    // series
+    (sp.series||[]).forEach(function(s){
+      const col=s.colorHex?( (s.colorHex.charAt(0)==='-')?cssvar(s.colorHex):s.colorHex ):((s.color!=null)?seriesColor(s.color):cssvar('--ink'));
+      const pts=s.points.filter(function(p){return isFinite(p.x)&&isFinite(p.y);});
+      if(pts.length>1 && !s.noLine){
+        const poly=el('polyline',{class:'series',points:pts.map(function(p){return xToPx(p.x,sp)+','+yToPx(p.y,sp);}).join(' ')});
+        poly.setAttribute('stroke',col); if(s.dashed) poly.setAttribute('stroke-dasharray','5 4');
+        if(s.width) poly.setAttribute('stroke-width',s.width);
+        svg.appendChild(poly);
+      }
+      if(s.showPoints){ pts.forEach(function(p){ const c=el('circle',{class:'pt',cx:xToPx(p.x,sp),cy:yToPx(p.y,sp),r:s.ptR||2.6}); c.setAttribute('fill',col); svg.appendChild(c); }); }
+      if(s.endLabel && pts.length){ const p=pts[pts.length-1]; const t=el('text',{class:'endlabel',x:xToPx(p.x,sp)+4,y:yToPx(p.y,sp)+3}); t.setAttribute('fill',col); t.textContent=s.endLabel; svg.appendChild(t); }
+      // hover targets
+      pts.forEach(function(p){ hoverTargets.push({px:xToPx(p.x,sp),py:yToPx(p.y,sp),label:p.label||'',col:col,ref:p.ref}); });
+    });
+    // hover overlay
+    const ov=el('rect',{x:pad.l,y:pad.t,width:plotW,height:plotH,fill:'transparent'});
+    ov.style.cursor='crosshair'; svg.appendChild(ov);
+    cross=el('circle',{r:4,fill:'none','stroke-width':2}); cross.setAttribute('stroke',cssvar('--brass')); cross.style.opacity='0'; svg.appendChild(cross);
+    ov.addEventListener('mousemove',onMove);
+    ov.addEventListener('mouseleave',function(){ tip.style.opacity='0'; cross.style.opacity='0'; if(sp.onHover) sp.onHover(null); });
+  }
+  function clientToSvg(evt){ const ctm=svg.getScreenCTM(); if(!ctm) return null; const pt=svg.createSVGPoint(); pt.x=evt.clientX; pt.y=evt.clientY; const p=pt.matrixTransform(ctm.inverse()); return {x:p.x,y:p.y}; }
+  function onMove(evt){
+    if(!hoverTargets.length) return;
+    const p=clientToSvg(evt); if(!p) return;
+    let best=null,bd=1e9;
+    for(const t of hoverTargets){ const dx=t.px-p.x, dy=t.py-p.y, d=dx*dx+dy*dy; if(d<bd){bd=d;best=t;} }
+    if(best && bd<3600){
+      tip.textContent=best.label; tip.style.left=best.px+'px'; tip.style.top=best.py+'px'; tip.style.opacity='1';
+      cross.setAttribute('cx',best.px); cross.setAttribute('cy',best.py); cross.setAttribute('stroke',cssvar('--brass')); cross.style.opacity='1';
+      if(spec.onHover) spec.onHover(best.ref);
+    } else { tip.style.opacity='0'; cross.style.opacity='0'; if(spec.onHover) spec.onHover(null); }
+  }
+  const api={ render:render, redraw:function(){ if(spec) render(spec); }, svg:svg, wrap:wrap };
+  onTheme(api.redraw);
+  return api;
+}
+function legendEl(items){ // items: [{label,color}]
+  const d=document.createElement('div'); d.className='legend';
+  items.forEach(function(it){ const k=document.createElement('span'); k.className='k';
+    const sw=document.createElement('span'); sw.className='sw'; sw.style.background=it.color;
+    const tx=document.createElement('span'); tx.textContent=it.label; k.appendChild(sw); k.appendChild(tx); d.appendChild(k);
+  });
+  return d;
+}
+RCT.makeChart=makeChart; RCT.legendEl=legendEl; RCT.el=el;
+// small DOM helpers
+function h(tag,cls,txt){ const e=document.createElement(tag); if(cls)e.className=cls; if(txt!=null)e.textContent=txt; return e; }
+function fmtBig(x){ const s=x.toString(); if(s.length<=18) return s; return s.slice(0,9)+'…'+s.slice(-6)+' ('+s.length+' digits)'; }
+RCT.h=h; RCT.fmtBig=fmtBig;
+/* ---------------- Hero: unfolding phi ---------------- */
+(function(){
+  const stage=document.getElementById('phi-stage');
+  if(!stage) return;
+  // build nested "1 + 1/(1 + ...)" to given depth
+  function buildLevel(k){
+    const wrap=h('span'); wrap.style.display='inline-flex'; wrap.style.alignItems='center'; wrap.style.whiteSpace='nowrap';
+    wrap.appendChild(document.createTextNode('1'));
+    const plus=h('span'); plus.textContent='+'; plus.style.margin='0 .28em'; wrap.appendChild(plus);
+    const frac=h('span','frac');
+    const num=h('span','num','1');
+    const den=h('span','den');
+    if(k<=1){ den.textContent='1 + ⋯'; den.style.color='var(--muted)'; }
+    else den.appendChild(buildLevel(k-1));
+    frac.appendChild(num); frac.appendChild(den);
+    wrap.appendChild(frac);
+    return wrap;
+  }
+  // Fibonacci convergent value F(k+1)/F(k)
+  function phiApprox(k){ let a=1,b=1; for(let i=0;i<k;i++){ const t=a+b; a=b; b=t; } return b/a; }
+  function draw(depth){
+    stage.innerHTML='';
+    const eq=h('span','phi-eq','φ = ');
+    stage.appendChild(eq);
+    stage.appendChild(buildLevel(depth));
+    const val=h('span','phi-val');
+    val.textContent='≈ '+phiApprox(depth+2).toFixed(12)+'   (depth '+depth+')';
+    stage.appendChild(val);
+  }
+  if(reduceMotion){ draw(5); return; }
+  let d=2; draw(d);
+  const maxD=8;
+  const iv=setInterval(function(){ d++; if(d>maxD){ d=2; } draw(d); },1200);
+  RCT._heroTimer=iv;
+})();
+/* ---------------- Route rail + scroll spy + mobile menu ---------------- */
+const STOPS=[
+  {id:'stop-1-depot',t:'The Depot'},{id:'stop-2-road',t:'The Unfolding Road'},
+  {id:'stop-3-engine',t:'The Engine Room'},{id:'stop-4-golden',t:'The Golden Milestone'},
+  {id:'stop-5-overlook',t:'Scenic Overlook'},{id:'stop-6-loop',t:'The Loop Road'},
+  {id:'stop-7-cattle',t:'The Cattle Crossing'},{id:'stop-8-family',t:'The Family Tree'},
+  {id:'stop-9-celebrity',t:'Celebrity Sightings'},{id:'stop-10-casino',t:'The Casino'},
+  {id:'stop-11-assembly',t:'Infinite Assembly Line'},{id:'stop-12-tower',t:'The Tower'},
+  {id:'stop-13-mirrors',t:'Hall of Mirrors'},{id:'stop-14-souvenir',t:'The Souvenir Shop'},
+  {id:'stop-15-terminus',t:'Terminus'},
+  {id:'stop-encore-blocks',t:'Encore: π from Blocks'},
+  {id:'stop-crossdomain-butterfly',t:'Cross-Domain: Butterfly'}
+];
+(function(){
+  const svg=document.getElementById('rail-svg');
+  const N=STOPS.length;
+  const top=40, bot=960, x=30;
+  const ys=STOPS.map(function(_,i){ return top+(bot-top)*i/(N-1); });
+  // route line
+  const line=el('line',{x1:x,y1:ys[0],x2:x,y2:ys[N-1],stroke:cssvar('--brass'),'stroke-width':3,'stroke-linecap':'round'});
+  svg.appendChild(line);
+  const bullets=[];
+  STOPS.forEach(function(s,i){
+    const hit=el('rect',{class:'st-hit',x:x-16,y:ys[i]-16,width:70,height:32});
+    const c=el('circle',{class:'st-bullet',cx:x,cy:ys[i],r:6,fill:cssvar('--brass'),stroke:cssvar('--surface'),'stroke-width':2});
+    const num=el('text',{class:'st-num',x:x,y:ys[i]+3,'text-anchor':'middle'}); num.textContent=(i+1);
+    const lab=el('text',{class:'st-label',x:x+16,y:ys[i]+4}); lab.textContent=(i+1)+'. '+s.t;
+    function go(){ document.getElementById(s.id).scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'}); }
+    hit.addEventListener('click',go); c.addEventListener('click',go);
+    hit.addEventListener('mouseenter',function(){ lab.style.opacity='1'; }); hit.addEventListener('mouseleave',function(){ if(!c.classList.contains('active')) lab.style.opacity='0'; });
+    svg.appendChild(lab); svg.appendChild(c); svg.appendChild(hit); svg.appendChild(num);
+    bullets.push({c:c,lab:lab,num:num});
+  });
+  function repaint(){
+    line.setAttribute('stroke',cssvar('--brass'));
+    bullets.forEach(function(b){ b.c.setAttribute('fill',cssvar('--brass')); b.c.setAttribute('stroke',cssvar('--surface')); b.num.setAttribute('fill',cssvar('--surface')); });
+  }
+  onTheme(repaint);
+  RCT._railBullets=bullets;
+  // mobile menu
+  const ol=document.getElementById('mobile-stops');
+  STOPS.forEach(function(s,i){ const li=h('li'); const a=h('a',null,(i+1)+'. '+s.t); a.href='#'+s.id; li.appendChild(a); ol.appendChild(li); });
+
+  // scroll spy
+  const secs=STOPS.map(function(s){ return document.getElementById(s.id); });
+  function setActive(idx){
+    bullets.forEach(function(b,i){
+      const on=(i===idx); b.c.classList.toggle('active',on);
+      b.c.setAttribute('r',on?9:6); b.lab.style.opacity=on?'1':'0';
+      b.c.setAttribute('opacity',on?1:0.55);
+    });
+  }
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ const idx=secs.indexOf(e.target); if(idx>=0) setActive(idx); } });
+    },{rootMargin:'-45% 0px -45% 0px',threshold:0});
+    secs.forEach(function(s){ io.observe(s); });
+  }
+  setActive(0);
+  // progress bar
+  const bar=document.getElementById('progbar');
+  function onScroll(){ const st=window.scrollY||document.documentElement.scrollTop; const h2=document.documentElement.scrollHeight-window.innerHeight; bar.style.width=(h2>0?Math.min(100,st/h2*100):0)+'%'; }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+})();
+/* ============ W1: CF EXPANSION MACHINE ============ */
+function bfLog10(bf){ return blog10(babs(bf.n)) - blog10(bf.d); }
+function evalCFfloat(terms){ // float value of finite CF
+  let v=Number(terms[terms.length-1]);
+  for(let i=terms.length-2;i>=0;i--){ v=Number(terms[i])+1/v; }
+  return v;
+}
+function expandPeriodic(pre,period,count){
+  const out=pre.slice(); let i=0;
+  while(out.length<count && period.length){ out.push(period[i%period.length]); i++; }
+  return out;
+}
+function makeNumber(kind,arg){
+  let terms, truthIdx, label, note='';
+  if(kind==='phi'){ terms=[]; for(let i=0;i<34;i++) terms.push(1n); label='φ  (golden ratio)'; }
+  else if(kind==='sqrt'){ const s=sqrtCF(BigInt(arg)); terms=expandPeriodic(s.pre,s.period,34); label='√'+arg; note='periodic: ['+s.pre[0]+'; ('+s.period.join(',')+')]'; }
+  else if(kind==='pi'){ const b=bracketFromDecimal(PI); terms=cfFromInterval(b.lo,b.hi,42); label='π'; note='certified from a 60-digit seed'; }
+  else if(kind==='e'){ const b=bracketFromDecimal(E); terms=cfFromInterval(b.lo,b.hi,42); label='e'; note='certified from a 60-digit seed'; }
+  else if(kind==='frac'){ terms=cfFromFrac(arg.n,arg.d); label=arg.n+'/'+arg.d; note='exact rational — CF terminates'; }
+  else if(kind==='decimal'){ terms=cfFromFrac(arg.n,arg.d); label=arg.label; note='exact value of the decimal typed'; }
+  if(!terms.length) terms=[0n];
+  const cs=convergents(terms);
+  let truth;
+  if(kind==='frac'||kind==='decimal'){ truth=new BigFrac(arg.n,arg.d); }
+  else { truth=new BigFrac(cs[cs.length-1].h, cs[cs.length-1].k); }
+  return {terms:terms, convs:cs, truth:truth, label:label, note:note, kind:kind};
+}
+function parseNumInput(str){
+  str=(str||'').trim();
+  if(!str) return null;
+  if(str.indexOf('/')>=0){ const p=str.split('/'); try{ const n=BigInt(p[0].trim()), d=BigInt(p[1].trim()); if(d===0n) return null; return {kind:'frac',arg:{n:n,d:d}}; }catch(e){ return null; } }
+  if(/^-?\d+(\.\d+)?$/.test(str)){
+    const neg=str[0]==='-'; const s=neg?str.slice(1):str;
+    const dot=s.indexOf('.'); let digits,dec;
+    if(dot<0){ digits=s; dec=0; } else { digits=s.slice(0,dot)+s.slice(dot+1); dec=s.length-dot-1; }
+    let n=BigInt(digits); if(neg) n=-n; const d=10n**BigInt(dec);
+    return {kind:'decimal',arg:{n:n,d:d,label:str}};
+  }
+  return null;
+}
+function mountW1(mount,initPreset){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>CF Expansion Machine</span><span class="tag">W1</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const r1=h('div','wrow');
+  const inp=h('input'); inp.type='text'; inp.placeholder='decimal or p/q, e.g. 3.14159 or 355/113'; inp.setAttribute('aria-label','number to expand');
+  const bStep=h('button','btn','Step'), bPlay=h('button','btn primary','Play'), bReset=h('button','btn','Reset');
+  r1.appendChild(inp); r1.appendChild(bStep); r1.appendChild(bPlay); r1.appendChild(bReset);
+  body.appendChild(r1);
+
+  const chips=h('div','chips-row');
+  const presets=[['π','pi'],['e','e'],['φ','phi'],['√2',['sqrt',2]],['√61',['sqrt',61]],['355/113',['frac',{n:355n,d:113n}]]];
+  presets.forEach(function(p){ const c=h('button','chip',p[0]); c.addEventListener('click',function(){ loadSpec(p[1]); }); chips.appendChild(c); });
+  body.appendChild(chips);
+
+  const noteEl=h('div','card-note'); body.appendChild(noteEl);
+
+  const grid=h('div'); grid.style.display='grid'; grid.style.gap='.8rem'; grid.style.gridTemplateColumns='1fr';
+  body.appendChild(grid);
+
+  const ledgerBox=h('div'); ledgerBox.innerHTML='<div class="lbl" style="font-family:var(--font-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem">Euclid ledger — floor &amp; reciprocate</div>';
+  const ledger=h('div','ledger'); ledgerBox.appendChild(ledger); grid.appendChild(ledgerBox);
+
+  const tblWrap=h('div','tablewrap');
+  const tbl=h('table'); tblWrap.appendChild(tbl); grid.appendChild(tblWrap);
+
+  const plotBox=h('div');
+  plotBox.innerHTML='<div class="lbl" style="font-family:var(--font-data);font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:.2rem 0 .3rem">|error| vs denominator q — log–log, dashed guide 1/q²</div>';
+  grid.appendChild(plotBox);
+  const chart=makeChart(plotBox,{width:760,height:260,padL:52});
+
+  let data=null, step=0, timer=null, errPts=[];
+
+  function loadSpec(spec){
+    let kind,arg;
+    if(Array.isArray(spec)){ kind=spec[0]; arg=spec[1]; }
+    else if(typeof spec==='string'){ kind=spec; }
+    else { kind=spec.kind; arg=spec.arg; }
+    data=makeNumber(kind, arg);
+    step=0; stopPlay(); render();
+  }
+  function loadFromInput(){ const p=parseNumInput(inp.value); if(!p){ noteEl.textContent='Could not parse — try a decimal like 2.71828 or a fraction like 355/113.'; return; } loadSpec(p); }
+
+  function render(){
+    const maxShow=Math.min(data.terms.length, data.kind==='frac'||data.kind==='decimal'?40:20);
+    const shown=Math.min(step, maxShow);
+    // notation line: [a0; a1, a2, ...]
+    const finite=(data.kind==='frac'||data.kind==='decimal');
+    const nt=data.terms.slice(0,Math.min(data.terms.length,finite?40:14));
+    let notation='[';
+    nt.forEach(function(t,i){ notation += (i===0)?(t.toString()+'; '):(t.toString()+(i<nt.length-1?', ':'')); });
+    if(nt.length===1) notation='['+nt[0].toString();
+    notation += (!finite && data.terms.length>14) ? ', …]' : ']';
+    noteEl.innerHTML='<b>'+data.label+'</b> = <span class="mono">'+notation+'</span>'+(data.note?'<br><span class="small">'+data.note+'</span>':'');
+    // ledger
+    ledger.innerHTML='';
+    for(let k=0;k<shown;k++){
+      const tail=evalCFfloat(data.terms.slice(k));
+      const a=data.terms[k].toString();
+      const nextTail=(k+1<data.terms.length)?evalCFfloat(data.terms.slice(k+1)):Infinity;
+      const line=h('div');
+      line.innerHTML='x<sub>'+k+'</sub> ≈ '+tail.toFixed(8)+'  →  a<sub>'+k+'</sub> = <span class="q">'+a+'</span>'+(isFinite(nextTail)?',  1/(x<sub>'+k+'</sub>−a<sub>'+k+'</sub>) ≈ '+nextTail.toFixed(6):'  (terminates)');
+      ledger.appendChild(line);
+    }
+    if(shown===0){ ledger.innerHTML='<span class="small" style="color:var(--muted)">Press Step or Play to begin the descent.</span>'; }
+    // table
+    tbl.innerHTML='<thead><tr><th>n</th><th>aₙ</th><th>pₙ/qₙ</th><th>decimal</th><th>|error|</th></tr></thead>';
+    const tb=h('tbody'); errPts=[];
+    for(let n=0;n<shown;n++){
+      const c=data.convs[n]; const a=data.terms[n];
+      const err=data.truth.sub(new BigFrac(c.h,c.k));
+      const errAbs=babs(err.n)===0n?0:fracFloat(babs(err.n),err.d);
+      const tr=h('tr');
+      const pq=(c.h.toString().length>14||c.k.toString().length>14)?fmtBig(c.h)+' / '+fmtBig(c.k):c.h+' / '+c.k;
+      tr.innerHTML='<td>'+n+'</td><td>'+a+'</td><td>'+pq+'</td><td>'+fracFloat(c.h,c.k).toFixed(10)+'</td><td>'+(errAbs===0?'0':errAbs.toExponential(3))+'</td>';
+      if(errAbs>0 && n<maxShow-1){ errPts.push({x:blog10(babs(c.k)), y:bfLog10(err), label:'n='+n+'  q='+fmtBig(c.k)+'  err='+errAbs.toExponential(2), idx:n}); }
+      (function(idx){ tr.addEventListener('mouseenter',function(){ Array.prototype.forEach.call(tb.children,function(x){x.classList.remove('hot');}); tr.classList.add('hot'); renderPlot(idx); }); })(n);
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb);
+    renderPlot(-1);
+  }
+  function renderPlot(hi){
+    if(!errPts.length){ chart.render({title:'error plot',xDomain:[0,1],yDomain:[-1,0],series:[]}); return; }
+    const xs=errPts.map(function(p){return p.x;}), ys=errPts.map(function(p){return p.y;});
+    let xmin=Math.min.apply(null,xs), xmax=Math.max.apply(null,xs); if(xmax-xmin<0.5)xmax=xmin+0.5;
+    let ymin=Math.min.apply(null,ys), ymax=Math.max.apply(null,ys); if(ymax-ymin<0.5)ymin=ymax-0.5;
+    // guide 1/q^2  ->  log10(err)= -2*log10(q)
+    const guide=[{x:xmin,y:-2*xmin},{x:xmax,y:-2*xmax}];
+    const series=[{points:errPts,color:0,showPoints:true,width:2}];
+    if(hi>=0){ const p=errPts.find(function(e){return e.idx===hi;}); if(p) series.push({points:[p],color:5,showPoints:true,ptR:5}); }
+    chart.render({
+      title:'|x − pₙ/qₙ| versus qₙ, log–log',
+      xDomain:[xmin-0.3,xmax+0.3], yDomain:[Math.min(ymin,-2*xmax)-0.3, ymax+0.3],
+      xTitle:'q (log₁₀)', yTitle:'|error| (log₁₀)',
+      xFmt:function(v){return v.toFixed(0);}, yFmt:function(v){return v.toFixed(0);},
+      guides:[{points:guide,label:'1/q²'}],
+      series:series
+    });
+  }
+  function doStep(){ const maxShow=Math.min(data.terms.length, data.kind==='frac'||data.kind==='decimal'?40:20); if(step<maxShow){ step++; render(); } else stopPlay(); }
+  function startPlay(){ if(timer) return; bPlay.textContent='Pause'; bPlay.classList.remove('primary'); timer=setInterval(doStep,700); }
+  function stopPlay(){ if(timer){ clearInterval(timer); timer=null; } bPlay.textContent='Play'; bPlay.classList.add('primary'); }
+  bStep.addEventListener('click',function(){ stopPlay(); doStep(); });
+  bPlay.addEventListener('click',function(){ if(timer) stopPlay(); else startPlay(); });
+  bReset.addEventListener('click',function(){ step=0; stopPlay(); render(); });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter') loadFromInput(); });
+  inp.addEventListener('change',loadFromInput);
+
+  mount.appendChild(wid);
+  loadSpec(initPreset||'pi');
+  // reveal a few by default
+  step=6; render();
+  return {load:loadSpec};
+}
+RCT.mountW1=mountW1;
+/* ============ W2: STERN–BROCOT EXPLORER ============ */
+function mountW2(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Stern–Brocot Explorer</span><span class="tag">W2</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const r1=h('div','wrow');
+  const bL=h('button','btn','◀ Left (L)'), bR=h('button','btn','Right (R) ▶'), bUndo=h('button','btn','Undo'), bReset=h('button','btn','Reset');
+  const inp=h('input'); inp.type='text'; inp.placeholder='find p/q e.g. 13/8'; inp.style.minWidth='7rem';
+  const bFind=h('button','btn primary','Find');
+  r1.appendChild(bL); r1.appendChild(bR); r1.appendChild(bUndo); r1.appendChild(bReset);
+  r1.appendChild(inp); r1.appendChild(bFind);
+  body.appendChild(r1);
+  const hint=h('div','small'); hint.style.marginBottom='.4rem'; hint.innerHTML='Use <span class="kbd">←</span> / <span class="kbd">→</span> arrow keys too. Click a child node to descend.';
+  body.appendChild(hint);
+
+  const svg=el('svg',{class:'chart',viewBox:'0 0 620 250',role:'img','aria-label':'Stern-Brocot tree'});
+  const svgWrap=h('div','chart-wrap'); svgWrap.appendChild(svg); body.appendChild(svgWrap);
+
+  const readout=h('div','readout'); readout.style.marginTop='.6rem'; body.appendChild(readout);
+  const foot=h('div','card-note'); foot.innerHTML='<b>Footnote.</b> The path\'s run-lengths are the CF terms — except the final term is one <em>more</em> than the last run (every rational has two CFs; the tree picks the one ending in a run of length ≥1).'; body.appendChild(foot);
+
+  let l,r,cur,path,crumbs;
+  function mediant(a,b){ return {n:a.n+b.n, d:a.d+b.d}; }
+  function reset(){ l={n:0n,d:1n}; r={n:1n,d:0n}; cur={n:1n,d:1n}; path=[]; crumbs=[cur]; render(); }
+  function moveL(){ r=cur; cur=mediant(l,r); path.push('L'); crumbs.push(cur); render(); }
+  function moveR(){ l=cur; cur=mediant(l,r); path.push('R'); crumbs.push(cur); render(); }
+  function undo(){ if(!path.length) return; path.pop(); crumbs.pop();
+    // rebuild from scratch along path
+    l={n:0n,d:1n}; r={n:1n,d:0n}; cur={n:1n,d:1n};
+    const p=path.slice(); path=[]; crumbs=[cur];
+    p.forEach(function(m){ if(m==='L'){ r=cur; cur=mediant(l,r); } else { l=cur; cur=mediant(l,r); } path.push(m); crumbs.push(cur); });
+    render();
+  }
+  function find(){
+    const s=(inp.value||'').split('/'); if(s.length!==2) return;
+    let tn,td; try{ tn=BigInt(s[0].trim()); td=BigInt(s[1].trim()); }catch(e){ return; }
+    if(td<=0n||tn<=0n){ readout.innerHTML='<span class="status-no">Enter a positive p/q.</span>'; return; }
+    const g=bgcd(tn,td); tn/=g; td/=g;
+    reset();
+    for(let i=0;i<400;i++){
+      const cmp=tn*cur.d - cur.n*td; // target - cur
+      if(cmp===0n) break;
+      if(cmp<0n) moveL(); else moveR();
+    }
+  }
+  function runLengths(){
+    const out=[]; let i=0;
+    while(i<path.length){ let j=i; while(j<path.length && path[j]===path[i]) j++; out.push({sym:path[i],len:j-i}); i=j; }
+    return out;
+  }
+  function nodeLabel(f){ const ns=f.n.toString(), ds=f.d.toString(); if(f.d===0n) return '∞'; if(ns.length>6||ds.length>6) return ns.slice(0,4)+'…/'+ds.slice(0,4)+'…'; return ns+'/'+ds; }
+  function render(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    // draw re-rooted subtree from cur, depth 3
+    const brass=cssvar('--brass'), ink=cssvar('--ink'), inkC=cssvar('--ink-2'), surf=cssvar('--surface'), border=cssvar('--border'), s1=cssvar('--s1');
+    function draw(nl,nr,depth,x0,x1,y,parentXY,role){
+      const v=mediant(nl,nr); const cx=(x0+x1)/2;
+      if(parentXY){ const ln=el('line',{x1:parentXY[0],y1:parentXY[1]+9,x2:cx,y2:y-9,stroke:border,'stroke-width':1.4}); svg.appendChild(ln); }
+      const isRoot=(depth===3);
+      const c=el('circle',{cx:cx,cy:y,r:isRoot?13:10,fill:isRoot?brass:surf,stroke:isRoot?brass:(role==='L'?s1:border),'stroke-width':isRoot?2:1.6});
+      if(!isRoot && depth===2){ c.style.cursor='pointer'; c.addEventListener('click',function(){ if(role==='L') moveL(); else moveR(); }); }
+      svg.appendChild(c);
+      const t=el('text',{x:cx,y:y+3.5,'text-anchor':'middle'}); t.setAttribute('font-family','var(--font-data)'); t.setAttribute('font-size',isRoot?'11':'9'); t.setAttribute('fill',isRoot?surf:ink); t.setAttribute('font-weight',isRoot?'700':'600'); t.textContent=nodeLabel(v);
+      svg.appendChild(t);
+      if(depth===3){ const badge=el('text',{x:cx,y:y-18,'text-anchor':'middle'}); badge.setAttribute('font-family','var(--font-data)'); badge.setAttribute('font-size','8'); badge.setAttribute('fill',inkC); badge.textContent='current'; svg.appendChild(badge); }
+      if(depth>0){
+        draw(nl,v,depth-1,x0,cx,y+62,[cx,y],'L');
+        draw(v,nr,depth-1,cx,x1,y+62,[cx,y],'R');
+      }
+    }
+    draw(l,r,3,10,610,34,null,null);
+    // readout
+    const rl=runLengths();
+    const rlStr=rl.map(function(g){ return g.sym+(g.len>1?'<sup>'+g.len+'</sup>':''); }).join(' ');
+    const brackets=rl.map(function(g){ return '['+g.len+']'; }).join(' ');
+    const cf=cfFromFrac(cur.n,cur.d);
+    let cfStr='['; cf.forEach(function(t,i){ cfStr += (i===0)?(t.toString()+(cf.length>1?'; ':'')):(t.toString()+(i<cf.length-1?', ':'')); }); cfStr+=']';
+    readout.innerHTML=
+      '<div>Current: <span class="hl mono">'+cur.n+'/'+cur.d+'</span>  ≈ '+fracFloat(cur.n,cur.d).toFixed(6)+'</div>'+
+      '<div style="margin-top:.3rem">Path: <span class="mono">'+(rlStr||'· (root)')+'</span> &nbsp; run-lengths <span class="mono">'+(brackets||'[ ]')+'</span></div>'+
+      '<div style="margin-top:.3rem">CF: <span class="mono">'+cfStr+'</span></div>'+
+      '<div style="margin-top:.3rem" class="small">Breadcrumb: '+crumbs.map(function(c){return c.n+'/'+c.d;}).join(' → ')+'</div>';
+  }
+  bL.addEventListener('click',moveL); bR.addEventListener('click',moveR); bUndo.addEventListener('click',undo); bReset.addEventListener('click',reset); bFind.addEventListener('click',find);
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter') find(); });
+  wid.addEventListener('keydown',function(e){ if(e.key==='ArrowLeft'){ moveL(); e.preventDefault(); } else if(e.key==='ArrowRight'){ moveR(); e.preventDefault(); } });
+  wid.tabIndex=0;
+  onTheme(render);
+  mount.appendChild(wid);
+  reset();
+  // demo descent
+  moveR(); moveL(); moveL();
+  return {};
+}
+RCT.mountW2=mountW2;
+/* ============ W3: GOLDEN SPIRAL LAB ============ */
+function mountW3(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Golden Spiral Lab</span><span class="tag">W3</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const r1=h('div','wrow');
+  const f1=h('div','field'); f1.innerHTML='<span class="lbl">depth</span>'; const dep=h('input'); dep.type='range'; dep.min=1; dep.max=12; dep.value=9; f1.appendChild(dep); const depV=h('span','mono','9'); depV.style.marginLeft='.3rem'; f1.appendChild(depV);
+  const f2=h('div','field'); f2.innerHTML='<span class="lbl">ratio</span>'; const sel=h('select'); sel.innerHTML='<option value="phi">φ = 1.6180…</option><option value="custom">custom p/q</option>'; f2.appendChild(sel);
+  const f3=h('div','field'); f3.innerHTML='<span class="lbl">custom</span>'; const cust=h('input'); cust.type='text'; cust.value='5/3'; cust.style.minWidth='5rem'; f3.appendChild(cust); f3.style.display='none';
+  r1.appendChild(f1); r1.appendChild(f2); r1.appendChild(f3);
+  body.appendChild(r1);
+
+  const cwrap=h('div'); cwrap.style.position='relative';
+  const cv=h('canvas'); cv.style.width='100%'; cv.style.maxWidth='560px'; cv.style.display='block'; cv.style.margin='0 auto';
+  cwrap.appendChild(cv); body.appendChild(cwrap);
+  const readout=h('div','readout'); readout.style.marginTop='.6rem'; body.appendChild(readout);
+
+  const CW=560, CH=340;
+  function setup(){ const dpr=Math.min(window.devicePixelRatio||1,2); cv.width=CW*dpr; cv.height=CH*dpr; const ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); return ctx; }
+
+  function currentRatio(){
+    if(sel.value==='phi') return {r:(1+Math.sqrt(5))/2, cf:null, sum:Infinity, label:'φ', rational:false};
+    const s=cust.value.trim(); let n,d;
+    if(s.indexOf('/')>=0){ const p=s.split('/'); try{ n=BigInt(p[0].trim()); d=BigInt(p[1].trim()); }catch(e){ return {r:1.5,cf:[1n,2n],sum:3,label:'3/2',rational:true}; } }
+    else { const m=/^(\d+)(?:\.(\d+))?$/.exec(s); if(!m) return {r:1.5,cf:[1n,2n],sum:3,label:'3/2',rational:true}; const dec=m[2]||''; n=BigInt(m[1]+dec); d=10n**BigInt(dec.length); }
+    if(d===0n||n===0n) return {r:1.5,cf:[1n,2n],sum:3,label:'3/2',rational:true};
+    let r=Number(n)/Number(d); if(r<1){ const t=n; n=d; d=t; r=1/r; }
+    const cf=cfFromFrac(n,d); let sum=0; cf.forEach(function(t){ sum+=Number(t); });
+    return {r:r, cf:cf, sum:sum, label:n+'/'+d, rational:true};
+  }
+
+  let anim=null, drawnCount=0;
+  function stopAnim(){ if(anim){ clearInterval(anim); anim=null; } }
+  function build(){
+    stopAnim();
+    const ctx=setup();
+    const info=currentRatio();
+    const depth=+dep.value; depV.textContent=depth;
+    const totalSquares = info.rational ? Math.min(depth, info.sum) : depth;
+    // initial rectangle fit into canvas
+    const pad=18; let availW=CW-2*pad, availH=CH-2*pad;
+    let w,hh; // ensure ratio r = w/hh >=1
+    if(availW/availH > info.r){ hh=availH; w=hh*info.r; } else { w=availW; hh=w/info.r; }
+    const x0=(CW-w)/2, y0=(CH-hh)/2;
+    // precompute square list via geometry (toggle by orientation)
+    const squares=[]; let x=x0,y=y0,W=w,H=hh; let wideT=false, tallT=false;
+    for(let i=0;i<totalSquares;i++){
+      const s=Math.min(W,H); if(s<0.6){ break; }
+      let phase;
+      if(W>=H){ phase=wideT?2:0; wideT=!wideT; } else { phase=tallT?3:1; tallT=!tallT; }
+      let sq;
+      if(phase===0){ sq={x:x,y:y,s:s,cx:x+s,cy:y+s,a0:Math.PI,a1:1.5*Math.PI}; x+=s; W-=s; }
+      else if(phase===2){ sq={x:x+W-s,y:y,s:s,cx:x+W-s,cy:y,a0:0,a1:0.5*Math.PI}; W-=s; }
+      else if(phase===1){ sq={x:x,y:y,s:s,cx:x,cy:y+s,a0:1.5*Math.PI,a1:2*Math.PI}; y+=s; H-=s; }
+      else { sq={x:x,y:y+H-s,s:s,cx:x+s,cy:y+H-s,a0:0.5*Math.PI,a1:Math.PI}; H-=s; }
+      squares.push(sq);
+    }
+    const terminatedFinite = info.rational && squares.length>=info.sum;
+    function paint(uptoN){
+      ctx.clearRect(0,0,CW,CH);
+      const border=cssvar('--border'), inkc=cssvar('--ink-2'), brass=cssvar('--brass'), surf=cssvar('--surface');
+      // outer rect
+      ctx.strokeStyle=inkc; ctx.lineWidth=1.4; ctx.strokeRect(x0,y0,w,hh);
+      for(let i=0;i<uptoN && i<squares.length;i++){
+        const sq=squares[i];
+        ctx.strokeStyle=border; ctx.lineWidth=1; ctx.strokeRect(sq.x,sq.y,sq.s,sq.s);
+        ctx.beginPath(); ctx.strokeStyle=brass; ctx.lineWidth=2.2; ctx.arc(sq.cx,sq.cy,sq.s,sq.a0,sq.a1); ctx.stroke();
+      }
+      drawnCount=Math.min(uptoN,squares.length);
+      updateReadout(info,squares.length,terminatedFinite);
+    }
+    lastPaint=paint; lastCount=squares.length;
+    if(reduceMotion){ paint(squares.length); }
+    else { let n=0; paint(0); anim=setInterval(function(){ n++; paint(n); if(n>=squares.length) stopAnim(); }, 130); }
+  }
+  let lastPaint=null, lastCount=0;
+  function updateReadout(info,drawn,fin){
+    let cfStr = info.rational ? ('['+info.cf.map(function(t,i){return (i===0)?(t+(info.cf.length>1?'; ':'')):(t+(i<info.cf.length-1?', ':''));}).join('')+']') : '[1; 1, 1, 1, …]';
+    readout.innerHTML=
+      '<div>Ratio <span class="hl mono">'+info.label+'</span> ≈ '+info.r.toFixed(6)+' &nbsp; CF <span class="mono">'+cfStr+'</span></div>'+
+      '<div style="margin-top:.3rem">Squares drawn: <span class="mono">'+drawn+'</span> &nbsp; '+
+        (info.rational ? (fin? '<span class="status-ok">subdivision TERMINATES</span> (finite CF ⇒ finite squares)' : 'still subdividing — raise depth to finish')
+                       : '<span class="status-no">never terminates</span> — φ\'s all-ones CF recurses forever')+'</div>';
+  }
+  sel.addEventListener('change',function(){ f3.style.display=(sel.value==='custom')?'':'none'; build(); });
+  cust.addEventListener('change',build); cust.addEventListener('keydown',function(e){ if(e.key==='Enter') build(); });
+  dep.addEventListener('input',function(){ depV.textContent=dep.value; build(); });
+  onTheme(function(){ if(lastPaint) lastPaint(lastCount); });
+  mount.appendChild(wid);
+  build();
+  return {};
+}
+RCT.mountW3=mountW3;
+/* ============ W4: IRRATIONALITY RACER ============ */
+function mountW4(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Irrationality Racer</span><span class="tag">W4</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const intro=h('div','small'); intro.style.marginBottom='.5rem'; intro.innerHTML='Plots <span class="mono">qₙ²·|x − pₙ/qₙ|</span> — the smaller and flatter, the harder to approximate. φ hugs its floor <span class="mono">1/√5 ≈ 0.447</span>.';
+  body.appendChild(intro);
+
+  const ents=[
+    {key:'phi',name:'φ',color:0,num:makeNumber('phi')},
+    {key:'sqrt2',name:'√2',color:1,num:makeNumber('sqrt',2)},
+    {key:'pi',name:'π',color:2,num:makeNumber('pi')},
+    {key:'e',name:'e',color:3,num:makeNumber('e')}
+  ];
+  const sel={phi:true,sqrt2:true,pi:true,e:true};
+  const r1=h('div','wrow');
+  ents.forEach(function(en){ const lab=h('label','ck'); const cb=h('input'); cb.type='checkbox'; cb.checked=true; cb.addEventListener('change',function(){ sel[en.key]=cb.checked; render(); }); lab.appendChild(cb); lab.appendChild(document.createTextNode(' '+en.name)); r1.appendChild(lab); });
+  body.appendChild(r1);
+
+  const chart=makeChart(body,{width:760,height:300,padL:48});
+  const leg=h('div'); body.appendChild(leg);
+  const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+
+  const MAXN=13;
+  function seriesFor(en){
+    const pts=[]; const L=en.num.convs.length;
+    for(let n=0;n<Math.min(L-1,MAXN);n++){
+      const c=en.num.convs[n];
+      const err=en.num.truth.sub(new BigFrac(c.h,c.k));
+      const y=fracFloat(babs(err.n)*c.k*c.k, err.d);
+      const pq=(c.h.toString().length>9)?fmtBig(c.h)+'/'+fmtBig(c.k):c.h+'/'+c.k;
+      pts.push({x:n,y:y,label:en.name+'  n='+n+'  '+pq+'  →'+y.toFixed(4),ref:null});
+    }
+    return pts;
+  }
+  function render(){
+    const series=[], legItems=[];
+    ents.forEach(function(en){ if(!sel[en.key]) return; const p=seriesFor(en); series.push({points:p,color:en.color,width:2,endLabel:en.name}); legItems.push({label:en.name,color:seriesColor(en.color)}); });
+    chart.render({
+      title:'qₙ²·|x − pₙ/qₙ| versus convergent index n',
+      xDomain:[0,MAXN-1], yDomain:[0,1],
+      xTitle:'n', yTitle:'qₙ²·|error|',
+      xFmt:function(v){return v.toFixed(0);}, yFmt:function(v){return v.toFixed(2);},
+      hairs:[{axis:'y',v:1/Math.sqrt(5),label:'1/√5 ≈ 0.447 (φ floor)'}],
+      series:series
+    });
+    leg.innerHTML=''; leg.appendChild(legendEl(legItems));
+    // table of last values
+    tbl.innerHTML='<thead><tr><th>number</th><th>n=1</th><th>n=3</th><th>n=6</th><th>n=9</th></tr></thead>';
+    const tb=h('tbody');
+    ents.forEach(function(en){ if(!sel[en.key]) return; const p=seriesFor(en); function at(n){ const q=p.find(function(x){return x.x===n;}); return q?q.y.toFixed(4):'—'; } const tr=h('tr'); tr.innerHTML='<td>'+en.name+'</td><td>'+at(1)+'</td><td>'+at(3)+'</td><td>'+at(6)+'</td><td>'+at(9)+'</td>'; tb.appendChild(tr); });
+    tbl.appendChild(tb);
+  }
+  mount.appendChild(wid);
+  render();
+  return {};
+}
+RCT.mountW4=mountW4;
+/* ============ W5: GAUSS-MAP COBWEB ============ */
+function mountW5(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Gauss-Map Cobweb — T(x)={1/x}</span><span class="tag">W5</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const r1=h('div','wrow');
+  const f=h('div','field'); f.innerHTML='<span class="lbl">seed x₀ ∈ (0,1)</span>'; const seed=h('input'); seed.type='text'; seed.value='0.415926'; seed.style.minWidth='6rem'; f.appendChild(seed);
+  const bStep=h('button','btn','Step'), bPlay=h('button','btn primary','Play'), bReset=h('button','btn','Reset');
+  const ghostL=h('label','ck'); const ghostCb=h('input'); ghostCb.type='checkbox'; ghostL.appendChild(ghostCb); ghostL.appendChild(document.createTextNode(' ghost orbit'));
+  r1.appendChild(f); r1.appendChild(bStep); r1.appendChild(bPlay); r1.appendChild(bReset); r1.appendChild(ghostL);
+  body.appendChild(r1);
+
+  const cv=h('canvas'); cv.style.width='100%'; cv.style.maxWidth='560px'; cv.style.display='block'; cv.style.margin='0 auto'; cv.style.cursor='crosshair';
+  body.appendChild(cv);
+  const strip=h('div','readout'); strip.style.marginTop='.5rem'; body.appendChild(strip);
+
+  const CW=560, CH=340, pad={l:30,r:12,t:12,b:26};
+  const PW=CW-pad.l-pad.r, PH=CH-pad.t-pad.b;
+  function ctx2(){ const dpr=Math.min(window.devicePixelRatio||1,2); cv.width=CW*dpr; cv.height=CH*dpr; const c=cv.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0); return c; }
+  function X(x){ return pad.l + x*PW; }
+  function Y(y){ return pad.t + PH - y*PH; }
+  function G(x){ const inv=1/x; return inv-Math.floor(inv); }
+
+  let x0=0.415926, xg=null, terms=[], orbit=[], gorbit=[], step=0, timer=null, ghost=false;
+  function reset(vals){
+    const v=parseFloat(seed.value); if(isFinite(v)&&v>0&&v<1) x0=v; else { seed.value=x0.toFixed(6); }
+    terms=[]; orbit=[x0]; gorbit=[]; step=0; ghost=ghostCb.checked;
+    if(ghost){ xg=Math.min(0.999999, Math.max(1e-6, x0+1e-3)); gorbit=[xg]; }
+    stopPlay(); paint();
+  }
+  function advance(){
+    if(orbit.length>26){ stopPlay(); return; }
+    const cur=orbit[orbit.length-1];
+    if(cur<1e-9){ stopPlay(); return; }
+    const a=Math.floor(1/cur); terms.push(a);
+    orbit.push(G(cur));
+    if(ghost && gorbit.length){ const gc=gorbit[gorbit.length-1]; if(gc>1e-9) gorbit.push(G(gc)); }
+    step++; paint();
+  }
+  function paint(){
+    const c=ctx2();
+    const grid=cssvar('--grid'), border=cssvar('--border'), inkc=cssvar('--ink-2'), brass=cssvar('--brass'), s1=cssvar('--s1'), s5=cssvar('--s5'), muted=cssvar('--muted');
+    c.clearRect(0,0,CW,CH);
+    // frame
+    c.strokeStyle=border; c.lineWidth=1; c.strokeRect(X(0),Y(1),PW,PH);
+    c.fillStyle=inkc; c.font='9px ui-monospace,monospace';
+    c.fillText('0',X(0)-3,Y(0)+12); c.fillText('1',X(1)-3,Y(0)+12); c.fillText('1',X(0)-12,Y(1)+3);
+    // diagonal
+    c.strokeStyle=muted; c.lineWidth=1; c.setLineDash([4,3]); c.beginPath(); c.moveTo(X(0),Y(0)); c.lineTo(X(1),Y(1)); c.stroke(); c.setLineDash([]);
+    // Gauss branches
+    c.strokeStyle=inkc; c.lineWidth=1.3;
+    for(let n=1;n<=30;n++){
+      const xa=1/(n+1)+1e-6, xb=1/n-1e-6; if(xb<=xa) continue;
+      c.beginPath(); let first=true;
+      const steps=40;
+      for(let i=0;i<=steps;i++){ const x=xa+(xb-xa)*i/steps; const y=1/x-n; const px=X(x),py=Y(y); if(first){c.moveTo(px,py);first=false;}else c.lineTo(px,py); }
+      c.stroke();
+    }
+    // ghost cobweb
+    if(ghost && gorbit.length){ drawCobweb(c,gorbit,s5,1,true); }
+    // main cobweb
+    drawCobweb(c,orbit,brass,2,false);
+    // readout
+    let cfstr=terms.length?('['+ '0; '+terms.join(', ')+' …]'):'[0; …]';
+    strip.innerHTML='<div>x₀ = <span class="hl mono">'+x0.toFixed(8)+'</span> &nbsp; reads off CF <span class="mono">'+cfstr+'</span></div>'+
+      '<div style="margin-top:.3rem" class="small">Each cobweb bounce lands on branch n and emits <span class="mono">aₖ = ⌊1/xₖ₋₁⌋ = '+ (terms.length?terms[terms.length-1]:'—') +'</span>. '+
+      (ghost?'Ghost seed x₀+10⁻³ shown in violet — watch the orbits diverge.':'Toggle a ghost orbit to see sensitivity.')+'</div>';
+  }
+  function drawCobweb(c,orb,color,width,dashed){
+    if(orb.length<1) return;
+    c.strokeStyle=color; c.lineWidth=width; if(dashed) c.globalAlpha=0.55;
+    c.beginPath();
+    let x=orb[0]; c.moveTo(X(x),Y(0));
+    for(let i=0;i<orb.length-1;i++){ const y=orb[i+1]; c.lineTo(X(x),Y(y)); c.lineTo(X(y),Y(y)); x=y; }
+    c.stroke();
+    // dots
+    c.fillStyle=color;
+    for(let i=0;i<orb.length;i++){ c.beginPath(); c.arc(X(orb[i]),Y(i+1<orb.length?orb[i+1]:0),2.4,0,7); c.fill(); }
+    c.globalAlpha=1;
+  }
+  function startPlay(){ if(timer)return; bPlay.textContent='Pause'; bPlay.classList.remove('primary'); timer=setInterval(advance,650); }
+  function stopPlay(){ if(timer){clearInterval(timer);timer=null;} bPlay.textContent='Play'; bPlay.classList.add('primary'); }
+  bStep.addEventListener('click',function(){ stopPlay(); advance(); });
+  bPlay.addEventListener('click',function(){ if(timer) stopPlay(); else startPlay(); });
+  bReset.addEventListener('click',reset);
+  seed.addEventListener('change',reset); seed.addEventListener('keydown',function(e){ if(e.key==='Enter') reset(); });
+  ghostCb.addEventListener('change',reset);
+  cv.addEventListener('click',function(e){ const rect=cv.getBoundingClientRect(); const rx=(e.clientX-rect.left)/rect.width*CW; let x=(rx-pad.l)/PW; x=Math.min(0.999,Math.max(0.001,x)); seed.value=x.toFixed(6); reset(); });
+  onTheme(paint);
+  mount.appendChild(wid);
+  reset();
+  // pre-run a few steps
+  advance(); advance(); advance();
+  return {};
+}
+RCT.mountW5=mountW5;
+/* ============ W6: KHINCHIN LAB ============ */
+function mountW6(mount){
+  const K0=2.6854520010653064;
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Khinchin Lab</span><span class="tag">W6</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const r1=h('div','wrow');
+  const bSample=h('button','btn primary','Sample 1000 reals'), bReset=h('button','btn','Reset');
+  const stat=h('span','small'); stat.style.marginLeft='.4rem';
+  r1.appendChild(bSample); r1.appendChild(bReset); r1.appendChild(stat);
+  body.appendChild(r1);
+
+  const capA=h('div','lbl'); capA.style.margin='.3rem 0'; capA.textContent='(a) running geometric mean of partial quotients → K₀';
+  body.appendChild(capA);
+  const chartA=makeChart(body,{width:760,height:220,padL:48});
+  const capB=h('div','lbl'); capB.style.margin='.7rem 0 .3rem'; capB.textContent='(b) Gauss–Kuzmin: observed (filled) vs predicted log₂(1+1/(k(k+2))) (outline)';
+  body.appendChild(capB);
+  const svgB=el('svg',{class:'chart',viewBox:'0 0 760 220',role:'img','aria-label':'Gauss-Kuzmin distribution'});
+  const wrapB=h('div','chart-wrap'); wrapB.appendChild(svgB); body.appendChild(wrapB);
+  const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+
+  const rng=mulberry32(12345);
+  let N=0, sumLog=0, cntA=0, hist=[0,0,0,0,0,0,0,0,0,0], totTerms=0, conv=[];
+  function predict(k){ return Math.log2(1+1/(k*(k+2))); }
+  function processReal(x){
+    for(let i=0;i<20;i++){
+      if(x<1e-9) break;
+      const inv=1/x; const a=Math.floor(inv);
+      if(a<1) break;
+      sumLog+=Math.log(a); cntA++; totTerms++;
+      if(a<=9) hist[a]++; else hist[0]++; // hist[0]=overflow(>=10)
+      x=inv-a;
+    }
+  }
+  function sample(n){
+    for(let i=0;i<n;i++){ const x=rng(); processReal(x); N++; if(N%20===0){ conv.push({x:N,y:Math.exp(sumLog/cntA)}); } }
+    if(!conv.length||conv[conv.length-1].x!==N) conv.push({x:N,y:Math.exp(sumLog/cntA)});
+    render();
+  }
+  function reset(){ N=0; sumLog=0; cntA=0; hist=[0,0,0,0,0,0,0,0,0,0]; totTerms=0; conv=[]; render(); }
+  function render(){
+    const gm=cntA?Math.exp(sumLog/cntA):0;
+    stat.innerHTML=' N = <span class="mono">'+N+'</span> reals, <span class="mono">'+totTerms+'</span> quotients &nbsp; geo-mean ≈ <span class="hl mono">'+(cntA?gm.toFixed(5):'—')+'</span>';
+    // chart A
+    if(conv.length){
+      const ymin=Math.min(2.0, Math.min.apply(null,conv.map(function(p){return p.y;}))-0.1);
+      const ymax=Math.max(3.2, Math.max.apply(null,conv.map(function(p){return p.y;}))+0.1);
+      chartA.render({ title:'running geometric mean vs sample count',
+        xDomain:[1,Math.max(50,N)], yDomain:[ymin,ymax], xLog:true,
+        xTitle:'samples', yTitle:'geo-mean', yFmt:function(v){return v.toFixed(1);}, xFmt:function(v){return v>=1000?(v/1000)+'k':(''+v);},
+        hairs:[{axis:'y',v:K0,label:'K₀ ≈ 2.68545'}],
+        series:[{points:conv,color:0,width:2}] });
+    } else { chartA.render({title:'',xDomain:[1,50],yDomain:[2,3.2],xLog:true,hairs:[{axis:'y',v:K0,label:'K₀ ≈ 2.68545'}],series:[]}); }
+    // chart B bars
+    while(svgB.firstChild) svgB.removeChild(svgB.firstChild);
+    const W=760,H=220,pl=44,pr=14,pt=12,pb=28; const pw=W-pl-pr, ph=H-pt-pb;
+    const s1=cssvar('--s1'), brass=cssvar('--brass');
+    const maxY=0.45;
+    for(let g=0;g<=4;g++){ const yv=g/4*maxY; const py=pt+ph-yv/maxY*ph; svgB.appendChild(el('line',{class:'grid',x1:pl,y1:py,x2:pl+pw,y2:py})); const t=el('text',{class:'axlabel',x:pl-6,y:py+3,'text-anchor':'end'}); t.textContent=yv.toFixed(2); svgB.appendChild(t); }
+    svgB.appendChild(el('line',{class:'axis',x1:pl,y1:pt,x2:pl,y2:pt+ph}));
+    svgB.appendChild(el('line',{class:'axis',x1:pl,y1:pt+ph,x2:pl+pw,y2:pt+ph}));
+    const ks=9; const bw=pw/ks;
+    for(let k=1;k<=ks;k++){
+      const cx=pl+(k-1)*bw+bw/2;
+      const obs=totTerms?hist[k]/totTerms:0; const pred=predict(k);
+      const bh=obs/maxY*ph, ph2=pred/maxY*ph;
+      const rw=bw*0.5;
+      svgB.appendChild(el('rect',{x:cx-rw/2,y:pt+ph-bh,width:rw,height:Math.max(0,bh),fill:s1,opacity:.9}));
+      svgB.appendChild(el('rect',{x:cx-bw*0.34,y:pt+ph-ph2,width:bw*0.68,height:Math.max(0,ph2),fill:'none',stroke:brass,'stroke-width':1.6}));
+      const t=el('text',{class:'axlabel',x:cx,y:pt+ph+13,'text-anchor':'middle'}); t.textContent=k; svgB.appendChild(t);
+    }
+    const lt=el('text',{class:'axtitle',x:pl+pw,y:pt+ph+25,'text-anchor':'end'}); lt.textContent='partial quotient value k'; svgB.appendChild(lt);
+    // table
+    tbl.innerHTML='<thead><tr><th>k</th><th>count</th><th>observed</th><th>predicted</th></tr></thead>';
+    const tb=h('tbody');
+    for(let k=1;k<=9;k++){ const obs=totTerms?hist[k]/totTerms:0; const tr=h('tr'); tr.innerHTML='<td>'+k+'</td><td>'+hist[k]+'</td><td>'+(obs*100).toFixed(2)+'%</td><td>'+(predict(k)*100).toFixed(2)+'%</td>'; tb.appendChild(tr); }
+    const tr2=h('tr'); tr2.innerHTML='<td>≥10</td><td>'+hist[0]+'</td><td>'+(totTerms?(hist[0]/totTerms*100).toFixed(2):'0')+'%</td><td>—</td>'; tb.appendChild(tr2);
+    tbl.appendChild(tb);
+  }
+  bSample.addEventListener('click',function(){ sample(1000); });
+  bReset.addEventListener('click',reset);
+  mount.appendChild(wid);
+  sample(1000);
+  return {};
+}
+RCT.mountW6=mountW6;
+/* ============ W7: PELL PLAYGROUND ============ */
+function mountW7(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Pell Playground — x²−D·y²=1</span><span class="tag">W7</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const r1=h('div','wrow');
+  const f=h('div','field'); f.innerHTML='<span class="lbl">D (non-square)</span>'; const rng=h('input'); rng.type='range'; rng.min=2; rng.max=200; rng.value=61; f.appendChild(rng);
+  const num=h('input'); num.type='number'; num.min=2; num.max=1000; num.value=61; num.style.width='5rem';
+  const chip=h('button','chip','D = 61  (Fermat 1657)');
+  r1.appendChild(f); r1.appendChild(num); r1.appendChild(chip);
+  body.appendChild(r1);
+
+  const cfLine=h('div','readout'); cfLine.style.margin='.3rem 0 .5rem'; body.appendChild(cfLine);
+  const card=h('div','card-note'); body.appendChild(card);
+  const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+  const capBar=h('div','lbl'); capBar.style.margin='.6rem 0 .3rem'; capBar.textContent='digits in fundamental x, for D = 2…100 (current D highlighted)';
+  body.appendChild(capBar);
+  const svgBar=el('svg',{class:'chart',viewBox:'0 0 760 180',role:'img','aria-label':'Pell solution size by D'});
+  const wrapBar=h('div','chart-wrap'); wrapBar.appendChild(svgBar); body.appendChild(wrapBar);
+
+  function isSquare(d){ const r=isqrt(BigInt(d)); return r*r===BigInt(d); }
+  // cache digit lengths
+  const digitCache={};
+  function digLen(d){ if(digitCache[d]!=null) return digitCache[d]; if(isSquare(d)){ return (digitCache[d]=0); } const s=pellFundamental(BigInt(d)); const v=s?s.x.toString().length:0; return (digitCache[d]=v); }
+
+  function render(D){
+    D=parseInt(D,10); if(!(D>=2)) D=2; if(D>1000) D=1000;
+    while(isSquare(D)) D++;
+    rng.value=Math.min(200,D); num.value=D;
+    const s=sqrtCF(D);
+    const periodStr=s.period.join(', ');
+    cfLine.innerHTML='√'+D+' = <span class="mono">['+s.pre[0]+'; <span style="text-decoration:overline">'+periodStr+'</span>]</span> &nbsp; <span class="small">period '+s.period.length+'</span>';
+    // convergent table over up to 2 periods
+    const L=s.period.length;
+    const terms=expandPeriodic(s.pre,s.period, Math.min(2*L, 15));
+    const cs=convergents(terms);
+    tbl.innerHTML='<thead><tr><th>n</th><th>aₙ</th><th>pₙ/qₙ</th><th>pₙ²−D·qₙ²</th></tr></thead>';
+    const tb=h('tbody');
+    for(let n=0;n<cs.length;n++){
+      const c=cs[n]; const val=c.h*c.h - BigInt(D)*c.k*c.k;
+      const tr=h('tr');
+      const pq=(c.h.toString().length>12)?fmtBig(c.h)+'/'+fmtBig(c.k):c.h+'/'+c.k;
+      let cls=''; if(val===1n) cls='ok'; else if(val===-1n) cls='no';
+      tr.innerHTML='<td>'+n+'</td><td>'+terms[n]+'</td><td>'+pq+'</td><td class="'+cls+'">'+val.toString()+(val===1n?' ✓':(val===-1n?' (−1)':''))+'</td>';
+      tb.appendChild(tr);
+    }
+    tbl.appendChild(tb);
+    // fundamental card
+    const fun=pellFundamental(BigInt(D));
+    if(fun){
+      const xs=fun.x.toString(), ys=fun.y.toString();
+      card.innerHTML='<b>Fundamental solution</b> (period '+fun.period+', '+(fun.period%2? 'odd → squared unit':'even → direct')+'):<br>'+
+        'x = <span class="mono">'+(xs.length>28?xs.slice(0,14)+'…'+xs.slice(-8)+' ('+xs.length+' digits)':xs)+'</span><br>'+
+        'y = <span class="mono">'+(ys.length>28?ys.slice(0,14)+'…'+ys.slice(-8)+' ('+ys.length+' digits)':ys)+'</span><br>'+
+        '<span class="'+(fun.verified?'status-ok':'status-no')+'">x²−D·y² = '+(fun.verified?'1 ✓ verified':'FAILED')+'</span>';
+    } else card.textContent='Perfect square — no Pell solution.';
+    // bar chart
+    while(svgBar.firstChild) svgBar.removeChild(svgBar.firstChild);
+    const W=760,H=180,pl=34,pr=12,pt=10,pb=22; const pw=W-pl-pr, ph=H-pt-pb;
+    const brass=cssvar('--brass'), s1=cssvar('--s1');
+    let maxD=1; const lens=[];
+    for(let d=2;d<=100;d++){ const dl=isSquare(d)?0:digLen(d); lens.push({d:d,l:dl}); if(dl>maxD)maxD=dl; }
+    svgBar.appendChild(el('line',{class:'axis',x1:pl,y1:pt+ph,x2:pl+pw,y2:pt+ph}));
+    svgBar.appendChild(el('line',{class:'axis',x1:pl,y1:pt,x2:pl,y2:pt+ph}));
+    const bw=pw/lens.length;
+    lens.forEach(function(o,i){ if(o.l<=0) return; const bh=o.l/maxD*ph; const x=pl+i*bw; const cur=(o.d===D);
+      svgBar.appendChild(el('rect',{x:x+bw*0.1,y:pt+ph-bh,width:bw*0.8,height:bh,fill:cur?brass:s1,opacity:cur?1:.75}));
+      if(cur){ const t=el('text',{class:'endlabel',x:x+bw/2,y:pt+ph-bh-3,'text-anchor':'middle'}); t.setAttribute('fill',brass); t.textContent='D='+o.d; svgBar.appendChild(t); }
+    });
+    for(let g=1;g<=maxD;g+=Math.ceil(maxD/5)){ const py=pt+ph-g/maxD*ph; const t=el('text',{class:'axlabel',x:pl-5,y:py+3,'text-anchor':'end'}); t.textContent=g; svgBar.appendChild(t); }
+    const lt=el('text',{class:'axtitle',x:pl+pw,y:pt+ph+18,'text-anchor':'end'}); lt.textContent='D'; svgBar.appendChild(lt);
+  }
+  rng.addEventListener('input',function(){ render(rng.value); });
+  num.addEventListener('change',function(){ render(num.value); });
+  num.addEventListener('keydown',function(e){ if(e.key==='Enter') render(num.value); });
+  chip.addEventListener('click',function(){ render(61); });
+  onTheme(function(){ render(num.value); });
+  mount.appendChild(wid);
+  render(61);
+  return {};
+}
+RCT.mountW7=mountW7;
+/* ============ W8: FRACTAL LAB ============ */
+function mountW8(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Fractal Lab</span><span class="tag">W8</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const tabs=[
+    {key:'koch',name:'Koch',max:6,def:4,dim:'ln4/ln3 ≈ 1.2619'},
+    {key:'dragon',name:'Dragon',max:14,def:10,dim:'2'},
+    {key:'sier',name:'Sierpiński',max:8,def:6,dim:'ln3/ln2 ≈ 1.5850'},
+    {key:'hilbert',name:'Hilbert',max:7,def:5,dim:'2'},
+    {key:'quest',name:'?(x)',max:0,def:0,dim:'the "slippery devil\'s staircase"'}
+  ];
+  let cur='koch';
+  const tabRow=h('div','chips-row');
+  const tabBtns={};
+  tabs.forEach(function(t){ const b=h('button','chip',t.name); b.addEventListener('click',function(){ cur=t.key; setTab(); }); tabBtns[t.key]=b; tabRow.appendChild(b); });
+  body.appendChild(tabRow);
+
+  const r1=h('div','wrow');
+  const f=h('div','field'); f.innerHTML='<span class="lbl">depth</span>'; const dep=h('input'); dep.type='range'; dep.min=0; dep.max=6; dep.value=4; f.appendChild(dep); const depV=h('span','mono','4'); depV.style.marginLeft='.3rem'; f.appendChild(depV);
+  r1.appendChild(f); body.appendChild(r1);
+
+  const cv=h('canvas'); cv.style.width='100%'; cv.style.maxWidth='560px'; cv.style.display='block'; cv.style.margin='0 auto';
+  body.appendChild(cv);
+  const questBox=h('div'); questBox.style.display='none'; body.appendChild(questBox);
+  const questChart=makeChart(questBox,{width:760,height:320,padL:48});
+  const readout=h('div','readout'); readout.style.marginTop='.5rem'; body.appendChild(readout);
+
+  const CW=560, CH=380;
+  function ctx2(){ const dpr=Math.min(window.devicePixelRatio||1,2); cv.width=CW*dpr; cv.height=CH*dpr; const c=cv.getContext('2d'); c.setTransform(dpr,0,0,dpr,0,0); return c; }
+
+  function mid(a,b){ return [(a[0]+b[0])/2,(a[1]+b[1])/2]; }
+  function kochCurve(p1,p2,n,out){
+    if(n===0){ out.push(p1); return; }
+    const ax=p1[0],ay=p1[1],bx=p2[0],by=p2[1];
+    const dx=(bx-ax)/3, dy=(by-ay)/3;
+    const A=p1, B=[ax+dx,ay+dy], D=[ax+2*dx,ay+2*dy], C2=p2;
+    const ang=-Math.PI/3;
+    const px=B[0]+ (D[0]-B[0])*Math.cos(ang)-(D[1]-B[1])*Math.sin(ang);
+    const py=B[1]+ (D[0]-B[0])*Math.sin(ang)+(D[1]-B[1])*Math.cos(ang);
+    const C=[px,py];
+    kochCurve(A,B,n-1,out); kochCurve(B,C,n-1,out); kochCurve(C,D,n-1,out); kochCurve(D,C2,n-1,out);
+  }
+  function buildKoch(n){
+    const v=[[0.06,0.30],[0.94,0.30],[0.5,0.30+0.88*Math.sqrt(3)/2]];
+    const pts=[]; kochCurve(v[0],v[1],n,pts); kochCurve(v[1],v[2],n,pts); kochCurve(v[2],v[0],n,pts); pts.push(v[0]);
+    return toSegs(pts);
+  }
+  function buildDragon(n){
+    const total=Math.pow(2,n); let x=0,y=0,dir=0; const dirs=[[1,0],[0,-1],[-1,0],[0,1]]; const pts=[[0,0]];
+    for(let k=1;k<=total;k++){ x+=dirs[dir][0]; y+=dirs[dir][1]; pts.push([x,y]); const right=(((k&-k)<<1)&k)!==0; dir=right?(dir+1)&3:(dir+3)&3; }
+    return toSegs(pts);
+  }
+  function buildSier(n){
+    const a=[0.5,0.05],b=[0.03,0.92],c=[0.97,0.92]; const segs=[];
+    (function rec(a,b,c,d){ if(d===0){ segs.push([a,b]); segs.push([b,c]); segs.push([c,a]); return; } const ab=mid(a,b),bc=mid(b,c),ca=mid(c,a); rec(a,ab,ca,d-1); rec(ab,b,bc,d-1); rec(ca,bc,c,d-1); })(a,b,c,n);
+    return segs.map(function(s){return [s[0][0],s[0][1],s[1][0],s[1][1]];});
+  }
+  function buildHilbert(n){
+    const pts=[];
+    (function hil(x0,y0,xi,xj,yi,yj,d){ if(d<=0){ pts.push([x0+(xi+yi)/2, y0+(xj+yj)/2]); return; }
+      hil(x0,y0, yi/2,yj/2, xi/2,xj/2, d-1);
+      hil(x0+xi/2,y0+xj/2, xi/2,xj/2, yi/2,yj/2, d-1);
+      hil(x0+xi/2+yi/2,y0+xj/2+yj/2, xi/2,xj/2, yi/2,yj/2, d-1);
+      hil(x0+xi/2+yi,y0+xj/2+yj, -yi/2,-yj/2, -xi/2,-xj/2, d-1);
+    })(0.04,0.04,0.92,0,0,0.92, n);
+    return toSegs(pts);
+  }
+  function toSegs(pts){ const s=[]; for(let i=0;i<pts.length-1;i++) s.push([pts[i][0],pts[i][1],pts[i+1][0],pts[i+1][1]]); return s; }
+
+  let anim=null;
+  function stopAnim(){ if(anim){ cancelAnimationFrame(anim); anim=null; } }
+  function drawFractal(){
+    if(cur==='quest') return;
+    stopAnim();
+    const n=+dep.value;
+    let segs, dim, name;
+    const t=tabs.find(function(x){return x.key===cur;});
+    if(cur==='koch'){ segs=buildKoch(n); dim='ln4/ln3 ≈ 1.2619'; }
+    else if(cur==='dragon'){ segs=buildDragon(n); dim='2 (fills the plane)'; }
+    else if(cur==='sier'){ segs=buildSier(n); dim='ln3/ln2 ≈ 1.5850'; }
+    else if(cur==='hilbert'){ segs=buildHilbert(n); dim='2 (space-filling)'; }
+    // normalize to canvas
+    let minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9;
+    segs.forEach(function(s){ minx=Math.min(minx,s[0],s[2]); maxx=Math.max(maxx,s[0],s[2]); miny=Math.min(miny,s[1],s[3]); maxy=Math.max(maxy,s[1],s[3]); });
+    const pad=20; const sc=Math.min((CW-2*pad)/(maxx-minx||1),(CH-2*pad)/(maxy-miny||1));
+    const ox=(CW-(maxx-minx)*sc)/2 - minx*sc, oy=(CH-(maxy-miny)*sc)/2 - miny*sc;
+    const P=segs.map(function(s){ return [s[0]*sc+ox, s[1]*sc+oy, s[2]*sc+ox, s[3]*sc+oy]; });
+    let totLen=0; P.forEach(function(s){ totLen+=Math.hypot(s[2]-s[0],s[3]-s[1]); });
+    const c=ctx2();
+    const brass=cssvar('--brass');
+    function frameDraw(upto){
+      c.clearRect(0,0,CW,CH); c.strokeStyle=brass; c.lineWidth=1.2; c.lineJoin='round'; c.lineCap='round';
+      c.beginPath();
+      const lim=Math.min(upto,P.length);
+      for(let i=0;i<lim;i++){ c.moveTo(P[i][0],P[i][1]); c.lineTo(P[i][2],P[i][3]); }
+      c.stroke();
+    }
+    readout.innerHTML='<div><b>'+t.name+'</b> at depth '+n+' — segments <span class="mono">'+P.length+'</span>, drawn length <span class="mono">'+Math.round(totLen)+'</span>px</div>'+
+      '<div style="margin-top:.3rem">Fractal dimension: <span class="hl mono">'+dim+'</span></div>';
+    if(reduceMotion || P.length<400){ frameDraw(P.length); }
+    else { let i=0; const chunk=Math.max(200,Math.floor(P.length/60)); (function step(){ i+=chunk; frameDraw(i); if(i<P.length){ anim=requestAnimationFrame(step); } })(); }
+    lastRedraw=function(){ frameDraw(P.length); };
+  }
+  let lastRedraw=null;
+
+  function drawQuest(){
+    stopAnim();
+    const pts=[];
+    for(let k=1;k<=511;k++){
+      const qm=questionMark(BigInt(k),512n); const v=fracFloat(qm.num,qm.den);
+      const cf=cfFromFrac(BigInt(k),512n);
+      // binary of ?(x)=num/den (den power of 2)
+      let r=qm.num, den=qm.den, bits=''; let guard=0;
+      while(r!==0n && guard<40){ r*=2n; if(r>=den){ bits+='1'; r-=den; } else bits+='0'; guard++; }
+      let cfStr='['+cf.map(function(t,i){return i===0?t+'; ':(t+(i<cf.length-1?', ':''));}).join('')+']';
+      pts.push({x:k/512, y:v, label:'x='+k+'/512  CF '+cfStr+'  ?(x)=0.'+(bits||'0')+'₂'});
+    }
+    questChart.render({ title:'Minkowski question-mark function ?(x)',
+      xDomain:[0,1], yDomain:[0,1], xTitle:'x', yTitle:'?(x)',
+      xFmt:function(v){return v.toFixed(2);}, yFmt:function(v){return v.toFixed(2);},
+      series:[{points:pts,color:4,width:2}] });
+    readout.innerHTML='<div><b>?(x)</b> maps quadratic irrationals to rationals and rationals to dyadics — continuous, strictly increasing, yet with zero derivative almost everywhere.</div>'+
+      '<div style="margin-top:.3rem" class="small">Hover the curve: each x\'s continued fraction becomes the binary digits of ?(x).</div>';
+  }
+
+  function setTab(){
+    tabs.forEach(function(t){ tabBtns[t.key].classList.toggle('on',t.key===cur); });
+    const t=tabs.find(function(x){return x.key===cur;});
+    if(cur==='quest'){ cv.style.display='none'; questBox.style.display=''; dep.parentNode.style.visibility='hidden'; drawQuest(); }
+    else { cv.style.display='block'; questBox.style.display='none'; dep.parentNode.style.visibility='visible'; dep.max=t.max; if(+dep.value>t.max) dep.value=t.def; depV.textContent=dep.value; drawFractal(); }
+  }
+  dep.addEventListener('input',function(){ depV.textContent=dep.value; drawFractal(); });
+  onTheme(function(){ if(cur==='quest') drawQuest(); else if(lastRedraw) lastRedraw(); });
+  mount.appendChild(wid);
+  setTab();
+  return {};
+}
+RCT.mountW8=mountW8;
+/* ============ W9: CALENDAR DESIGNER ============ */
+function mountW9(mount){
+  const REF=0.242190; // fractional part of the tropical year (days)
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Calendar Designer — 0.242190 days</span><span class="tag">W9</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const intro=h('div','small'); intro.style.marginBottom='.4rem'; intro.innerHTML='The tropical year runs 365.242190 days. Each convergent of the leftover 0.242190 is a leap-year rule: <span class="mono">p</span> leap days every <span class="mono">q</span> years.';
+  body.appendChild(intro);
+
+  const convs=convergents(cfFromFrac(24219n,100000n)).filter(function(c){ return c.k>1n; });
+  const named={'1/4':'Julian — Sosigenes, 45 BC','7/29':'','8/33':'Khayyām, 1079 (Jalāli)','31/128':'von Mädler, 1864 — ultra-accurate','132/545':''};
+  const rules=[]; // {p,q,name,rate,driftMil}
+  convs.forEach(function(c){ if(c.k>5000n) return; const p=Number(c.h),q=Number(c.k); const rate=p/q-REF; rules.push({p:p,q:q,name:named[p+'/'+q]||'',rate:rate,driftMil:rate*1000,isConv:true}); });
+  const greg={p:97,q:400,name:'Gregorian, 1582 — NOT a convergent',rate:97/400-REF,driftMil:(97/400-REF)*1000,isConv:false};
+
+  const r1=h('div','wrow');
+  const bStep=h('button','btn','Step'), bAll=h('button','btn','Show all'), bReset=h('button','btn','Reset');
+  r1.appendChild(bStep); r1.appendChild(bAll); r1.appendChild(bReset);
+  const tf=h('div','field'); tf.style.marginLeft='auto'; tf.innerHTML='<span class="lbl">drift budget (days / millennium)</span>'; const tol=h('input'); tol.type='range'; tol.min=0; tol.max=100; tol.value=25; tf.appendChild(tol); const tolV=h('span','mono'); tolV.style.marginLeft='.3rem'; tf.appendChild(tolV);
+  r1.appendChild(tf);
+  body.appendChild(r1);
+
+  const cardWrap=h('div'); cardWrap.style.display='grid'; cardWrap.style.gap='.5rem'; cardWrap.style.gridTemplateColumns='repeat(auto-fill,minmax(180px,1fr))'; cardWrap.style.margin='.4rem 0';
+  body.appendChild(cardWrap);
+  const pick=h('div','card-note'); body.appendChild(pick);
+  const capC=h('div','lbl'); capC.style.margin='.5rem 0 .3rem'; capC.textContent='cumulative drift over 3000 years (days)';
+  body.appendChild(capC);
+  const chart=makeChart(body,{width:760,height:240,padL:48});
+
+  let shown=1;
+  function ruleCard(rl,active){
+    const d=h('div');
+    d.style.border='1px solid var(--border)'; d.style.borderRadius='3px'; d.style.padding='.5rem .6rem'; d.style.fontFamily='var(--font-data)'; d.style.fontSize='.72rem';
+    d.style.background=active?'color-mix(in srgb,var(--brass) 14%, transparent)':'transparent';
+    const drift=rl.driftMil;
+    d.innerHTML='<div style="font-weight:700;font-size:.9rem">'+rl.p+' / '+rl.q+'</div>'+
+      '<div style="color:var(--ink-2)">'+rl.p+' leaps / '+rl.q+' yrs</div>'+
+      (rl.name?'<div class="hl" style="margin:.2rem 0">'+rl.name+'</div>':'<div style="height:.2rem"></div>')+
+      '<div>avg year '+(365+rl.p/rl.q).toFixed(6)+'</div>'+
+      '<div style="color:'+(Math.abs(drift)<1?'var(--s2)':'var(--ink-2)')+'">drift '+(drift>=0?'+':'')+drift.toFixed(3)+' d / millennium</div>';
+    return d;
+  }
+  function selectBudget(){
+    const budget=+tol.value/10; tolV.textContent=budget.toFixed(1);
+    let best=null;
+    rules.forEach(function(rl){ if(Math.abs(rl.driftMil)<=budget){ if(!best||rl.q<best.q) best=rl; } });
+    if(best) pick.innerHTML='For a budget of <b>'+budget.toFixed(1)+'</b> days/millennium, the cheapest rule is <span class="hl mono">'+best.p+'/'+best.q+'</span>'+(best.name?' ('+best.name+')':'')+' — drift '+best.driftMil.toFixed(3)+' d/mil.';
+    else pick.innerHTML='No convergent meets a budget of '+budget.toFixed(1)+' d/millennium — tighten or loosen the slider.';
+    return best;
+  }
+  function render(){
+    cardWrap.innerHTML='';
+    const best=selectBudget();
+    const list=rules.slice(0,shown);
+    list.forEach(function(rl){ cardWrap.appendChild(ruleCard(rl, best&&best.q===rl.q)); });
+    cardWrap.appendChild(ruleCard(greg,false));
+    // chart: notable rules
+    const notable=[];
+    const j=rules.find(function(r){return r.q===4;}); if(j) notable.push({rl:j,c:5,lab:'Julian 1/4'});
+    const kh=rules.find(function(r){return r.q===33;}); if(kh) notable.push({rl:kh,c:2,lab:'8/33'});
+    notable.push({rl:greg,c:1,lab:'97/400'});
+    const acc=rules.find(function(r){return r.q===128;}); if(acc) notable.push({rl:acc,c:3,lab:'31/128'});
+    const series=notable.map(function(o){ return {points:[{x:0,y:0},{x:3000,y:3000*o.rl.rate}],color:o.c,width:2,endLabel:o.lab}; });
+    let maxAbs=1; notable.forEach(function(o){ maxAbs=Math.max(maxAbs,Math.abs(3000*o.rl.rate)); });
+    chart.render({ title:'cumulative calendar drift over 3000 years',
+      xDomain:[0,3400], yDomain:[-maxAbs*1.1,maxAbs*1.1],
+      xTitle:'years', yTitle:'drift (days)', xFmt:function(v){return v.toFixed(0);}, yFmt:function(v){return v.toFixed(1);},
+      hairs:[{axis:'y',v:0}],
+      series:series });
+  }
+  bStep.addEventListener('click',function(){ if(shown<rules.length) shown++; render(); });
+  bAll.addEventListener('click',function(){ shown=rules.length; render(); });
+  bReset.addEventListener('click',function(){ shown=1; render(); });
+  tol.addEventListener('input',render);
+  mount.appendChild(wid);
+  shown=Math.min(4,rules.length); render();
+  return {};
+}
+RCT.mountW9=mountW9;
+/* ============ W10: TEMPERAMENT STUDIO ============ */
+function mountW10(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Temperament Studio</span><span class="tag">W10</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const PURE=Math.log2(3/2)*1200; // 701.955
+  const justCents=[0,111.73,203.91,315.64,386.31,498.04,590.22,701.96,813.69,884.36,996.09,1088.27,1200];
+  const noteNames=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+  let tuning='12tet', base=261.63;
+
+  let AC=null; try{ AC=window.AudioContext||window.webkitAudioContext; }catch(e){}
+  let actx=null;
+  function ctx(){ if(!AC) return null; if(!actx) actx=new AC(); if(actx.state==='suspended') actx.resume(); return actx; }
+  function play(freqs,dur){ const c=ctx(); if(!c) return; const t0=c.currentTime; freqs.forEach(function(f){ const o=c.createOscillator(); o.type='triangle'; o.frequency.value=f; const g=c.createGain(); g.gain.setValueAtTime(0,t0); g.gain.linearRampToValueAtTime(0.16,t0+0.02); g.gain.setValueAtTime(0.16,t0+dur-0.12); g.gain.linearRampToValueAtTime(0,t0+dur); o.connect(g); g.connect(c.destination); o.start(t0); o.stop(t0+dur); }); }
+
+  function centsOf(semi){ if(tuning==='12tet') return semi*100; if(tuning==='just') return justCents[semi]; return Math.round(semi*53/12)*1200/53; }
+  function freqOf(semi){ return base*Math.pow(2,centsOf(semi)/1200); }
+
+  const r1=h('div','wrow');
+  const selF=h('div','field'); selF.innerHTML='<span class="lbl">tuning</span>'; const sel=h('select'); sel.innerHTML='<option value="12tet">12-TET (equal)</option><option value="just">Just intonation</option><option value="53tet">53-TET</option>'; selF.appendChild(sel);
+  const bPure=h('button','btn','▶ Pure fifth 3/2'), bTemp=h('button','btn','▶ Tempered fifth (12-TET)');
+  r1.appendChild(selF); r1.appendChild(bPure); r1.appendChild(bTemp);
+  body.appendChild(r1);
+
+  const piano=h('div','piano'); body.appendChild(piano);
+  const whiteIdx=[0,2,4,5,7,9,11]; const blackAfter={0:1,2:3,5:6,7:8,9:10}; // white pos -> black semitone
+  const whiteKeys=[];
+  whiteIdx.forEach(function(semi,wi){ const k=h('div','wk'); k.dataset.semi=semi; k.title=noteNames[semi]; const lbl=h('span'); lbl.style.position='absolute'; lbl.style.bottom='4px'; lbl.style.left='0'; lbl.style.right='0'; lbl.style.textAlign='center'; lbl.style.fontFamily='var(--font-data)'; lbl.style.fontSize='.6rem'; lbl.style.color='var(--muted)'; lbl.textContent=noteNames[semi]; k.appendChild(lbl); k.addEventListener('click',function(){ hit(semi,k); }); piano.appendChild(k); whiteKeys.push(k); });
+  // black keys
+  const blackKeys=[];
+  Object.keys(blackAfter).forEach(function(wp){ const semi=blackAfter[wp]; const wi=whiteIdx.indexOf(+wp); const bk=h('div','bk'); bk.dataset.semi=semi; bk.title=noteNames[semi]; bk.style.left=((wi+1)/7*100)+'%'; bk.addEventListener('click',function(e){ e.stopPropagation(); hit(semi,bk); }); piano.appendChild(bk); blackKeys.push(bk); });
+
+  const readout=h('div','readout'); readout.style.marginTop='.6rem'; body.appendChild(readout);
+  const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+  const cvgCap=h('div','lbl'); cvgCap.style.margin='.6rem 0 .3rem'; cvgCap.textContent='convergents of log₂(3/2) = 0.58496 — each is an equal temperament';
+  body.appendChild(cvgCap);
+  const cvgWrap=h('div','tablewrap'); const cvg=h('table'); cvgWrap.appendChild(cvg); body.appendChild(cvgWrap);
+  if(!AC){ const n=h('div','card-note'); n.innerHTML='<b>No Web Audio</b> in this browser — the keyboard and all numbers still work, just silently.'; body.appendChild(n); }
+
+  function hit(semi,keyEl){ play([freqOf(semi)],0.6); flash(keyEl); showInterval(semi); }
+  function flash(k){ k.classList.add('lit'); setTimeout(function(){ k.classList.remove('lit'); },260); }
+  function showInterval(semi){
+    const c=centsOf(semi); const j=justCents[semi]; const err=c-j;
+    readout.innerHTML='<div>Note <span class="hl">'+noteNames[semi]+'</span> in <span class="mono">'+sel.options[sel.selectedIndex].text+'</span>: '+
+      '<span class="mono">'+c.toFixed(2)+'</span> cents &nbsp; just <span class="mono">'+j.toFixed(2)+'</span> &nbsp; error <span class="mono">'+(err>=0?'+':'')+err.toFixed(2)+'</span> cents</div>';
+  }
+  function renderTables(){
+    tbl.innerHTML='<thead><tr><th>degree</th><th>tuning ¢</th><th>just ¢</th><th>error ¢</th></tr></thead>';
+    const tb=h('tbody');
+    for(let s=0;s<=12;s++){ const c=centsOf(s), j=justCents[s], e=c-j; const tr=h('tr'); const nm=s===12?'C′':noteNames[s]; tr.innerHTML='<td>'+nm+'</td><td>'+c.toFixed(1)+'</td><td>'+j.toFixed(1)+'</td><td class="'+(Math.abs(e)<6?'ok':(Math.abs(e)>16?'no':''))+'">'+(e>=0?'+':'')+e.toFixed(1)+'</td>'; tb.appendChild(tr); }
+    tbl.appendChild(tb);
+    // convergents of log2(3/2)
+    const list=[[1,2],[3,5],[7,12],[24,41],[31,53]];
+    cvg.innerHTML='<thead><tr><th>p/q</th><th>notes/oct</th><th>fifth ¢</th><th>error vs 3/2 ¢</th></tr></thead>';
+    const cb=h('tbody');
+    list.forEach(function(pq){ const fifth=pq[0]/pq[1]*1200; const err=fifth-PURE; const tr=h('tr'); const isCur=(tuning==='12tet'&&pq[1]===12)||(tuning==='53tet'&&pq[1]===53); if(isCur) tr.classList.add('hot'); tr.innerHTML='<td>'+pq[0]+'/'+pq[1]+'</td><td>'+pq[1]+'</td><td>'+fifth.toFixed(3)+'</td><td class="'+(Math.abs(err)<2?'ok':'')+'">'+(err>=0?'+':'')+err.toFixed(3)+'</td>'; cb.appendChild(tr); });
+    cvg.appendChild(cb);
+  }
+  sel.addEventListener('change',function(){ tuning=sel.value; renderTables(); showInterval(7); });
+  bPure.addEventListener('click',function(){ play([base, base*3/2],2.6); flash(whiteKeys[0]); readout.innerHTML='<div><span class="hl">Pure fifth</span> C–G at ratio 3/2 = <span class="mono">701.955</span> cents — dead still, no beats.</div>'; });
+  bTemp.addEventListener('click',function(){ play([base, base*Math.pow(2,7/12)],2.6); flash(whiteKeys[4]); const beat=Math.abs(3*base-2*base*Math.pow(2,7/12)); readout.innerHTML='<div><span class="hl">Tempered fifth</span> C–G at 2^(7/12) = <span class="mono">700</span> cents — 1.955 cents flat. Listen: it beats at ≈ <span class="mono">'+beat.toFixed(2)+' Hz</span>.</div>'; });
+  mount.appendChild(wid);
+  renderTables(); showInterval(7);
+  return {};
+}
+RCT.mountW10=mountW10;
+/* ============ W11: WIENER ATTACK STEPPER ============ */
+function mountW11(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Wiener Attack Stepper — small-d RSA</span><span class="tag">W11</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const r1=h('div','wrow');
+  const f=h('div','field'); f.innerHTML='<span class="lbl">modulus bits</span>'; const sel=h('select'); sel.innerHTML='<option>64</option><option>128</option><option>256</option>'; f.appendChild(sel);
+  const bGen=h('button','btn primary','Generate vulnerable key');
+  const bStep=h('button','btn','Step'), bAuto=h('button','btn','Auto'), bReset=h('button','btn','Reset');
+  r1.appendChild(f); r1.appendChild(bGen); r1.appendChild(bStep); r1.appendChild(bAuto); r1.appendChild(bReset);
+  body.appendChild(r1);
+
+  const keyCard=h('div','card-note'); body.appendChild(keyCard);
+  const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+  const result=h('div'); result.style.marginTop='.5rem'; body.appendChild(result);
+  const why=h('details'); why.innerHTML='<summary style="font-family:var(--font-data);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2);cursor:pointer;margin-top:.6rem">why it works</summary>'+
+    '<div class="small" style="margin-top:.4rem">Since <span class="mono">e·d ≡ 1 (mod φ)</span>, we have <span class="mono">e·d = k·φ + 1</span>, so <span class="mono">k/d</span> is an astonishingly good approximation to <span class="mono">e/φ ≈ e/N</span>. When <span class="mono">d &lt; ⅓·N^¼</span>, Legendre\'s criterion guarantees <span class="mono">k/d</span> appears among the <em>convergents</em> of <span class="mono">e/N</span> — so we just try each one. Recover <span class="mono">φ = (e·d − 1)/k</span>, then <span class="mono">p, q</span> are the roots of <span class="mono">x² − (N − φ + 1)x + N</span>.</div>';
+  body.appendChild(why);
+
+  let key=null, convs=[], idx=0, solved=false;
+  function trunc(x){ const s=x.toString(); return s.length>22?s.slice(0,12)+'…'+s.slice(-6)+' ('+s.length+'d)':s; }
+  function gen(){
+    const bits=parseInt(sel.value,10); const pbits=bits/2;
+    const rng=mulberry32((Date.now()>>>0)^0x9e3779b9);
+    let p,q,n,phi,d,e,bound,tries=0;
+    do{
+      p=randPrime(pbits,rng); q=randPrime(pbits,rng);
+      if(!p||!q||p===q){ tries++; continue; }
+      n=p*q; phi=(p-1n)*(q-1n);
+      bound=isqrt(isqrt(n))/3n;
+      d=null;
+      if(bound>5n){
+        for(let t=0;t<4000;t++){ let cand=BigInt(3+Math.floor(rng()*Number(bound<100000n?bound:100000n))); cand|=1n; if(cand>=bound) continue; if(cand<3n) continue; if(bgcd(cand,phi)===1n){ d=cand; break; } }
+      }
+      tries++;
+    } while((!d) && tries<40);
+    if(!d){ keyCard.innerHTML='<span class="status-no">Could not build a vulnerable key at this size — try again.</span>'; return; }
+    e=modinv(d,phi);
+    key={p:p,q:q,n:n,phi:phi,d:d,e:e,bits:bits};
+    convs=convergents(cfFromFrac(e,n));
+    idx=0; solved=false;
+    keyCard.innerHTML='<b>Public key</b> (bits='+bits+'): &nbsp; N = <span class="mono">'+trunc(n)+'</span> &nbsp; e = <span class="mono">'+trunc(e)+'</span><br>'+
+      '<span class="small">Secret d = <span class="mono">'+d.toString().length+'-digit value, hidden</span> — chosen &lt; ⅓·N^¼, i.e. dangerously small.</span>';
+    render();
+  }
+  function testConv(i){
+    const c=convs[i]; const kcand=c.h, dcand=c.k;
+    if(kcand===0n) return {ok:false,reason:'k=0'};
+    if((key.e*dcand-1n)%kcand!==0n) return {ok:false,reason:'φ not integer'};
+    const phiCand=(key.e*dcand-1n)/kcand;
+    if(phiCand<=0n||phiCand>=key.n) return {ok:false,reason:'φ out of range'};
+    const s=key.n-phiCand+1n; // p+q
+    const disc=s*s-4n*key.n;
+    if(disc<0n) return {ok:false,reason:'disc<0'};
+    const t=isqrt(disc);
+    if(t*t!==disc) return {ok:false,reason:'disc not square'};
+    const p=(s+t)/2n, q=(s-t)/2n;
+    if(p*q===key.n) return {ok:true,phiCand:phiCand,p:p,q:q,dcand:dcand,kcand:kcand};
+    return {ok:false,reason:'p·q≠N'};
+  }
+  function render(){
+    tbl.innerHTML='<thead><tr><th>i</th><th>k/d candidate</th><th>φ candidate</th><th>status</th></tr></thead>';
+    const tb=h('tbody');
+    for(let i=0;i<=idx && i<convs.length;i++){
+      const c=convs[i]; const res=testConv(i);
+      const tr=h('tr');
+      const phiTxt = res.ok?trunc(res.phiCand):(((key.e*c.k-1n)%(c.h||1n)===0n && c.h!==0n)?trunc((key.e*c.k-1n)/c.h):'—');
+      let st = res.ok?'<span class="status-ok">✓ FACTORED</span>':'<span class="status-no">✗ '+res.reason+'</span>';
+      if(res.ok) tr.classList.add('hot');
+      tr.innerHTML='<td>'+i+'</td><td class="mono">'+trunc(c.h)+' / '+trunc(c.k)+'</td><td class="mono">'+phiTxt+'</td><td>'+st+'</td>';
+      tb.appendChild(tr);
+      if(res.ok){ solved=true; result.innerHTML='<div class="status-ok" style="font-weight:700">Key broken.</div><div class="readout" style="margin-top:.3rem">d = <span class="mono">'+key.d.toString()+'</span><br>p = <span class="mono">'+trunc(res.p)+'</span> &nbsp; q = <span class="mono">'+trunc(res.q)+'</span><br>recovered d matches: <span class="'+(res.dcand===key.d?'status-ok':'status-no')+'">'+(res.dcand===key.d?'yes ✓':'no')+'</span></div>'; break; }
+    }
+    tbl.appendChild(tb);
+    if(!solved) result.innerHTML='<div class="small">Walking convergents of e/N… press Step or Auto.</div>';
+  }
+  function step(){ if(!key||solved) return; if(idx<convs.length-1) idx++; render(); }
+  function auto(){ if(!key) return; let guard=0; while(!solved && idx<convs.length-1 && guard<200){ idx++; render(); guard++; } }
+  bGen.addEventListener('click',gen);
+  bStep.addEventListener('click',step);
+  bAuto.addEventListener('click',auto);
+  bReset.addEventListener('click',function(){ idx=0; solved=false; result.innerHTML=''; if(key) render(); });
+  mount.appendChild(wid);
+  gen();
+  return {};
+}
+RCT.mountW11=mountW11;
+/* ============ W12: COLLATZ ORBIT PLOTTER ============ */
+function mountW12(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Collatz Orbit Plotter</span><span class="tag">W12</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const r1=h('div','wrow');
+  const inp=h('input'); inp.type='text'; inp.value='27'; inp.style.minWidth='6rem'; inp.setAttribute('aria-label','starting n');
+  const bRace=h('button','btn primary','Add to race'), bClear=h('button','btn','Clear');
+  const chip=h('button','chip','n = 27  (111 steps, peak 9232)');
+  r1.appendChild(inp); r1.appendChild(bRace); r1.appendChild(bClear); r1.appendChild(chip);
+  body.appendChild(r1);
+
+  const chips=h('div','chips-row'); body.appendChild(chips);
+  const chart=makeChart(body,{width:760,height:300,padL:52});
+  const leg=h('div'); body.appendChild(leg);
+  const capS=h('div','lbl'); capS.style.margin='.7rem 0 .3rem'; capS.textContent='stopping time (steps → 1) for every n ≤ 1000 — the Collatz "galaxy"';
+  body.appendChild(capS);
+  const scatter=makeChart(body,{width:760,height:200,padL:44});
+  const note=h('div','card-note'); note.innerHTML='<b>Note.</b> Every orbit tested (verified past 2⁶⁸) reaches 1 — but no proof exists that all do. This is the Collatz conjecture.'; body.appendChild(note);
+
+  const COLS=[0,5,1,3];
+  let seeds=[];
+  function orbit(n){
+    const pts=[]; let v=n, step=0, peak=n; const cap=100000;
+    pts.push({x:0,y:Number(v),ref:null,label:'step 0 = '+v.toString()});
+    while(v!==1n && step<cap){ v=(v&1n)?(3n*v+1n):(v/2n); step++; if(v>peak)peak=v; pts.push({x:step,y:Number(v),label:'step '+step+' = '+(v.toString().length>16?fmtBig(v):v.toString())}); }
+    return {pts:pts,steps:step,peak:peak};
+  }
+  // precompute scatter once
+  const scatterPts=[];
+  (function(){ for(let n=1;n<=1000;n++){ let v=BigInt(n),s=0; while(v!==1n && s<100000){ v=(v&1n)?(3n*v+1n):(v/2n); s++; } scatterPts.push({x:n,y:s,label:'n='+n+'  '+s+' steps'}); } })();
+
+  function addSeed(str){
+    let n; try{ n=BigInt((str||'').trim()); }catch(e){ return; }
+    if(n<1n) return;
+    if(seeds.length>=4) seeds.shift();
+    const o=orbit(n); o.n=n; o.color=COLS[seeds.length%4];
+    seeds.push(o); render();
+  }
+  function render(){
+    // reassign colors by slot order
+    seeds.forEach(function(s,i){ s.color=COLS[i%4]; });
+    const series=seeds.map(function(s){ return {points:s.pts,color:s.color,width:2,endLabel:'n='+s.n.toString()}; });
+    let maxStep=10, maxV=10;
+    seeds.forEach(function(s){ maxStep=Math.max(maxStep,s.steps); maxV=Math.max(maxV,Number(s.peak)); });
+    chart.render({ title:'Collatz orbits (log value vs step)',
+      xDomain:[0,maxStep+2], yDomain:[1,maxV*1.4], yLog:true,
+      xTitle:'step', yTitle:'value (log)', xFmt:function(v){return v.toFixed(0);}, yFmt:function(v){ return v>=1000?(v/1000)+'k':(''+Math.round(v)); },
+      series:series });
+    leg.innerHTML=''; leg.appendChild(legendEl(seeds.map(function(s){ return {label:'n='+s.n.toString(),color:seriesColor(s.color)}; })));
+    // chips
+    chips.innerHTML='';
+    seeds.forEach(function(s){ const c=h('span','chip'); c.style.borderColor=seriesColor(s.color); c.innerHTML='n='+s.n.toString()+': <b>'+s.steps+'</b> steps, peak <b>'+(s.peak.toString().length>12?fmtBig(s.peak):s.peak.toString())+'</b>'; chips.appendChild(c); });
+    // scatter
+    let maxS=1; scatterPts.forEach(function(p){ if(p.y>maxS)maxS=p.y; });
+    scatter.render({ title:'Collatz stopping time for n up to 1000',
+      xDomain:[0,1000], yDomain:[0,maxS+5], xTitle:'n', yTitle:'steps', xFmt:function(v){return v.toFixed(0);}, yFmt:function(v){return v.toFixed(0);},
+      series:[{points:scatterPts,colorHex:'--muted',showPoints:true,ptR:1.4,noLine:true}] });
+  }
+  bRace.addEventListener('click',function(){ addSeed(inp.value); });
+  bClear.addEventListener('click',function(){ seeds=[]; render(); });
+  chip.addEventListener('click',function(){ inp.value='27'; seeds=[]; addSeed('27'); });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter') addSeed(inp.value); });
+  mount.appendChild(wid);
+  addSeed('27'); addSeed('97');
+  return {};
+}
+RCT.mountW12=mountW12;
+/* ============ W13: COLLIDING BLOCKS COUNT PI ============ */
+function mountW13(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Colliding Blocks &middot; π</span><span class="tag">W13</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+
+  const r1=h('div','wrow');
+  const chipDefs=[['ratio 1 → 3',0],['ratio 100 → 31',1],['ratio 10⁴ → 314',2]];
+  const chipEls=[];
+  chipDefs.forEach(function(cd,idx){ const c=h('button','chip',cd[0]); c.addEventListener('click',function(){ setN(cd[1]); }); r1.appendChild(c); chipEls.push(c); });
+  const bPlay=h('button','btn primary','Play'), bReset=h('button','btn','Reset'), bEnd=h('button','btn','Skip to end');
+  r1.appendChild(bPlay); r1.appendChild(bReset); r1.appendChild(bEnd);
+  body.appendChild(r1);
+  const r2=h('div','wrow'); const sf=h('div','field'); sf.innerHTML='<span class="lbl">speed</span>';
+  const speed=h('input'); speed.type='range'; speed.min='1'; speed.max='60'; speed.value='14'; sf.appendChild(speed); r2.appendChild(sf); body.appendChild(r2);
+
+  const cv=h('canvas','chart'); cv.width=760; cv.height=230; cv.style.width='100%'; cv.style.height='auto';
+  body.appendChild(cv); const ctx=cv.getContext('2d');
+  const readout=h('div','readout'); readout.style.marginTop='.5rem'; body.appendChild(readout);
+  const note=h('div','card-note'); note.innerHTML='<b>Galperin, 2003.</b> Perfectly elastic, frictionless collisions. The count is <span class="mono">⌊π·10ⁿ⌋</span> — provably the digits of π. Higher ratios (more digits) via <span class="mono">python -m tourbus demo blocks</span>.'; body.appendChild(note);
+
+  let COL={}; function refresh(){ COL={ink:cssvar('--ink'),ink2:cssvar('--ink-2'),brass:cssvar('--brass'),grid:cssvar('--grid'),s1:cssvar('--s1'),surf:cssvar('--surface'),muted:cssvar('--muted')}; }
+  refresh(); onTheme(function(){ refresh(); draw(); });
+
+  let n=1, states=[], total=0, vt=0, raf=null, lastHit=-1, lastHitReal=-9999;
+  const CAP=460, Xview=6.6;
+
+  function simulate(nn){
+    const m=1, M=Math.pow(100,nn), ws=0.42, wb=0.42+0.2*nn;
+    let xs=1.0, vs=0.0, xb=5.0, vb=-1.0, T=0;
+    const S=[{t:0,xs:xs,xb:xb,vs:vs,vb:vb}];
+    let c=0; const inf=Infinity;
+    while(c<CAP*4){
+      const tw = vs<0 ? -xs/vs : inf;
+      const tb = vs>vb ? (xb-xs-ws)/(vs-vb) : inf;
+      const t=Math.min(tw,tb);
+      if(t===inf) break;
+      xs+=vs*t; xb+=vb*t; T+=t;
+      if(tw<=tb){ vs=-vs; } else { const nvs=((m-M)*vs+2*M*vb)/(m+M), nvb=((M-m)*vb+2*m*vs)/(m+M); vs=nvs; vb=nvb; }
+      c++;
+      if(S.length<=CAP) S.push({t:T,xs:xs,xb:xb,vs:vs,vb:vb});
+    }
+    return {states:S, total:c, ws:ws, wb:wb};
+  }
+
+  let ws=0.42, wb=0.6;
+  function setN(nn){ stop(); n=nn; const r=simulate(nn); states=r.states; total=r.total; ws=r.ws; wb=r.wb; vt=0; lastHit=-1;
+    chipEls.forEach(function(c,i){ c.classList.toggle('on', i===nn); });
+    draw(); updateReadout(0); }
+
+  function segAt(v){ let i=0; while(i+1<states.length && states[i+1].t<=v) i++; return i; }
+  function px(x){ const pad=54; return pad + (x/Xview)*(cv.width-pad-24); }
+
+  function draw(){
+    const W=cv.width,H=cv.height; ctx.clearRect(0,0,W,H);
+    const floorY=H-34, wallX=px(0);
+    // floor + wall
+    ctx.strokeStyle=COL.grid; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(wallX,floorY); ctx.lineTo(W,floorY); ctx.stroke();
+    ctx.fillStyle=COL.brass; ctx.fillRect(wallX-7,40,7,floorY-40);
+    // positions
+    const i=segAt(vt), st=states[i]; const dt=vt-st.t;
+    const xs=st.xs+st.vs*dt, xb=st.xb+st.vb*dt;
+    const hS=26, hB=26+9*n;
+    const sw=(px(ws)-px(0)), bw=(px(wb)-px(0));
+    const sx=px(Math.max(0,xs)), bx=px(xb);
+    // big block
+    ctx.fillStyle=COL.brass; ctx.globalAlpha=.85; ctx.fillRect(bx,floorY-hB,bw,hB); ctx.globalAlpha=1;
+    ctx.fillStyle=COL.surf; ctx.font='700 11px ui-monospace,Menlo,monospace'; ctx.textAlign='center';
+    ctx.fillText('M='+(n===0?'1':('100'+['','¹','²','³'][n])), bx+bw/2, floorY-hB/2);
+    // small block
+    ctx.fillStyle=COL.s1; ctx.fillRect(sx,floorY-hS,sw,hS);
+    ctx.fillStyle=COL.surf; ctx.fillText('m', sx+sw/2, floorY-hS/2+4);
+    // collision flash
+    const now=performance.now?performance.now():Date.now();
+    if(now-lastHitReal<140){ const a=1-(now-lastHitReal)/140; ctx.strokeStyle=COL.s6||COL.brass; ctx.globalAlpha=a; ctx.lineWidth=2;
+      const fx=lastHit; for(let k=0;k<3;k++){ ctx.beginPath(); ctx.arc(fx,floorY-14,4+k*6*(1-a)+6,0,7); ctx.stroke(); } ctx.globalAlpha=1; }
+  }
+
+  function updateReadout(count){
+    const digits=PI.replace('.','').slice(0,n+1);
+    const done=(vt>=states[states.length-1].t);
+    const shown=done?total:count;
+    readout.innerHTML='Collisions: <span class="hl mono" style="font-size:1.5em">'+shown+'</span>'+
+      (done? ' &nbsp; = <span class="mono">⌊π·10'+['','¹','²','³'][n]+'⌋</span> = first '+(n+1)+' digit'+(n?'s':'')+' of π '+
+        '<span class="small">(π = 3.'+PI.slice(2,2+Math.max(0,n))+'…)</span>' : '');
+  }
+
+  let prevReal=null;
+  function frame(ts){
+    if(prevReal==null) prevReal=ts; const dtr=Math.min(0.05,(ts-prevReal)/1000); prevReal=ts;
+    vt += dtr*parseFloat(speed.value);
+    const i=segAt(vt);
+    if(i>lastHit && i>0){ lastHit=i; lastHitReal=performance.now?performance.now():Date.now();
+      // remember collision x for the flash
+      const st=states[i]; lastHit= (st.vs>=0? px(Math.max(0,st.xs)) : px(0)); }
+    draw(); updateReadout(i);
+    if(vt < states[states.length-1].t + 1.2){ raf=requestAnimationFrame(frame); }
+    else { stop(); }
+  }
+  function play(){ if(raf) return; if(vt>=states[states.length-1].t) vt=0; prevReal=null; bPlay.textContent='Pause'; bPlay.classList.remove('primary'); raf=requestAnimationFrame(frame); }
+  function stop(){ if(raf){ cancelAnimationFrame(raf); raf=null; } bPlay.textContent='Play'; bPlay.classList.add('primary'); }
+
+  bPlay.addEventListener('click',function(){ if(raf) stop(); else play(); });
+  bReset.addEventListener('click',function(){ stop(); vt=0; lastHit=-1; draw(); updateReadout(0); });
+  bEnd.addEventListener('click',function(){ stop(); vt=states[states.length-1].t+2; draw(); updateReadout(total); });
+
+  mount.appendChild(wid);
+  setN(1);
+  if(reduceMotion){ vt=states[states.length-1].t+2; draw(); updateReadout(total); }
+  return {};
+}
+RCT.mountW13=mountW13;
+/* ============ W14: THE HOFSTADTER BUTTERFLY (Sturm = continuant) ============ */
+function mountW14(mount){
+  const wid=h('div','widget');
+  wid.appendChild((function(){ const l=h('div','wlabel'); l.innerHTML='<span>Hofstadter Butterfly</span><span class="tag">W14</span>'; return l; })());
+  const body=h('div','wbody'); wid.appendChild(body);
+  const r1=h('div','wrow');
+  const f=h('div','field'); f.innerHTML='<span class="lbl">detail (max q)</span>';
+  const qs=h('input'); qs.type='range'; qs.min='8'; qs.max='34'; qs.value='22'; f.appendChild(qs); r1.appendChild(f);
+  body.appendChild(r1);
+  const cv=h('canvas','chart'); cv.width=760; cv.height=460; cv.style.width='100%'; cv.style.height='auto'; body.appendChild(cv);
+  const ctx=cv.getContext('2d');
+  const readout=h('div','readout'); readout.style.marginTop='.4rem'; body.appendChild(readout);
+  const note=h('div','card-note'); note.innerHTML='<b>Sturm = continuant.</b> Each vertical band is where the transfer-matrix discriminant <span class="mono">|Δ(E)| ≤ 4</span>; Δ(E) is a continuant in E — the same recurrence as every convergent. Hover to read a flux and its continued fraction.'; body.appendChild(note);
+
+  let COL={}; function refresh(){ COL={ink:cssvar('--ink'),ink2:cssvar('--ink-2'),brass:cssvar('--brass'),grid:cssvar('--grid')}; }
+  refresh(); onTheme(function(){ refresh(); draw(); });
+
+  function gcd(a,b){ while(b){ [a,b]=[b,a%b]; } return a; }
+  function disc(p,q,E){
+    function tr(nu){ let a00=1,a01=0,a10=0,a11=1; const w=2*Math.PI*p/q;
+      for(let j=0;j<q;j++){ const aj=2*Math.cos(w*j+nu); const b00=E-aj;
+        const n00=b00*a00-a10, n01=b00*a01-a11, n10=a00, n11=a01; a00=n00;a01=n01;a10=n10;a11=n11; }
+      return a00+a11; }
+    return 0.5*(tr(0)+tr(Math.PI/q));
+  }
+  function bands(p,q){
+    const N=Math.max(200,60*q), lo=-4.05, hi=4.05, out=[]; let prevIn=false, startE=lo, prevE=lo;
+    for(let i=0;i<=N;i++){ const E=lo+(hi-lo)*i/N; const inb=Math.abs(disc(p,q,E))<=4;
+      if(inb&&!prevIn) startE=E; if(!inb&&prevIn) out.push([startE,prevE]); prevIn=inb; prevE=E; }
+    if(prevIn) out.push([startE,prevE]);
+    return out;
+  }
+  let segs=[], curQ=0;
+  function build(qmax){ segs=[]; curQ=qmax;
+    for(let q=1;q<=qmax;q++) for(let p=1;p<q;p++){ if(gcd(p,q)!==1) continue;
+      bands(p,q).forEach(function(b){ segs.push({x:p/q,y1:b[0],y2:b[1],q:q}); }); } }
+  const padL=46,padR=14,padT=12,padB=26;
+  function xpx(fl){ return padL+fl*(cv.width-padL-padR); }
+  function ypx(E){ return padT+(1-(E+4.2)/8.4)*(cv.height-padT-padB); }
+  function draw(){
+    const W=cv.width,H=cv.height; ctx.clearRect(0,0,W,H);
+    ctx.font='9px ui-monospace,Menlo,monospace';
+    [0,0.25,0.5,0.75,1].forEach(function(fl){ const x=xpx(fl); ctx.strokeStyle=COL.grid; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,ypx(4.2)); ctx.lineTo(x,ypx(-4.2)); ctx.stroke();
+      ctx.fillStyle=COL.ink2; ctx.textAlign='center'; ctx.fillText(fl===0?'0':(fl===1?'1':(''+fl)), x, H-8); });
+    [-4,-2,0,2,4].forEach(function(E){ const y=ypx(E); ctx.strokeStyle=COL.grid; ctx.beginPath();
+      ctx.moveTo(xpx(0),y); ctx.lineTo(xpx(1),y); ctx.stroke(); ctx.fillStyle=COL.ink2; ctx.textAlign='right'; ctx.fillText(''+E, xpx(0)-4, y+3); });
+    ctx.strokeStyle=COL.brass; ctx.lineCap='round'; ctx.lineWidth=1.1;
+    segs.forEach(function(s){ ctx.globalAlpha=Math.min(0.85,0.35+1.2/s.q); const x=xpx(s.x);
+      ctx.beginPath(); ctx.moveTo(x,ypx(s.y1)); ctx.lineTo(x,ypx(s.y2)); ctx.stroke(); });
+    ctx.globalAlpha=1; ctx.fillStyle=COL.ink2; ctx.textAlign='center';
+    ctx.fillText('magnetic flux  p/q', (xpx(0)+xpx(1))/2, H-1);
+  }
+  function simpleCF(p,q){ const t=[]; let a=p,b=q; while(b){ const k=Math.floor(a/b); t.push(k); [a,b]=[b,a-k*b]; } return t; }
+  cv.addEventListener('mousemove',function(e){
+    const rect=cv.getBoundingClientRect(); const px=(e.clientX-rect.left)/rect.width*cv.width;
+    let fl=(px-padL)/(cv.width-padL-padR); fl=Math.max(0,Math.min(1,fl));
+    let best=[1,2], bd=1; for(let q=2;q<=curQ;q++) for(let p=1;p<q;p++){ if(gcd(p,q)!==1) continue; const d=Math.abs(fl-p/q); if(d<bd){ bd=d; best=[p,q]; } }
+    const p=best[0],q=best[1], cf=simpleCF(p,q), nb=bands(p,q).length;
+    readout.innerHTML='flux ≈ <span class="hl mono">'+p+'/'+q+'</span> &nbsp; CF = <span class="mono">['+cf[0]+(cf.length>1?'; '+cf.slice(1).join(', '):'')+']</span> &nbsp; <span class="small">'+nb+' band'+(nb!==1?'s':'')+' — gaps labelled by its convergents</span>';
+  });
+  qs.addEventListener('input',function(){ build(parseInt(qs.value,10)); draw(); });
+  mount.appendChild(wid);
+  build(parseInt(qs.value,10)); draw();
+  readout.innerHTML='<span class="small">Hover the butterfly to read a flux and its continued fraction.</span>';
+  return {};
+}
+RCT.mountW14=mountW14;
+/* ============ MINI readouts (stops 3, 6, 11, 12) ============ */
+function miniCard(mount,title,tag){
+  const wid=h('div','widget'); const l=h('div','wlabel'); l.innerHTML='<span>'+title+'</span>'+(tag?'<span class="tag">'+tag+'</span>':''); wid.appendChild(l);
+  const body=h('div','wbody'); wid.appendChild(body); mount.appendChild(wid); return body;
+}
+function mountMiniConvergents(mount){
+  const body=miniCard(mount,'π — the record-setting convergents','');
+  const pi=makeNumber('pi'); const tblWrap=h('div','tablewrap'); const tbl=h('table'); tblWrap.appendChild(tbl); body.appendChild(tblWrap);
+  tbl.innerHTML='<thead><tr><th>n</th><th>pₙ/qₙ</th><th>decimal</th><th>|π − pₙ/qₙ|</th><th></th></tr></thead>';
+  const tb=h('tbody');
+  const nameByPQ={'22/7':'Archimedes','355/113':'Zǔ Chōngzhī, 5th c.'};
+  for(let n=0;n<6;n++){ const c=pi.convs[n]; const err=pi.truth.sub(new BigFrac(c.h,c.k)); const ea=fracFloat(babs(err.n),err.d);
+    const pq=c.h+'/'+c.k; const nm=nameByPQ[pq]||''; const tr=h('tr'); if(nm) tr.classList.add('hot');
+    tr.innerHTML='<td>'+n+'</td><td>'+pq+'</td><td>'+fracFloat(c.h,c.k).toFixed(9)+'</td><td>'+ea.toExponential(2)+'</td><td class="hl" style="text-align:left">'+nm+'</td>'; tb.appendChild(tr); }
+  tbl.appendChild(tb);
+  const note=h('div','small'); note.style.marginTop='.4rem'; note.innerHTML='After 355/113 the next term is a whopping <span class="mono">a₄ = 292</span>, which is why 355/113 is so freakishly good — accurate to 6 decimals with a 3-digit denominator.'; body.appendChild(note);
+}
+function mountMiniSqrt(mount){
+  const body=miniCard(mount,'√d is always periodic','');
+  const r=h('div','wrow'); const f=h('div','field'); f.innerHTML='<span class="lbl">d</span>'; const inp=h('input'); inp.type='number'; inp.value=7; inp.min=2; inp.max=100000; inp.style.width='6rem'; f.appendChild(inp); r.appendChild(f);
+  const chipsW=h('span'); [2,3,7,13,61].forEach(function(d){ const c=h('button','chip','√'+d); c.style.marginLeft='.3rem'; c.addEventListener('click',function(){ inp.value=d; render(); }); chipsW.appendChild(c); }); r.appendChild(chipsW);
+  body.appendChild(r);
+  const out=h('div','readout'); out.style.marginTop='.4rem'; body.appendChild(out);
+  function render(){ let d=parseInt(inp.value,10); if(!(d>=2))d=2; const rt=isqrt(BigInt(d)); if(rt*rt===BigInt(d)){ out.innerHTML='<span class="small">'+d+' is a perfect square — √'+d+' = '+rt+' is rational, no period.</span>'; return; }
+    const s=sqrtCF(d); out.innerHTML='√'+d+' = <span class="mono">['+s.pre[0]+'; <span style="text-decoration:overline">'+s.period.join(', ')+'</span>]</span> &nbsp; <span class="small">period length '+s.period.length+'; the block ends at 2·a₀ = '+(2n*s.pre[0])+'</span>'; }
+  inp.addEventListener('input',render); render();
+}
+function mountMiniGosper(mount){
+  const body=miniCard(mount,'√2 + √3 — one term at a time','');
+  const b2=bracketFromDecimal(SQRT2), b3=bracketFromDecimal(SQRT3);
+  const lo=b2.lo.add(b3.lo), hi=b2.hi.add(b3.hi);
+  const terms=cfFromInterval(lo,hi,40);
+  const info=h('div','small'); info.innerHTML='√2+√3 ≈ 3.14626436994… (a root of <span class="mono">x⁴ − 10x² + 1</span>). Its CF is aperiodic — a quartic irrational. Streaming certified terms:'; body.appendChild(info);
+  const line=h('div','ledger'); line.style.marginTop='.4rem'; body.appendChild(line);
+  const r=h('div','wrow'); r.style.marginTop='.4rem'; const bStep=h('button','btn','Emit term'), bPlay=h('button','btn primary','Stream'), bReset=h('button','btn','Reset'); r.appendChild(bStep); r.appendChild(bPlay); r.appendChild(bReset); body.appendChild(r);
+  let shown=0, timer=null;
+  function render(){ let s='[';
+    for(let i=0;i<shown && i<terms.length;i++){ s+= (i===0)?(terms[i]+'; '):(terms[i]+(i<Math.min(shown,terms.length)-1?', ':'')); }
+    s+= (shown<terms.length?' …':' ')+']';
+    line.innerHTML='<span class="mono">'+(shown?s:'[ … ]')+'</span>'+(shown?'<span class="small" style="margin-left:.5rem">'+shown+' terms certified</span>':'');
+  }
+  function stepT(){ if(shown<terms.length){ shown++; render(); } else stop(); }
+  function stop(){ if(timer){clearInterval(timer);timer=null;} bPlay.textContent='Stream'; bPlay.classList.add('primary'); }
+  bStep.addEventListener('click',function(){ stop(); stepT(); });
+  bPlay.addEventListener('click',function(){ if(timer){ stop(); } else { bPlay.textContent='Pause'; bPlay.classList.remove('primary'); timer=setInterval(stepT,600); } });
+  bReset.addEventListener('click',function(){ shown=0; stop(); render(); });
+  shown=4; render();
+}
+function mountMiniTower(mount){
+  const body=miniCard(mount,'A(4,2) = 2^65536 − 3','');
+  const big=(1n<<65536n)-3n; const str=big.toString();
+  const info=h('div','readout');
+  info.innerHTML='<div>Ackermann <span class="mono">A(4,2)</span> computed exactly in BigInt:</div>'+
+    '<div style="margin-top:.3rem">digits: <span class="hl mono">'+str.length+'</span> &nbsp; first 12: <span class="mono">'+str.slice(0,12)+'…</span> &nbsp; last 6: <span class="mono">…'+str.slice(-6)+'</span></div>'+
+    '<div style="margin-top:.3rem" class="small">A(4,3) = 2^(2^65536) − 3 would have more digits than there are atoms in the observable universe.</div>';
+  body.appendChild(info);
+  const y=h('div','card-note'); y.innerHTML='<b>Y combinator</b> — recursion with no name to call: <span class="mono">Y = λf.(λx.f (x x)) (λx.f (x x))</span>. It satisfies <span class="mono">Y f = f (Y f)</span>, manufacturing a fixed point (and thus recursion) out of pure self-application.'; body.appendChild(y);
+}
+RCT.mountMini={conv:mountMiniConvergents,sqrt:mountMiniSqrt,gosper:mountMiniGosper,tower:mountMiniTower};
+/* ============ INIT — mount all widgets ============ */
+function mountAll(){
+  const by=function(id){ return document.getElementById(id); };
+  try{ mountW1(by('w1a'),'pi'); }catch(e){ fail('w1a',e); }
+  try{ mountW1(by('w1b'),'e'); }catch(e){ fail('w1b',e); }
+  try{ mountW2(by('w2')); }catch(e){ fail('w2',e); }
+  try{ mountW3(by('w3')); }catch(e){ fail('w3',e); }
+  try{ mountW4(by('w4')); }catch(e){ fail('w4',e); }
+  try{ mountW5(by('w5')); }catch(e){ fail('w5',e); }
+  try{ mountW6(by('w6')); }catch(e){ fail('w6',e); }
+  try{ mountW7(by('w7')); }catch(e){ fail('w7',e); }
+  try{ mountW8(by('w8')); }catch(e){ fail('w8',e); }
+  try{ mountW9(by('w9')); }catch(e){ fail('w9',e); }
+  try{ mountW10(by('w10')); }catch(e){ fail('w10',e); }
+  try{ mountW11(by('w11')); }catch(e){ fail('w11',e); }
+  try{ mountW12(by('w12')); }catch(e){ fail('w12',e); }
+  try{ mountW13(by('w13')); }catch(e){ fail('w13',e); }
+  try{ mountW14(by('w14')); }catch(e){ fail('w14',e); }
+  try{ mountMiniConvergents(by('mini-convergents')); }catch(e){ fail('mini-convergents',e); }
+  try{ mountMiniSqrt(by('mini-sqrtcf')); }catch(e){ fail('mini-sqrtcf',e); }
+  try{ mountMiniGosper(by('mini-gosper')); }catch(e){ fail('mini-gosper',e); }
+  try{ mountMiniTower(by('mini-tower')); }catch(e){ fail('mini-tower',e); }
+}
+function fail(id,e){ const m=document.getElementById(id); if(m){ const d=h('div','card-note'); d.style.borderColor='var(--s6)'; d.textContent='['+id+'] failed to load: '+(e&&e.message?e.message:e); m.appendChild(d); } if(window.console) console.error('[RCT '+id+']',e); }
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mountAll); else mountAll();
+window.RCT=RCT;
+})();
+</script>

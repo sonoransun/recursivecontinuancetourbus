@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Same Recurrence Everywhere - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a class="on" href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a></p>
+<h1 id="appendix-f-the-same-recurrence-everywhere">Appendix F — The Same Recurrence Everywhere</h1>
+<blockquote>One three-term recurrence — the continuant that produces every continued-fraction convergent — turns out to be the secular determinant of a molecule, the spectrum of an electron in a magnetic field, the impedance of a circuit, the stability of a control system, and the best rational summary of a divergent series. The golden ratio, meanwhile, is quietly optimizing sunflowers, quasicrystals, and planetary orbits. This appendix follows the same object across the sciences, and computes it in each.</blockquote>
+<p>The Express Line (Appendix D) and the Web of Ideas (Appendix E) argued that recursion and continued fractions are one idea in many costumes. Here we take the argument into the laboratory. Every claim below is <em>computed</em> by <code>python -m tourbus crossdomain</code> — the same exact engine, wearing lab coats.</p>
+<h2 id="the-one-recurrence">The one recurrence</h2>
+<p>Recall the <strong>continuant</strong> from the Express Line: <code>K(a₁,…,aₙ)</code> obeys the three-term recurrence <code>K_k = a_k·K_{k-1} + K_{k-2}</code>, and it is exactly the numerator of a continued-fraction convergent. Change the sign to <code>K_k = x·K_{k-1} − K_{k-2}</code> and you have the characteristic polynomial of a tridiagonal matrix. That single switch is the seam along which continued fractions stitch themselves into physics, chemistry, and engineering — because <em>tridiagonal</em> is what you get whenever a system is a chain of nearest-neighbour couplings, and almost everything, locally, is.</p>
+<h2 id="chemistry-a-molecule-s-energy-levels-are-a-continuant">Chemistry — a molecule&#x27;s energy levels are a continuant</h2>
+<p>In simple <strong>Hückel theory</strong>, the π-electron energy levels of a conjugated molecule are <code>E = α + xβ</code>, where the <code>x</code> are eigenvalues of the molecular graph. For a linear polyene (a chain of carbons) the secular determinant is <em>literally the continuant</em> with the minus sign, so the levels are <code>x_k = 2cos(kπ/(n+1))</code>. Two payoffs fall out for free. <strong>Benzene</strong> (a six-carbon ring) has energy levels <code>2, 1, 1, −1, −1, −2</code> in units of β — closed-shell, large gap, <strong>aromatic</strong> — and sweeping the ring size reproduces Hückel&#x27;s <strong>4n+2 rule</strong> exactly. And <strong>butadiene</strong> (four carbons) has levels <code>±φ</code> and <code>±1/φ</code>: the golden ratio, sitting in a molecule. (<code>demo huckel</code>.)</p>
+<pre><code>$ python -m tourbus demo huckel
+Huckel MO energies of the C6 annulene (units of beta):
+  [2.0, 1.0, 1.0, -1.0, -1.0, -2.0]
+  verdict: aromatic (Huckel 4n+2 rule)</code></pre>
+<h2 id="condensed-matter-a-solid-s-density-of-states-is-a-continued-fraction">Condensed matter — a solid&#x27;s density of states is a continued fraction</h2>
+<p>The <strong>recursion method</strong> (Haydock; Lanczos) computes the local Green&#x27;s function of a tight-binding solid or molecule as</p>
+<p>G₀₀(z) = 1/(z − a₀ − b₁²/(z − a₁ − b₂²/(z − a₂ − …))),</p>
+<p>a continued fraction whose coefficients come from a three-term recursion, and whose imaginary part is the local density of states. A molecule&#x27;s electronic structure, in other words, <em>is</em> a continued fraction. On the <strong>Bethe lattice</strong> — a self-similar tree — the continued fraction closes on itself into a quadratic, giving the density of states in exact closed form. (<code>demo dos</code>.)</p>
+<pre><code>$ python -m tourbus demo dos
+Green&#x27;s function of a 4-site chain as a continued fraction:
+  Lanczos a = [&#x27;0&#x27;, &#x27;0&#x27;, &#x27;0&#x27;, &#x27;0&#x27;]
+          b^2 = [&#x27;1&#x27;, &#x27;1&#x27;, &#x27;1&#x27;]
+  eigenvalue poles = [-1.618, -0.618, 0.618, 1.618]</code></pre>
+<h2 id="spectra-the-hofstadter-butterfly-is-drawn-with-continuants">Spectra — the Hofstadter butterfly is drawn with continuants</h2>
+<p>Put an electron on a lattice in a magnetic field and its allowed energies, plotted against the magnetic flux, form the self-similar fractal called the <strong>Hofstadter butterfly</strong>. To compute the spectrum for a rational flux <code>p/q</code> you count eigenvalues with the <strong>Sturm sequence</strong> <code>d_k = (a_k−E)d_{k-1} − d_{k-2}</code> — which is the continuant again. The butterfly&#x27;s gaps are labelled by the <strong>continued-fraction convergents</strong> of the flux; at irrational flux the spectrum is a Cantor set. The number-theory of continued fractions is drawn directly onto a material&#x27;s energy levels. (The band spectrum is symmetric about <code>E = 0</code> for every flux; for even <code>q</code> the two central bands kiss at a Dirac point.) (<code>demo butterfly</code>.)</p>
+<pre><code>$ python -m tourbus demo butterfly
+Hofstadter butterfly: bands vs magnetic flux p/q
+ flux  bands
+ ----  -----
+ 1/2       1
+ 1/3       3
+ 2/3       3
+ 1/4       3
+ 3/4       3
+ 1/5       5
+ 2/5       5
+ 3/5       5
+ 4/5       5
+ 1/6       5
+ 5/6       5
+ 1/7       7
+ 2/7       7
+ 3/7       7
+ 4/7       7
+ 5/7       7
+ 6/7       7
+  flux 1/2: Delta(E)=E^2-4, edges +/-2sqrt2; the spectrum is fractal.</code></pre>
+<h2 id="engineering-ladders-and-stability">Engineering — ladders and stability</h2>
+<p>Two staples of electrical and control engineering are continued fractions in disguise. The impedance of a <strong>Cauer LC ladder</strong> is a continued fraction in the frequency variable, so expanding a rational impedance as a continued fraction <em>synthesizes the circuit</em> — the partial quotients are the component values. (<code>demo cauer</code>.)</p>
+<pre><code>$ python -m tourbus demo cauer
+Cauer ladder synthesis of Z(s) = (24s^3+6s)/(12s^2+1):
+  element values = [&#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;]  (L1, C1, L2, ...)</code></pre>
+<p>And a control system is <strong>stable</strong> (Routh–Hurwitz) precisely when the continued fraction of its characteristic polynomial&#x27;s even and odd parts has <em>all positive quotients</em> — the polynomial echo of a real number&#x27;s regular continued fraction. (<code>demo routh</code>.)</p>
+<h2 id="analysis-pad-resummation">Analysis — Padé resummation</h2>
+<p>The convergents of Stop 3 are the best rational approximations of a <em>number</em>. Do the same to a <em>power series</em> and you get the <strong>Padé approximants</strong>: the C-fraction of a series has convergents that are the Padé table, and truncating it resums even a divergent series into a rational function that converges far better than the series ever did. The <code>[1/1]</code> Padé of <code>eˣ</code> is <code>(2+x)/(2−x)</code>. (<code>demo pade</code>.)</p>
+<h2 id="nonlinear-dynamics-mode-locking-and-the-devil-s-staircase">Nonlinear dynamics — mode-locking and the devil&#x27;s staircase</h2>
+<p>Drive an oscillator and its rhythm <strong>locks</strong> to rational ratios of the drive over whole intervals — Arnold tongues, organized by the <strong>Stern–Brocot/Farey</strong> mediants of Stop 8. The locked winding number, plotted against the drive, is a <strong>devil&#x27;s staircase</strong>: constant on the rationals, and shaped by Minkowski&#x27;s question-mark function. Push the same period-doubling logic in the logistic map and you meet the <strong>Feigenbaum constant</strong> δ ≈ 4.669 — a renormalization rate, the exact cousin of the Gauss–Kuzmin–Wirsing constant we computed on the Express Line. (<code>demo staircase</code>.)</p>
+<h2 id="biology-materials-the-golden-thread">Biology &amp; materials — the golden thread</h2>
+<p>The second thread is a single number. Plants place each seed at the <strong>golden angle</strong>, <code>360°·(2−φ) ≈ 137.5°</code>, because φ is the <em>most badly approximable</em> number (Stop 4) — so seeds never fall into radial spokes, and the visible spiral counts are consecutive <strong>Fibonacci numbers</strong>, the denominators of φ&#x27;s convergents. (<code>demo phyllotaxis</code>.)</p>
+<pre><code>$ python -m tourbus demo phyllotaxis
+Phyllotaxis: the golden angle in plants
+  golden angle = 137.50776 degrees
+  n=200 seeds -&gt; parastichy spirals (21, 34) (consecutive Fibonacci)
+  n=400 seeds -&gt; parastichy spirals (21, 34) (consecutive Fibonacci)
+  n=600 seeds -&gt; parastichy spirals (34, 55) (consecutive Fibonacci)</code></pre>
+<p>The same golden ratio inflates the <strong>Fibonacci quasicrystal</strong>, whose sharpest diffraction peaks are indexed, once again, by φ&#x27;s convergents. (<code>demo quasicrystal</code>.)</p>
+<h2 id="the-frontier-ap-ry-s-3">The frontier — Apéry&#x27;s ζ(3)</h2>
+<p>And at the edge of the known: Apéry proved <code>ζ(3) = Σ 1/n³</code> irrational with a recurrence whose two solutions are the convergents of a continued fraction, racing to ζ(3) faster than the denominators can keep up. Recursion and continued fractions, meeting at a place mathematics still cannot fully map — whether ζ(5) is irrational remains open. (<code>demo apery</code>.)</p>
+<h2 id="the-throughline">The throughline</h2>
+<p>A molecule, a magnetic spectrum, a circuit, a control loop, a resummed series, a mode-locked rhythm, a sunflower, a quasicrystal, an irrationality proof — all the same recurrence, the same nested self-application. Continued fractions are not a corner of number theory; they are the shape that any <em>chain of couplings</em> takes when you write it down. The tour bus turns out to run everywhere.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>R. Haydock, &quot;The recursive solution of the Schrödinger equation,&quot; <em>Solid State Physics</em> 35 (1980) — Green&#x27;s functions as continued fractions.</li><li>D. Hofstadter, <em>Phys. Rev. B</em> 14 (1976); Avila &amp; Jitomirskaya, <em>Ann. of Math.</em> (2009) — the butterfly and the Ten Martini Problem.</li><li>W. Cauer, <em>Synthesis of Linear Communication Networks</em> (1958) — ladder networks.</li><li>G. A. Baker &amp; P. Graves-Morris, <em>Padé Approximants</em> (1996).</li><li>P. Prusinkiewicz &amp; A. Lindenmayer, <em>The Algorithmic Beauty of Plants</em> (1990) — phyllotaxis.</li><li>A. van der Poorten, &quot;A proof that Euler missed… Apéry&#x27;s proof of the irrationality of ζ(3),&quot; <em>Math. Intelligencer</em> 1 (1979).</li></ul>
+<hr>
+<p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a> · <a href="appendix-d-frontier.html">The Express Line</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hall of Mirrors - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a class="on" href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="12-tower.html">← Stop 12 — The Tower</a> · <a href="index.html">Route map</a> · <a href="14-souvenir-shop.html">Stop 14 — The Souvenir Shop →</a></p>
+<h1 id="stop-13-the-hall-of-mirrors">Stop 13 — The Hall of Mirrors</h1>
+<blockquote>Recursion you can see: fractals are the fixed points of &quot;do this smaller, several times,&quot; and their dimension is a fraction.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>Recursion has been algebraic (Euclid), analytic (convergents), and logical (Ackermann). In the hall of mirrors it becomes <strong>geometric</strong>. A fractal is the picture of a recursive definition — a shape built by the rule &quot;replace me with several smaller copies of myself&quot; — and it turns out to be a <em>fixed point</em> in exactly the sense of <code>φ = 1 + 1/φ</code> (Stop 4) and the periodic surds (Stop 6). The mirrors reflect the whole tour back at itself.</p>
+<h3 id="self-similarity-and-dimension">Self-similarity and dimension</h3>
+<p>The defining feature is <strong>self-similarity</strong>: zoom into a fractal and you see a copy of the whole. Quantify this with the <strong>similarity dimension</strong>. If a shape is made of <code>N</code> copies of itself each scaled down by a factor <code>r &lt; 1</code>, its dimension is</p>
+<pre><code>d = ln N / ln(1/r).</code></pre>
+<p>For an ordinary line, halving it gives <code>N = 2</code> copies at <code>r = 1/2</code>, so <code>d = ln 2 / ln 2 = 1</code> — a line is one-dimensional, as it should be. A filled square gives <code>N = 4</code>, <code>r = 1/2</code>, <code>d = ln 4 / ln 2 = 2</code>. The surprise is what happens between the integers:</p>
+<ul><li><strong>Cantor set</strong> — remove the middle third, repeat: <code>N = 2</code> copies at <code>r = 1/3</code>, so <code>d = ln 2 / ln 3 ≈ 0.6309</code>. More than a point, less than a line.</li><li><strong>Koch curve</strong> — replace each segment with four at a third the length: <code>N = 4</code>, <code>r = 1/3</code>, <code>d = ln 4 / ln 3 ≈ 1.2619</code>. A curve of <em>infinite length</em> bounding a finite area.</li><li><strong>Sierpiński triangle</strong> — three half-size copies: <code>N = 3</code>, <code>r = 1/2</code>, <code>d = ln 3 / ln 2 ≈ 1.5850</code>. More than a curve, less than a region.</li></ul>
+<p>These non-integer dimensions are the signature of a fractal: the object is genuinely &quot;rougher&quot; than a smooth curve but &quot;thinner&quot; than a solid, and the fraction <code>d</code> measures exactly where it sits.</p>
+<h3 id="space-filling-curves">Space-filling curves</h3>
+<p>Push the branching further and a curve can fill an entire region — dimension exactly <code>2</code>. The <strong>dragon curve</strong> and the <strong>Hilbert curve</strong> are the tour&#x27;s examples. The dragon (fold a strip of paper in half repeatedly and unfold each crease to a right angle) tiles the plane; the Hilbert curve visits every point of a square in the limit, which is why it is used to lay out data so that nearby points in one dimension stay nearby in two (database indexing, image dithering). Both have similarity dimension <code>2</code> — a one-dimensional path that is, in the limit, two-dimensional. Peano&#x27;s discovery of such curves in 1890 was a genuine shock to the intuition that a line and a plane are different sizes.</p>
+<h3 id="hutchinson-a-fractal-is-a-fixed-point">Hutchinson: a fractal is a fixed point</h3>
+<p>Why does the recursion converge to a definite shape at all? <strong>John Hutchinson (1981)</strong> gave the clean answer. An <strong>iterated function system (IFS)</strong> is a finite set of contracting maps <code>f₁, …, fₖ</code> (each shrinking distances). Define an operator on shapes: <code>F(S) = f₁(S) ∪ … ∪ fₖ(S)</code> — &quot;replace <code>S</code> by the union of its shrunk copies.&quot; Then:</p>
+<blockquote>Every contracting IFS has a <strong>unique</strong> non-empty compact set <code>A</code> with <code>F(A) = A</code>. Starting from <em>any</em> shape and applying <code>F</code> repeatedly converges to this <code>A</code>.</blockquote>
+<p><code>A</code> is the <strong>attractor</strong>, and it <em>is</em> the fractal. A fractal is literally a fixed point <code>F(A) = A</code> of the &quot;make smaller copies&quot; operator — the geometric twin of <code>φ = 1 + 1/φ</code>. This is why you can start the dragon from a single line segment or a scribble and still land on the same dragon: the fixed point does not care where you begin. (The convergence is guaranteed by the Banach fixed-point theorem, the same tool that underlies Newton&#x27;s method and much of analysis.)</p>
+<h3 id="the-bridge-back-to-continued-fractions">The bridge back to continued fractions</h3>
+<p>Here is the connection that makes this stop belong on a continued-fraction tour. A <strong>purely periodic continued fraction</strong> <code>x = [(a₁, …, aₖ)]</code> satisfies <code>x = M(x)</code> where <code>M</code> is the <strong>Möbius transformation</strong> built from the period&#x27;s convergents — a homographic map of exactly the kind Gosper&#x27;s machine used at Stop 11. In other words, a quadratic surd is a <strong>fixed point of a Möbius map</strong>, just as a fractal is a fixed point of an IFS. The reduced surds of Galois (Stop 6) are the &quot;self-similar points&quot; of the continued-fraction world: the numbers whose expansion looks the same after you strip off a period, exactly as the Koch curve looks the same after you zoom in by three. The hall of mirrors and the loop road are the same phenomenon in two different spaces — geometry and arithmetic — both governed by the single principle that a contraction has one fixed point.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Generate the dragon curve to depth 10. The <code>tourbus</code> fractal engine emits an SVG (drawn in the web widget); the demo reports its size, which grows with the recursion depth as the curve accumulates its <code>2¹⁰</code> segments:</p>
+<pre><code>$ python -m tourbus demo dragon --depth 10
+dragon(depth=10) -&gt; 8155 bytes of SVG
+  (open site/index.html for the drawn version)</code></pre>
+<p>The other curves are generated the same way. The Koch curve and Hilbert curve each expand by their own branching factor as depth increases — Koch quadrupling its segment count per level, Hilbert quadrupling its cells:</p>
+<pre><code>$ python -m tourbus demo koch --depth 4
+koch(depth=4) -&gt; 3421 bytes of SVG
+  (open site/index.html for the drawn version)</code></pre>
+<pre><code>$ python -m tourbus demo hilbert --depth 5
+hilbert(depth=5) -&gt; 8763 bytes of SVG
+  (open site/index.html for the drawn version)</code></pre>
+<pre><code>$ python -m tourbus demo sierpinski --depth 6
+sierpinski_arrowhead(depth=6) -&gt; 9753 bytes of SVG
+  (open site/index.html for the drawn version)</code></pre>
+<p>Each SVG is the <em>n</em>-th application of the IFS operator <code>F</code> to a starting shape — a finite snapshot of the infinite fixed point <code>A</code>. Increase <code>--depth</code> and you step closer to the attractor; the byte counts climb because each level multiplies the number of segments by the branching factor <code>N</code>. Open the web widget to watch these draw themselves stroke by recursive stroke.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Compute the similarity dimension of the Sierpiński carpet (a square cut into a 3×3 grid with the centre removed, repeated). <details><summary>Hint</summary><code>N = 8</code> copies at <code>r = 1/3</code>, so <code>d = ln 8 / ln 3 ≈ 1.8928</code>.</details></li></ol>
+<ol><li><strong>(★)</strong> Explain why the Koch curve has infinite length but bounds a finite area. <details><summary>Hint</summary>Each step multiplies length by <code>4/3 &gt; 1</code> (diverges) while the enclosed area is a convergent geometric series.</details></li></ol>
+<ol><li><strong>(★★)</strong> The dragon and Hilbert curves both have dimension <code>2</code>. Verify this for the Hilbert curve from its <code>N</code> and <code>r</code>. <details><summary>Hint</summary><code>N = 4</code> copies at <code>r = 1/2</code>, so <code>d = ln 4 / ln 2 = 2</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> State the IFS (the list of contracting maps) whose attractor is the Cantor set, and confirm it has two maps each contracting by <code>1/3</code>. <details><summary>Hint</summary><code>f₁(x) = x/3</code> and <code>f₂(x) = x/3 + 2/3</code>; their union operator fixes the Cantor set.</details></li></ol>
+<ol><li><strong>(★★★)</strong> For the purely periodic surd <code>√2 − 1 = [(2)]</code>, find the Möbius map <code>M</code> with <code>M(x) = x</code> and verify the surd is its attracting fixed point. <details><summary>Hint</summary>One period gives <code>x = 1/(2 + x)</code>, i.e. <code>M(x) = 1/(2+x)</code>; solve <code>x² + 2x − 1 = 0</code> to get <code>x = √2 − 1</code>.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Hall of Mirrors</strong> widget: <a href="explore.html#stop-13-mirrors"><code>site/index.html#stop-13-mirrors</code></a>. Drag the depth slider and watch the dragon, Koch, Sierpiński, and Hilbert curves converge on their fixed-point attractors one recursive level at a time.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>K. Falconer, <em>Fractal Geometry: Mathematical Foundations and Applications</em> — the standard text, including similarity dimension and IFS. See Appendix C.</li><li>J. Hutchinson, &quot;Fractals and Self Similarity,&quot; <em>Indiana Univ. Math. J.</em> (1981) — the fixed-point theorem for IFS.</li><li>M. Barnsley, <em>Fractals Everywhere</em>, for the IFS / attractor viewpoint.</li><li>C. Series, &quot;The Modular Surface and Continued Fractions,&quot; for the Möbius / surd connection; Appendix C.</li></ul>
+<p class="chapter-nav"><a href="12-tower.html">← Stop 12 — The Tower</a> · <a href="index.html">Route map</a> · <a href="14-souvenir-shop.html">Stop 14 — The Souvenir Shop →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

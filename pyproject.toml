@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tourbus"
+version = "1.0.0"
+description = "Recursive Continuance Tour Bus — a guided tour of recursion and continued fractions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Recursive Continuance Tour Bus" }]
+keywords = ["continued-fractions", "recursion", "number-theory", "mathematics", "education"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+# The core is deliberately zero-dependency: standard library only.
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7.0", "hypothesis>=6.0"]
+
+[project.scripts]
+tourbus = "tourbus.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/example/recursivecontinuancetourbus"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: long-running or statistical tests (deselected by default)",
+    "statistical: sampling-based checks with loose tolerances",
+]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+tourbus = ["py.typed"]

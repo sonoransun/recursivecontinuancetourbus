@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Unfolding Road - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a class="on" href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="01-depot.html">← Stop 1 — The Depot</a> · <a href="index.html">Route map</a> · <a href="03-engine-room.html">Stop 3 — The Engine Room →</a></p>
+<h1 id="stop-2-the-unfolding-road">Stop 2 — The Unfolding Road</h1>
+<blockquote>The road ahead is a fraction that never quite closes: the continued fraction, Euclid&#x27;s algorithm let loose on the real numbers.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>Leaving the depot, the algorithm we just watched reduce two integers now runs on a single real number, and the quotients it produces unfold into a road called a <strong>continued fraction</strong>. Where an ordinary decimal writes a number as a sum of tenths, hundredths, and thousandths — a base chosen by our ten fingers — a continued fraction writes it as a tower of nested reciprocals, a representation the number chooses for itself.</p>
+<h3 id="notation">Notation</h3>
+<p>A <strong>simple continued fraction</strong> is written</p>
+<pre><code>[a₀; a₁, a₂, a₃, …] = a₀ + 1/(a₁ + 1/(a₂ + 1/(a₃ + …))).</code></pre>
+<p>The numbers <code>aₙ</code> are the <strong>partial quotients</strong>. By convention <code>a₀</code> is an integer (possibly negative or zero), and every later <code>aₙ</code> is a positive integer, <code>aₙ ≥ 1</code>. The semicolon after <code>a₀</code> marks the boundary between the integer part and the fractional tail; the commas separate the rest. This tour writes finite expansions as <code>[a₀; a₁, …, aₙ]</code> and periodic ones — coming at Stop 6 — with a parenthesised repeating block, as in <code>[1; (2)]</code> for <code>√2</code>.</p>
+<h3 id="how-the-road-is-paved">How the road is paved</h3>
+<p>To expand any real <code>x</code>, take its floor and invert the leftover:</p>
+<ol><li>Set <code>a₀ = ⌊x⌋</code>. If <code>x = a₀</code>, stop.</li><li>Otherwise let <code>x₁ = 1/(x − a₀)</code> (a number greater than 1) and repeat with <code>x₁</code>.</li></ol>
+<p>This is Euclid&#x27;s algorithm again. If <code>x = p/q</code> is rational, then <code>a₀ = ⌊p/q⌋</code> is Euclid&#x27;s first quotient, <code>x − a₀ = (p mod q)/q</code>, and inverting gives <code>q/(p mod q)</code> — exactly the next division Euclid would perform. <strong>The partial quotients of a rational <code>p/q</code> are precisely the quotients Euclid produces while computing <code>gcd(p, q).</code></strong> That is why Stop 1 kept the quotients: they were the road all along.</p>
+<h3 id="rational-if-and-only-if-finite">Rational if and only if finite</h3>
+<p>Because Euclid&#x27;s algorithm terminates on integers, <strong>a number is rational exactly when its continued fraction is finite</strong>, and irrational exactly when it is infinite. A finite expansion halts when some <code>x − aₙ</code> hits zero; an irrational never gives a zero remainder, so the road runs forever. This is a cleaner rational/irrational test than decimals offer: <code>1/3 = 0.333…</code> looks infinite in base ten but is just <code>[0; 3]</code>, while <code>√2</code> is genuinely unending in both.</p>
+<h3 id="the-two-faces-of-a-rational">The two faces of a rational</h3>
+<p>There is one small ambiguity. Every rational has <strong>exactly two</strong> finite continued-fraction representations, related by splitting off the last term:</p>
+<pre><code>[a₀; a₁, …, aₙ]  with aₙ ≥ 2   equals   [a₀; a₁, …, aₙ − 1, 1].</code></pre>
+<p>For example <code>[4; 2, 6, 7] = [4; 2, 6, 6, 1]</code>, because <code>7 = 6 + 1/1</code>. To make the expansion unique we adopt the standard convention that the last partial quotient is at least <code>2</code> (equivalently, an expansion of length greater than one never ends in <code>1</code>). This tie has real consequences at Stop 8, where the two forms are the two ways to walk the last step of the Stern–Brocot tree, and at Stop 3, where they explain why convergents come in over-and-under pairs.</p>
+<h3 id="why-bother">Why bother?</h3>
+<p>Decimals are convenient for arithmetic but terrible at revealing a number&#x27;s approximation-theoretic character. Continued fractions are the opposite: awkward to add (Stop 11 is entirely about fixing that) but supreme at answering &quot;what is the best simple fraction close to <code>x</code>?&quot; Truncating a decimal gives you the best fraction with a <em>power-of-ten</em> denominator; truncating a continued fraction gives you the best fraction with <em>any</em> denominator that small — the <strong>convergents</strong> of Stop 3. The road is unfolding toward the best possible rational approximations, and it does so with denominators far smaller than decimals would demand.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Expand the rational <code>415/93</code>. The partial quotients are <code>4, 2, 6, 7</code> — and if you run <code>demo euclid 415 93</code> you will see those same four numbers fall out of the division ladder:</p>
+<pre><code>$ python -m tourbus demo cf 415/93
+continued fraction of 415/93:
+  [4; 2, 6, 7]
+
+ n  a_n  p/q            value      error
+ -  ---  ------  ------------  ---------
+ 0    4  4/1     4.0000000000  +4.62e-01
+ 1    2  9/2     4.5000000000  -3.76e-02
+ 2    6  58/13   4.4615384615  +8.27e-04
+ 3    7  415/93  4.4623655914  +0.00e+00</code></pre>
+<p>The final convergent equals <code>415/93</code> exactly and the error hits zero — the hallmark of a rational&#x27;s finite road. Compare Euclid on the same pair, whose quotients match term for term:</p>
+<pre><code>$ python -m tourbus demo euclid 415 93
+  415 = 4 x 93 + 43
+  93 = 2 x 43 + 7
+  43 = 6 x 7 + 1
+  7 = 7 x 1 + 0
+  continued fraction = [4; 2, 6, 7]</code></pre>
+<p>The tool always reduces to lowest terms first, so an unreduced fraction and its reduced form share a road. Feeding it <code>1071/462</code>, which reduces to <code>51/22</code>, gives the depot&#x27;s quotients back again:</p>
+<pre><code>$ python -m tourbus demo cf 1071/462
+continued fraction of 51/22:
+  [2; 3, 7]
+
+ n  a_n  p/q           value      error
+ -  ---  -----  ------------  ---------
+ 0    2  2/1    2.0000000000  +3.18e-01
+ 1    3  7/3    2.3333333333  -1.52e-02
+ 2    7  51/22  2.3181818182  +0.00e+00</code></pre>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Expand <code>[3; 4, 12, 4]</code> back into an ordinary fraction by hand, then check with <code>demo cf</code> on your answer. <details><summary>Hint</summary>Work inside-out: <code>4 + 1/4 = 17/4</code>, then <code>12 + 4/17 = 208/17</code>, and so on.</details></li></ol>
+<ol><li><strong>(★)</strong> Write both continued-fraction representations of <code>9/7</code>. <details><summary>Hint</summary>One ends in a term ≥ 2; split that last term into <code>(term − 1) + 1/1</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Show that <code>[0; a₁, a₂, …]</code> is the reciprocal of <code>[a₁; a₂, …]</code> whenever the latter exceeds 1. What does this say about <code>demo cf 93/415</code>? <details><summary>Hint</summary>Prepending a <code>0</code> and inverting are the same operation; the road of <code>93/415</code> is <code>415/93</code>&#x27;s road with a <code>0</code> bolted on the front.</details></li></ol>
+<ol><li><strong>(★★)</strong> Explain why no continued fraction has a partial quotient of <code>0</code> after the first term. <details><summary>Hint</summary>At each step <code>x − aₙ</code> lies in <code>[0, 1)</code>, so its reciprocal is <code>&gt; 1</code>, forcing the next floor to be at least 1.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Prove that the continued fraction of a rational is finite by arguing that the sequence of remainders is strictly decreasing in the integers. <details><summary>Hint</summary>Each <code>xₙ = 1/(xₙ₋₁ − aₙ₋₁)</code> has a denominator that is a strictly smaller positive integer than the previous one; a decreasing sequence of positive integers cannot be infinite.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Unfolding Road</strong> widget: <a href="explore.html#stop-2-road"><code>site/index.html#stop-2-road</code></a>. Type any rational or a named constant and watch the fraction unfold one nested reciprocal at a time, with each partial quotient peeled off as it is computed.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Khinchin, <em>Continued Fractions</em>, §§1–3 for the definition and the rational/irrational dichotomy. See Appendix C.</li><li>Hardy &amp; Wright, <em>An Introduction to the Theory of Numbers</em>, Chapter X, §§10.1–10.5.</li><li>C. D. Olds, <em>Continued Fractions</em> (MAA New Mathematical Library), an approachable book-length introduction; Appendix C.</li></ul>
+<p class="chapter-nav"><a href="01-depot.html">← Stop 1 — The Depot</a> · <a href="index.html">Route map</a> · <a href="03-engine-room.html">Stop 3 — The Engine Room →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

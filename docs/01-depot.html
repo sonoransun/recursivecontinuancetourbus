@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Depot - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a class="on" href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="index.html">Route map</a> · <a href="02-unfolding-road.html">Stop 2 — The Unfolding Road →</a></p>
+<h1 id="stop-1-the-depot">Stop 1 — The Depot</h1>
+<blockquote>Before the bus can roll, we visit the garage where the oldest algorithm still turns over: Euclid&#x27;s method for the greatest common divisor.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>Every tour needs a depot — the place the vehicles are built and where the engine that powers everything gets its first turn. Ours is <strong>Euclid&#x27;s algorithm</strong>, written down around 300 BC in Book VII of the <em>Elements</em> and arguably the oldest algorithm still in everyday use. It is also the seed of everything on this tour: continued fractions are Euclid&#x27;s algorithm run on real numbers, and continued fractions are how we will meet recursion in its purest form.</p>
+<p>The problem is to find the <strong>greatest common divisor</strong> <code>gcd(a, b)</code> of two non-negative integers — the largest integer dividing both. The algorithm rests on a single self-referential observation:</p>
+<ul><li><code>gcd(a, 0) = a</code> (the base case), and</li><li><code>gcd(a, b) = gcd(b, a mod b)</code> (the recursive step).</li></ul>
+<p>The second rule is true because any common divisor of <code>a</code> and <code>b</code> also divides <code>a − qb = a mod b</code>, and vice versa, so the <em>set</em> of common divisors — and hence its maximum — is unchanged when we replace the pair <code>(a, b)</code> by the smaller pair <code>(b, a mod b)</code>. Because the second coordinate strictly decreases and stays non-negative, the recursion must terminate: it cannot descend below zero forever. When it hits <code>0</code>, the other coordinate is the answer. This is recursion with a guaranteed base case, the template for every well-founded recursion we will meet later.</p>
+<p>Concretely, we repeatedly divide with remainder. To compute <code>gcd(1071, 462)</code>:</p>
+<pre><code>1071 = 2 × 462 + 147
+ 462 = 3 × 147 +  21
+ 147 = 7 ×  21 +   0   ← remainder 0, so gcd = 21</code></pre>
+<p>The <strong>quotients</strong> <code>2, 3, 7</code> are worth keeping. They are exactly the partial quotients of the continued fraction of <code>1071/462</code>, which is how the depot connects to Stop 2. Euclid throws the quotients away and keeps the last nonzero remainder; continued fractions throw the remainder away and keep the quotients. Same machine, two products.</p>
+<h3 id="b-zout-and-the-extended-algorithm">Bézout and the extended algorithm</h3>
+<p>Euclid&#x27;s algorithm does more than report a number. <strong>Bézout&#x27;s identity</strong> says that for any integers <code>a, b</code> there exist integers <code>x, y</code> with</p>
+<pre><code>a·x + b·y = gcd(a, b).</code></pre>
+<p>The <em>extended</em> Euclidean algorithm finds <code>x</code> and <code>y</code> by carrying the coefficients backward through the same division steps (or forward, as a recurrence on the quotients). This is the workhorse behind modular inverses: when <code>gcd(a, m) = 1</code>, the coefficient <code>x</code> is precisely <code>a⁻¹ mod m</code>, the computation that makes RSA decryption — and, at Stop 14, RSA <em>breaking</em> — possible.</p>
+<h3 id="how-fast-lam-s-theorem">How fast? Lamé&#x27;s theorem</h3>
+<p>How many division steps can the algorithm take? The answer, proved by <strong>Gabriel Lamé in 1844</strong> in what is often called the first theorem of computational complexity, is strikingly tidy:</p>
+<blockquote>The number of division steps needed to compute <code>gcd(a, b)</code> with <code>a &gt; b</code> is at most <strong>five times the number of decimal digits of <code>b</code></strong>.</blockquote>
+<p>So the running time is linear in the number of digits — the algorithm is fast precisely because each step shrinks the numbers geometrically. The worst case, the inputs that force the most steps for their size, are <strong>consecutive Fibonacci numbers</strong>. The smallest pair requiring <code>n</code> division steps is <code>(F₍ₙ₊₂₎, F₍ₙ₊₁₎)</code>. Fibonacci numbers are the slowest to reduce because at every step the quotient is as small as it can be — exactly <code>1</code> — so the algorithm peels off the least possible each time. That is not a coincidence: the golden ratio <code>φ</code> at Stop 4 is <code>[1; 1, 1, …]</code>, the continued fraction whose every quotient is <code>1</code>, and it is the &quot;most irrational&quot; number for the very same reason. The depot and the golden milestone are two views of one fact.</p>
+<p>The Fibonacci link also explains the constant <code>5</code>: since <code>F₍ₙ₊₁₎ ≈ φⁿ/√5</code> and <code>log₁₀ φ ≈ 0.208 ≈ 1/4.785</code>, the digit count grows like <code>n/4.785</code>, giving the factor just under five.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Trace the algorithm on <code>1071</code> and <code>462</code>. The tool prints each division and then the continued fraction assembled from the quotients:</p>
+<pre><code>$ python -m tourbus demo euclid 1071 462
+  1071 = 2 x 462 + 147
+  462 = 3 x 147 + 21
+  147 = 7 x 21 + 0
+  continued fraction = [2; 3, 7]</code></pre>
+<p>Now feed it Lamé&#x27;s worst case, two consecutive Fibonacci numbers, <code>F₁₀ = 55</code> and <code>F₉ = 34</code>. Every quotient collapses to <code>1</code> (until the last), so the algorithm grinds through the maximum number of steps for numbers this small:</p>
+<pre><code>$ python -m tourbus demo euclid 55 34
+  55 = 1 x 34 + 21
+  34 = 1 x 21 + 13
+  21 = 1 x 13 + 8
+  13 = 1 x 8 + 5
+  8 = 1 x 5 + 3
+  5 = 1 x 3 + 2
+  3 = 1 x 2 + 1
+  2 = 2 x 1 + 0
+  continued fraction = [1; 1, 1, 1, 1, 1, 1, 2]</code></pre>
+<p>Push it further to <code>F₂₀ = 6765</code> and <code>F₁₉ = 4181</code> and you get seventeen steps of nothing but <code>1</code>s — the signature of the slowest possible reduction:</p>
+<pre><code>$ python -m tourbus demo euclid 6765 4181
+  6765 = 1 x 4181 + 2584
+  4181 = 1 x 2584 + 1597
+  2584 = 1 x 1597 + 987
+  1597 = 1 x 987 + 610
+  987 = 1 x 610 + 377
+  610 = 1 x 377 + 233
+  377 = 1 x 233 + 144
+  233 = 1 x 144 + 89
+  144 = 1 x 89 + 55
+  89 = 1 x 55 + 34
+  55 = 1 x 34 + 21
+  34 = 1 x 21 + 13
+  21 = 1 x 13 + 8
+  13 = 1 x 8 + 5
+  8 = 1 x 5 + 3
+  5 = 1 x 3 + 2
+  3 = 1 x 2 + 1
+  2 = 2 x 1 + 0
+  continued fraction = [1; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]</code></pre>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Run <code>demo euclid 1071 462</code> and confirm by hand that <code>2·? + 3·? + …</code> reconstructs the fractions. What is <code>gcd(1071, 462)</code>, and what is <code>1071/462</code> in lowest terms? <details><summary>Hint</summary>The gcd is the last nonzero remainder, 21. Divide numerator and denominator by it.</details></li></ol>
+<ol><li><strong>(★)</strong> The pair <code>(55, 34)</code> took 8 steps. Predict how many steps <code>(89, 55)</code> will take, then check with the demo. <details><summary>Hint</summary><code>89 = F₁₁</code> and <code>55 = F₁₀</code>. Lamé&#x27;s worst case for <code>n</code> steps is <code>(F₍ₙ₊₂₎, F₍ₙ₊₁₎)</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Using Bézout&#x27;s identity, find integers <code>x, y</code> with <code>1071·x + 462·y = 21</code>. Verify your answer. <details><summary>Hint</summary>Work the three division rows backward, substituting each remainder in terms of the previous two.</details></li></ol>
+<ol><li><strong>(★★)</strong> Prove that <code>gcd(F₍ₙ₊₁₎, Fₙ) = 1</code> for all <code>n ≥ 1</code> directly from the algorithm. <details><summary>Hint</summary><code>F₍ₙ₊₁₎ mod Fₙ = F₍ₙ₋₁₎</code>, so the algorithm walks straight down the Fibonacci sequence to <code>gcd(F₂, F₁) = gcd(1, 1)</code>.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Show that for <code>a &gt; b ≥ 1</code>, the number of division steps is at most <code>log_φ(b√5)</code>, and deduce Lamé&#x27;s factor of five. <details><summary>Hint</summary>If the algorithm takes <code>k</code> steps then <code>b ≥ F₍ₖ₊₁₎ ≈ φᵏ/√5</code>. Take logs base 10 and use <code>log₁₀ φ ≈ 0.209</code>.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the interactive <strong>Depot</strong> widget: <a href="explore.html#stop-1-depot"><code>site/index.html#stop-1-depot</code></a>. Type two integers and watch the division ladder build itself, with the quotients highlighted so you can read off the continued fraction directly.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>Euclid, <em>Elements</em>, Book VII, Propositions 1–2 (the original). See Appendix C.</li><li>Hardy &amp; Wright, <em>An Introduction to the Theory of Numbers</em>, §§4.1–4.2 on the algorithm and its convergence.</li><li>Knuth, <em>The Art of Computer Programming</em>, Vol. 2, §4.5.3 for Lamé&#x27;s theorem and the Fibonacci worst case in full.</li><li>D. E. Knuth&#x27;s account of Lamé (1844) as the birth of algorithmic complexity; Appendix C.</li></ul>
+<p class="chapter-nav"><a href="index.html">Route map</a> · <a href="02-unfolding-road.html">Stop 2 — The Unfolding Road →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>

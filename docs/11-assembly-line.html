@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Infinite Assembly Line - Tour Bus</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/rct-docs.css">
+<script>
+(function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+</header>
+<div class="layout">
+  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
+<div class="nav-group">The Tour</div>
+<a href="01-depot.html">1 · The Depot</a>
+<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
+<a href="03-engine-room.html">3 · The Engine Room</a>
+<a href="04-golden.html">4 · The Golden Milestone</a>
+<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
+<a href="06-loop-road.html">6 · The Loop Road</a>
+<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
+<a href="08-family-tree.html">8 · The Family Tree</a>
+<a href="09-celebrity.html">9 · Celebrity Sightings</a>
+<a href="10-casino.html">10 · The Casino</a>
+<a class="on" href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
+<a href="12-tower.html">12 · The Tower</a>
+<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
+<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
+<a href="15-terminus.html">15 · Terminus</a>
+<div class="nav-group">The Express Line</div>
+<a href="appendix-d-frontier.html">Fringe Avenues</a>
+<div class="nav-group">Synthesis</div>
+<a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
+<div class="nav-group">Cross-Domain</div>
+<a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
+<a href="appendix-c-references.html">Appendix C - References</a>
+<div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a></nav>
+  <main class="content"><p class="chapter-nav"><a href="10-casino.html">← Stop 10 — The Casino</a> · <a href="index.html">Route map</a> · <a href="12-tower.html">Stop 12 — The Tower →</a></p>
+<h1 id="stop-11-the-infinite-assembly-line">Stop 11 — The Infinite Assembly Line</h1>
+<blockquote>Continued fractions are miserable to add — unless you build a machine that consumes and produces them one term at a time, forever.</blockquote>
+<h2 id="overview">Overview</h2>
+<p>Continued fractions are the best tool for <em>approximating</em> numbers (Stop 5) but a notoriously bad tool for <em>computing</em> with them. There is no simple rule for the continued fraction of <code>x + y</code> in terms of the continued fractions of <code>x</code> and <code>y</code>. For two centuries this was the subject&#x27;s embarrassing weakness. Then in <strong>1972</strong> <strong>Bill Gosper</strong>, in the legendary MIT memo <strong>HAKMEM (item 101)</strong>, showed how to do exact arithmetic on continued fractions directly — and in doing so gave one of the purest examples of <strong>corecursion</strong>: a program that does not consume a finite input and halt, but <em>produces</em> an infinite stream on demand, forever.</p>
+<h3 id="homographic-functions">Homographic functions</h3>
+<p>The building block is the <strong>homographic</strong> (or Möbius) function of one variable</p>
+<pre><code>z(x) = (a·x + b)/(c·x + d),</code></pre>
+<p>with integer state <code>(a, b, c, d)</code>. This single form is remarkably expressive: <code>x + n</code> is <code>(x + n)/1</code>, <code>n·x</code> is <code>(n·x)/1</code>, <code>1/x</code> is <code>(0·x + 1)/(1·x + 0)</code>, and the identity is <code>(x)/(1)</code>. Gosper&#x27;s insight is that we can compute the continued fraction of <code>z(x)</code> while reading the continued fraction of <code>x</code>, using two moves:</p>
+<ul><li><strong>Ingest</strong> the next partial quotient <code>p</code> of <code>x</code>. Substituting <code>x ← p + 1/x′</code> transforms the state by <code>(a, b, c, d) ← (a·p + b, a, c·p + d, c)</code>. This folds one input term into the machine.</li><li><strong>Emit</strong> a partial quotient <code>q</code> of the output. This is allowed <em>only when the machine is sure</em>: when the floor of <code>z</code> agrees at both ends of the remaining input range — i.e. <code>⌊a/c⌋ = ⌊(a+b)/(c+d)⌋</code>. Then output <code>q = ⌊a/c⌋</code> and transform the state by <code>(a, b, c, d) ← (c, d, a − q·c, b − q·d)</code> (subtract <code>q</code>, then invert).</li></ul>
+<p>The machine alternates: emit whenever it can prove the next output digit, otherwise ingest another input digit to narrow the uncertainty. It never rounds and never approximates — every emitted term is exact.</p>
+<h3 id="bihomographic-two-inputs-at-once">Bihomographic: two inputs at once</h3>
+<p>To add or multiply <em>two</em> continued fractions we need the <strong>bihomographic</strong> form</p>
+<pre><code>z(x, y) = (a·x·y + b·x + c·y + d)/(e·x·y + f·x + g·y + h),</code></pre>
+<p>with an eight-integer state. Addition is <code>(x·y·0 + x + y + 0)/(1)</code>, i.e. <code>(b, c) = (1, 1)</code> and denominator <code>1</code>; multiplication is <code>(x·y)/(1)</code>, i.e. <code>a = 1</code>; and so on for subtraction and division. The machine now has <em>three</em> moves — ingest from <code>x</code>, ingest from <code>y</code>, or emit — and a rule for choosing which input to read (whichever is contributing more uncertainty). Everything else is the same alternation of ingest and provably-safe emit. This is exactly the engine behind <code>tourbus.cf.gosper</code> and the <code>demo gosper</code> command.</p>
+<h3 id="corecursion-and-a-limit">Corecursion, and a limit</h3>
+<p>Note what kind of program this is. Ordinary recursion (the rest of the tour) breaks a problem into smaller pieces and bottoms out at a base case. Gosper&#x27;s algorithm has <strong>no base case</strong> — its inputs are infinite streams and its output is an infinite stream. It is <strong>corecursion</strong>: defined not by how it terminates but by how it <em>keeps going</em>, producing one more term whenever asked. The correctness condition is not &quot;it halts&quot; but &quot;each emitted term is forced.&quot; This is the same shift in viewpoint that separates the fixed points of Stop 6 from the descending recursions of Stop 1.</p>
+<p>Corecursion has a famous limitation: <strong>stream equality is undecidable</strong>. Consider <code>√2 · √2</code>, which equals exactly <code>2</code>. The machine would love to emit the finite continued fraction <code>[2]</code> and stop — but to <em>prove</em> the output is exactly <code>2</code> it would have to rule out an infinitesimally small fractional part, which requires reading infinitely many input terms. It never gains enough certainty to emit, so it <strong>stalls forever</strong>, ingesting term after term of <code>√2</code> without ever producing output. <code>tourbus</code> guards against this with a safety cutoff and reports the stall honestly. This is not a bug; it is a shadow of the halting problem falling across arithmetic itself. A machine that produces exact answers cannot, in general, <em>know</em> when its answer has become rational.</p>
+<h2 id="worked-examples">Worked examples</h2>
+<p>Add <code>√2</code> and <code>√3</code> as continued fractions — no decimal ever computed, just term in and term out. The result is the continued fraction of <code>√2 + √3 ≈ 3.1463</code>, produced twelve terms deep by the bihomographic machine:</p>
+<pre><code>$ python -m tourbus demo gosper --op add sqrt2 sqrt3
+sqrt2 add sqrt3 (as a continued fraction):
+  [3, 6, 1, 5, 7, 1, 1, 4, 1, 38, 43, 1]</code></pre>
+<p>Multiply the same two and something tidier appears — <code>√2 · √3 = √6</code>, a quadratic surd, so by Stop 6 its continued fraction must be periodic. The machine discovers the period <code>[2; (2, 4)]</code> without ever being told the answer is <code>√6</code>:</p>
+<pre><code>$ python -m tourbus demo gosper --op mul sqrt2 sqrt3
+sqrt2 mul sqrt3 (as a continued fraction):
+  [2, 2, 4, 2, 4, 2, 4, 2, 4, 2, 4, 2]</code></pre>
+<p>Now the cautionary tale. Multiply <code>√2</code> by <em>itself</em>. The true answer is exactly <code>2</code>, but the machine cannot ever prove the fractional part has vanished, so it ingests forever and <code>tourbus</code> trips its safety cutoff rather than loop endlessly:</p>
+<pre><code>$ python -m tourbus demo gosper --op mul sqrt2 sqrt2
+sqrt2 mul sqrt2 (as a continued fraction):
+demo error: bihomographic ingested too long without emitting (the exact result is likely rational)</code></pre>
+<p>That error message <em>is</em> the theorem: exact stream arithmetic cannot decide, in finite time, that its output has become rational. The assembly line runs forever, and sometimes forever is the honest answer.</p>
+<h2 id="exercises">Exercises</h2>
+<ol><li><strong>(★)</strong> Verify numerically that the <code>add</code> result is right: evaluate the continued fraction <code>[3, 6, 1, 5]</code> and compare to <code>√2 + √3 ≈ 3.14626</code>. <details><summary>Hint</summary>Use the engine-room recurrence; the fourth convergent already agrees to several places.</details></li></ol>
+<ol><li><strong>(★)</strong> Confirm <code>√2 · √3 = √6</code> is a quadratic surd and predict, from Stop 6, that its continued fraction is periodic. What is the period? <details><summary>Hint</summary><code>√6 = [2; (2, 4)]</code>; the block ends in <code>2·⌊√6⌋ = 4</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Write the homographic state <code>(a, b, c, d)</code> for the function <code>z(x) = (2x + 1)/(x + 3)</code> and perform one ingest of the partial quotient <code>p = 3</code>. <details><summary>Hint</summary>Start <code>(2, 1, 1, 3)</code>; ingesting <code>p = 3</code> gives <code>(2·3+1, 2, 1·3+3, 1) = (7, 2, 6, 1)</code>.</details></li></ol>
+<ol><li><strong>(★★)</strong> Explain precisely why <code>demo gosper --op mul sqrt2 sqrt2</code> stalls, while <code>--op mul sqrt2 sqrt3</code> does not. <details><summary>Hint</summary>The first output is rational (<code>2</code>, a finite CF) and the machine cannot prove finiteness; the second is an irrational surd, whose infinite output it can keep emitting.</details></li></ol>
+<ol><li><strong>(★★★)</strong> Give the emit condition <code>⌊a/c⌋ = ⌊(a+b)/(c+d)⌋</code> a geometric reading: why does agreement of the floor at the two ends of the input interval certify the next output digit? <details><summary>Hint</summary>A homographic map is monotone on the input range <code>[1, ∞)</code>, so if the floor of <code>z</code> agrees at both endpoints it is constant across the whole interval — the output digit is determined regardless of the unread input.</details></li></ol>
+<h2 id="see-it-move">See it move</h2>
+<p>Open the <strong>Assembly Line</strong> widget: <a href="explore.html#stop-11-assembly"><code>site/index.html#stop-11-assembly</code></a>. Pick two numbers and an operation and watch the eight-integer state update as terms are ingested and emitted, with the machine visibly stalling when you ask it for <code>√2 · √2</code>.</p>
+<h2 id="further-reading">Further reading</h2>
+<ul><li>R. W. Gosper, &quot;Continued Fraction Arithmetic,&quot; HAKMEM item 101 (1972) — the original algorithm. See Appendix C.</li><li>M. Beeler, R. W. Gosper &amp; R. Schroeppel, <em>HAKMEM</em>, MIT AI Memo 239.</li><li>J. Vuillemin, &quot;Exact Real Computer Arithmetic with Continued Fractions,&quot; <em>IEEE Trans. Computers</em> (1990).</li><li>Appendix B of this tour for the definitions of <em>homographic</em>, <em>bihomographic</em>, and <em>corecursion</em>.</li></ul>
+<p class="chapter-nav"><a href="10-casino.html">← Stop 10 — The Casino</a> · <a href="index.html">Route map</a> · <a href="12-tower.html">Stop 12 — The Tower →</a></p></main>
+</div>
+<footer class="site-footer">
+  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
+  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+</footer>
+<script src="assets/rct-docs.js"></script>
+</body>
+</html>
