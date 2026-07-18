@@ -3,7 +3,7 @@ from fractions import Fraction
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from conftest import st_fractions, st_nonsquare_d
+from tourbus_testkit import st_fractions, st_nonsquare_d
 from tourbus.cf.convergents import recurrence
 from tourbus.cf.core import CF
 from tourbus.numbertheory.minkowski import (

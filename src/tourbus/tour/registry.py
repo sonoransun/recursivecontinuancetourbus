@@ -94,4 +94,4 @@ def get_stop(number: int) -> Stop:
     for s in STOPS:
         if s.number == number:
             return s
-    raise KeyError(f"no stop numbered {number} (valid: 1..{len(STOPS)})")
+    raise KeyError(f"no stop {number} (valid 1..{len(STOPS)})")

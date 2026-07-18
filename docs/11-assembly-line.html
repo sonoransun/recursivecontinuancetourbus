@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="10-casino.html">← Stop 10 — The Casino</a> · <a href="index.html">Route map</a> · <a href="12-tower.html">Stop 12 — The Tower →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="10-casino.html">← Stop 10 — The Casino</a> · <a href="index.html">Route map</a> · <a href="12-tower.html">Stop 12 — The Tower →</a></p>
 <h1 id="stop-11-the-infinite-assembly-line">Stop 11 — The Infinite Assembly Line</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
 <blockquote>Continued fractions are miserable to add — unless you build a machine that consumes and produces them one term at a time, forever.</blockquote>
 <h2 id="overview">Overview</h2>
 <p>Continued fractions are the best tool for <em>approximating</em> numbers (Stop 5) but a notoriously bad tool for <em>computing</em> with them. There is no simple rule for the continued fraction of <code>x + y</code> in terms of the continued fractions of <code>x</code> and <code>y</code>. For two centuries this was the subject&#x27;s embarrassing weakness. Then in <strong>1972</strong> <strong>Bill Gosper</strong>, in the legendary MIT memo <strong>HAKMEM (item 101)</strong>, showed how to do exact arithmetic on continued fractions directly — and in doing so gave one of the purest examples of <strong>corecursion</strong>: a program that does not consume a finite input and halt, but <em>produces</em> an infinite stream on demand, forever.</p>
@@ -57,6 +69,8 @@
 <p>with integer state <code>(a, b, c, d)</code>. This single form is remarkably expressive: <code>x + n</code> is <code>(x + n)/1</code>, <code>n·x</code> is <code>(n·x)/1</code>, <code>1/x</code> is <code>(0·x + 1)/(1·x + 0)</code>, and the identity is <code>(x)/(1)</code>. Gosper&#x27;s insight is that we can compute the continued fraction of <code>z(x)</code> while reading the continued fraction of <code>x</code>, using two moves:</p>
 <ul><li><strong>Ingest</strong> the next partial quotient <code>p</code> of <code>x</code>. Substituting <code>x ← p + 1/x′</code> transforms the state by <code>(a, b, c, d) ← (a·p + b, a, c·p + d, c)</code>. This folds one input term into the machine.</li><li><strong>Emit</strong> a partial quotient <code>q</code> of the output. This is allowed <em>only when the machine is sure</em>: when the floor of <code>z</code> agrees at both ends of the remaining input range — i.e. <code>⌊a/c⌋ = ⌊(a+b)/(c+d)⌋</code>. Then output <code>q = ⌊a/c⌋</code> and transform the state by <code>(a, b, c, d) ← (c, d, a − q·c, b − q·d)</code> (subtract <code>q</code>, then invert).</li></ul>
 <p>The machine alternates: emit whenever it can prove the next output digit, otherwise ingest another input digit to narrow the uncertainty. It never rounds and never approximates — every emitted term is exact.</p>
+<p>The whole assembly line is one loop — test, then emit if the digit is forced, ingest if it is not, and come back around forever:</p>
+<figure class="diagram" role="figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 712.4 294" width="712.4" height="294" role="img" font-family="var(--font-data,monospace)" font-size="13"><title>state (a, b, c, d)</title><line x1="371.2" y1="40" x2="371.2" y2="76" stroke="currentColor"/><line x1="347.5243" y1="114" x2="284.8335" y2="153.7185" stroke="currentColor"/><line x1="243.1905" y1="188" x2="215.0984" y2="225.5917" stroke="currentColor"/><line x1="390.8723" y1="114" x2="442.2161" y2="153.1493" stroke="currentColor"/><line x1="483.4628" y1="188" x2="522.3906" y2="226.3831" stroke="currentColor"/><polyline points="40,247 24,247 24,95 200.15,95" fill="none" stroke="currentColor"/><polyline points="543.3,262 543.3,284 10,284 10,103 200.15,103" fill="none" stroke="currentColor"/><polygon points="371.2,84 367.7,76 374.7,76" fill="currentColor"/><polygon points="278.0757,158 282.9604,150.7619 286.7067,156.675" fill="currentColor"/><polygon points="210.3095,232 212.2947,223.4965 217.902,227.6868" fill="currentColor"/><polygon points="448.5777,158 440.0939,155.9325 444.3382,150.3661" fill="currentColor"/><polygon points="528.0872,232 519.9332,228.8754 524.848,223.8909" fill="currentColor"/><polygon points="208.15,95 200.15,91.5 200.15,98.5" fill="currentColor"/><polygon points="208.15,103 200.15,99.5 200.15,106.5" fill="currentColor"/><rect x="291.1" y="10" width="160.2" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><rect x="208.15" y="84" width="326.1" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><rect x="170.35" y="158" width="168.1" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><rect x="40" y="232" width="318.2" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><rect x="364.45" y="158" width="207.6" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><rect x="384.2" y="232" width="318.2" height="30" fill="var(--surface,#fff)" stroke="currentColor"/><text x="371.2" y="29.5" text-anchor="middle" fill="currentColor">state (a, b, c, d)</text><text x="371.2" y="103.5" text-anchor="middle" fill="currentColor">test: floor(a/c) = floor((a+b)/(c+d)) ?</text><text x="254.4" y="177.5" text-anchor="middle" fill="currentColor">emit q = floor(a/c)</text><text x="199.1" y="251.5" text-anchor="middle" fill="currentColor">state becomes (c, d, a - q*c, b - q*d)</text><text x="468.25" y="177.5" text-anchor="middle" fill="currentColor">ingest next input term p</text><text x="543.3" y="251.5" text-anchor="middle" fill="currentColor">state becomes (a*p + b, a, c*p + d, c)</text><rect x="94.5375" y="128" width="302.3" height="16" fill="var(--surface,#fff)"/><text x="245.6875" y="140.5" text-anchor="middle" fill="currentColor">yes - the next output digit is forced</text><rect x="402.8375" y="128" width="168" height="16" fill="var(--surface,#fff)"/><text x="486.8375" y="140.5" text-anchor="middle" fill="currentColor">no - not yet certain</text></svg></figure>
 <h3 id="bihomographic-two-inputs-at-once">Bihomographic: two inputs at once</h3>
 <p>To add or multiply <em>two</em> continued fractions we need the <strong>bihomographic</strong> form</p>
 <pre><code>z(x, y) = (a·x·y + b·x + c·y + d)/(e·x·y + f·x + g·y + h),</code></pre>
@@ -64,6 +78,8 @@
 <h3 id="corecursion-and-a-limit">Corecursion, and a limit</h3>
 <p>Note what kind of program this is. Ordinary recursion (the rest of the tour) breaks a problem into smaller pieces and bottoms out at a base case. Gosper&#x27;s algorithm has <strong>no base case</strong> — its inputs are infinite streams and its output is an infinite stream. It is <strong>corecursion</strong>: defined not by how it terminates but by how it <em>keeps going</em>, producing one more term whenever asked. The correctness condition is not &quot;it halts&quot; but &quot;each emitted term is forced.&quot; This is the same shift in viewpoint that separates the fixed points of Stop 6 from the descending recursions of Stop 1.</p>
 <p>Corecursion has a famous limitation: <strong>stream equality is undecidable</strong>. Consider <code>√2 · √2</code>, which equals exactly <code>2</code>. The machine would love to emit the finite continued fraction <code>[2]</code> and stop — but to <em>prove</em> the output is exactly <code>2</code> it would have to rule out an infinitesimally small fractional part, which requires reading infinitely many input terms. It never gains enough certainty to emit, so it <strong>stalls forever</strong>, ingesting term after term of <code>√2</code> without ever producing output. <code>tourbus</code> guards against this with a safety cutoff and reports the stall honestly. This is not a bug; it is a shadow of the halting problem falling across arithmetic itself. A machine that produces exact answers cannot, in general, <em>know</em> when its answer has become rational.</p>
+<h3 id="from-memo-to-method">From memo to method</h3>
+<p>HAKMEM itself deserves a footnote: AI Memo 239 (February 1972) was a stapled grab-bag of tricks from the MIT AI Lab — number theory next to circuit hacks next to screen-drawing lore — and item 101 sat inside it, never published as a paper, passed around for decades as hacker folklore. Jean Vuillemin&#x27;s 1990 IEEE paper finally gave the algorithm formal foundations as exact real arithmetic. Heritage stop H6 (Appendix H) places the memo in the long line that starts at Euclid.</p>
 <h2 id="worked-examples">Worked examples</h2>
 <p>Add <code>√2</code> and <code>√3</code> as continued fractions — no decimal ever computed, just term in and term out. The result is the continued fraction of <code>√2 + √3 ≈ 3.1463</code>, produced twelve terms deep by the bihomographic machine:</p>
 <pre><code>$ python -m tourbus demo gosper --op add sqrt2 sqrt3
@@ -94,6 +110,7 @@ demo error: bihomographic ingested too long without emitting (the exact result i
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

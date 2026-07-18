@@ -17,12 +17,25 @@ served as-is.
 from __future__ import annotations
 
 import html
+import json
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / "docs"
 ASSETS = DOCS / "assets"
+
+# The engine (figures) lives under src/; the mermaid renderer sits beside this
+# script. Neither home is guaranteed to be on sys.path when this module is
+# loaded by file path (pytest) rather than run as a script, so add both.
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from build_mermaid import MermaidError, render_diagram  # noqa: E402,F401
+from tourbus.figures import FIGURES  # noqa: E402
 
 # --------------------------------------------------------------------------- #
 #  Site structure.
@@ -46,6 +59,9 @@ STOPS = [
     ("15-terminus", "Terminus"),
 ]
 
+# Curated landing-card copy for the Express-line sections of Appendix D. The
+# card count and anchors are derived from the "## E..." headings at build
+# time; entries here only supply the blurbs (extras fall back to the heading).
 EXPRESS = [
     ("The Markov Spectrum", "The numbers after the golden ratio."),
     ("Continuants", "The polynomial inside every convergent."),
@@ -53,18 +69,98 @@ EXPRESS = [
     ("Continued-Fraction Variants", "Nearest-integer and minus expansions."),
     ("The Three-Distance Theorem", "A surprise in an irrational rotation."),
     ("The Gauss-Kuzmin-Wirsing Constant", "Computed from the transfer operator."),
+    ("Colliding Blocks", "Counting π with elastic collisions."),
+    ("The River", "Conway's topograph walks x² − dy² to Pell."),
+    ("Ramanujan's Continued Fraction", "A q-fraction that collapses to the golden ratio."),
+]
+
+# Curated landing-card copy for the Heritage-line sections of Appendix H,
+# same mechanism as EXPRESS: the card count and anchors come from the
+# "## H..." headings at build time; entries here only supply the blurbs.
+HERITAGE = [
+    ("The Ladder of Euclid",
+     "Anthyphairesis: the continued fraction, three centuries before Christ "
+     "and two millennia before its name."),
+    ("The Cyclic Method",
+     "Fermat's challenge, solved in Sanskrit verse five hundred years early."),
+    ("First Fractions in Print",
+     "Bombelli, Cataldi, Brouncker: a notation, a name, and pi's first formula."),
+    ("The Planetarium",
+     "Huygens cuts Saturn's orbit into 206 brass teeth."),
+    ("Lambert's Trial of Pi",
+     "The tangent testifies, and pi is proved irrational."),
+    ("The Skyscraper of Liouville",
+     "A number built to be approximated: the first proven transcendental."),
+    ("The Tree in the Workshop",
+     "Stern's blackboard and Brocot's gears grow the same tree of fractions."),
+    ("The Factoring Machine",
+     "CFRAC cracks F7: convergents turned against the integers."),
+    ("Item 101",
+     "Gosper's memo teaches arithmetic to stream forever."),
+]
+
+# Curated landing-card copy for the Branch-line sections of Appendix I, same
+# mechanism as EXPRESS/HERITAGE: card count and anchors come from the "## B..."
+# headings at build time; entries here only supply the blurbs.
+BRANCH = [
+    ("Engel Expansions", "The ascending staircase: ceilings where the continued fraction takes floors."),
+    ("Lüroth and Pierce", "The honest casino, and a rational that loops forever."),
+    ("Egyptian Fractions", "The greedy scribe and the Erdős-Straus problem."),
+    ("Zeckendorf and the Golden Base", "Integers written in Fibonacci, and base-φ."),
+    ("Cutting Sequences", "Ostrowski numeration and Sturmian words on ticker tape."),
+    ("Lochs' Theorem", "The exchange rate between digits and quotients."),
+]
+
+# The interactive exposition (explore.html) has no Markdown source, so its
+# widget sections are hand-listed here to make them searchable. Each id must
+# match a "<section id=...>" in site/index.html so search hits resolve.
+EXPLORE_SECTIONS = [
+    ("stop-1-depot", "Stop 1 - CF Expansion Machine (W1)",
+     "Type a number or fraction and step Euclid's algorithm into its continued fraction; the convergents table updates live."),
+    ("stop-4-golden", "Stop 4 - Golden Spiral & Irrationality Racer (W3, W4)",
+     "The golden spiral at any depth and ratio, and a race of the convergent errors of phi, e, and pi."),
+    ("stop-5-scenic-overlook", "Stop 5 - Calendar Designer (W9)",
+     "Design a leap-year rule as a convergent of the tropical year, 0.242190 days."),
+    ("stop-7-cattle-crossing", "Stop 7 - Pell Playground (W7)",
+     "Enter d and watch the convergent at the period boundary light up as the fundamental solution of x^2 - d y^2 = 1."),
+    ("stop-8-family-tree", "Stop 8 - Stern-Brocot Explorer (W2)",
+     "Descend the mediant tree left and right to locate any fraction in lowest terms."),
+    ("stop-10-casino", "Stop 10 - Gauss Map Cobweb & Khinchin Lab (W5, W6)",
+     "Iterate the Gauss map T(x) = {1/x} as a cobweb, and watch the geometric mean of partial quotients approach Khinchin's constant."),
+    ("stop-13-hall-of-mirrors", "Stop 13 - Fractal Lab (W8)",
+     "Draw the Koch, dragon, Sierpinski, and Hilbert curves at any depth."),
+    ("stop-14-souvenir-shop", "Stop 14 - Temperament Studio, Wiener Attack, Collatz (W10, W11, W12)",
+     "Musical temperament tables, a small-exponent RSA break by convergents, and the Collatz orbit plotter."),
+    ("stop-encore-blocks", "Encore - Colliding Blocks Count Pi (W13)",
+     "A mass ratio of 100^n makes two elastic blocks collide the digits of pi times."),
+    ("stop-crossdomain-butterfly", "Cross-Domain - Hofstadter Butterfly (W14)",
+     "The fractal spectrum of an electron in a magnetic field, drawn from continuant Sturm sequences versus flux p/q."),
+    ("stop-branch-bazaar", "Branch - The Expansion Bazaar (W15)",
+     "Enter one number and see it unfolded five ways at once: continued fraction, Engel, Pierce, greedy Egyptian, and Zeckendorf, with the error of each."),
 ]
 
 REFERENCE = [
     ("appendix-a-proofs", "Appendix A - Proofs"),
     ("appendix-b-glossary", "Appendix B - Glossary"),
     ("appendix-c-references", "Appendix C - References"),
+    ("appendix-g-hints", "Appendix G - Hints & selected answers"),
+    ("syllabus", "Syllabus - for instructors"),
 ]
 
 FAVICON = (
     "data:image/svg+xml,"
     "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E"
     "%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E"
+)
+
+# Early theme bootstrap: stamp data-theme on :root before first paint so the
+# saved theme applies without a flash. Shared by every page shell and the
+# wrapped exposition.
+THEME_BOOTSTRAP = (
+    "<script>\n"
+    "(function(){try{var t=localStorage.getItem('rct-theme')||'auto';"
+    "document.documentElement.setAttribute('data-theme',t);}catch(e){}})();\n"
+    "</script>"
 )
 
 # --------------------------------------------------------------------------- #
@@ -141,7 +237,7 @@ def _is_nav_strip(line: str) -> bool:
     return " · " in line and "](" in line and ("←" in line or "→" in line or "Route map" in line)
 
 
-def md_to_html(text: str) -> str:
+def md_to_html(text: str, src_name: str = "?") -> str:
     lines = text.split("\n")
     out: list[str] = []
     i = 0
@@ -156,6 +252,7 @@ def md_to_html(text: str) -> str:
 
         # fenced code block
         if stripped.startswith("```"):
+            fence_line = i + 1  # absolute 1-based line of the opening fence
             lang = stripped[3:].strip()
             i += 1
             buf = []
@@ -163,6 +260,10 @@ def md_to_html(text: str) -> str:
                 buf.append(lines[i])
                 i += 1
             i += 1  # closing fence
+            if lang == "mermaid":
+                out.append(render_diagram("\n".join(buf), src_name=src_name,
+                                          line_no=fence_line))
+                continue
             cls = f' class="lang-{lang}"' if lang else ""
             out.append(f"<pre><code{cls}>{html.escape(chr(10).join(buf))}</code></pre>")
             continue
@@ -226,6 +327,13 @@ def md_to_html(text: str) -> str:
             i += 1
             continue
 
+        # block-level figure: ![caption](assets/fig-*.svg) alone on its line
+        m = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)$", stripped)
+        if m:
+            out.append(_figure_html(m.group(1), m.group(2), src_name, i + 1))
+            i += 1
+            continue
+
         # paragraph (gather consecutive plain lines)
         buf = [stripped]
         i += 1
@@ -233,14 +341,39 @@ def md_to_html(text: str) -> str:
             buf.append(lines[i].strip())
             i += 1
         joined = " ".join(buf)
+        if "![" in joined:
+            raise SystemExit(
+                f"{src_name}: inline image syntax is not supported; "
+                "put ![...](...) on its own line"
+            )
         cls = ' class="chapter-nav"' if _is_nav_strip(joined) else ""
         out.append(f"<p{cls}>{inline(joined)}</p>")
     return "\n".join(out)
 
 
+def _figure_html(
+    caption: str, src: str, src_name: str, line_no: int, base: Path = DOCS
+) -> str:
+    """Inline a committed figure asset as a ``<figure>`` with its caption.
+
+    Only ``assets/fig-*.svg`` paths that exist under ``base`` are accepted;
+    ``build()`` writes every ``FIGURES`` entry before the page loop, so
+    existence is exactly manifest membership. The SVG document is inlined
+    (no ``<img>``), which lets the stylesheet re-theme it via CSS variables.
+    """
+    ok = src.startswith("assets/fig-") and src.endswith(".svg") and (base / src).exists()
+    if not ok:
+        raise SystemExit(f"{src_name}:{line_no}: unknown figure asset {src!r}")
+    svg = (base / src).read_text()
+    return (
+        f'<figure class="figure">{svg}'
+        f"<figcaption>{inline(caption)}</figcaption></figure>"
+    )
+
+
 def _para_breaks(stripped: str) -> bool:
     return (
-        stripped.startswith(("#", ">", "|", "```", "---", "- ", "* "))
+        stripped.startswith(("#", ">", "|", "```", "---", "- ", "* ", "!["))
         or bool(re.match(r"^\d+\.\s", stripped))
         or stripped.startswith("<")
     )
@@ -294,6 +427,10 @@ def nav_html(active: str) -> str:
     parts.append(item("appendix-e-web-of-ideas.html", "The Web of Ideas", "appendix-e-web-of-ideas"))
     parts.append('<div class="nav-group">Cross-Domain</div>')
     parts.append(item("appendix-f-cross-domain.html", "The Same Recurrence", "appendix-f-cross-domain"))
+    parts.append('<div class="nav-group">Heritage</div>')
+    parts.append(item("appendix-h-history.html", "A History in Convergents", "appendix-h-history"))
+    parts.append('<div class="nav-group">Branch</div>')
+    parts.append(item("appendix-i-branches.html", "Other Ways to Unfold", "appendix-i-branches"))
     parts.append('<div class="nav-group">Reference</div>')
     for slug, title in REFERENCE:
         parts.append(item(f"{slug}.html", title, slug))
@@ -312,24 +449,28 @@ def shell(title: str, active: str, content: str) -> str:
 <title>{html.escape(title)}</title>
 <link rel="icon" href="{FAVICON}">
 <link rel="stylesheet" href="assets/rct-docs.css">
-<script>
-(function(){{try{{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();
-</script>
+{THEME_BOOTSTRAP}
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
   <nav class="sidebar" aria-label="Route">{nav}</nav>
-  <main class="content">{content}</main>
+  <main class="content" id="main">{content}</main>
 </div>
 <footer class="site-footer">
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>
@@ -340,19 +481,101 @@ def shell(title: str, active: str, content: str) -> str:
 #  Landing page.
 # --------------------------------------------------------------------------- #
 
+def _express_sections(
+    src: Path = DOCS / "appendix-d-frontier.md",
+) -> list[tuple[str, str, str]]:
+    """Parse Appendix D's ``## E...`` headings: (label, anchor, heading rest).
+
+    Anchors reuse ``_slug`` on the same heading text ``md_to_html`` sees, so
+    the landing cards can never drift from the generated ``id=`` attributes.
+    """
+    if not src.exists():
+        return []
+    out = []
+    for m in re.finditer(r"^##\s+(E(\d+)\b[^\n]*)", src.read_text(), flags=re.M):
+        heading = m.group(1).strip()
+        rest = re.sub(r"^E\d+\s*[—–:-]*\s*", "", heading)
+        out.append((f"E{m.group(2)}", _slug(heading), rest))
+    return out
+
+
+def _heritage_sections(
+    src: Path = DOCS / "appendix-h-history.md",
+) -> list[tuple[str, str, str]]:
+    """Parse Appendix H's ``## H...`` headings: (label, anchor, heading rest).
+
+    The Heritage clone of :func:`_express_sections`; interlude and
+    front-matter headings are plain ``##`` text and cannot match.
+    """
+    if not src.exists():
+        return []
+    out = []
+    for m in re.finditer(r"^##\s+(H(\d+)\b[^\n]*)", src.read_text(), flags=re.M):
+        heading = m.group(1).strip()
+        rest = re.sub(r"^H\d+\s*[—–:-]*\s*", "", heading)
+        out.append((f"H{m.group(2)}", _slug(heading), rest))
+    return out
+
+
+def _branch_sections(
+    src: Path = DOCS / "appendix-i-branches.md",
+) -> list[tuple[str, str, str]]:
+    """Parse Appendix I's ``## B...`` headings: (label, anchor, heading rest).
+
+    The Branch clone of :func:`_express_sections`.
+    """
+    if not src.exists():
+        return []
+    out = []
+    for m in re.finditer(r"^##\s+(B(\d+)\b[^\n]*)", src.read_text(), flags=re.M):
+        heading = m.group(1).strip()
+        rest = re.sub(r"^B\d+\s*[—–:-]*\s*", "", heading)
+        out.append((f"B{m.group(2)}", _slug(heading), rest))
+    return out
+
+
+def _section_cards(
+    sections: list[tuple[str, str, str]],
+    curated: list[tuple[str, str]],
+    page: str,
+    cls: str,
+) -> str:
+    """Landing cards for parsed ``## X<n>`` sections plus curated blurbs."""
+    cards = []
+    for k, (label, anchor, rest) in enumerate(sections, start=1):
+        if k <= len(curated):
+            title, note = curated[k - 1]
+        else:  # no curated blurb yet: derive card copy from the heading itself
+            title, _, note = rest.partition(":")
+            title, note = title.strip(), note.strip()
+            if note:
+                note = note[0].upper() + note[1:]
+                note += "" if note.endswith((".", "!", "?")) else "."
+        cards.append(
+            f'<a class="card {cls}" href="{page}#{anchor}">'
+            f'<span class="card-num">{label}</span>'
+            f'<span class="card-title">{html.escape(title)}</span>'
+            f'<span class="card-note">{html.escape(note)}</span></a>'
+        )
+    return "\n".join(cards)
+
+
 def landing() -> str:
     tour_cards = "\n".join(
         f'<a class="card" href="{slug}.html"><span class="card-num">{k}</span>'
         f'<span class="card-title">{html.escape(title)}</span></a>'
         for k, (slug, title) in enumerate(STOPS, start=1)
     )
-    express_cards = "\n".join(
-        f'<a class="card express" href="appendix-d-frontier.html#e{k}">'
-        f'<span class="card-num">E{k}</span>'
-        f'<span class="card-title">{html.escape(title)}</span>'
-        f'<span class="card-note">{html.escape(note)}</span></a>'
-        for k, (title, note) in enumerate(EXPRESS, start=1)
-    )
+    sections = _express_sections()
+    express_cards = _section_cards(sections, EXPRESS, "appendix-d-frontier.html", "express")
+    h_sections = _heritage_sections()
+    heritage_cards = _section_cards(h_sections, HERITAGE, "appendix-h-history.html", "heritage")
+    b_sections = _branch_sections()
+    branch_cards = _section_cards(b_sections, BRANCH, "appendix-i-branches.html", "branch")
+    count_words = {6: "Six", 7: "Seven", 8: "Eight", 9: "Nine"}
+    express_count = count_words.get(len(sections), str(len(sections)))
+    heritage_count = count_words.get(len(h_sections), str(len(h_sections)))
+    branch_count = count_words.get(len(b_sections), str(len(b_sections)))
     return f"""
 <section class="hero">
   <div class="eyebrow">Line R &middot; Recursion &amp; Continued Fractions</div>
@@ -377,7 +600,7 @@ def landing() -> str:
 
 <section>
   <h2>The Express Line</h2>
-  <p>Six deeper, stranger stops past the terminus &mdash; each still computed
+  <p>{express_count} deeper, stranger stops past the terminus &mdash; each still computed
   exactly (or rigorously) on the same engine. See
   <a href="appendix-d-frontier.html">the Fringe Avenues</a>.</p>
   <div class="card-grid">{express_cards}</div>
@@ -412,17 +635,44 @@ def landing() -> str:
 </section>
 
 <section>
+  <h2>The Heritage Line</h2>
+  <p>{heritage_count} stops through twenty-three centuries of history &mdash;
+  Euclid's mutual measuring, the chakravala, the first fractions in print,
+  Huygens' gears, Lambert's proof, Liouville's built-to-order transcendental,
+  the tree of Stern and Brocot, the factorization of F&#8327;, and Gosper's
+  stream machine &mdash; every episode re-run live on the engine with
+  <code>python -m tourbus heritage</code>. See
+  <a href="appendix-h-history.html">Appendix H</a>.</p>
+  <div class="card-grid">{heritage_cards}</div>
+</section>
+
+<section>
+  <h2>The Branch Line</h2>
+  <p>{branch_count} other ways to unfold a number &mdash; the Engel and Pierce
+  staircases, the greedy Egyptian scribe, Zeckendorf's Fibonacci binary,
+  Sturmian cutting sequences, and the exchange rate of Lochs' theorem &mdash;
+  each an alternative to the continued fraction, computed exactly with
+  <code>python -m tourbus branch</code>. See
+  <a href="appendix-i-branches.html">Appendix I</a>.</p>
+  <div class="card-grid">{branch_cards}</div>
+</section>
+
+<section>
   <h2>Reference &amp; running it</h2>
   <ul class="ref-list">
     <li><a href="appendix-a-proofs.html">Appendix A &mdash; Proofs</a></li>
     <li><a href="appendix-b-glossary.html">Appendix B &mdash; Glossary</a></li>
     <li><a href="appendix-c-references.html">Appendix C &mdash; References</a></li>
+    <li><a href="appendix-g-hints.html">Appendix G &mdash; Hints &amp; selected answers</a></li>
+    <li><a href="syllabus.html">The Syllabus &mdash; riding the tour as a course</a></li>
   </ul>
   <p>The whole tour is powered by <code>tourbus</code>, a standard-library-only
   Python package. Ride it in your terminal:</p>
   <pre><code>python -m tourbus            # the interactive tour
 python -m tourbus --all      # the whole tour as a transcript
 python -m tourbus frontier   # the Express Line
+python -m tourbus heritage   # the Heritage Line (the history)
+python -m tourbus branch     # the Branch Line (other expansions)
 python -m tourbus demo gkw   # the Gauss-Kuzmin-Wirsing constant, from scratch</code></pre>
 </section>
 """
@@ -432,27 +682,134 @@ python -m tourbus demo gkw   # the Gauss-Kuzmin-Wirsing constant, from scratch</
 #  Build.
 # --------------------------------------------------------------------------- #
 
+def _with_toc(content: str) -> str:
+    """Insert an "On this page" list after the h1 on pages with >= 4 h2s."""
+    heads = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', content)
+    if len(heads) < 4:
+        return content
+    items = []
+    for hid, body in heads:
+        label = re.sub(r"<[^>]+>", "", body)
+        items.append(f'<li><a href="#{hid}">{label}</a></li>')
+    toc = (
+        '<nav class="page-toc" aria-label="On this page">'
+        '<div class="toc-title">On this page</div>'
+        f'<ol>{"".join(items)}</ol></nav>'
+    )
+    head, sep, tail = content.partition("</h1>")
+    if sep:
+        return head + sep + "\n" + toc + tail
+    return toc + "\n" + content
+
+
+def _plain(text: str) -> str:
+    """Markdown/inline-HTML -> plain text, for the search index."""
+    text = re.sub(r"`([^`]+)`", r"\1", text)
+    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    # italics first (the lookarounds skip ** runs) so nested **bold *italic*** resolves
+    text = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"\1", text)
+    text = re.sub(r"\*\*([^*]+)\*\*", r"\1", text)
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"\*+", "", text)  # emphasis markers orphaned by snippet truncation
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _headings_with_snippets(text: str) -> list[dict[str, str]]:
+    """Each h1-h3 of a Markdown page with a short plain-text snippet."""
+    secs: list[dict[str, str]] = []
+    raw: list[str] = []  # raw source lines of the current section's snippet
+    in_code = False
+    for line in text.split("\n"):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code or not stripped:
+            continue
+        m = re.match(r"^(#{1,3})\s+(.*)$", stripped)
+        if m:
+            secs.append({"id": _slug(m.group(2)), "t": _plain(m.group(2)), "s": ""})
+            raw = []
+            continue
+        if (
+            not secs
+            or stripped.startswith(("#", "|", ">", "<", "!"))
+            or stripped in ("---", "***", "___")
+            or _is_nav_strip(stripped)
+            or len(secs[-1]["s"]) >= 180
+        ):
+            continue
+        candidate = re.sub(r"^(\d+\.|[-*])\s+", "", stripped)
+        if _plain(candidate):
+            # emphasis can span source lines: join the raw lines, then strip markers
+            raw.append(candidate)
+            secs[-1]["s"] = _plain(" ".join(raw))
+    for sec in secs:
+        if len(sec["s"]) > 180:
+            sec["s"] = sec["s"][:177].rstrip() + "..."
+    return secs
+
+
+def _search_index(pages: list[tuple[str, str]]) -> str:
+    """Build the client-side search index as a JS asset.
+
+    A ``<script src>`` global (rather than fetched JSON) so search also works
+    when the site is opened over ``file://``.
+    """
+    entries = []
+    for slug, title in pages:
+        src = DOCS / f"{slug}.md"
+        if not src.exists():
+            continue
+        entries.append(
+            {"p": f"{slug}.html", "t": title, "h": _headings_with_snippets(src.read_text())}
+        )
+    # The interactive exposition has no Markdown source; index its widget
+    # sections by hand so search can reach them (ids resolve inside explore.html).
+    entries.append({
+        "p": "explore.html",
+        "t": "Live Exposition",
+        "h": [{"id": sid, "t": t, "s": s} for sid, t, s in EXPLORE_SECTIONS],
+    })
+    payload = json.dumps(entries, separators=(",", ":"), ensure_ascii=True)
+    return f"window.RCT_SEARCH_INDEX={payload};\n"
+
+
 def build() -> None:
     ASSETS.mkdir(parents=True, exist_ok=True)
     (DOCS / ".nojekyll").write_text("")
     (ASSETS / "rct-docs.css").write_text(CSS)
     (ASSETS / "rct-docs.js").write_text(JS)
 
-    # landing
-    (DOCS / "index.html").write_text(shell("Recursive Continuance Tour Bus", "index", landing()))
-
     # chapters + express + reference
     pages = [(slug, title) for slug, title in STOPS]
     pages.append(("appendix-d-frontier", "The Express Line"))
     pages.append(("appendix-e-web-of-ideas", "The Web of Ideas"))
     pages.append(("appendix-f-cross-domain", "The Same Recurrence Everywhere"))
+    pages.append(("appendix-h-history", "Appendix H - A History in Convergents"))
+    pages.append(("appendix-i-branches", "Appendix I - The Branch Line"))
     pages += REFERENCE
+
+    (ASSETS / "search-index.js").write_text(_search_index(pages))
+
+    # teaching figures: emit every manifest entry, then prune strays so the
+    # committed docs/assets/fig-*.svg set always equals the FIGURES manifest
+    for name, fn in FIGURES.items():
+        (ASSETS / name).write_text(fn())
+    for orphan in sorted(ASSETS.glob("fig-*.svg")):
+        if orphan.name not in FIGURES:
+            orphan.unlink()
+            print(f"  pruned orphan {orphan.name}")
+
+    # landing
+    (DOCS / "index.html").write_text(shell("Recursive Continuance Tour Bus", "index", landing()))
+
     for slug, title in pages:
         src = DOCS / f"{slug}.md"
         if not src.exists():
             print(f"  (skip missing {src.name})")
             continue
-        content = md_to_html(src.read_text())
+        content = _with_toc(md_to_html(src.read_text(), src_name=src.name))
         (DOCS / f"{slug}.html").write_text(shell(f"{title} - Tour Bus", slug, content))
         print(f"  wrote {slug}.html")
 
@@ -464,13 +821,22 @@ def build() -> None:
 
 
 def _wrap_exposition(fragment: str) -> str:
-    """Wrap the content-only exposition in a full HTML document for Pages."""
+    """Make ``docs/explore.html`` from ``site/index.html``.
+
+    A full standalone document (leading ``<!doctype``, any case) is copied
+    through verbatim; a head-less fragment gets wrapped in a minimal shell,
+    including the early theme-bootstrap script so the saved dark theme
+    applies before first paint. Both paths are idempotent.
+    """
+    if fragment.lstrip().lower().startswith("<!doctype"):
+        return fragment
     # The fragment starts with <title>...; give it a real head/body.
     return (
         "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n"
         "<meta charset=\"utf-8\">\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         f"<link rel=\"icon\" href=\"{FAVICON}\">\n"
+        f"{THEME_BOOTSTRAP}\n"
         "<style>body{margin:0}</style>\n"
         "</head>\n<body>\n"
         + fragment
@@ -518,6 +884,21 @@ code{font-family:var(--font-data);font-size:.86em;background:color-mix(in srgb,v
 pre{background:var(--surface);border:1px solid var(--border);border-radius:5px;
   padding:.9rem 1rem;overflow-x:auto}
 pre code{background:none;padding:0;font-size:.82rem;line-height:1.55}
+/* the button anchors to a non-scrolling wrapper so it stays pinned while the <pre> scrolls */
+.codewrap{position:relative}
+.codewrap .copy-btn{position:absolute;top:.4rem;right:.4rem;font-family:var(--font-data);font-size:.62rem;
+  text-transform:uppercase;letter-spacing:.05em;background:var(--surface);color:var(--ink-2);
+  border:1px solid var(--border);border-radius:4px;padding:.25rem .5rem;cursor:pointer;
+  opacity:0;transition:opacity .15s}
+.codewrap:hover .copy-btn,.codewrap .copy-btn:focus-visible{opacity:1}
+.codewrap .copy-btn:hover{border-color:var(--brass);color:var(--brass)}
+@media (hover:none){.codewrap .copy-btn{opacity:1}}
+
+/* skip link (visually hidden until focused) */
+.skip-link{position:fixed;top:.5rem;left:.5rem;z-index:60;transform:translateY(-300%);
+  background:var(--brass);color:#fff;font-family:var(--font-sign);font-weight:600;font-size:.85rem;
+  padding:.5rem .8rem;border-radius:4px}
+.skip-link:focus{transform:none}
 
 /* topbar */
 .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:.7rem;
@@ -531,6 +912,27 @@ pre code{background:none;padding:0;font-size:.82rem;line-height:1.55}
   padding:.4rem .55rem;border-radius:4px;cursor:pointer;line-height:1}
 .theme-toggle:hover,.menu-btn:hover{border-color:var(--brass);color:var(--brass)}
 .menu-btn{display:none;font-size:1rem}
+
+/* search */
+.search{position:relative;flex:0 1 230px;min-width:0}
+.search input{width:100%;font-family:var(--font-data);font-size:.72rem;background:var(--surface);
+  color:var(--ink);border:1px solid var(--border);border-radius:4px;padding:.4rem .55rem;line-height:1}
+.search input::placeholder{color:var(--muted)}
+.search input:focus{border-color:var(--brass)}
+.search-results{position:absolute;top:calc(100% + 6px);right:0;width:min(430px,calc(100vw - 1.6rem));
+  max-height:60vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);
+  border-radius:5px;box-shadow:0 10px 26px rgba(0,0,0,.18);z-index:40;font-family:var(--font-sign)}
+.search-hit{display:block;padding:.45rem .7rem;border-bottom:1px solid var(--border);color:var(--ink);
+  font-size:.82rem}
+.search-hit:last-child{border-bottom:none}
+.search-hit:hover,.search-hit.active{background:color-mix(in srgb,var(--brass) 10%,transparent);
+  text-decoration:none}
+.hit-page{font-family:var(--font-data);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--brass)}
+.hit-head{font-weight:600}
+.hit-snip{display:block;font-size:.72rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.search-empty{padding:.5rem .7rem;font-size:.78rem;color:var(--muted)}
 
 /* layout */
 .layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1240px;margin:0 auto;
@@ -566,6 +968,21 @@ pre code{background:none;padding:0;font-size:.82rem;line-height:1.55}
 .chapter-nav{font-family:var(--font-data);font-size:.78rem;color:var(--muted);
   padding:.5rem 0;border-bottom:1px solid var(--border);margin-bottom:1.4rem}
 .chapter-nav:last-of-type{border-bottom:none;border-top:1px solid var(--border);margin-top:2rem}
+
+/* per-page "On this page" list */
+.page-toc{margin:0 0 1.4rem;padding:.55rem .9rem .7rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:5px;font-family:var(--font-sign);font-size:.84rem}
+.toc-title{font-family:var(--font-data);font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--muted);margin:.1rem 0 .3rem}
+.page-toc ol{margin:0;padding-left:1.25rem}
+.page-toc li{margin:.15rem 0}
+
+/* figures + mermaid diagrams (both inlined SVG) */
+.diagram{margin:1.6rem 0;text-align:center}
+.diagram svg{max-width:100%;height:auto}
+figure.figure{margin:1.6rem 0;text-align:center}
+figure.figure svg{max-width:100%;height:auto;color:var(--ink)}
+figure.figure figcaption{font-family:var(--font-sign);font-size:.82rem;color:var(--ink-2);margin-top:.4rem}
 
 /* tables */
 .tablewrap{overflow-x:auto;margin:1rem 0;border:1px solid var(--border);border-radius:5px}
@@ -616,11 +1033,32 @@ th{color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;font-size:.6
     transform:translateX(-105%);transition:transform .2s;border-right:1px solid var(--border)}
   body.nav-open .sidebar{transform:none}
   .content{max-width:none}
+  .search{flex:1 1 120px}
+  .page-toc{display:none}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card:hover{transform:none}.sidebar{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card:hover{transform:none}
+  .sidebar{transition:none}.codewrap .copy-btn{transition:none}}
+
+/* print */
+@media print{
+  /* pin the palette so a persisted dark theme cannot leak into print output */
+  :root,:root[data-theme="dark"],:root[data-theme="light"]{
+    --page:#fff; --surface:#fff; --ink:#000; --ink-2:#333;
+    --muted:#555; --grid:#ddd; --border:rgba(0,0,0,.25); --brass:#8a5a10;
+  }
+  .topbar,.sidebar,.site-footer,.skip-link,.page-toc,.chapter-nav,.search,.codewrap .copy-btn{display:none!important}
+  body{background:#fff;color:#000}
+  .layout{display:block;max-width:none}
+  .content{max-width:none;padding:0}
+  a{color:#000}
+  code{background:none}
+  pre{background:#fff;border-color:#999}
+  pre,blockquote,.tablewrap,tr,.diagram,figure.figure{page-break-inside:avoid}
+  h1,h2,h3,h4{page-break-after:avoid}
+}
 """
 
-JS = """(function(){
+JS = r"""(function(){
   var order=['auto','light','dark'];
   var labels={auto:'Theme: Auto',light:'Theme: Light',dark:'Theme: Dark'};
   var btn=document.getElementById('theme-toggle');
@@ -635,6 +1073,93 @@ JS = """(function(){
   // close mobile nav after following a link
   document.querySelectorAll('.sidebar a').forEach(function(a){
     a.addEventListener('click',function(){document.body.classList.remove('nav-open');});
+  });
+})();
+
+// copy buttons on code blocks
+(function(){
+  document.querySelectorAll('.content pre').forEach(function(pre){
+    // wrap the scrollable <pre> so the button stays pinned while the code scrolls
+    var wrap=document.createElement('div');
+    wrap.className='codewrap';
+    pre.parentNode.insertBefore(wrap,pre);
+    wrap.appendChild(pre);
+    var btn=document.createElement('button');
+    btn.type='button';btn.className='copy-btn';btn.textContent='Copy';
+    btn.addEventListener('click',function(){
+      var text=(pre.querySelector('code')||pre).textContent;
+      function done(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy';},1500);}
+      function fallback(){
+        var ta=document.createElement('textarea');
+        ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+        document.body.appendChild(ta);ta.select();
+        try{document.execCommand('copy');done();}catch(e){}
+        document.body.removeChild(ta);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done,fallback);
+      }else{fallback();}
+    });
+    wrap.appendChild(btn);
+  });
+})();
+
+// client-side search over the build-time index (assets/search-index.js)
+(function(){
+  var input=document.getElementById('search-input');
+  var box=document.getElementById('search-results');
+  if(!input||!box)return;
+  var hits=[],active=-1;
+  function close(){box.hidden=true;box.innerHTML='';hits=[];active=-1;}
+  function mark(i){
+    var links=box.querySelectorAll('.search-hit');
+    if(links[active])links[active].classList.remove('active');
+    active=i;
+    if(links[active]){links[active].classList.add('active');links[active].scrollIntoView({block:'nearest'});}
+  }
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function run(){
+    var idx=window.RCT_SEARCH_INDEX||[];
+    var q=input.value.trim().toLowerCase();
+    close();
+    if(q.length<2)return;
+    var terms=q.split(/\s+/);
+    for(var p=0;p<idx.length&&hits.length<12;p++){
+      var pg=idx[p];
+      for(var h=0;h<pg.h.length&&hits.length<12;h++){
+        var sec=pg.h[h];
+        var hay=(pg.t+' '+sec.t+' '+sec.s).toLowerCase();
+        var ok=terms.every(function(t){return hay.indexOf(t)>=0;});
+        if(ok)hits.push({href:pg.p+'#'+sec.id,page:pg.t,head:sec.t,snip:sec.s});
+      }
+    }
+    if(!hits.length){box.innerHTML='<div class="search-empty">No matches.</div>';box.hidden=false;return;}
+    box.innerHTML=hits.map(function(x){
+      return '<a class="search-hit" href="'+esc(x.href)+'">'
+        +'<span class="hit-page">'+esc(x.page)+'</span> &rsaquo; '
+        +'<span class="hit-head">'+esc(x.head)+'</span>'
+        +'<span class="hit-snip">'+esc(x.snip)+'</span></a>';
+    }).join('');
+    box.hidden=false;
+  }
+  input.addEventListener('input',run);
+  input.addEventListener('keydown',function(e){
+    if(box.hidden)return;
+    var n=box.querySelectorAll('.search-hit').length;
+    if(e.key==='ArrowDown'&&n){e.preventDefault();mark((active+1)%n);}
+    else if(e.key==='ArrowUp'&&n){e.preventDefault();mark((active-1+n)%n);}
+    else if(e.key==='Enter'&&n){
+      e.preventDefault();
+      var pick=box.querySelectorAll('.search-hit')[active>=0?active:0];
+      if(pick)window.location.href=pick.getAttribute('href');
+    }
+    else if(e.key==='Escape'){close();input.blur();}
+  });
+  box.addEventListener('click',function(e){
+    if(e.target.closest&&e.target.closest('.search-hit'))setTimeout(close,0);
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest||!e.target.closest('.search'))close();
   });
 })();
 """

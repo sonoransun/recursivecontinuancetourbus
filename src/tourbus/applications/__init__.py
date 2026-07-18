@@ -13,6 +13,8 @@ world and shows what it buys you:
   is small, using the convergents of the public ``e/n``.
 * :mod:`~tourbus.applications.collatz` — the ``3n+1`` map, a recursion as short
   as Euclid's yet still unproven, set against the CF machinery for contrast.
+* :mod:`~tourbus.applications.cfrac` — CFRAC, the Morrison–Brillhart
+  continued-fraction factoring method that cracked the Fermat number ``F7``.
 
 Everything here is standard-library only.
 """
@@ -39,6 +41,13 @@ from .wiener import (
     wiener_attack,
 )
 from .collatz import collatz_orbit, collatz_stats
+from .cfrac import (
+    FERMAT_F7,
+    F7_FACTORS,
+    cfrac_factor,
+    cfrac_relations,
+    verify_f7,
+)
 
 __all__ = [
     # calendar
@@ -63,4 +72,10 @@ __all__ = [
     # collatz
     "collatz_orbit",
     "collatz_stats",
+    # cfrac
+    "cfrac_factor",
+    "cfrac_relations",
+    "verify_f7",
+    "FERMAT_F7",
+    "F7_FACTORS",
 ]

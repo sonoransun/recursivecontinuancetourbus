@@ -58,6 +58,16 @@ Pell's equation a genuine test of method rather than patience — brute-force
 search over `y` would never reach `226153980`, but the continued fraction walks
 straight to it.
 
+### The chakravala comes first
+
+Bhāskara II did not merely study `d = 61` — he solved it, around 1150, by the
+**chakravala** ("cyclic") method: compose trial solutions of `x² − d·y² = k`
+using Brahmagupta's 628 CE **bhāvanā** identity, and turn the wheel until `k`
+lands on `1`. Fermat's 1657 challenge was, unknowingly, a rerun of a
+five-hundred-year-old exercise. The chakravala never mentions a continued
+fraction, yet it arrives at exactly the convergents of `√61` — two roads, one
+summit. Watch it run at Heritage stop H2 (Appendix H).
+
 ### Archimedes' cattle
 
 The most famous Pell equation is disguised as a poem. **Archimedes' cattle
@@ -156,6 +166,7 @@ Open the **Cattle Crossing** widget:
 and watch the convergents of `√d` scroll by until the one at the period boundary
 lights up as the Pell solution, with a running check of `x² − d y²`.
 
+**Try it live:** the Pell Playground preset to [Fermat's d = 61](../site/index.html#w7?d=61).
 ## Further reading
 
 - H. W. Lenstra, "Solving the Pell Equation," *Notices of the AMS* (2002) — a

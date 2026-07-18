@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a class="on" href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="15-terminus.html">← Stop 15 — Terminus</a> · <a href="index.html">Route map</a> · <a href="appendix-b-glossary.html">Appendix B — Glossary →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="15-terminus.html">← Stop 15 — Terminus</a> · <a href="index.html">Route map</a> · <a href="appendix-b-glossary.html">Appendix B — Glossary →</a></p>
 <h1 id="appendix-a-proofs">Appendix A — Proofs</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#a-1-the-determinant-identity-stop-3">A.1 The determinant identity (Stop 3)</a></li><li><a href="#a-2-the-straddle-and-the-error-bound-stops-3-5">A.2 The straddle and the error bound (Stops 3, 5)</a></li><li><a href="#a-3-fibonacci-ratios-converge-to-stop-4">A.3 Fibonacci ratios converge to φ (Stop 4)</a></li><li><a href="#a-4-lagrange-s-periodicity-theorem-stop-6">A.4 Lagrange&#x27;s periodicity theorem (Stop 6)</a></li><li><a href="#a-5-why-wiener-s-attack-works-stops-5-14">A.5 Why Wiener&#x27;s attack works (Stops 5, 14)</a></li><li><a href="#see-also">See also</a></li></ol></nav>
 <p>The tour keeps the narrative moving by stating theorems and pointing here for the arguments. These are proof <em>sketches</em> — complete enough to follow and to reconstruct, but written for a curious reader rather than a referee. Each is keyed to the stop where the result appears.</p>
 <p>Throughout, <code>pₙ/qₙ = [a₀; a₁, …, aₙ]</code> denotes the convergents built by the <strong>fundamental recurrence</strong> (Stop 3):</p>
 <pre><code>pₙ = aₙ·pₙ₋₁ + pₙ₋₂,      p₋₁ = 1,  p₋₂ = 0,
@@ -108,6 +120,7 @@ qₙ = aₙ·qₙ₋₁ + qₙ₋₂,      q₋₁ = 0,  q₋₂ = 1.</code></pr
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

@@ -56,13 +56,7 @@ class Glyphs:
     route_link: str
     bus: str
     bar: str
-    bar_half: str
-    tl: str
-    tr: str
-    bl: str
-    br: str
     h: str
-    v: str
     arrow: str
     star: str
     bullet: str
@@ -71,16 +65,14 @@ class Glyphs:
     def unicode(cls) -> "Glyphs":
         return cls(
             route_done="●", route_here="◉", route_ahead="○", route_link="━",
-            bus="🚌", bar="█", bar_half="▌", tl="┌", tr="┐", bl="└", br="┘",
-            h="─", v="│", arrow="→", star="⁂", bullet="▸",
+            bus="🚌", bar="█", h="─", arrow="→", star="⁂", bullet="▸",
         )
 
     @classmethod
     def ascii(cls) -> "Glyphs":
         return cls(
             route_done="*", route_here="@", route_ahead="o", route_link="-",
-            bus="[BUS]", bar="#", bar_half="=", tl="+", tr="+", bl="+", br="+",
-            h="-", v="|", arrow="->", star="*", bullet=">",
+            bus="[BUS]", bar="#", h="-", arrow="->", star="*", bullet=">",
         )
 
 
@@ -99,7 +91,6 @@ class Console:
     width: int = 80
     color: bool = False
     ascii_only: bool = False
-    fast: bool = False
     out: TextIO = sys.stdout
     inp: TextIO = sys.stdin
     rng: random.Random = None  # type: ignore[assignment]
@@ -159,8 +150,11 @@ class Console:
         """
         marker = self.style(self.glyphs.bullet + " try>", "marker")
         interactive = bool(getattr(self.inp, "isatty", lambda: False)())
+        # An empty default means "Enter does the obvious thing"; showing a
+        # bare "[]" (or "[auto: ]") would only add noise.
+        hint = f" [{default}]" if default else ""
         if interactive:
-            self.out.write(f"  {marker} {question} [{default}]: ")
+            self.out.write(f"  {marker} {question}{hint}: ")
             self.out.flush()
             try:
                 raw = self.inp.readline()
@@ -170,8 +164,8 @@ class Console:
         else:
             line = self.inp.readline() if self.inp else ""
             raw = line.strip() if line else ""
-            shown = raw if raw else f"[auto: {default}]"
-            self.emit(f"  {marker} {question} {shown}")
+            shown = raw if raw else (f"[auto: {default}]" if default else "")
+            self.emit(f"  {marker} {question} {shown}".rstrip())
         value = raw if raw else default
         try:
             return parse(value)
@@ -184,7 +178,6 @@ def make_console(
     width: int | None = None,
     color: bool | None = None,
     ascii_only: bool = False,
-    fast: bool = False,
     out: TextIO | None = None,
     inp: TextIO | None = None,
     seed: int = 0,
@@ -197,15 +190,14 @@ def make_console(
         except Exception:
             width = 80
         width = max(60, min(120, width))
+    else:
+        width = max(40, width)  # below this the rail and tables fall apart
     if color is None:
         color = supports_color(out)
-    if not getattr(out, "isatty", lambda: False)():
-        fast = True
     return Console(
         width=width,
         color=color,
         ascii_only=ascii_only,
-        fast=fast,
         out=out,
         inp=inp,
         rng=random.Random(seed),

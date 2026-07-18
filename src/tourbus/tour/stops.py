@@ -30,12 +30,11 @@ def _narr(c: Console, text: str) -> None:
 
 
 def _subhead(c: Console, text: str) -> None:
-    c.emit(" " + c.style(text, "title"))
+    render.subhead(c, text)
 
 
 def _souvenir(c: Console, text: str) -> None:
-    c.emit(" " + c.style(f"{c.glyphs.star} souvenir: ", "marker") + c.style(text, "chrome"))
-    c.emit()
+    render.souvenir(c, text)
 
 
 def _number_to_cf(text: str):

@@ -78,6 +78,8 @@ number-theory of continued fractions is drawn directly onto a material's energy
 levels. (The band spectrum is symmetric about `E = 0` for every flux; for even
 `q` the two central bands kiss at a Dirac point.) (`demo butterfly`.)
 
+![The butterfly, drawn by continuants: allowed energies against magnetic flux p/q. The wings' gaps open at every rational flux — the continued-fraction hierarchy, photographed in a spectrum.](assets/fig-butterfly.svg)
+
 ```
 $ python -m tourbus demo butterfly
 Hofstadter butterfly: bands vs magnetic flux p/q
@@ -102,6 +104,9 @@ Hofstadter butterfly: bands vs magnetic flux p/q
  6/7       7
   flux 1/2: Delta(E)=E^2-4, edges +/-2sqrt2; the spectrum is fractal.
 ```
+
+**Try it live:** open [the butterfly at flux 3/5, resolution q ≤ 28](../site/index.html#w14?q=28&fl=3/5)
+and drag the flux to watch the gaps open at every rational.
 
 ## Engineering — ladders and stability
 

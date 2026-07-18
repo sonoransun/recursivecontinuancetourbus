@@ -1,7 +1,7 @@
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from conftest import st_nonsquare_d
+from tourbus_testkit import st_nonsquare_d
 from tourbus.cf.expand import cf_from_quadratic
 from tourbus.numbertheory.pell import (
     PellSolution,

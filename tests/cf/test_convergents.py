@@ -3,7 +3,7 @@ from math import gcd
 
 from hypothesis import given
 
-from conftest import st_fractions
+from tourbus_testkit import st_fractions
 from tourbus.cf.convergents import (
     best_approximation,
     best_approximations,

@@ -59,6 +59,14 @@ makes it outrun the primitive recursive functions. It also makes it explode:
 `A(4, 2) = 2↑↑5 − 3 = 2^65536 − 3`, a number with **19,729 decimal digits** —
 which is why the `tourbus` demo politely refuses to print it in full.
 
+The function has a purpose as well as a punchline: Wilhelm Ackermann was David
+Hilbert's student, and the 1928 paper ("Zum Hilbertschen Aufbau der reellen
+Zahlen") served Hilbert's program of building analysis from finitary
+recursions — the function was evidence about what recursion *is*. The tidy
+two-argument form used here is due to Rózsa Péter (1935), whose work made
+recursion theory a discipline of its own. The name "Ackermann–Péter function"
+credits them both.
+
 ### The Y combinator: recursion from nothing
 
 If recursion is a function calling itself *by name*, where does the name come
@@ -92,7 +100,8 @@ textbook case of a recursion whose *behaviour* is far simpler than its
 *definition* — a reminder that a nested recursion can hide a trivial function,
 just as Gosper's stall (Stop 11) hid a trivial answer. Proving `M(n) = 91`
 requires reasoning about the *total* function, not tracing any single call, and
-is a classic exercise in program verification.
+is a classic exercise in program verification. McCarthy posed it around 1970,
+in the first wave of proving programs correct rather than merely running them.
 
 ## Worked examples
 

@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="08-family-tree.html">← Stop 8 — The Family Tree</a> · <a href="index.html">Route map</a> · <a href="10-casino.html">Stop 10 — The Casino →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="08-family-tree.html">← Stop 8 — The Family Tree</a> · <a href="index.html">Route map</a> · <a href="10-casino.html">Stop 10 — The Casino →</a></p>
 <h1 id="stop-9-celebrity-sightings">Stop 9 — Celebrity Sightings</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
 <blockquote>Two famous constants ride this road: e, whose continued fraction hides a perfect pattern, and π, whose continued fraction hides nothing we can see.</blockquote>
 <h2 id="overview">Overview</h2>
 <p>The tour now meets its celebrities. The quadratic surds of Stop 6 loop; the rationals of Stop 2 terminate. But the two most famous transcendental numbers, <code>e</code> and <code>π</code>, do neither — and the <em>contrast</em> between them is the lesson of this stop. One wears its structure openly; the other guards it so well that basic questions about it remain unanswered to this day.</p>
@@ -105,7 +117,7 @@ continued fraction of pi:
  7    1  312689/99532  3.1415926536  -2.91e-11</code></pre>
 <p>Put the two tables side by side: <code>e</code>&#x27;s terms are a machine you can predict; <code>π</code>&#x27;s are, for all anyone can prove, a coin toss.</p>
 <h2 id="exercises">Exercises</h2>
-<ol><li><strong>(★)</strong> From the <code>e</code> demo, write down partial quotients <code>a₈</code> through <code>a₁₄</code> predicted by Euler&#x27;s pattern, then check them against the printed head of the expansion. <details><summary>Hint</summary>The blocks continue <code>1, 8, 1, 1, 10, 1, 1, …</code>; the even terms are <code>8</code> at position 8 and <code>10</code> at position 11.</details></li></ol>
+<ol><li><strong>(★)</strong> From the <code>e</code> demo, write down partial quotients <code>a₈</code> through <code>a₁₄</code> predicted by Euler&#x27;s pattern, then check them against the printed head of the expansion. <details><summary>Hint</summary>The blocks continue <code>6, 1, 1, 8, 1, 1, 10, …</code>; the even terms are <code>6</code> at position 8, <code>8</code> at position 11, and <code>10</code> at position 14.</details></li></ol>
 <ol><li><strong>(★)</strong> Explain, in one sentence, why Euler&#x27;s pattern proves <code>e</code> is irrational. <details><summary>Hint</summary>The expansion never terminates, and only rationals have terminating continued fractions.</details></li></ol>
 <ol><li><strong>(★★)</strong> Compute the first four convergents of Brouncker&#x27;s formula for <code>4/π</code> and compare their accuracy to the regular convergents <code>22/7</code> and <code>355/113</code>. <details><summary>Hint</summary>Generalized CFs of <code>π</code> converge much more slowly than the regular one; that is exactly why the <em>regular</em> expansion is the powerful tool for approximation.</details></li></ol>
 <ol><li><strong>(★★)</strong> Using Lambert&#x27;s <code>tan(x)</code> continued fraction, evaluate the first two convergents at <code>x = π/4</code> and see them approach <code>tan(π/4) = 1</code>. <details><summary>Hint</summary>The first convergent is <code>x</code>; the second is <code>x/(1 − x²/3) = 3x/(3 − x²)</code>.</details></li></ol>
@@ -120,6 +132,7 @@ continued fraction of pi:
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

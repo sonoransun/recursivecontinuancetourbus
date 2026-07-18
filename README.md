@@ -8,6 +8,8 @@
 > exposition will fuel the fire of your curiosity toward the ever onward
 > structures of logic.
 
+**GitHub Pages site → [Recursive Continuance Tour Bus](https://sonoransun.github.io/recursivecontinuancetourbus/)** — See how far down the recursion goes!
+
 A guided tour through recursion and continued fractions — from Euclid's
 algorithm to Gosper's exact stream arithmetic and the open problems at the
 frontier — delivered three ways from one rigorous, exact-arithmetic engine.
@@ -28,11 +30,15 @@ frontier — delivered three ways from one rigorous, exact-arithmetic engine.
   stops, each mixing narrative, live-computed demonstrations, and "try this"
   prompts. Run `python -m tourbus`.
 - **The interactive exposition** — a self-contained single-page web showpiece
-  (`site/index.html`) with twelve interactive widgets: expand any number's
+  (`site/index.html`) with fifteen interactive widgets: expand any number's
   continued fraction, descend the Stern–Brocot tree, solve Pell's equation,
-  draw fractals, break a weak RSA key, and more.
+  draw fractals, break a weak RSA key, compare five expansion systems side by
+  side, and more.
 - **The docs** — a chapter per stop in [`docs/`](docs/index.md), with worked
-  examples, exercises, and further reading.
+  examples, exercises, embedded engine-drawn figures and diagrams, and further
+  reading.
+- **The syllabus** — a curriculum map for instructors: prerequisite graph,
+  15-week pacing, learning objectives ([`docs/syllabus.md`](docs/syllabus.md)).
 
 ## Quickstart
 
@@ -55,9 +61,17 @@ python -m tourbus demo cf pi
 python -m tourbus demo gosper --op add sqrt2 sqrt3
 python -m tourbus demo --list
 
-# Ride the Express Line — six fringe stops past the terminus
+# Ride the Express Line — nine fringe stops past the terminus
 python -m tourbus frontier
 python -m tourbus demo gkw          # the Gauss-Kuzmin-Wirsing constant, from scratch
+python -m tourbus demo ramanujan    # the Rogers-Ramanujan fraction and a golden-ratio miracle
+
+# Ride the Heritage Line — nine historical stops, computed live
+python -m tourbus heritage
+
+# Ride the Branch Line — six other ways to unfold a number
+python -m tourbus branch
+python -m tourbus demo cfrac        # factor an integer the way CFRAC cracked F7
 
 # Open the web exposition
 open site/index.html      # (or just double-click it)
@@ -88,7 +102,7 @@ Each stop has a chapter in [`docs/`](docs/index.md) and a section in
 
 ### The Express Line (fringe avenues)
 
-Six deeper stops past the terminus, each still computed exactly (or rigorously)
+Nine deeper stops past the terminus, each still computed exactly (or rigorously)
 on the same engine — `python -m tourbus frontier`:
 
 | Stop | Topic |
@@ -99,6 +113,9 @@ on the same engine — `python -m tourbus frontier`:
 | E4 | CF variants — nearest-integer and Hirzebruch–Jung "minus" expansions |
 | E5 | The three-distance theorem |
 | E6 | The Gauss–Kuzmin–Wirsing constant, computed from scratch |
+| E7 | Colliding blocks count π — mechanics reduced to rotation |
+| E8 | The River — Conway's topograph, where √d's period solves Pell |
+| E9 | Ramanujan's continued fraction — a *q*-fraction that collapses to the golden ratio |
 
 See [Appendix D](docs/appendix-d-frontier.md).
 
@@ -122,6 +139,42 @@ sunflowers and quasicrystals. Ride the whole line with `python -m tourbus
 crossdomain`, or run a single stop (`python -m tourbus demo huckel`,
 `python -m tourbus demo butterfly`). See
 [Appendix F — The Same Recurrence Everywhere](docs/appendix-f-cross-domain.md).
+
+### The Heritage Line (history, computed)
+
+Nine historical stops — the same road, driven through time, from Euclid's ladder
+to a 1972 memo — `python -m tourbus heritage`:
+
+| Stop | Year | Topic |
+|------|------|-------|
+| H1 | c. 300 BC | Euclid's ladder — the algorithm before the notation |
+| H2 | 628–1150 | Brahmagupta and Bhāskara — the chakravala solves Pell |
+| H3 | 1572–1655 | Bombelli, Cataldi, Brouncker — first fractions in print |
+| H4 | 1682 | Huygens' planetarium — gears cut to a convergent |
+| H5 | 1761 | Lambert — π proved irrational through tan x |
+| H6 | 1844 | Liouville — the first number *proved* transcendental |
+| H7 | 1858–1861 | Stern and Brocot — the tree of all fractions, twice |
+| H8 | 1970 | Morrison–Brillhart — CFRAC factors the Fermat number F₇ |
+| H9 | 1972 | Gosper's Item 101 — arithmetic learns to stream |
+
+Every claim is computed live on the same engine. See
+[Appendix H](docs/appendix-h-history.md).
+
+### The Branch Line (other ways to unfold a number)
+
+Six stops on the alternatives to the continued fraction — every one exact on the
+same engine — `python -m tourbus branch`:
+
+| Stop | Topic |
+|------|-------|
+| B1 | Engel expansions — an ascending staircase of ceilings; the factorial series of *e* |
+| B2 | Lüroth and Pierce series — an honest casino, and a rational that loops forever |
+| B3 | Egyptian fractions — the greedy scribe and the Erdős–Straus conjecture |
+| B4 | Zeckendorf and base-φ — integers written in Fibonacci |
+| B5 | Cutting sequences — Ostrowski numeration and the Sturmian Fibonacci word |
+| B6 | Lochs' theorem — the exchange rate between decimal digits and CF terms |
+
+See [Appendix I](docs/appendix-i-branches.md).
 
 ## Using the engine directly
 

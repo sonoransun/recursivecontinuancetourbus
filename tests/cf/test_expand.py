@@ -3,7 +3,7 @@ from fractions import Fraction
 import pytest
 from hypothesis import given
 
-from conftest import st_fractions, st_nonsquare_d
+from tourbus_testkit import st_fractions, st_nonsquare_d
 from tourbus.cf.convergents import recurrence
 from tourbus.cf.expand import cf_from_fraction, cf_from_quadratic
 

@@ -23,7 +23,7 @@ from typing import Iterable, Iterator
 
 from .expand import cf_from_interval
 
-__all__ = ["GCFTerm", "gcf_convergents", "gcf_to_simple", "pi_gcf"]
+__all__ = ["GCFTerm", "brouncker_gcf", "gcf_convergents", "gcf_to_simple", "pi_gcf"]
 
 
 @dataclass(frozen=True)
@@ -95,4 +95,21 @@ def pi_gcf() -> Iterator[GCFTerm]:
     i = 1
     while True:
         yield GCFTerm(6, (2 * i - 1) ** 2)
+        i += 1
+
+
+def brouncker_gcf() -> Iterator[GCFTerm]:
+    """Brouncker's ``4/pi = 1 + 1^2/(2 + 3^2/(2 + 5^2/(2 + ...)))`` (1655).
+
+    The first infinite continued fraction for pi in the Western literature — the
+    same odd squares as :func:`pi_gcf` over the constant denominator 2.
+
+    >>> import itertools
+    >>> [str(c) for c in itertools.islice(gcf_convergents(brouncker_gcf()), 4)]
+    ['1', '3/2', '15/13', '105/76']
+    """
+    yield GCFTerm(1, 1)
+    i = 1
+    while True:
+        yield GCFTerm(2, (2 * i - 1) ** 2)
         i += 1

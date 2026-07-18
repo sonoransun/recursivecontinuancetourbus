@@ -42,6 +42,8 @@ fraction is missing, and none is duplicated — a complete, non-redundant
 enumeration of the rationals, which is remarkable given how easy it is to
 double-count them.
 
+![Five levels of the family tree: every positive rational exactly once, every child a mediant of its ancestors, every left-right address a continued fraction wearing a different coat.](assets/fig-stern-brocot.svg)
+
 ### Address = continued fraction
 
 Each node has an address: the string of **L**eft and **R**ight turns from the
@@ -74,6 +76,8 @@ cross-sections of one structure: neighbours in a Farey sequence are exactly
 parent-and-child (or the two fractions flanking a mediant) in the tree. The
 mediant of two Farey neighbours is the next fraction to appear between them as
 `n` grows.
+
+![A circle of radius 1/(2q²) parked over every fraction p/q: tangent exactly when the fractions are Farey neighbours. The mediant is the circle that fits in the gap.](assets/fig-ford-circles.svg)
 
 ### fusc, and the Calkin–Wilf enumeration
 
@@ -170,6 +174,7 @@ Open the **Family Tree** widget:
 R to descend the Stern–Brocot tree, or type a fraction and watch the path light
 up, with the mediant computed at every branch.
 
+**Try it live:** descend straight to [355/113](../site/index.html#w2?f=355/113).
 ## Further reading
 
 - Graham, Knuth & Patashnik, *Concrete Mathematics*, §4.5 — the definitive

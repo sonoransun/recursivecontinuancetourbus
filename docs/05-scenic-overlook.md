@@ -171,6 +171,7 @@ Open the **Scenic Overlook** widget:
 slider for the target ratio and watch the best-approximation fractions update
 live, with the calendar, gear, and π presets one click away.
 
+**Try it live:** the calendar preset to [a tolerance of 2.5 days per millennium](../site/index.html#w9?b=2.5).
 ## Further reading
 
 - Khinchin, *Continued Fractions*, §6 (best approximations, Legendre's

@@ -80,6 +80,8 @@ ratio `φ` at Stop 4 is `[1; 1, 1, …]`, the continued fraction whose every
 quotient is `1`, and it is the "most irrational" number for the very same
 reason. The depot and the golden milestone are two views of one fact.
 
+![The call tree of a naive fib(7): a recursion that forks faster than you can drive. Lamé's theorem is the promise that Euclid never does this — the quotients prune the tree to a single aisle.](assets/fig-calltree.svg)
+
 The Fibonacci link also explains the constant `5`: since `F₍ₙ₊₁₎ ≈ φⁿ/√5` and
 `log₁₀ φ ≈ 0.208 ≈ 1/4.785`, the digit count grows like `n/4.785`, giving the
 factor just under five.

@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,13 +45,19 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content">
+  <main class="content" id="main">
 <section class="hero">
   <div class="eyebrow">Line R &middot; Recursion &amp; Continued Fractions</div>
   <h1>Recursive Continuance Tour Bus</h1>
@@ -84,15 +95,18 @@
 
 <section>
   <h2>The Express Line</h2>
-  <p>Six deeper, stranger stops past the terminus &mdash; each still computed
+  <p>Nine deeper, stranger stops past the terminus &mdash; each still computed
   exactly (or rigorously) on the same engine. See
   <a href="appendix-d-frontier.html">the Fringe Avenues</a>.</p>
-  <div class="card-grid"><a class="card express" href="appendix-d-frontier.html#e1"><span class="card-num">E1</span><span class="card-title">The Markov Spectrum</span><span class="card-note">The numbers after the golden ratio.</span></a>
-<a class="card express" href="appendix-d-frontier.html#e2"><span class="card-num">E2</span><span class="card-title">Continuants</span><span class="card-note">The polynomial inside every convergent.</span></a>
-<a class="card express" href="appendix-d-frontier.html#e3"><span class="card-num">E3</span><span class="card-title">Algebraic Irrationals</span><span class="card-note">Cube roots and an open problem.</span></a>
-<a class="card express" href="appendix-d-frontier.html#e4"><span class="card-num">E4</span><span class="card-title">Continued-Fraction Variants</span><span class="card-note">Nearest-integer and minus expansions.</span></a>
-<a class="card express" href="appendix-d-frontier.html#e5"><span class="card-num">E5</span><span class="card-title">The Three-Distance Theorem</span><span class="card-note">A surprise in an irrational rotation.</span></a>
-<a class="card express" href="appendix-d-frontier.html#e6"><span class="card-num">E6</span><span class="card-title">The Gauss-Kuzmin-Wirsing Constant</span><span class="card-note">Computed from the transfer operator.</span></a></div>
+  <div class="card-grid"><a class="card express" href="appendix-d-frontier.html#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio"><span class="card-num">E1</span><span class="card-title">The Markov Spectrum</span><span class="card-note">The numbers after the golden ratio.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e2-continuants-the-polynomial-behind-every-convergent"><span class="card-num">E2</span><span class="card-title">Continuants</span><span class="card-note">The polynomial inside every convergent.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e3-algebraic-irrationals-cube-roots-and-an-open-problem"><span class="card-num">E3</span><span class="card-title">Algebraic Irrationals</span><span class="card-note">Cube roots and an open problem.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e4-continued-fraction-variants-nearest-integer-and-minus"><span class="card-num">E4</span><span class="card-title">Continued-Fraction Variants</span><span class="card-note">Nearest-integer and minus expansions.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e5-the-three-distance-theorem"><span class="card-num">E5</span><span class="card-title">The Three-Distance Theorem</span><span class="card-note">A surprise in an irrational rotation.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e6-the-gauss-kuzmin-wirsing-constant-from-scratch"><span class="card-num">E6</span><span class="card-title">The Gauss-Kuzmin-Wirsing Constant</span><span class="card-note">Computed from the transfer operator.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e7-physics-colliding-blocks-count"><span class="card-num">E7</span><span class="card-title">Colliding Blocks</span><span class="card-note">Counting π with elastic collisions.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e8-the-river-conway-s-topograph"><span class="card-num">E8</span><span class="card-title">The River</span><span class="card-note">Conway&#x27;s topograph walks x² − dy² to Pell.</span></a>
+<a class="card express" href="appendix-d-frontier.html#e9-ramanujan-s-continued-fraction"><span class="card-num">E9</span><span class="card-title">Ramanujan&#x27;s Continued Fraction</span><span class="card-note">A q-fraction that collapses to the golden ratio.</span></a></div>
 </section>
 
 <section>
@@ -124,17 +138,57 @@
 </section>
 
 <section>
+  <h2>The Heritage Line</h2>
+  <p>Nine stops through twenty-three centuries of history &mdash;
+  Euclid's mutual measuring, the chakravala, the first fractions in print,
+  Huygens' gears, Lambert's proof, Liouville's built-to-order transcendental,
+  the tree of Stern and Brocot, the factorization of F&#8327;, and Gosper's
+  stream machine &mdash; every episode re-run live on the engine with
+  <code>python -m tourbus heritage</code>. See
+  <a href="appendix-h-history.html">Appendix H</a>.</p>
+  <div class="card-grid"><a class="card heritage" href="appendix-h-history.html#h1-c-300-bc-the-ladder-of-euclid"><span class="card-num">H1</span><span class="card-title">The Ladder of Euclid</span><span class="card-note">Anthyphairesis: the continued fraction, three centuries before Christ and two millennia before its name.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h2-628-1150-the-cyclic-method"><span class="card-num">H2</span><span class="card-title">The Cyclic Method</span><span class="card-note">Fermat&#x27;s challenge, solved in Sanskrit verse five hundred years early.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h3-1572-1655-first-fractions-in-print"><span class="card-num">H3</span><span class="card-title">First Fractions in Print</span><span class="card-note">Bombelli, Cataldi, Brouncker: a notation, a name, and pi&#x27;s first formula.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h4-1682-the-planetarium"><span class="card-num">H4</span><span class="card-title">The Planetarium</span><span class="card-note">Huygens cuts Saturn&#x27;s orbit into 206 brass teeth.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h5-1761-lambert-puts-on-trial"><span class="card-num">H5</span><span class="card-title">Lambert&#x27;s Trial of Pi</span><span class="card-note">The tangent testifies, and pi is proved irrational.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h6-1844-the-skyscraper-of-liouville"><span class="card-num">H6</span><span class="card-title">The Skyscraper of Liouville</span><span class="card-note">A number built to be approximated: the first proven transcendental.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h7-1858-1861-the-tree-in-the-workshop"><span class="card-num">H7</span><span class="card-title">The Tree in the Workshop</span><span class="card-note">Stern&#x27;s blackboard and Brocot&#x27;s gears grow the same tree of fractions.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h8-1970-the-factoring-machine"><span class="card-num">H8</span><span class="card-title">The Factoring Machine</span><span class="card-note">CFRAC cracks F7: convergents turned against the integers.</span></a>
+<a class="card heritage" href="appendix-h-history.html#h9-1972-item-101"><span class="card-num">H9</span><span class="card-title">Item 101</span><span class="card-note">Gosper&#x27;s memo teaches arithmetic to stream forever.</span></a></div>
+</section>
+
+<section>
+  <h2>The Branch Line</h2>
+  <p>Six other ways to unfold a number &mdash; the Engel and Pierce
+  staircases, the greedy Egyptian scribe, Zeckendorf's Fibonacci binary,
+  Sturmian cutting sequences, and the exchange rate of Lochs' theorem &mdash;
+  each an alternative to the continued fraction, computed exactly with
+  <code>python -m tourbus branch</code>. See
+  <a href="appendix-i-branches.html">Appendix I</a>.</p>
+  <div class="card-grid"><a class="card branch" href="appendix-i-branches.html#b1-engel-expansions-the-ascending-staircase"><span class="card-num">B1</span><span class="card-title">Engel Expansions</span><span class="card-note">The ascending staircase: ceilings where the continued fraction takes floors.</span></a>
+<a class="card branch" href="appendix-i-branches.html#b2-l-roth-and-pierce-the-honest-casino"><span class="card-num">B2</span><span class="card-title">Lüroth and Pierce</span><span class="card-note">The honest casino, and a rational that loops forever.</span></a>
+<a class="card branch" href="appendix-i-branches.html#b3-egyptian-fractions-the-greedy-scribe"><span class="card-num">B3</span><span class="card-title">Egyptian Fractions</span><span class="card-note">The greedy scribe and the Erdős-Straus problem.</span></a>
+<a class="card branch" href="appendix-i-branches.html#b4-zeckendorf-and-the-golden-base"><span class="card-num">B4</span><span class="card-title">Zeckendorf and the Golden Base</span><span class="card-note">Integers written in Fibonacci, and base-φ.</span></a>
+<a class="card branch" href="appendix-i-branches.html#b5-cutting-sequences-ostrowski-sturmian-words-and-the-three-distances"><span class="card-num">B5</span><span class="card-title">Cutting Sequences</span><span class="card-note">Ostrowski numeration and Sturmian words on ticker tape.</span></a>
+<a class="card branch" href="appendix-i-branches.html#b6-lochs-theorem-the-exchange-rate"><span class="card-num">B6</span><span class="card-title">Lochs&#x27; Theorem</span><span class="card-note">The exchange rate between digits and quotients.</span></a></div>
+</section>
+
+<section>
   <h2>Reference &amp; running it</h2>
   <ul class="ref-list">
     <li><a href="appendix-a-proofs.html">Appendix A &mdash; Proofs</a></li>
     <li><a href="appendix-b-glossary.html">Appendix B &mdash; Glossary</a></li>
     <li><a href="appendix-c-references.html">Appendix C &mdash; References</a></li>
+    <li><a href="appendix-g-hints.html">Appendix G &mdash; Hints &amp; selected answers</a></li>
+    <li><a href="syllabus.html">The Syllabus &mdash; riding the tour as a course</a></li>
   </ul>
   <p>The whole tour is powered by <code>tourbus</code>, a standard-library-only
   Python package. Ride it in your terminal:</p>
   <pre><code>python -m tourbus            # the interactive tour
 python -m tourbus --all      # the whole tour as a transcript
 python -m tourbus frontier   # the Express Line
+python -m tourbus heritage   # the Heritage Line (the history)
+python -m tourbus branch     # the Branch Line (other expansions)
 python -m tourbus demo gkw   # the Gauss-Kuzmin-Wirsing constant, from scratch</code></pre>
 </section>
 </main>
@@ -143,6 +197,7 @@ python -m tourbus demo gkw   # the Gauss-Kuzmin-Wirsing constant, from scratch</
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

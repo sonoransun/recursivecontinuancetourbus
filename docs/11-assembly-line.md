@@ -42,6 +42,20 @@ The machine alternates: emit whenever it can prove the next output digit,
 otherwise ingest another input digit to narrow the uncertainty. It never rounds
 and never approximates — every emitted term is exact.
 
+The whole assembly line is one loop — test, then emit if the digit is forced,
+ingest if it is not, and come back around forever:
+
+```mermaid
+flowchart TD
+    A["state (a, b, c, d)"] --> B["test: floor(a/c) = floor((a+b)/(c+d)) ?"]
+    B -->|"yes - the next output digit is forced"| C["emit q = floor(a/c)"]
+    C --> D["state becomes (c, d, a - q*c, b - q*d)"]
+    D --> B
+    B -->|"no - not yet certain"| E["ingest next input term p"]
+    E --> F["state becomes (a*p + b, a, c*p + d, c)"]
+    F --> B
+```
+
 ### Bihomographic: two inputs at once
 
 To add or multiply *two* continued fractions we need the **bihomographic** form
@@ -79,6 +93,16 @@ producing output. `tourbus` guards against this with a safety cutoff and reports
 the stall honestly. This is not a bug; it is a shadow of the halting problem
 falling across arithmetic itself. A machine that produces exact answers cannot,
 in general, *know* when its answer has become rational.
+
+### From memo to method
+
+HAKMEM itself deserves a footnote: AI Memo 239 (February 1972) was a stapled
+grab-bag of tricks from the MIT AI Lab — number theory next to circuit hacks
+next to screen-drawing lore — and item 101 sat inside it, never published as a
+paper, passed around for decades as hacker folklore. Jean Vuillemin's 1990
+IEEE paper finally gave the algorithm formal foundations as exact real
+arithmetic. Heritage stop H6 (Appendix H) places the memo in the long line
+that starts at Euclid.
 
 ## Worked examples
 

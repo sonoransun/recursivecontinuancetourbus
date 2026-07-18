@@ -1,7 +1,7 @@
 """Rendering primitives for the command-line tour.
 
 Pure functions that turn data into strings: aligned tables, horizontal bar
-charts, ASCII histograms, framed boxes, the route map, and the two-dimensional
+charts, ASCII histograms, the route map, and the two-dimensional
 "stacked" rendering of a continued fraction. Everything takes a
 :class:`~tourbus.tour.termio.Console` for width and styling so the same code
 draws in colour, monochrome, or pure ASCII.
@@ -9,13 +9,40 @@ draws in colour, monochrome, or pure ASCII.
 
 from __future__ import annotations
 
+import textwrap
 from typing import Sequence
 
 from .termio import Console
 
 
+def subhead(c: Console, text: str) -> None:
+    """A one-line section title, wrapped on narrow consoles."""
+    for line in textwrap.wrap(text, width=max(20, c.width - 1)) or [""]:
+        c.emit(" " + c.style(line, "title"))
+
+
+def souvenir(c: Console, text: str) -> None:
+    """The take-away line closing a stop, wrapped so it never overflows.
+
+    Continuation lines hang under the start of the text, past the
+    ``souvenir:`` marker.
+    """
+    prefix = f"{c.glyphs.star} souvenir: "
+    body = textwrap.wrap(text, width=max(20, c.width - len(prefix) - 1)) or [""]
+    c.emit(" " + c.style(prefix, "marker") + c.style(body[0], "chrome"))
+    pad = " " * (len(prefix) + 1)
+    for line in body[1:]:
+        c.emit(pad + c.style(line, "chrome"))
+    c.emit()
+
+
 def route_line(total: int, current: int, console: Console) -> str:
-    """The ``●━━◉━━○`` progress rail with a ``STOP k / N`` label."""
+    """The ``●━━◉━━○`` progress rail with a ``STOP k / N`` label.
+
+    The rail adapts to the console: links shrink from two glyphs to one to
+    none, and on a very narrow console the label wraps onto its own line, so
+    the rail never overflows the width.
+    """
     g = console.glyphs
     dots = []
     for i in range(1, total + 1):
@@ -25,9 +52,17 @@ def route_line(total: int, current: int, console: Console) -> str:
             dots.append(console.style(g.route_here, "route_here"))
         else:
             dots.append(console.style(g.route_ahead, "route_ahead"))
-    link = console.style(g.route_link * 2, "chrome")
-    label = console.style(f"STOP {current} / {total}", "title")
-    return link.join(dots) + "   " + label
+    label = f"STOP {current} / {total}"
+    # Widths are measured on the unstyled text (style() adds zero-width ANSI
+    # codes); the caller prefixes one space, hence ``width - 1``.
+    for link_len in (2, 1, 0):
+        if total + link_len * (total - 1) + 3 + len(label) <= console.width - 1:
+            link = console.style(g.route_link * link_len, "chrome")
+            return link.join(dots) + "   " + console.style(label, "title")
+    # Narrower still: drop the links and wrap the label under the rail.
+    link_len = 1 if total + (total - 1) <= console.width - 1 else 0
+    link = console.style(g.route_link * link_len, "chrome")
+    return link.join(dots) + "\n " + console.style(label, "title")
 
 
 def stop_header(number: int, total: int, title: str, console: Console) -> str:
@@ -130,23 +165,6 @@ def histogram(
     return "\n".join(out)
 
 
-def box(body: str, *, console: Console, title: str | None = None, indent: str = " ") -> str:
-    """Frame a block of text; optional title sits on the top border."""
-    g = console.glyphs
-    lines = body.split("\n")
-    inner = max((len(l) for l in lines), default=0)
-    if title:
-        inner = max(inner, len(title) + 2)
-    top_label = f" {title} " if title else ""
-    top = g.tl + top_label + g.h * (inner - len(top_label) + 1) + g.tr
-    bottom = g.bl + g.h * (inner + 1) + g.br
-    out = [indent + console.style(top, "chrome")]
-    for l in lines:
-        out.append(indent + console.style(g.v, "chrome") + " " + l.ljust(inner) + console.style(g.v, "chrome"))
-    out.append(indent + console.style(bottom, "chrome"))
-    return "\n".join(out)
-
-
 def stacked_fraction(terms: Sequence[int], *, console: Console, max_terms: int = 5) -> str:
     """Render ``[a0; a1, ...]`` as a 2-D staircase of stacked fractions."""
     shown = list(terms[:max_terms])
@@ -174,16 +192,3 @@ def _frac_block(terms, bar_char: str):
     for i, l in enumerate(frac_lines):
         out.append((prefix if i == bar_index else pad) + l)
     return out, bar_index
-
-
-def two_columns(left: str, right: str, *, console: Console, gap: int = 4) -> str:
-    """Place two text blocks side by side (used for step-trace vs table)."""
-    lcol = left.split("\n")
-    rcol = right.split("\n")
-    lw = max((len(l) for l in lcol), default=0)
-    height = max(len(lcol), len(rcol))
-    lcol += [""] * (height - len(lcol))
-    rcol += [""] * (height - len(rcol))
-    return "\n".join(
-        f" {lcol[i].ljust(lw)}{' ' * gap}{rcol[i]}" for i in range(height)
-    )

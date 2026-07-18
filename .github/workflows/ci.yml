@@ -1,0 +1,141 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install (editable) with test extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[test]"
+
+      - name: Fast test suite
+        run: pytest -m "not slow" -q
+
+      - name: Doctests
+        run: pytest --doctest-modules src/tourbus -q
+
+      - name: Slow / statistical tests
+        run: pytest -m slow -q
+
+      - name: Tour smoke test (must run non-interactively and deterministically)
+        run: |
+          python -m tourbus --all --no-color --seed 1 --width 80 > run1.txt
+          python -m tourbus --all --no-color --seed 1 --width 80 > run2.txt
+          diff run1.txt run2.txt && echo "deterministic OK"
+          python -m tourbus demo pell 61 --no-color | grep -q 1766319049
+          python -m tourbus list --no-color > /dev/null
+          python -m tourbus frontier --no-color > /dev/null           # the Express Line
+          python -m tourbus frontier 7 --no-color | grep -q 31415     # colliding blocks count pi
+          python -m tourbus frontier 8 --no-color | grep -q "1, 1, 1, 4"  # topograph river = CF of sqrt(7)
+          python -m tourbus frontier 9 --no-color | grep -q 0.2840790438  # Ramanujan's golden identity
+          python -m tourbus crossdomain --no-color > /dev/null        # the Cross-Domain Line
+          python -m tourbus heritage --no-color > /dev/null           # the Heritage Line
+          python -m tourbus heritage 2 --no-color | grep -q 1766319049  # chakravala solves Pell N=61
+          python -m tourbus heritage 8 --no-color | grep -q 59649589127497217  # CFRAC factors F7
+          python -m tourbus branch --no-color > /dev/null             # the Branch Line
+          python -m tourbus branch 6 --no-color | grep -q 0.970       # Lochs' exchange rate
+          python -m tourbus demo gkw --no-color | grep -q -- -0.303    # GKW constant from scratch
+          python -m tourbus demo huckel --no-color | grep -q aromatic  # chemistry = continuant
+          python -m tourbus demo butterfly --no-color > /dev/null       # Hofstadter via Sturm
+          python -m tourbus demo cfrac --no-color | grep -q 3119       # CFRAC cracks a semiprime
+          python -m tourbus demo ramanujan --no-color | grep -q 0.2840790438  # Rogers-Ramanujan
+          echo "e" | python -m tourbus stop 9 --no-color > /dev/null  # piped stdin must not block
+
+  self-contained-page:
+    name: web exposition is self-contained
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No external requests, well-formed, all widgets present
+        run: |
+          python - <<'PY'
+          import re, sys
+          s = open("site/index.html").read()
+          ext = [u for u in re.findall(r'https?://[^"\' )]+', s) if "www.w3.org" not in u]
+          assert not ext, f"external URLs found: {ext[:5]}"
+          for tag in ("<!doctype", "<html", "<head>", "<body>"):
+              assert tag in s.lower(), f"missing wrapper tag: {tag}"
+          assert all(f"mountW{i}(" in s for i in range(1, 16)), "missing a widget mount"
+          assert "<script" in s and "<style" in s
+          print("site/index.html: self-contained full document, all 15 widgets present")
+          PY
+
+  pages-site:
+    name: docs site builds and links resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Rebuild the GitHub Pages site
+        run: python build_site.py
+      - name: Committed HTML is in sync with the Markdown sources
+        run: git diff --exit-code docs/
+      - name: "All internal links resolve, #fragments hit anchors"
+        run: |
+          python - <<'PY'
+          import glob, os, re
+          pages, anchors = {}, {}
+          for f in sorted(glob.glob("docs/*.html")):
+              s = open(f).read()
+              pages[os.path.basename(f)] = s
+              anchors[os.path.basename(f)] = set(re.findall(r'(?:id|name)="([^"]+)"', s))
+          bad = []
+          for name, s in sorted(pages.items()):
+              for href in re.findall(r'href="([^"]+)"', s):
+                  if href.startswith(("http", "data:", "mailto:")):
+                      continue
+                  base, _, frag = href.partition("#")
+                  # widget deep links carry a query (#w7?d=61); the mount id is the anchor
+                  frag = re.sub(r'^(w\d+[ab]?)\?.*$', r'\1', frag)
+                  if base and not os.path.exists(os.path.join("docs", base)):
+                      bad.append((name, href))
+                  elif frag and frag not in anchors.get(base or name, set()):
+                      bad.append((name, href))  # dead #fragment (same-page when base is empty)
+          assert not bad, f"broken internal links or anchors: {bad[:10]}"
+          n = len(pages)
+          assert n == 27, f"expected exactly 27 pages, found {n} (update this when pages are added or removed)"
+          assert os.path.exists("docs/.nojekyll")
+          print(f"docs site OK: {n} pages, links and #fragments resolve, .nojekyll present")
+          PY
+      - name: "Figures and diagrams are fully rendered and in sync"
+        run: |
+          python - <<'PY'
+          import glob, os, re
+          pages = {os.path.basename(f): open(f).read() for f in sorted(glob.glob("docs/*.html"))}
+          for name, s in sorted(pages.items()):
+              assert 'class="lang-mermaid"' not in s, f"unrendered mermaid fence in {name}"
+              if name != "explore.html":
+                  assert "<img" not in s, f"stray <img> in {name} (figures must be inlined SVG)"
+          disk = {os.path.basename(p) for p in glob.glob("docs/assets/fig-*.svg")}
+          referenced = set()
+          for f in glob.glob("docs/*.md"):
+              referenced |= {os.path.basename(m) for m in
+                             re.findall(r'!\[[^\]]*\]\((assets/fig-[^)]+\.svg)\)', open(f).read())}
+          assert disk == referenced, f"figure assets out of sync: disk-only={disk - referenced}, md-only={referenced - disk}"
+          n_fig = sum(s.count('<figure class="figure">') for s in pages.values())
+          n_dia = sum(s.count('class="diagram"') for s in pages.values())
+          assert n_fig >= 17 and n_dia >= 4, f"expected >=17 figures and >=4 diagrams, found {n_fig}/{n_dia}"
+          print(f"figures/diagrams OK: {len(disk)} assets all referenced, {n_fig} figures, {n_dia} diagrams, no <img>, no raw fences")
+          PY

@@ -2,7 +2,7 @@ from fractions import Fraction
 
 from hypothesis import given
 
-from conftest import st_positive_fractions
+from tourbus_testkit import st_positive_fractions
 from tourbus.frontier import variants as V
 
 

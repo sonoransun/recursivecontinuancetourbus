@@ -148,8 +148,9 @@ are, for all anyone can prove, a coin toss.
 1. **(★)** From the `e` demo, write down partial quotients `a₈` through `a₁₄`
    predicted by Euler's pattern, then check them against the printed head of the
    expansion.
-   <details><summary>Hint</summary>The blocks continue `1, 8, 1, 1, 10, 1, 1,
-   …`; the even terms are `8` at position 8 and `10` at position 11.</details>
+   <details><summary>Hint</summary>The blocks continue `6, 1, 1, 8, 1, 1, 10,
+   …`; the even terms are `6` at position 8, `8` at position 11, and `10` at
+   position 14.</details>
 
 2. **(★)** Explain, in one sentence, why Euler's pattern proves `e` is
    irrational.

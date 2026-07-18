@@ -41,6 +41,17 @@ These non-integer dimensions are the signature of a fractal: the object is
 genuinely "rougher" than a smooth curve but "thinner" than a solid, and the
 fraction `d` measures exactly where it sits.
 
+![The attractor, approached: each frame is one more application of "replace me with smaller copies of myself." The limit is the fixed point.](assets/fig-koch-sierpinski.svg)
+
+Every exhibit in this hall is older than its label. Cantor's set (1883), the
+Koch curve (1904), and Sierpiński's triangle (1915) were built as
+counterexamples — "monsters" meant to break the era's intuitions about curves —
+and the dragon was folded by physicists Heighway, Banks, and Harter in the
+1960s and spread by Martin Gardner's 1967 column. Only in 1975 did Benoit
+Mandelbrot coin *fractal* and argue the monsters were the rule, not the
+exception — coastlines, lungs, markets. The gallery had been open for ninety
+years before anyone hung a sign.
+
 ### Space-filling curves
 
 Push the branching further and a curve can fill an entire region — dimension
@@ -52,6 +63,8 @@ points in one dimension stay nearby in two (database indexing, image dithering).
 Both have similarity dimension `2` — a one-dimensional path that is, in the
 limit, two-dimensional. Peano's discovery of such curves in 1890 was a genuine
 shock to the intuition that a line and a plane are different sizes.
+
+![Ten paper-folds of the dragon: a one-dimensional path on its way to being two-dimensional, and it tiles the plane when it grows up.](assets/fig-dragon.svg)
 
 ### Hutchinson: a fractal is a fixed point
 
@@ -162,6 +175,7 @@ Open the **Hall of Mirrors** widget:
 depth slider and watch the dragon, Koch, Sierpiński, and Hilbert curves converge
 on their fixed-point attractors one recursive level at a time.
 
+**Try it live:** the Fractal Lab preset to [the dragon at depth 10](../site/index.html#w8?f=dragon&d=10).
 ## Further reading
 
 - K. Falconer, *Fractal Geometry: Mathematical Foundations and Applications* —

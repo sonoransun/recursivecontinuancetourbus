@@ -22,6 +22,7 @@ __all__ = [
     "phi_cf",
     "sqrt_cf",
     "e_cf",
+    "tan1_cf",
     "pi_cf",
     "pi_cf_via_gcf",
     "gamma_cf",
@@ -83,6 +84,45 @@ def e_cf(max_terms: int | None = None) -> CF:
             k += 1
 
     return CF.from_stream(factory, kind=CFKind.INFINITE)
+
+
+def tan1_cf() -> CF:
+    """Lambert's ``tan(1) = [1; 1, 1, 3, 1, 5, 1, 7, ...]``, certified exactly.
+
+    The alternating Taylor partial sums for ``sin(1)`` and ``cos(1)`` are
+    exact Fractions that bracket their limits, so ``(sin_lo/cos_hi,
+    sin_hi/cos_lo)`` rigorously brackets ``tan(1)`` — no rounding anywhere.
+    (Lambert's own generalized CF is *not* used: its convergents approach
+    monotonically, so the alternation-based ``gcf_to_simple`` bracket would
+    not certify it.)
+
+    >>> tan1_cf().terms(10)
+    [1, 1, 1, 3, 1, 5, 1, 7, 1, 9]
+    """
+
+    def bracket(parity: int, count: int) -> tuple[Fraction, Fraction]:
+        # Partial sums of sum_j (-1)^j / (2j + parity)! — consecutive ones
+        # bracket the limit (alternating, strictly shrinking terms).
+        total = prev = Fraction(0)
+        fact = 1                      # parity! for parity in {0, 1}
+        sign = 1
+        for j in range(count):
+            prev = total
+            total += Fraction(sign, fact)
+            sign = -sign
+            fact *= (parity + 2 * j + 1) * (parity + 2 * j + 2)
+        lo, hi = sorted((prev, total))
+        return lo, hi
+
+    def produce(prec: int) -> tuple[Fraction, Fraction]:
+        count = prec + 8
+        sin_lo, sin_hi = bracket(1, count)
+        cos_lo, cos_hi = bracket(0, count)
+        return sin_lo / cos_hi, sin_hi / cos_lo
+
+    return CF.from_stream(
+        lambda: cf_from_interval(produce), kind=CFKind.INFINITE
+    )
 
 
 def _machin_pi(prec: int) -> Decimal:

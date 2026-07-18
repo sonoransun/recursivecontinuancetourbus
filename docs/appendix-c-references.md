@@ -33,10 +33,101 @@ purposes, it is called out.
   survey that carries the reader right up to the open problems of the last stop.
   *[Stops 9, 15.]*
 
-## Number theory, approximation, and Pell
+## Historical primary sources
 
-- **Euclid, *Elements*, Book VII, Props. 1–2.** The original algorithm, c. 300
-  BC. Readable in Heath's translation. *[Stop 1.]*
+- **Euclid, *Elements*, Books VII (Props. 1–2) and X (Prop. 2) (c. 300 BC).**
+  The gcd as mutual measuring — and, in X.2, the startling converse: a measuring
+  that never ends means the magnitudes share no common measure. Readable in
+  Heath's translation. *[Stops 1, 2; Heritage H1.]*
+
+- **Āryabhaṭa, *Āryabhaṭīya* (499).** The kuṭṭaka ("pulverizer") for linear
+  indeterminate equations — Euclid's quotients run backward, an ancestor of the
+  Bézout step of Stop 1. *[Stop 1; Heritage H2.]*
+
+- **Brahmagupta, *Brāhmasphuṭasiddhānta* (628).** The bhāvanā composition law
+  for `x² − d·y² = k`, with d = 92 dispatched a millennium before Europe
+  noticed the problem. *[Stop 7; Heritage H2.]*
+
+- **Bhāskara II, *Bījagaṇita* (1150).** The chakravala in full, d = 61 included
+  — five centuries before Fermat posed that exact case as a challenge.
+  *[Stop 7; Heritage H2.]*
+
+- **R. Bombelli, *L'Algebra* (1572).** √13 squeezed through an iterated
+  fraction: the continued fraction's first appearance in European print, still
+  nameless. *[Heritage H3.]*
+
+- **P. A. Cataldi, *Trattato del modo brevissimo di trovare la radice quadra
+  delli numeri* (1613).** √18 unfolded step by step, with the first notation
+  built for the job. *[Heritage H3.]*
+
+- **J. Wallis, *Arithmetica Infinitorum* (1655).** Records Brouncker's 4/π —
+  the first infinite continued fraction for a named constant — beside Wallis's
+  own product for π/2. The term "continued fraction" arrives later, in his
+  *Opera Mathematica* (1695). *[Stop 9; Heritage H3.]*
+
+- **C. Huygens, *Descriptio automati planetarii* (1703, posthumous; the machine
+  designed c. 1680–82).** Convergents as an engineering rule: which gear pair
+  may stand in for Saturn. Printed in the *Opuscula Posthuma* (Leiden); the
+  first applied continued-fraction text. *[Stop 5; Heritage H4.]*
+
+- **L. Euler, "De fractionibus continuis dissertatio" (presented 1737;
+  published 1744).** The founding paper: e unfolded, rational ⇔ finite, and the
+  machinery made systematic. *[Stops 3, 6, 9.]*
+
+- **J. H. Lambert, "Mémoire sur quelques propriétés remarquables des quantités
+  transcendantes circulaires et logarithmiques" (presented 1761; published
+  1768).** tan x as a continued fraction, and from it the first proof that π is
+  irrational. *[Stop 9; Heritage H5.]*
+
+- **J.-L. Lagrange, "Additions au mémoire sur la résolution des équations
+  numériques" (1770).** Periodicity of quadratic irrationals proved, and Pell's
+  equation settled completely; his later "Additions" to the French translation
+  of Euler's *Élémens d'algèbre* (1774) carried the theory to a wider audience.
+  *[Stops 6, 7.]*
+
+- **É. Galois, "Démonstration d'un théorème sur les fractions continues
+  périodiques" (1829).** His first published paper, at seventeen: purely
+  periodic ⇔ reduced surd. *[Stops 6, 13.]*
+
+- **C. F. Gauss, letter to P.-S. Laplace (30 January 1812).** The invariant
+  measure of the Gauss map asserted without proof, with the error-term question
+  that became Gauss–Kuzmin left open for a century. *[Stop 10.]*
+
+- **J. Liouville, "Sur des classes très étendues de quantités dont la valeur
+  n'est ni algébrique ni même réductible à des irrationnelles algébriques"
+  (1844).** The memoir that builds the first numbers ever proved transcendental
+  — approximated by rationals too well to be algebraic. *[Heritage H6.]*
+
+- **M. A. Stern, "Über eine zahlentheoretische Funktion" (*Crelle's Journal* 55,
+  1858).** The diatomic sequence (`fusc`) and the mediant tree, published as pure
+  structure three years before Brocot reached the same tree at the bench.
+  *[Stop 8; Heritage H7.]*
+
+- **A. Brocot, "Calcul des rouages par approximation, nouvelle méthode"
+  (1861).** A clockmaker's tables of mediants for choosing gear trains: the
+  Stern–Brocot tree, born on a workbench. *[Stop 8; Heritage H4.]*
+
+- **L. J. Rogers, "Second memoir on the expansion of certain infinite products"
+  (*Proc. London Math. Soc.* 25, 1894).** The identities — and the continued
+  fraction — that Ramanujan would rediscover and carry further two decades later.
+  *[Appendix D, stop E9.]*
+
+- **O. Perron, *Die Lehre von den Kettenbrüchen* (1913).** The encyclopedic
+  treatise; a century on, still the reference for generalized continued
+  fractions. *[Stops 9, 15.]*
+
+- **S. Ramanujan, letters to G. H. Hardy (1913).** Over a hundred formulas
+  without proof, among them the Rogers–Ramanujan continued fraction and its value
+  `√((5 + √5)/2) − φ` at `q = e^(−2π)` — the identities Hardy said no one "would
+  have had the imagination to invent." *[Appendix D, stop E9; Heritage.]*
+
+- **M. A. Morrison & J. Brillhart, "A method of factoring and the factorization
+  of F7," *Mathematics of Computation* 29 (1975).** CFRAC: the continued fraction
+  of `√(kN)` turned into a factoring engine, and the fall of the seventh Fermat
+  number — ancestor of the quadratic sieve and the number field sieve.
+  *[Heritage H8; Stop 14.]*
+
+## Number theory, approximation, and Pell
 
 - **D. E. Knuth, *The Art of Computer Programming*, Vol. 2 (*Seminumerical
   Algorithms*), §4.5.3.** Euclid's algorithm, Lamé's theorem, and the Fibonacci
@@ -51,6 +142,21 @@ purposes, it is called out.
 - **I. Vardi, "Archimedes' Cattle Problem," *American Mathematical Monthly* 105
   (1998).** The reduction of the cattle problem to a Pell equation and the
   206,545-digit answer. *[Stop 7.]*
+
+- **J. H. Conway, *The Sensual (Quadratic) Form* (Carus Mathematical Monographs
+  26, MAA, 1997).** The topograph: binary quadratic forms drawn as a landscape,
+  with the river of an indefinite form its periodic continued fraction and its
+  wells the Pell solutions. *[Appendix D, stop E8.]*
+
+- **G. H. Hardy, *Ramanujan: Twelve Lectures on Subjects Suggested by His Life
+  and Work* (1940).** The classic exposition, the Rogers–Ramanujan continued
+  fraction and its modular special values among the lectures. *[Appendix D, stop
+  E9.]*
+
+- **B. C. Berndt, *Ramanujan's Notebooks*, Parts I–V (Springer, 1985–1998).**
+  The complete edited proofs of the notebook entries — the reference for the
+  `q`-continued fraction and the nested radicals of stop E9. *[Appendix D, stop
+  E9.]*
 
 ## Rationals, the Stern–Brocot tree, and Farey
 
@@ -75,6 +181,21 @@ purposes, it is called out.
 - **C. Series, "The Modular Surface and Continued Fractions," *J. London Math.
   Soc.* (1985).** The geometric/dynamical link between quadratic surds, Möbius
   maps, and self-similarity. *[Stops 6, 13.]*
+
+- **G. Lochs, "Vergleich der Genauigkeit von Dezimalbruch und Kettenbruch"
+  (*Abh. Math. Sem. Univ. Hamburg* 27, 1964).** The decimal-to-term exchange
+  rate `6 ln 2 ln 10 / π²`, and its identity with the entropy of the Gauss map.
+  *[Appendix I, B6.]*
+
+- **J. Galambos, *Representations of Real Numbers by Infinite Series* (Springer
+  Lecture Notes in Mathematics 502, 1976).** The metric theory of the Engel,
+  Lüroth, Pierce, and Sylvester expansions — the honest casino and its cousins.
+  *[Appendix I, B1–B3.]*
+
+- **N. Pytheas Fogg, *Substitutions in Dynamics, Arithmetics and Combinatorics*
+  (Springer Lecture Notes in Mathematics 1794, 2002).** Ostrowski numeration,
+  Sturmian words, and the Fibonacci word, from the dynamical viewpoint.
+  *[Appendix I, B5.]*
 
 ## Exact arithmetic and recursion
 

@@ -56,9 +56,11 @@ The periods of square roots have beautiful structure:
   **√7 = [2; (1, 1, 1, 4)]**, period 4.
 - The repeating block of `√d` is a **palindrome followed by a single term equal
   to `2⌊√d⌋`**. In `√7 = [2; (1, 1, 1, 4)]` the block is the palindrome `1,1,1`
-  capped by `4 = 2·⌊√7⌋ = 2·2`. This palindromic law (Galois, 1828) is not
+  capped by `4 = 2·⌊√7⌋ = 2·2`. This palindromic law (Galois, 1829) is not
   decoration; the palindrome is what makes the Pell-equation machinery of Stop 7
   work, and its position determines the sign in `x² − d y² = ±1`.
+
+![Period lengths of √d for d up to 99: no formula, no pattern, erratic as weather — and, at the next stop, the whole reason Pell's equation swings from trivial to brutal.](assets/fig-period-wheel.svg)
 
 ### Galois and purely periodic surds
 

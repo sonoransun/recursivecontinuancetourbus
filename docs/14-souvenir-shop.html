@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="13-hall-of-mirrors.html">← Stop 13 — The Hall of Mirrors</a> · <a href="index.html">Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="13-hall-of-mirrors.html">← Stop 13 — The Hall of Mirrors</a> · <a href="index.html">Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus →</a></p>
 <h1 id="stop-14-the-souvenir-shop">Stop 14 — The Souvenir Shop</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
 <blockquote>Three things to take home: why the piano is tuned the way it is, how a careless RSA key falls in seconds, and a five-line function nobody can prove halts.</blockquote>
 <h2 id="overview">Overview</h2>
 <p>The last working stop is a shop of applications — three souvenirs showing the continued fraction and the recursion at work far from pure number theory. One tunes a musical scale, one breaks a cipher, and one is a problem so simple a child can state it and no mathematician can solve it. Each is a convergent, an approximation, or an orbit — the tour&#x27;s ideas, out in the world.</p>
@@ -55,6 +67,7 @@
 <p>A musical fifth — the most consonant interval after the octave — is the frequency ratio <code>3/2</code>. An octave is a doubling, ratio <code>2</code>. To build a keyboard we want to stack fifths and land back on an octave, i.e. we want integers <code>m, n</code> with <code>(3/2)ᵐ ≈ 2ⁿ</code>. Taking logs, this is asking for a good rational approximation to</p>
 <pre><code>log₂(3/2) = 0.5849625007…</code></pre>
 <p>The convergents of this number are exactly the historically important scales. <code>7/12</code> says: twelve equal steps per octave, with the fifth at seven of them — <strong>12-tone equal temperament</strong>, the tuning of the modern piano. The <code>12</code> in &quot;the chromatic scale has twelve notes&quot; is a continued-fraction convergent. The fifth it produces is off from the pure <code>3/2</code> by only <code>−1.955</code> cents (hundredths of a semitone), imperceptibly flat — the compromise that lets you play in every key on one set of strings. The next convergents, <code>24/41</code> and <code>31/53</code>, give microtonal scales (41-TET, 53-TET) that are <em>more</em> accurate still and are used in some experimental and historical instruments.</p>
+<p>The convergents were tuning instruments long before anyone wrote them down as convergents. Zhu Zaiyu computed the twelve exactly equal semitones — root-extractions to nine digits, on an abacus — in Ming-dynasty China (1584), with Simon Stevin reaching the same tuning in Europe within a few years; and the finer 53-note convergent was anticipated by Jing Fang in the first century BC, who counted 53 fifths against 31 octaves, then rediscovered by Nicholas Mercator in the seventeenth century. The piano obeys <code>7/12</code>; the theory arrived two millennia after the practice.</p>
 <h3 id="souvenir-2-breaking-rsa-with-a-continued-fraction">Souvenir 2: breaking RSA with a continued fraction</h3>
 <p>RSA encryption uses a public modulus <code>N = pq</code> and a public exponent <code>e</code>, with a secret exponent <code>d</code> satisfying <code>e·d ≡ 1 (mod φ(N))</code>, so that <code>e·d = 1 + kφ(N)</code> for some integer <code>k</code>. Choosing a <em>small</em> <code>d</code> speeds up decryption — a tempting shortcut. <strong>Michael Wiener showed in 1990</strong> that it is a fatal one:</p>
 <blockquote>If the private exponent satisfies <code>d &lt; N^{1/4}/3</code>, then RSA is broken. The fraction <code>k/d</code> appears among the <strong>convergents of <code>e/N</code></strong>, so an attacker who knows only the public key <code>(e, N)</code> can read off <code>d</code> in seconds.</blockquote>
@@ -97,6 +110,7 @@ Collatz flight of 27:
 <ol><li><strong>(★★★)</strong> Show that the Collatz map cannot have a cycle other than <code>1 → 4 → 2 → 1</code> among numbers below the verified bound, and explain why this does <em>not</em> prove the conjecture. <details><summary>Hint</summary>Verification checks each starting value reaches 1, ruling out small cycles; but &quot;no counterexample below <code>2⁶⁸</code>&quot; says nothing about arbitrarily large <code>n</code>.</details></li></ol>
 <h2 id="see-it-move">See it move</h2>
 <p>Open the <strong>Souvenir Shop</strong> widget: <a href="explore.html#stop-14-souvenir"><code>site/index.html#stop-14-souvenir</code></a>. Tune a scale by dragging the note count, watch a weak RSA key crack as its convergents scroll past, and trace any Collatz flight as a rising-and-falling graph.</p>
+<p><strong>Try it live:</strong> <a href="explore.html#w10?t=just">just intonation versus equal temperament</a>, or watch <a href="explore.html#w11?b=128&amp;auto=1">a 128-bit weak key break itself</a>.</p>
 <h2 id="further-reading">Further reading</h2>
 <ul><li>M. Wiener, &quot;Cryptanalysis of Short RSA Secret Exponents,&quot; <em>IEEE Trans. Information Theory</em> (1990) — the original attack. See Appendix C.</li><li>J. C. Lagarias, ed., <em>The Ultimate Challenge: The 3x+1 Problem</em> (2010) — the definitive Collatz survey; Appendix C.</li><li>D. Benson, <em>Music: A Mathematical Offering</em>, for temperament and the continued-fraction derivation of 12-TET.</li><li>Appendix A of this tour for the derivation of Wiener&#x27;s <code>N^{1/4}</code> bound.</li></ul>
 <p class="chapter-nav"><a href="13-hall-of-mirrors.html">← Stop 13 — The Hall of Mirrors</a> · <a href="index.html">Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus →</a></p></main>
@@ -105,6 +119,7 @@ Collatz flight of 27:
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

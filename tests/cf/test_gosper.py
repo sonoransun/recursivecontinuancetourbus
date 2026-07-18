@@ -4,7 +4,7 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-from conftest import st_fractions
+from tourbus_testkit import st_fractions
 from tourbus.cf.constants import sqrt_cf
 from tourbus.cf.core import CF
 from tourbus.cf import gosper

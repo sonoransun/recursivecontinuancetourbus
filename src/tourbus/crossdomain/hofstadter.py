@@ -266,12 +266,13 @@ def _fmt(value: float) -> str:
     return f"{v:.4f}".rstrip("0").rstrip(".")
 
 
-def butterfly_svg(qmax: int, *, height: float = 400.0) -> str:
+def butterfly_svg(qmax: int, *, height: float = 400.0, stroke: str = "black") -> str:
     """A Hofstadter-butterfly SVG: each reduced flux ``p/q`` (``q <= qmax``) drawn
     as vertical band segments at ``x = p/q``.
 
     Flux runs left-to-right over ``[0, 1]``; energy runs bottom-to-top over
-    ``[-4, 4]``. The document is a single well-formed ``<svg>`` root.
+    ``[-4, 4]``. ``stroke`` sets the band color (the docs figures pass
+    ``"currentColor"``). The document is a single well-formed ``<svg>`` root.
 
     >>> svg = butterfly_svg(4)
     >>> svg.startswith('<svg') and svg.endswith('</svg>')
@@ -309,6 +310,6 @@ def butterfly_svg(qmax: int, *, height: float = 400.0) -> str:
         f'<svg xmlns="http://www.w3.org/2000/svg" '
         f'viewBox="0 0 {_fmt(width)} {_fmt(height)}">'
         f"<title>Hofstadter butterfly (q &lt;= {qmax})</title>"
-        f'<g stroke="black" stroke-width="0.6">{body}</g>'
+        f'<g stroke="{stroke}" stroke-width="0.6">{body}</g>'
         f"</svg>"
     )

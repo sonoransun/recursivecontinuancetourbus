@@ -7,7 +7,6 @@ works without walking the whole tour.
 
 from __future__ import annotations
 
-import random
 from fractions import Fraction
 
 from .termio import Console
@@ -92,8 +91,8 @@ def demo_stern_brocot(c: Console, args) -> int:
 def demo_gauss(c: Console, args) -> int:
     from ..dynamics import gauss
 
-    seed, args = _flag(args, "--seed", 0, int)
-    rng = random.Random(seed)
+    # --seed is a global flag; the console's RNG is already seeded with it.
+    rng = c.rng
     terms = []
     for _ in range(200):
         terms.extend(CF.from_fraction(Fraction(rng.getrandbits(48) + 1, 1 << 48)).terms(25)[1:])
@@ -108,8 +107,8 @@ def demo_khinchin(c: Console, args) -> int:
     from ..dynamics import gauss
 
     n, args = _flag(args, "--samples", 500, int)
-    seed, args = _flag(args, "--seed", 0, int)
-    rng = random.Random(seed)
+    # --seed is a global flag; the console's RNG is already seeded with it.
+    rng = c.rng
     terms = []
     for _ in range(n):
         terms.extend(CF.from_fraction(Fraction(rng.getrandbits(48) + 1, 1 << 48)).terms(25)[1:])
@@ -126,8 +125,12 @@ def demo_gosper(c: Console, args) -> int:
     names = args or ["sqrt2", "sqrt3"]
     from .stops import _number_to_cf
 
+    ops = {"add": gosper.add, "sub": gosper.sub, "mul": gosper.mul, "div": gosper.div}
+    if op not in ops:
+        c.emit(c.style(f"unknown op {op!r} (add|sub|mul|div)", "warn"))
+        return 1
     xs = [_number_to_cf(n)[1] for n in names[:2]]
-    fn = {"add": gosper.add, "sub": gosper.sub, "mul": gosper.mul, "div": gosper.div}[op]
+    fn = ops[op]
     result = fn(xs[0], xs[1])
     c.emit(c.style(f"{names[0]} {op} {names[1]} (as a continued fraction):", "title"))
     c.emit("  " + c.style(str(result.terms(12)), "result"))
@@ -185,8 +188,8 @@ def demo_wiener(c: Console, args) -> int:
     from ..applications.wiener import make_vulnerable_key, wiener_attack
 
     bits, args = _flag(args, "--bits", 128, int)
-    seed, args = _flag(args, "--seed", 7, int)
-    key = make_vulnerable_key(bits, rng=random.Random(seed))
+    # --seed is a global flag; the console's RNG is already seeded with it.
+    key = make_vulnerable_key(bits, rng=c.rng)
     recovered = wiener_attack(key.e, key.n)
     c.emit(c.style(f"vulnerable RSA key ({bits}-bit):", "title"))
     c.emit("  " + c.style(f"n = {key.n}", "chrome"))
@@ -438,6 +441,183 @@ def demo_quasicrystal(c: Console, args) -> int:
     return 0
 
 
+# -- Branch Line (other expansions) & new heritage/express demos ------------ #
+
+def _prod(xs) -> int:
+    p = 1
+    for x in xs:
+        p *= x
+    return p
+
+
+def demo_engel(c: Console, args) -> int:
+    from ..expansions import engel as E
+
+    target = args[0] if args else "3/7"
+    if target in ("e", "E"):
+        et = E.engel_e_terms(10)
+        c.emit(c.style("Engel expansion of e (the factorial series):", "title"))
+        c.emit("  " + c.style(f"{et}   (1, then 1, 2, 3, 4, ...)", "result"))
+        c.emit("  " + c.style(f"partial sum -> {float(E.engel_eval(et)):.7f}", "chrome"))
+        return 0
+    p, q = target.split("/") if "/" in target else (target, "1")
+    x = Fraction(int(p), int(q))
+    digits = E.engel_expansion(x)
+    c.emit(c.style(f"Engel expansion of {x}:", "title"))
+    c.emit("  " + c.style(f"digits {digits}  (nondecreasing)", "result"))
+    c.emit("  " + c.style(
+        f"{x} = " + " + ".join("1/" + str(_prod(digits[: i + 1])) for i in range(len(digits))),
+        "result"))
+    return 0
+
+
+def demo_pierce(c: Console, args) -> int:
+    from ..expansions import luroth as L
+
+    target = args[0] if args else "5/17"
+    p, q = target.split("/") if "/" in target else (target, "1")
+    x = Fraction(int(p), int(q))
+    c.emit(c.style(f"Pierce and Luroth expansions of {x}:", "title"))
+    pd = L.pierce_expansion(x)
+    c.emit("  " + c.style(f"Pierce (alternating, increasing): {pd} -> {L.pierce_eval(pd)}", "result"))
+    pre, per = L.luroth_expansion(x)
+    c.emit("  " + c.style(f"Luroth (preperiod {pre}, period {per}) -> {L.luroth_eval(pre, per)}", "result"))
+    c.emit("  " + c.style(f"Pierce of 1/phi = {L.pierce_of_reciprocal_phi(7)} "
+                          "(pairs straddling Lucas numbers)", "chrome"))
+    return 0
+
+
+def demo_egyptian(c: Console, args) -> int:
+    from ..expansions import egyptian as G
+
+    target = args[0] if args else "5/121"
+    p, q = target.split("/")
+    x = Fraction(int(p), int(q))
+    greedy = G.fibonacci_sylvester(x)
+    c.emit(c.style(f"Fibonacci-Sylvester greedy Egyptian fraction of {x}:", "title"))
+    c.emit("  " + c.style(f"{x} = " + " + ".join(f"1/{d}" for d in greedy), "result"))
+    c.emit("  " + c.style(f"denominator digit-counts {[len(str(d)) for d in greedy]} "
+                          "-- greedy can explode.", "chrome"))
+    es = G.erdos_straus(5)
+    c.emit("  " + c.style(f"Erdos-Straus 4/5 = 1/{es[0]} + 1/{es[1]} + 1/{es[2]} "
+                          "(conjectured possible for every n; open since 1948)", "chrome"))
+    return 0
+
+
+def demo_zeckendorf(c: Console, args) -> int:
+    from ..expansions.zeckendorf import zeckendorf, base_phi_digits
+
+    n = int(args[0]) if args else 100
+    summands = zeckendorf(n)
+    c.emit(c.style(f"Zeckendorf representation of {n}:", "title"))
+    c.emit("  " + c.style(f"{n} = " + " + ".join(str(s) for s in summands)
+                          + "  (non-consecutive Fibonacci)", "result"))
+    c.emit("  " + c.style(f"in base phi: {base_phi_digits(n)}  (no two consecutive 1s)", "result"))
+    return 0
+
+
+def demo_ostrowski(c: Console, args) -> int:
+    from ..expansions.ostrowski import ostrowski, from_ostrowski, characteristic_word
+
+    n = int(args[0]) if args else 100
+    fib_cf = [0] + [1] * 20
+    digits = ostrowski(n, fib_cf)
+    c.emit(c.style(f"Ostrowski numeration of {n} against 1/phi:", "title"))
+    c.emit("  " + c.style(f"digits {digits} -> rebuilds {from_ostrowski(digits, fib_cf)}", "result"))
+    c.emit("  " + c.style(f"Fibonacci word (golden cutting sequence): "
+                          f"{characteristic_word(fib_cf, 28)}", "result"))
+    return 0
+
+
+def demo_lochs(c: Console, args) -> int:
+    from ..expansions import lochs as L
+    from ..cf.constants import pi_cf
+
+    terms = pi_cf().terms(22)
+    ratio = L.lochs_ratio(terms, max_terms=20)
+    c.emit(c.style("Lochs' theorem: the digit/term exchange rate on pi:", "title"))
+    c.emit("  " + c.style(f"this pi sample: {ratio:.4f} decimals per continued-fraction term", "result"))
+    c.emit("  " + c.style(f"almost-sure limit 1/{L.lochs_constant():.4f} = {1 / L.lochs_constant():.4f} "
+                          "decimals per term (Lochs, 1964)", "result"))
+    c.emit("  " + c.style("the rate is 6 ln2 ln10 / pi^2 -- the entropy of the "
+                          "continued-fraction map.", "chrome"))
+    return 0
+
+
+def demo_liouville(c: Console, args) -> int:
+    from ..numbertheory import liouville as LV
+
+    k = int(args[0]) if args else 4
+    k = max(1, min(k, 4))
+    trunc = LV.liouville_truncation(k)
+    terms = LV.liouville_cf_terms(k, max_terms=14)
+    places = len(str(trunc.denominator)) - 1
+    exact = "0." + str(trunc.numerator).rjust(places, "0")
+    c.emit(c.style(f"Liouville's constant (sum of 10^-n!), truncation k={k}:", "title"))
+    c.emit("  " + c.style(f"L ~ {exact}...", "result"))
+    c.emit("  " + c.style(f"certified continued fraction: {terms}", "result"))
+    c.emit("  " + c.style("note the giant partial quotients -- the fingerprint of a "
+                          "number too well approximated to be algebraic (1844).", "chrome"))
+    return 0
+
+
+def demo_cfrac(c: Console, args) -> int:
+    from ..applications import cfrac
+
+    n = int(args[0]) if args else 13290059
+    p, q = cfrac.cfrac_factor(n)
+    c.emit(c.style(f"CFRAC (Morrison-Brillhart) factors {n}:", "title"))
+    c.emit("  " + c.style(f"{n} = {p} x {q}", "result"))
+    c.emit("  " + c.style(f"check: {p} * {q} = {p * q}", "success"))
+    c.emit("  " + c.style(f"the same method factored F7 = 2^128+1 = "
+                          f"{cfrac.F7_FACTORS[0]} x {cfrac.F7_FACTORS[1]} in 1970.", "chrome"))
+    return 0
+
+
+def demo_topograph(c: Console, args) -> int:
+    from ..numbertheory import topograph as T
+    from ..cf.expand import cf_from_quadratic
+
+    d = int(args[0]) if args else 7
+    period = T.river_period(d)
+    x, y = T.pell_from_river(d)
+    c.emit(c.style(f"Conway's topograph: the river of x^2 - {d} y^2:", "title"))
+    for row in T.topograph_strip(d):
+        c.emit("  " + c.style(row, "result"))
+    c.emit("  " + c.style(f"river period {period} = continued fraction period of sqrt({d})",
+                          "result"))
+    c.emit("  " + c.style(f"the river's Q=1 well gives Pell: {x}^2 - {d}*{y}^2 = "
+                          f"{x * x - d * y * y}", "success"))
+    return 0
+
+
+def demo_ramanujan(c: Console, args) -> int:
+    from ..frontier import ramanujan as R
+    from fractions import Fraction
+
+    c.emit(c.style("Ramanujan's Rogers-Ramanujan continued fraction:", "title"))
+    convs = R.rogers_ramanujan_convergents(Fraction(1, 2), 8)
+    c.emit("  " + c.style(f"R(1/2)/q^(1/5) convergents: {[str(f) for f in convs[:6]]}", "result"))
+    cf, closed, err = R.rogers_ramanujan_golden()
+    c.emit("  " + c.style(f"R(e^-2pi) from the fraction = {cf:.10f}", "result"))
+    c.emit("  " + c.style(f"           sqrt((5+sqrt5)/2) - phi = {closed:.10f}  (agree {err:.0e})",
+                          "result"))
+    c.emit("  " + c.style(f"nested radical sqrt(1+2sqrt(1+3sqrt(...))) -> "
+                          f"{R.ramanujan_nested_radical(24):.7f} (= 3)", "chrome"))
+    return 0
+
+
+def demo_supergolden(c: Console, args) -> int:
+    from ..frontier import supergolden_cf
+
+    cf = supergolden_cf()
+    c.emit(c.style("The supergolden ratio (root of x^3 = x^2 + 1):", "title"))
+    c.emit("  " + c.style(str(cf.terms(14)) + " ...", "result"))
+    c.emit("  " + c.style("the narrow-gauge cousin of the plastic number; its powers "
+                          "count the Narayana cows sequence.", "chrome"))
+    return 0
+
+
 DEMOS = {
     "cf": ("expand a number's continued fraction", demo_cf),
     "euclid": ("trace Euclid's algorithm on two integers", demo_euclid),
@@ -476,6 +656,19 @@ DEMOS = {
     "phyllotaxis": ("the golden angle in plants (biology)", demo_phyllotaxis),
     "apery": ("Apery's proof that zeta(3) is irrational", demo_apery),
     "quasicrystal": ("the Fibonacci quasicrystal (materials)", demo_quasicrystal),
+    # --- Branch Line (other expansions) ---
+    "engel": ("Engel expansion: ceilings instead of floors", demo_engel),
+    "pierce": ("Pierce & Luroth series (alternating / periodic)", demo_pierce),
+    "egyptian": ("greedy Egyptian fractions & Erdos-Straus", demo_egyptian),
+    "zeckendorf": ("Zeckendorf sum & base-phi numeration", demo_zeckendorf),
+    "ostrowski": ("Ostrowski numeration & the Fibonacci word", demo_ostrowski),
+    "lochs": ("Lochs' digit-to-term exchange rate", demo_lochs),
+    # --- new heritage / express engines ---
+    "liouville": ("Liouville's constant: the first transcendental (1844)", demo_liouville),
+    "cfrac": ("CFRAC factoring, the method that cracked F7", demo_cfrac),
+    "topograph": ("Conway's topograph: the river that solves Pell", demo_topograph),
+    "ramanujan": ("Ramanujan's Rogers-Ramanujan fraction & nested radicals", demo_ramanujan),
+    "supergolden": ("the supergolden ratio's continued fraction", demo_supergolden),
 }
 
 
@@ -492,10 +685,6 @@ def run_demo(console: Console, name: str, args) -> int:
         console.emit(console.style(f"unknown demo {name!r}; try 'demo --list'", "warn"))
         return 1
     _, fn = DEMOS[name]
-    # Global valueless flags may land in the demo's args via REMAINDER capture
-    # (e.g. `demo huckel --no-color`); drop them so demos see only their own args.
-    _GLOBAL = {"--no-color", "--color", "--ascii", "--fast"}
-    args = [a for a in args if a not in _GLOBAL]
     try:
         return fn(console, list(args))
     except Exception as exc:  # keep the CLI robust for any single demo

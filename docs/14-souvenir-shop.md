@@ -34,6 +34,15 @@ one set of strings. The next convergents, `24/41` and `31/53`, give
 microtonal scales (41-TET, 53-TET) that are *more* accurate still and are used in
 some experimental and historical instruments.
 
+The convergents were tuning instruments long before anyone wrote them down as
+convergents. Zhu Zaiyu computed the twelve exactly equal semitones —
+root-extractions to nine digits, on an abacus — in Ming-dynasty China (1584),
+with Simon Stevin reaching the same tuning in Europe within a few years; and
+the finer 53-note convergent was anticipated by Jing Fang in the first century
+BC, who counted 53 fifths against 31 octaves, then rediscovered by Nicholas
+Mercator in the seventeenth century. The piano obeys `7/12`; the theory
+arrived two millennia after the practice.
+
 ### Souvenir 2: breaking RSA with a continued fraction
 
 RSA encryption uses a public modulus `N = pq` and a public exponent `e`, with a
@@ -164,6 +173,7 @@ Open the **Souvenir Shop** widget:
 scale by dragging the note count, watch a weak RSA key crack as its convergents
 scroll past, and trace any Collatz flight as a rising-and-falling graph.
 
+**Try it live:** [just intonation versus equal temperament](../site/index.html#w10?t=just), or watch [a 128-bit weak key break itself](../site/index.html#w11?b=128&auto=1).
 ## Further reading
 
 - M. Wiener, "Cryptanalysis of Short RSA Secret Exponents," *IEEE Trans.

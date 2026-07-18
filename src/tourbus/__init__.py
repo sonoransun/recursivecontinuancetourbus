@@ -10,7 +10,7 @@ tour lives in :mod:`tourbus.tour` and is reached via ``python -m tourbus``.
 
 from __future__ import annotations
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 from .cf.core import CF, CFKind, QuadraticSurd
 from .cf.convergents import (

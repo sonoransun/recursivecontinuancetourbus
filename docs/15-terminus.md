@@ -64,6 +64,20 @@ for pseudo-random number generation and numerical integration. Bourgain and
 Kontorovich proved in 2014 that *almost all* `q` work — a spectacular near-miss —
 but the full conjecture remains open.
 
+### The Erdős–Straus conjecture
+
+Not every open question about unfolding a number is about *continued* fractions.
+The greedy Egyptian-fraction expansion of the Branch Line
+([Appendix I, stop B3](appendix-i-branches.md#b3-egyptian-fractions-the-greedy-scribe))
+always terminates, but the shortest such expansions hide a famous unknown:
+**Erdős and Straus conjectured (1948)** that for every integer `n ≥ 2` the
+fraction `4/n` can be written as a sum of exactly three unit fractions,
+`4/n = 1/x + 1/y + 1/z`. A solution has been found for every `n` ever tested —
+`python -m tourbus demo egyptian` builds them live — yet no proof exists that one
+always does. It is the same theme as the rest of this stop: an algorithm so
+simple a scribe used it four thousand years ago, guarding a question no one can
+answer.
+
 ### The Littlewood conjecture
 
 The deepest is **Littlewood's conjecture (c. 1930)**: for *every* pair of real
@@ -91,7 +105,7 @@ constant `K₀` we cannot classify. The golden ratio's extremal irrationality
 is itself the open problem. The tour is a loop road of its own: the elementary
 beginning and the unsolved end are the same questions asked at different depths.
 
-## Worked example
+## Worked examples
 
 There is nothing new to compute at Terminus — only something to sit with. Run the
 Collatz flight of `27` one more time, and read it now as a parable for the whole

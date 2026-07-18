@@ -59,6 +59,8 @@ fraction is dominated by small terms, with `1` alone accounting for over
 two-fifths of them — which is why numbers like `φ` (all `1`s) and the Fibonacci
 worst case of Stop 1 sit at the boundary of typical behaviour.
 
+![The loaded dice, audited: Gauss–Kuzmin's predicted digit frequencies log₂(1 + 1/k(k+2)) against counts harvested from a live orbit. The house edge is exactly as Gauss claimed in 1812.](assets/fig-gauss-kuzmin.svg)
+
 ### Khinchin's constant
 
 Here is the theorem that makes this a casino. **Khinchin proved in 1935** that
@@ -169,6 +171,7 @@ Open the **Casino** widget:
 thousands of random continued fractions and watch the Gauss–Kuzmin histogram
 fill in and the running geometric mean settle toward Khinchin's constant.
 
+**Try it live:** the Gauss-map cobweb [seeded at 0.415926](../site/index.html#w5?x=0.415926).
 ## Further reading
 
 - Khinchin, *Continued Fractions*, §§14–16 — the source, including the proof of

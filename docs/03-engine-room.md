@@ -81,6 +81,19 @@ Denominators grow **at least exponentially** (like `φⁿ`), which is why a hand
 of convergents already pins a number down to many decimal places — and why the
 slowest-growing case, all `aₙ = 1`, is the golden ratio waiting at Stop 4.
 
+![Three roads downhill: log-error of the convergents of φ, e, and π. Every road descends at least as fast as 1/q², φ's — all ones — no faster than it must, and the cliff on π's route is a₄ = 292.](assets/fig-convergent-error.svg)
+
+### Where the engine came from
+
+The engine is younger than the fractions it drives. The general rule for
+forming the numerators and denominators of convergents was in print by John
+Wallis's *Opera Mathematica* (1695) — the same book that coined the name
+"continued fraction" — and Cataldi (1613) already held equivalent relations;
+it was Euler's *De fractionibus continuis* (presented 1737) that turned the
+rule into the systematic theory the tour runs on. What you just watched is,
+nearly symbol for symbol, their machine; for the whole story, ride the
+Heritage Line (Appendix H).
+
 ## Worked examples
 
 Watch the engine turn on `π`. The convergents `3, 22/7, 333/106, 355/113`

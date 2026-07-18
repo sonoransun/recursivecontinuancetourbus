@@ -81,6 +81,8 @@ Packing points around a circle so that no two ever line up — so the
 arrangement is maximally "irrational" — is exactly the problem Hurwitz answered,
 and nature's solution is `φ`.
 
+![Seeds placed one golden angle apart. The most irrational number is the one that never falls into rays — any rational angle would comb the head into spokes and gaps.](assets/fig-phyllotaxis.svg)
+
 ## Worked examples
 
 Expand `φ` and watch the all-ones road produce Fibonacci convergents. The
@@ -151,6 +153,7 @@ Open the **Golden Milestone** widget:
 the road one at a time and watch the Fibonacci convergents spiral in on `φ`,
 with a golden-spiral animation showing why the convergence is so reluctant.
 
+**Try it live:** the spiral preset to [depth 9 at ratio φ](../site/index.html#w3?d=9&r=phi).
 ## Further reading
 
 - Hurwitz, "Ueber die angenäherte Darstellung der Irrationalzahlen durch

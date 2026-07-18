@@ -3,7 +3,7 @@ from fractions import Fraction
 import pytest
 from hypothesis import given
 
-from conftest import st_positive_fractions
+from tourbus_testkit import st_positive_fractions
 from tourbus.applications.gears import HUYGENS_TARGET, gear_ratio, huygens_gear
 
 

@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="14-souvenir-shop.html">← Stop 14 — The Souvenir Shop</a> · <a href="index.html">Route map</a> · <a href="appendix-a-proofs.html">Appendix A — Proofs →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="14-souvenir-shop.html">← Stop 14 — The Souvenir Shop</a> · <a href="index.html">Route map</a> · <a href="appendix-a-proofs.html">Appendix A — Proofs →</a></p>
 <h1 id="stop-15-terminus">Stop 15 — Terminus</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
 <blockquote>The end of the line is where the map runs out: the questions about continued fractions that no one can yet answer.</blockquote>
 <h2 id="overview">Overview</h2>
 <p>The bus comes to rest at Terminus, and the honest thing to show you here is not another theorem but the edge of the map — the places where the road we have been driving simply stops, and open water begins. Continued fractions are among the oldest objects in mathematics, and some of the most natural questions about them remain unsolved after three centuries. This closing stop is a short catalogue of those questions, each one a place where the tour could, in principle, continue if only someone found the way.</p>
@@ -61,13 +73,15 @@
 <p>The constant <code>γ = 0.5772156649…</code>, the limit of <code>1 + 1/2 + … + 1/n − ln n</code>, appears throughout analysis and number theory. Its continued fraction has been computed to hundreds of billions of terms. And still, <strong>it is unknown whether <code>γ</code> is irrational</strong> — the single most embarrassing open problem in the subject, because irrationality is exactly the property continued fractions are <em>built</em> to detect (Stop 2: irrational ⇔ infinite expansion). If <code>γ</code> were rational its denominator would have to be astronomically large, but &quot;very probably infinite&quot; is not a proof.</p>
 <h3 id="zaremba-s-conjecture">Zaremba&#x27;s conjecture</h3>
 <p>Not every question here is about a single constant. <strong>Zaremba&#x27;s conjecture (1972)</strong> asks: is there a constant <code>A</code> such that every positive integer <code>q</code> is the denominator of some fraction <code>p/q</code> whose continued fraction has all partial quotients at most <code>A</code>? (Zaremba proposed <code>A = 5</code>.) This is a question about which <em>denominators</em> admit &quot;well-behaved&quot; continued fractions, with real consequences for pseudo-random number generation and numerical integration. Bourgain and Kontorovich proved in 2014 that <em>almost all</em> <code>q</code> work — a spectacular near-miss — but the full conjecture remains open.</p>
+<h3 id="the-erd-s-straus-conjecture">The Erdős–Straus conjecture</h3>
+<p>Not every open question about unfolding a number is about <em>continued</em> fractions. The greedy Egyptian-fraction expansion of the Branch Line (<a href="appendix-i-branches.html#b3-egyptian-fractions-the-greedy-scribe">Appendix I, stop B3</a>) always terminates, but the shortest such expansions hide a famous unknown: <strong>Erdős and Straus conjectured (1948)</strong> that for every integer <code>n ≥ 2</code> the fraction <code>4/n</code> can be written as a sum of exactly three unit fractions, <code>4/n = 1/x + 1/y + 1/z</code>. A solution has been found for every <code>n</code> ever tested — <code>python -m tourbus demo egyptian</code> builds them live — yet no proof exists that one always does. It is the same theme as the rest of this stop: an algorithm so simple a scribe used it four thousand years ago, guarding a question no one can answer.</p>
 <h3 id="the-littlewood-conjecture">The Littlewood conjecture</h3>
 <p>The deepest is <strong>Littlewood&#x27;s conjecture (c. 1930)</strong>: for <em>every</em> pair of real numbers <code>α, β</code>,</p>
 <pre><code>lim inf_{n→∞}  n · ‖nα‖ · ‖nβ‖ = 0,</code></pre>
 <p>where <code>‖x‖</code> is the distance from <code>x</code> to the nearest integer. It says two numbers cannot <em>both</em> resist rational approximation too stubbornly at the same denominators — a two-dimensional cousin of Hurwitz&#x27;s theorem (Stop 4). Einsiedler, Katok, and Lindenstrauss proved in 2006, using deep ergodic theory of the kind glimpsed at Stop 10, that the set of exceptions (if any) has dimension zero — but whether the set is actually <em>empty</em>, and the conjecture true, is unknown.</p>
 <h3 id="where-the-road-goes">Where the road goes</h3>
 <p>Every stop on this tour touched one of these frontiers. The depot&#x27;s Euclidean descent (Stop 1) becomes the ergodic Gauss map (Stop 10) whose invariant constant <code>K₀</code> we cannot classify. The golden ratio&#x27;s extremal irrationality (Stop 4) becomes Littlewood&#x27;s multidimensional question. The pattern in <code>e</code> (Stop 9) throws the patternlessness of <code>π</code> into relief, and that patternlessness is itself the open problem. The tour is a loop road of its own: the elementary beginning and the unsolved end are the same questions asked at different depths.</p>
-<h2 id="worked-example">Worked example</h2>
+<h2 id="worked-examples">Worked examples</h2>
 <p>There is nothing new to compute at Terminus — only something to sit with. Run the Collatz flight of <code>27</code> one more time, and read it now as a parable for the whole tour: a recursion with the simplest possible rule, whose behaviour we can watch in complete detail and still cannot explain.</p>
 <pre><code>$ python -m tourbus demo collatz 27
 Collatz flight of 27:
@@ -90,6 +104,7 @@ Collatz flight of 27:
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

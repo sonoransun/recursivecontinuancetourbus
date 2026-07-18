@@ -4,7 +4,7 @@ from math import gcd
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from conftest import st_fractions
+from tourbus_testkit import st_fractions
 from tourbus.numbertheory.stern_brocot import (
     calkin_wilf,
     farey,

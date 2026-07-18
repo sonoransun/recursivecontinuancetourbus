@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,49 +45,95 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a class="on" href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="appendix-a-proofs.html">← Appendix A — Proofs</a> · <a href="index.html">Route map</a> · <a href="appendix-c-references.html">Appendix C — References →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="appendix-a-proofs.html">← Appendix A — Proofs</a> · <a href="index.html">Route map</a> · <a href="appendix-c-references.html">Appendix C — References →</a></p>
 <h1 id="appendix-b-glossary">Appendix B — Glossary</h1>
-<p>The vocabulary of the tour, in alphabetical order. Each entry names the stop where the term is introduced.</p>
+<p>The vocabulary of the tour, in alphabetical order. Each entry links to the stop where the term is introduced.</p>
+<h3 id="anthyphairesis">Anthyphairesis</h3>
+<p>The Greek name — &#x27;reciprocal subtraction&#x27; — for Euclid&#x27;s mutual measuring of two magnitudes: subtract the smaller from the larger until it no longer fits, swap, repeat. Elements X.2 makes it a test: the process ends iff the magnitudes are commensurable, which is the continued-fraction termination criterion in ancient dress. <em>(<a href="01-depot.html">Stop 1</a>; <a href="appendix-h-history.html">Appendix H</a>.)</em></p>
+<h3 id="base-phi-numeration">Base-φ (phi) numeration</h3>
+<p>A positional numeral system in the irrational base <code>φ</code>, with digits <code>0</code> and <code>1</code> and the carry rule given by the golden identity <code>φ² = φ + 1</code>. Every non-negative integer has a finite representation in which no two consecutive <code>1</code>s occur — the base-φ form of Zeckendorf&#x27;s idea, promoting the golden ratio of <a href="04-golden.html">Stop 4</a> from a number to be measured into the ruler itself. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
 <h3 id="best-approximation-of-the-first-kind">Best approximation of the first kind</h3>
-<p>A fraction <code>p/q</code> that minimises the <em>absolute</em> distance <code>|x − p/q|</code> among all fractions with denominator at most <code>q</code>. These include the convergents <strong>and</strong> certain semiconvergents. Contrast with the second kind. <em>(Stop 5.)</em></p>
+<p>A fraction <code>p/q</code> that minimises the <em>absolute</em> distance <code>|x − p/q|</code> among all fractions with denominator at most <code>q</code>. These include the convergents <strong>and</strong> certain semiconvergents. Contrast with the second kind. <em>(<a href="05-scenic-overlook.html">Stop 5</a>.)</em></p>
 <h3 id="best-approximation-of-the-second-kind">Best approximation of the second kind</h3>
-<p>A fraction <code>p/q</code> that minimises <code>|q·x − p|</code> — the distance weighted by the denominator — among all fractions with denominator at most <code>q</code>. By <strong>Lagrange&#x27;s theorem</strong>, these are <em>exactly</em> the continued-fraction convergents. This is the stronger, cleaner notion, and the one usually meant by &quot;best rational approximation.&quot; <em>(Stop 5.)</em></p>
+<p>A fraction <code>p/q</code> that minimises <code>|q·x − p|</code> — the distance weighted by the denominator — among all fractions with denominator at most <code>q</code>. By <strong>Lagrange&#x27;s theorem</strong>, these are <em>exactly</em> the continued-fraction convergents. This is the stronger, cleaner notion, and the one usually meant by &quot;best rational approximation.&quot; <em>(<a href="05-scenic-overlook.html">Stop 5</a>.)</em></p>
+<h3 id="bh-van-bhavana">Bhāvanā (bhavana)</h3>
+<p>Brahmagupta&#x27;s composition law (628 CE): from <code>a² − d·b² = k</code> and <code>c² − d·e² = l</code>, the pair <code>(ac + d·be, ae + bc)</code> satisfies <code>x² − d·y² = k·l</code>. Composing near-solutions of Pell&#x27;s equation is the engine inside the chakravala. <em>(<a href="07-cattle-crossing.html">Stop 7</a>; <a href="appendix-h-history.html">Appendix H</a>.)</em></p>
 <h3 id="bihomographic-transform">Bihomographic transform</h3>
-<p>A function of two variables <code>z(x, y) = (a·xy + b·x + c·y + d)/(e·xy + f·x + g·y + h)</code> with an eight-integer state, used by Gosper&#x27;s algorithm to compute <code>x + y</code>, <code>x · y</code>, and other binary operations directly on continued-fraction streams. It has three moves — ingest from <code>x</code>, ingest from <code>y</code>, or emit an output term. <em>(Stop 11.)</em></p>
+<p>A function of two variables <code>z(x, y) = (a·xy + b·x + c·y + d)/(e·xy + f·x + g·y + h)</code> with an eight-integer state, used by Gosper&#x27;s algorithm to compute <code>x + y</code>, <code>x · y</code>, and other binary operations directly on continued-fraction streams. It has three moves — ingest from <code>x</code>, ingest from <code>y</code>, or emit an output term. <em>(<a href="11-assembly-line.html">Stop 11</a>.)</em></p>
+<h3 id="cfrac-continued-fraction-factorization">CFRAC (continued-fraction factorization)</h3>
+<p>The factoring algorithm of Morrison and Brillhart (1970) that reads the small residues <code>Qₖ = pₖ² − N·qₖ²</code> dropping out of the convergents of <code>√(kN)</code>. Because each residue has size about <code>√N</code>, many factor completely over a small fixed prime base; combining enough of them into a congruence of squares <code>X² ≡ Y² (mod N)</code> yields a factor as <code>gcd(X − Y, N)</code>. It cracked the seventh Fermat number and is the ancestor of the quadratic sieve and the number field sieve. <em>(<a href="appendix-h-history.html">Appendix H</a>.)</em></p>
+<h3 id="chakravala">Chakravala</h3>
+<p>The &#x27;cyclic&#x27; method of Jayadeva and Bhāskara II (1150) for Pell&#x27;s equation: compose a trial triple with a chosen auxiliary solution by bhāvanā, scale down, and repeat until the residue k reaches 1. It solves <code>x² − 61·y² = 1</code> in a handful of turns — with no continued fraction in sight, though it lands on the same convergents. <em>(<a href="07-cattle-crossing.html">Stop 7</a>; <a href="appendix-h-history.html">Appendix H</a>.)</em></p>
 <h3 id="complete-quotient">Complete quotient</h3>
-<p>The value <code>xₙ = [aₙ; aₙ₊₁, aₙ₊₂, …]</code> of the entire tail of a continued fraction from position <code>n</code> onward. Always <code>≥ 1</code> for <code>n ≥ 1</code>, and satisfies <code>x = (xₙ pₙ₋₁ + pₙ₋₂)/(xₙ qₙ₋₁ + qₙ₋₂)</code>. The tool of the error-bound proof in Appendix A. <em>(Stop 3.)</em></p>
+<p>The value <code>xₙ = [aₙ; aₙ₊₁, aₙ₊₂, …]</code> of the entire tail of a continued fraction from position <code>n</code> onward. Always <code>≥ 1</code> for <code>n ≥ 1</code>, and satisfies <code>x = (xₙ pₙ₋₁ + pₙ₋₂)/(xₙ qₙ₋₁ + qₙ₋₂)</code>. The tool of the error-bound proof in Appendix A. <em>(<a href="appendix-a-proofs.html">Appendix A</a>.)</em></p>
 <h3 id="convergent">Convergent</h3>
-<p>The rational <code>pₙ/qₙ = [a₀; a₁, …, aₙ]</code> obtained by truncating a continued fraction after <code>n + 1</code> terms. Convergents are automatically in lowest terms, straddle the true value in alternation, and are the best approximations of the second kind. <em>(Stop 3.)</em></p>
+<p>The rational <code>pₙ/qₙ = [a₀; a₁, …, aₙ]</code> obtained by truncating a continued fraction after <code>n + 1</code> terms. Convergents are automatically in lowest terms, straddle the true value in alternation, and are the best approximations of the second kind. <em>(<a href="03-engine-room.html">Stop 3</a>.)</em></p>
 <h3 id="corecursion">Corecursion</h3>
-<p>A definition scheme that <em>produces</em> an infinite structure on demand, rather than consuming a finite input down to a base case (ordinary recursion). Gosper&#x27;s stream arithmetic is corecursive: it has no base case and is judged correct by how it keeps emitting valid terms forever, not by how it halts. <em>(Stop 11.)</em></p>
+<p>A definition scheme that <em>produces</em> an infinite structure on demand, rather than consuming a finite input down to a base case (ordinary recursion). Gosper&#x27;s stream arithmetic is corecursive: it has no base case and is judged correct by how it keeps emitting valid terms forever, not by how it halts. <em>(<a href="11-assembly-line.html">Stop 11</a>.)</em></p>
+<h3 id="egyptian-fraction">Egyptian fraction</h3>
+<p>A representation of a rational as a sum of <em>distinct</em> unit fractions <code>1/n</code>, in the manner of the Rhind papyrus scribes. The Fibonacci–Sylvester greedy algorithm produces one by repeatedly subtracting the largest unit fraction that still fits; it always terminates for a rational, but can drive the denominators to roughly square at every step. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
+<h3 id="engel-expansion">Engel expansion</h3>
+<p>The unique representation <code>x = 1/a₁ + 1/(a₁a₂) + 1/(a₁a₂a₃) + …</code> of a number in <code>(0, 1]</code> with non-decreasing integer digits <code>1 ≤ a₁ ≤ a₂ ≤ …</code>. It is the ceiling-and-affine cousin of the regular continued fraction — set <code>a = ⌈1/x⌉</code>, replace <code>x</code> by <code>a·x − 1</code>, and repeat — and terminates exactly for the rationals. The factorial series makes <code>e − 1</code> its cleanest specimen, with digits <code>1, 2, 3, …</code>. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
+<h3 id="erd-s-straus-conjecture">Erdős–Straus conjecture</h3>
+<p>The claim (1948) that <code>4/n = 1/x + 1/y + 1/z</code> is solvable in positive integers for every <code>n ≥ 2</code>. It has been verified to enormous bounds and reduced by congruences to a few stubborn residue classes, yet remains open — one of the Egyptian-fraction questions the tour can pose but not answer. <em>(<a href="appendix-i-branches.html">Appendix I</a>; <a href="15-terminus.html">Stop 15</a>.)</em></p>
 <h3 id="farey-sequence-f">Farey sequence <code>Fₙ</code></h3>
-<p>The ascending list of all fractions in <code>[0, 1]</code> with denominator at most <code>n</code>, in lowest terms. Adjacent fractions <code>a/b &lt; c/d</code> satisfy the neighbour relation <code>bc − ad = 1</code>, and the mediant of two neighbours is the next fraction to appear between them. Closely tied to the Stern–Brocot tree. <em>(Stop 8.)</em></p>
+<p>The ascending list of all fractions in <code>[0, 1]</code> with denominator at most <code>n</code>, in lowest terms. Adjacent fractions <code>a/b &lt; c/d</code> satisfy the neighbour relation <code>bc − ad = 1</code>, and the mediant of two neighbours is the next fraction to appear between them. Closely tied to the Stern–Brocot tree. <em>(<a href="08-family-tree.html">Stop 8</a>.)</em></p>
 <h3 id="gauss-map">Gauss map</h3>
-<p>The transformation <code>T(x) = {1/x} = 1/x − ⌊1/x⌋</code> on <code>(0, 1)</code>, which strips the first partial quotient off a continued fraction and shifts the rest forward. It preserves the <strong>Gauss measure</strong> <code>dμ = (1/ln 2)·1/(1+x) dx</code> and is ergodic; the statistics of continued fractions are the dynamics of this one map. <em>(Stop 10.)</em></p>
+<p>The transformation <code>T(x) = {1/x} = 1/x − ⌊1/x⌋</code> on <code>(0, 1)</code>, which strips the first partial quotient off a continued fraction and shifts the rest forward. It preserves the <strong>Gauss measure</strong> <code>dμ = (1/ln 2)·1/(1+x) dx</code> and is ergodic; the statistics of continued fractions are the dynamics of this one map. <em>(<a href="10-casino.html">Stop 10</a>.)</em></p>
+<h3 id="generalized-continued-fraction">Generalized continued fraction</h3>
+<p>A continued fraction whose numerators need not be 1: <code>b₀ + a₁/(b₁ + a₂/(b₂ + …))</code>. Chaotic simple expansions can become perfectly patterned in generalized form — Brouncker&#x27;s 4/π and Lambert&#x27;s tan x are the classic cases. <em>(<a href="09-celebrity.html">Stop 9</a>.)</em></p>
 <h3 id="homographic-transform">Homographic transform</h3>
-<p>A function of one variable <code>z(x) = (a·x + b)/(c·x + d)</code> with integer state <code>(a, b, c, d)</code> — also called a Möbius or fractional-linear transform. The one-input building block of Gosper&#x27;s algorithm, with two moves: ingest an input term or emit an output term when the floor is determined. A <strong>purely periodic</strong> continued fraction is a fixed point of such a map. <em>(Stops 11, 13.)</em></p>
+<p>A function of one variable <code>z(x) = (a·x + b)/(c·x + d)</code> with integer state <code>(a, b, c, d)</code> — also called a Möbius or fractional-linear transform. The one-input building block of Gosper&#x27;s algorithm, with two moves: ingest an input term or emit an output term when the floor is determined. A <strong>purely periodic</strong> continued fraction is a fixed point of such a map. <em>(Stops <a href="11-assembly-line.html">11</a>, <a href="13-hall-of-mirrors.html">13</a>.)</em></p>
+<h3 id="ku-aka-kuttaka">Kuṭṭaka (kuttaka)</h3>
+<p>Āryabhaṭa&#x27;s &#x27;pulverizer&#x27; (499 CE): solve <code>a·x − b·y = c</code> in integers by running Euclid&#x27;s quotients backward — the same arithmetic as the Bézout step of Stop 1, a thousand years earlier. <em>(<a href="01-depot.html">Stop 1</a>; <a href="appendix-h-history.html">Appendix H</a>.)</em></p>
+<h3 id="liouville-number">Liouville number</h3>
+<p>A real number approximable by rationals beyond every polynomial rate: for each <code>m</code> there is a <code>p/q</code> with <code>0 &lt; |α − p/q| &lt; 1/qᵐ</code>. Liouville&#x27;s inequality forbids this of any algebraic irrational, so every such number is transcendental — <code>L = Σ 10^(−n!)</code> was the first quantity ever proved transcendental (1844). Liouville numbers have infinite irrationality measure and betray themselves in the continued fraction through partial quotients that explode. <em>(<a href="appendix-h-history.html">Appendix H</a>.)</em></p>
+<h3 id="lochs-theorem">Lochs&#x27; theorem</h3>
+<p>The result (1964) that for almost every real number the first <code>n</code> decimal digits pin down about <code>m ≈ 0.9703·n</code> correct continued-fraction terms, at the exchange rate <code>6 ln 2 ln 10 / π²</code>. The continued fraction is thus the marginally denser currency, packing slightly more information per symbol than the decimal expansion; the constant is <code>ln 10</code> divided by twice Lévy&#x27;s constant, the entropy of the Gauss map. <em>(<a href="appendix-i-branches.html">Appendix I</a>; <a href="10-casino.html">Stop 10</a>.)</em></p>
+<h3 id="l-roth-series">Lüroth series</h3>
+<p>The expansion <code>x = 1/a₁ + 1/(a₁(a₁−1)a₂) + …</code> (Lüroth, 1883) whose digits are genuinely <strong>independent and identically distributed</strong>, with <code>P(digit = k) = 1/(k(k−1))</code>. Unlike the correlated Gauss–Kuzmin digits of the regular continued fraction, Lüroth&#x27;s are a memoryless fair wheel; the price of that honesty is that a rational&#x27;s Lüroth expansion is eventually periodic rather than finite. <em>(<a href="appendix-i-branches.html">Appendix I</a>; <a href="10-casino.html">Stop 10</a>.)</em></p>
 <h3 id="mediant">Mediant</h3>
-<p>The fraction <code>(a + c)/(b + d)</code> formed from <code>a/b</code> and <code>c/d</code> by adding numerators and denominators separately. It lies strictly between two neighbours and is the generating operation of the Stern–Brocot tree and the Farey sequences. <em>(Stop 8.)</em></p>
+<p>The fraction <code>(a + c)/(b + d)</code> formed from <code>a/b</code> and <code>c/d</code> by adding numerators and denominators separately. It lies strictly between two neighbours and is the generating operation of the Stern–Brocot tree and the Farey sequences. <em>(<a href="08-family-tree.html">Stop 8</a>.)</em></p>
+<h3 id="nested-radical">Nested radical</h3>
+<p>An expression continuing under infinitely many radical signs, such as Ramanujan&#x27;s <code>3 = √(1 + 2√(1 + 3√(1 + 4√(…))))</code>. Its general form <code>x + 1 = √(1 + x√(1 + (x+1)√(…)))</code> converges to <code>x + 1</code> for every <code>x</code>, and like a continued fraction it is evaluated as the limit of its finite truncations. <em>(<a href="appendix-d-frontier.html">Appendix D</a>.)</em></p>
+<h3 id="ostrowski-numeration">Ostrowski numeration</h3>
+<p>A positional number system built on the convergent denominators <code>q₀, q₁, q₂, …</code> of a fixed irrational <code>α</code>: every non-negative integer has a unique mixed-radix representation against those <code>qₖ</code>, with the partial quotients setting each digit&#x27;s range. It is the continued fraction turned into a numeral system; for <code>α = 1/φ</code> the denominators are the Fibonacci numbers and it collapses onto the Zeckendorf representation. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
 <h3 id="partial-quotient">Partial quotient</h3>
-<p>One of the terms <code>aₙ</code> in <code>[a₀; a₁, a₂, …]</code>. The first, <code>a₀</code>, is any integer; every later one is a positive integer <code>aₙ ≥ 1</code>. For a rational, the partial quotients are exactly the quotients produced by Euclid&#x27;s algorithm. <em>(Stops 1, 2.)</em></p>
+<p>One of the terms <code>aₙ</code> in <code>[a₀; a₁, a₂, …]</code>. The first, <code>a₀</code>, is any integer; every later one is a positive integer <code>aₙ ≥ 1</code>. For a rational, the partial quotients are exactly the quotients produced by Euclid&#x27;s algorithm. <em>(<a href="02-unfolding-road.html">Stop 2</a>.)</em></p>
+<h3 id="pierce-expansion">Pierce expansion</h3>
+<p>The alternating-sign cousin of the Engel expansion, <code>x = 1/a₁ − 1/(a₁a₂) + 1/(a₁a₂a₃) − …</code>, whose digits are <strong>strictly increasing</strong> and finite for every rational. The alternating sign accelerates the sum while keeping Engel&#x27;s clean termination; the Pierce digits of <code>1/φ</code> come in pairs straddling the Lucas numbers and grow doubly exponentially. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
 <h3 id="primitive-recursion">Primitive recursion</h3>
-<p>The class of functions built from basic functions (zero, successor, projection) by composition and <em>bounded</em> recursion — essentially, everything computable with <code>for</code>-loops whose bounds are known in advance. The Ackermann function is total and computable but <strong>not</strong> primitive recursive: it grows faster than any function in this class. <em>(Stop 12.)</em></p>
+<p>The class of functions built from basic functions (zero, successor, projection) by composition and <em>bounded</em> recursion — essentially, everything computable with <code>for</code>-loops whose bounds are known in advance. The Ackermann function is total and computable but <strong>not</strong> primitive recursive: it grows faster than any function in this class. <em>(<a href="12-tower.html">Stop 12</a>.)</em></p>
 <h3 id="quadratic-irrational-quadratic-surd">Quadratic irrational (quadratic surd)</h3>
-<p>An irrational root of an integer quadratic <code>ax² + bx + c = 0</code>, equivalently a number of the form <code>(P + √d)/Q</code> with <code>d</code> a non-square positive integer. By <strong>Lagrange&#x27;s theorem</strong>, these are exactly the numbers with eventually periodic continued fractions. <em>(Stop 6.)</em></p>
+<p>An irrational root of an integer quadratic <code>ax² + bx + c = 0</code>, equivalently a number of the form <code>(P + √d)/Q</code> with <code>d</code> a non-square positive integer. By <strong>Lagrange&#x27;s theorem</strong>, these are exactly the numbers with eventually periodic continued fractions. <em>(<a href="06-loop-road.html">Stop 6</a>.)</em></p>
 <h3 id="reduced-surd">Reduced surd</h3>
-<p>A quadratic irrational <code>x</code> with <code>x &gt; 1</code> whose conjugate <code>x̄</code> (the other root, <code>√d ↦ −√d</code>) lies strictly in <code>(−1, 0)</code>. By <strong>Galois&#x27; theorem</strong>, a surd&#x27;s continued fraction is <em>purely</em> periodic (periodic from the very first term) if and only if it is reduced. <em>(Stop 6.)</em></p>
+<p>A quadratic irrational <code>x</code> with <code>x &gt; 1</code> whose conjugate <code>x̄</code> (the other root, <code>√d ↦ −√d</code>) lies strictly in <code>(−1, 0)</code>. By <strong>Galois&#x27; theorem</strong>, a surd&#x27;s continued fraction is <em>purely</em> periodic (periodic from the very first term) if and only if it is reduced. <em>(<a href="06-loop-road.html">Stop 6</a>.)</em></p>
+<h3 id="rogers-ramanujan-continued-fraction">Rogers–Ramanujan continued fraction</h3>
+<p>The <code>q</code>-continued fraction <code>R(q) = q^(1/5)/(1 + q/(1 + q²/(1 + q³/(1 + …))))</code>, whose partial numerators are the powers <code>q, q², q³, …</code> rather than the constant <code>1</code> of a simple continued fraction. Ramanujan sent it to Hardy in 1913 with the astonishing value <code>R(e^(−2π)) = √((5 + √5)/2) − φ</code>, an infinite fraction collapsing to a surd built entirely from the golden ratio. <em>(<a href="appendix-d-frontier.html">Appendix D</a>; <a href="appendix-h-history.html">Appendix H</a>.)</em></p>
 <h3 id="semiconvergent">Semiconvergent</h3>
-<p>An intermediate fraction obtained by using a partial quotient <code>1 ≤ k &lt; aₙ</code> in the convergent recurrence: <code>(k·pₙ₋₁ + pₙ₋₂)/(k·qₙ₋₁ + qₙ₋₂)</code>. Semiconvergents fill the gaps between successive convergents and appear among the best approximations of the first kind, though not the second. <em>(Stop 5.)</em></p>
+<p>An intermediate fraction obtained by using a partial quotient <code>1 ≤ k &lt; aₙ</code> in the convergent recurrence: <code>(k·pₙ₋₁ + pₙ₋₂)/(k·qₙ₋₁ + qₙ₋₂)</code>. Semiconvergents fill the gaps between successive convergents and appear among the best approximations of the first kind, though not the second. <em>(<a href="05-scenic-overlook.html">Stop 5</a>.)</em></p>
 <h3 id="similarity-dimension">Similarity dimension</h3>
-<p>For a self-similar set made of <code>N</code> copies of itself each scaled by <code>r &lt; 1</code>, the number <code>d = ln N / ln(1/r)</code>. It generalises ordinary dimension to fractional values: Cantor set <code>≈ 0.6309</code>, Koch curve <code>≈ 1.2619</code>, Sierpiński triangle <code>≈ 1.5850</code>, and space-filling curves (dragon, Hilbert) exactly <code>2</code>. <em>(Stop 13.)</em></p>
+<p>For a self-similar set made of <code>N</code> copies of itself each scaled by <code>r &lt; 1</code>, the number <code>d = ln N / ln(1/r)</code>. It generalises ordinary dimension to fractional values: Cantor set <code>≈ 0.6309</code>, Koch curve <code>≈ 1.2619</code>, Sierpiński triangle <code>≈ 1.5850</code>, and space-filling curves (dragon, Hilbert) exactly <code>2</code>. <em>(<a href="13-hall-of-mirrors.html">Stop 13</a>.)</em></p>
 <h3 id="stern-brocot-tree">Stern–Brocot tree</h3>
-<p>The infinite binary tree of all positive rationals, each appearing exactly once in lowest terms, generated by repeatedly inserting mediants between <code>0/1</code> and <code>1/0</code>. A node&#x27;s Left/Right address has run-lengths equal to its continued fraction&#x27;s partial quotients (last run off by one). <em>(Stop 8.)</em></p>
+<p>The infinite binary tree of all positive rationals, each appearing exactly once in lowest terms, generated by repeatedly inserting mediants between <code>0/1</code> and <code>1/0</code>. A node&#x27;s Left/Right address has run-lengths equal to its continued fraction&#x27;s partial quotients (last run off by one). <em>(<a href="08-family-tree.html">Stop 8</a>.)</em></p>
+<h3 id="sturmian-word-and-the-fibonacci-word">Sturmian word (and the Fibonacci word)</h3>
+<p>An infinite binary sequence of the lowest complexity still compatible with being aperiodic — exactly <code>n + 1</code> distinct factors of each length <code>n</code>. The <strong>Fibonacci word</strong> <code>a b a a b a b a a b …</code> is the canonical example, read off as the cutting sequence of a line of slope <code>1/φ</code> across the integer grid: the most balanced aperiodic word there is. <em>(<a href="appendix-i-branches.html">Appendix I</a>.)</em></p>
+<h3 id="topograph-conway-s">Topograph (Conway&#x27;s)</h3>
+<p>John Conway&#x27;s picture of a binary quadratic form, its values arranged on the infinite trivalent tree of superbases and grown by one arithmetic rule across each edge (<code>r + r&#x27; = 2(p + q)</code>). For an indefinite form <code>x² − d·y²</code> a single periodic path — the <strong>river</strong> — separates the positive values from the negative, and that river is the periodic continued fraction of <code>√d</code>, each <code>+1</code> well a solution of Pell&#x27;s equation. <em>(<a href="appendix-d-frontier.html">Appendix D</a>; <a href="06-loop-road.html">Stop 6</a>.)</em></p>
+<h3 id="zeckendorf-representation">Zeckendorf representation</h3>
+<p>The unique way to write a positive integer as a sum of Fibonacci numbers with no two <em>consecutive</em> Fibonacci numbers used, found by the greedy algorithm. Writing a <code>1</code> for each Fibonacci used and a <code>0</code> for each skipped gives Fibonacci coding, a self-synchronizing variable-length code in which the string <code>11</code> never occurs inside a codeword. <em>(<a href="appendix-i-branches.html">Appendix I</a>; <a href="04-golden.html">Stop 4</a>.)</em></p>
 <h2 id="see-also">See also</h2>
 <ul><li>Appendix A for the proofs that use these terms.</li><li>Appendix C for the sources where each is developed in full.</li></ul>
 <p class="chapter-nav"><a href="appendix-a-proofs.html">← Appendix A — Proofs</a> · <a href="index.html">Route map</a> · <a href="appendix-c-references.html">Appendix C — References →</a></p></main>
@@ -91,6 +142,7 @@
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

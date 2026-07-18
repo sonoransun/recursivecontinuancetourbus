@@ -23,7 +23,7 @@ from typing import Callable, Iterator, Sequence
 
 from .._util.formatting import cf_to_str
 
-__all__ = ["CF", "CFKind", "QuadraticSurd"]
+__all__ = ["CF", "CFKind", "QuadraticSurd", "surd_floor"]
 
 _DISPLAY_TERMS = 20  # how many partial quotients str() shows for an open-ended CF
 
@@ -160,6 +160,41 @@ class QuadraticSurd:
         sign = "+" if b > 0 else "-"
         mag = surd.lstrip("-")
         return f"{self.a} {sign} {mag}"
+
+
+def surd_floor(x: QuadraticSurd) -> int:
+    """Exact floor of a quadratic surd — no floating point anywhere.
+
+    Rewrites ``a + b*sqrt(D)`` as ``(P + sign(b)*sqrt(b^2 D)) / L`` over a
+    common denominator ``L`` and delegates to the integer floor routine that
+    powers the PQa expansion. This is the safe doorway for every expansion
+    algorithm that needs ``floor(1/x)`` of an exact irrational: a floating
+    floor is off by one exactly when it matters most (values a hair below an
+    integer), and an off-by-one floor makes greedy expansions diverge.
+
+    >>> surd_floor(QuadraticSurd.make(0, 1, 2))          # sqrt(2)
+    1
+    >>> surd_floor(QuadraticSurd.from_pqd(1, 5, 2))      # golden ratio
+    1
+    >>> surd_floor(QuadraticSurd.make(0, -1, 2))         # -sqrt(2)
+    -2
+    >>> surd_floor(QuadraticSurd.make(Fraction(7, 2), 0, 1))
+    3
+    """
+    if x.b == 0:
+        return math.floor(x.a)
+    # Local import: expand builds on nothing from this module, but keeping the
+    # dependency out of module load preserves the core -> doorways layering.
+    from .expand import _floor_quad
+
+    L = math.lcm(x.a.denominator, x.b.denominator)
+    P = int(x.a * L)
+    B = int(x.b * L)
+    D2 = B * B * x.D
+    if B > 0:
+        return _floor_quad(P, D2, L)
+    # a + b*sqrt(D) = (P - sqrt(D2)) / L = (-P + sqrt(D2)) / (-L)
+    return _floor_quad(-P, D2, -L)
 
 
 # --------------------------------------------------------------------------- #

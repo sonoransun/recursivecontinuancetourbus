@@ -115,6 +115,8 @@ strictly increasing function that maps quadratic irrationals to rationals and ha
 derivative zero almost everywhere. The staircase of a driven heart and the
 question-mark function of number theory are the same curve.
 
+![The devil's staircase: flat on every rational winding number, and the widest steps sit over the simplest fractions. The stairs you cannot see are the irrationals holding the curve together.](assets/fig-staircase.svg)
+
 ## 5. Fractal spectra: the butterfly and the quasicrystal
 
 Put an electron on a two-dimensional crystal in a magnetic field. Whether the
@@ -171,14 +173,16 @@ Galperin's colliding blocks: physics counts the digits of pi
  100^4                  31415         31415
  100^5                 314159        314159
  100^6                3141592       3141592
+  two elastic blocks, count every collision -> the digits of pi.
 ```
 
 And here the whole tour closes its loop. The two-block system, in the right
 coordinates, is a billiard bouncing inside a **wedge** of angle `arctan(√(m/M))`;
-the number of bounces is `⌊π/θ⌋`, a **rotation number** — the very quantity that
-continued fractions were invented to measure (Stops 8 and §4 above). π appears
-because it is the half-turn. Recursion, continued fractions, rotation, and π are
-not adjacent here. They are identical.
+the number of bounces is `⌈π/θ⌉ − 1` (that is `⌊π/θ⌋` whenever `π/θ` is not an
+integer), a **rotation number** — the very quantity that continued fractions
+were invented to measure (Stops 8 and §4 above). π appears because it is the
+half-turn. Recursion, continued fractions, rotation, and π are not adjacent
+here. They are identical.
 
 ## 7. The throughline
 

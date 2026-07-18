@@ -133,8 +133,8 @@ continued fraction of 51/22:
 
 1. **(★)** Expand `[3; 4, 12, 4]` back into an ordinary fraction by hand, then
    check with `demo cf` on your answer.
-   <details><summary>Hint</summary>Work inside-out: `4 + 1/4 = 17/4`, then
-   `12 + 4/17 = 208/17`, and so on.</details>
+   <details><summary>Hint</summary>Work inside-out: `12 + 1/4 = 49/4`, then
+   `4 + 4/49 = 200/49`, and so on.</details>
 
 2. **(★)** Write both continued-fraction representations of `9/7`.
    <details><summary>Hint</summary>One ends in a term ≥ 2; split that last term

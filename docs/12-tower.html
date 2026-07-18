@@ -11,9 +11,14 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
   <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
   <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <div class="search">
+    <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <div class="search-results" id="search-results" hidden></div>
+  </div>
   <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
 </header>
 <div class="layout">
@@ -40,14 +45,21 @@
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
 <div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
+<div class="nav-group">Heritage</div>
+<a href="appendix-h-history.html">A History in Convergents</a>
+<div class="nav-group">Branch</div>
+<a href="appendix-i-branches.html">Other Ways to Unfold</a>
 <div class="nav-group">Reference</div>
 <a href="appendix-a-proofs.html">Appendix A - Proofs</a>
 <a href="appendix-b-glossary.html">Appendix B - Glossary</a>
 <a href="appendix-c-references.html">Appendix C - References</a>
+<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus - for instructors</a>
 <div class="nav-group">Interactive</div>
 <a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content"><p class="chapter-nav"><a href="11-assembly-line.html">← Stop 11 — The Infinite Assembly Line</a> · <a href="index.html">Route map</a> · <a href="13-hall-of-mirrors.html">Stop 13 — The Hall of Mirrors →</a></p>
+  <main class="content" id="main"><p class="chapter-nav"><a href="11-assembly-line.html">← Stop 11 — The Infinite Assembly Line</a> · <a href="index.html">Route map</a> · <a href="13-hall-of-mirrors.html">Stop 13 — The Hall of Mirrors →</a></p>
 <h1 id="stop-12-the-tower">Stop 12 — The Tower</h1>
+<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
 <blockquote>A recursion so powerful it outruns every loop you could ever write: the Ackermann function, and the combinator that conjures recursion from nothing.</blockquote>
 <h2 id="overview">Overview</h2>
 <p>Every recursion on the tour so far has been <em>tame</em>: Euclid descends to a base case, convergents build up term by term, Gosper&#x27;s machine emits on demand. This stop climbs a tower of recursions so steep that ordinary iteration cannot keep up — and then asks the vertiginous question of where recursion itself comes from. It is the most computer-science-flavoured stop, and the least about continued fractions, but it is where &quot;recursive continuance&quot; is pushed to its logical extreme.</p>
@@ -65,6 +77,7 @@ A(m+1, 0)   = A(m, 1)
 A(m+1, n+1) = A(m, A(m+1, n)).</code></pre>
 <p>The <code>m</code> coordinate selects the rung of the hyperoperation ladder: <code>A(1, n) = n + 2</code>, <code>A(2, n) = 2n + 3</code>, <code>A(3, n) = 2ⁿ⁺³ − 3</code>, and <code>A(4, n) = 2↑↑(n+3) − 3</code> is tetrational. The function is <strong>total</strong> (it halts for every input) and <strong>computable</strong> (the definition above is a program), yet it is <strong>not primitive recursive</strong> — it grows faster than any function you can build from bounded <code>for</code>-loops alone. Ackermann&#x27;s 1928 function was the first concrete example proving that the total computable functions strictly <em>contain</em> the primitive recursive ones: some things are computable only with unbounded recursion (<code>while</code>), not mere iteration.</p>
 <p>The double recursion in the third line is the whole story: to compute <code>A(m+1, n+1)</code> you must first compute <code>A(m+1, n)</code> and feed the result <em>back in as an argument</em> to <code>A(m, ·)</code>. That inner-value-as-outer-argument nesting is what makes it outrun the primitive recursive functions. It also makes it explode: <code>A(4, 2) = 2↑↑5 − 3 = 2^65536 − 3</code>, a number with <strong>19,729 decimal digits</strong> — which is why the <code>tourbus</code> demo politely refuses to print it in full.</p>
+<p>The function has a purpose as well as a punchline: Wilhelm Ackermann was David Hilbert&#x27;s student, and the 1928 paper (&quot;Zum Hilbertschen Aufbau der reellen Zahlen&quot;) served Hilbert&#x27;s program of building analysis from finitary recursions — the function was evidence about what recursion <em>is</em>. The tidy two-argument form used here is due to Rózsa Péter (1935), whose work made recursion theory a discipline of its own. The name &quot;Ackermann–Péter function&quot; credits them both.</p>
 <h3 id="the-y-combinator-recursion-from-nothing">The Y combinator: recursion from nothing</h3>
 <p>If recursion is a function calling itself <em>by name</em>, where does the name come from? In the pure lambda calculus there are no names — only anonymous functions. Yet recursion is still available, through a <strong>fixed-point combinator</strong>. The most famous is Curry&#x27;s <strong>Y combinator</strong>:</p>
 <pre><code>Y = λf. (λx. f (x x)) (λx. f (x x)),      with the property   Y f = f (Y f).</code></pre>
@@ -73,7 +86,7 @@ A(m+1, n+1) = A(m, A(m+1, n)).</code></pre>
 <p>A gentler puzzle closes the tower. John McCarthy&#x27;s <strong>91 function</strong> is</p>
 <pre><code>M(n) = n − 10           if n &gt; 100,
 M(n) = M(M(n + 11))     if n ≤ 100.</code></pre>
-<p>The nested <code>M(M(…))</code> looks alarming, but the astonishing fact is that <code>M(n) = 91</code> for <strong>every</strong> <code>n ≤ 100</code>, and <code>n − 10</code> for <code>n &gt; 100</code>. It is a textbook case of a recursion whose <em>behaviour</em> is far simpler than its <em>definition</em> — a reminder that a nested recursion can hide a trivial function, just as Gosper&#x27;s stall (Stop 11) hid a trivial answer. Proving <code>M(n) = 91</code> requires reasoning about the <em>total</em> function, not tracing any single call, and is a classic exercise in program verification.</p>
+<p>The nested <code>M(M(…))</code> looks alarming, but the astonishing fact is that <code>M(n) = 91</code> for <strong>every</strong> <code>n ≤ 100</code>, and <code>n − 10</code> for <code>n &gt; 100</code>. It is a textbook case of a recursion whose <em>behaviour</em> is far simpler than its <em>definition</em> — a reminder that a nested recursion can hide a trivial function, just as Gosper&#x27;s stall (Stop 11) hid a trivial answer. Proving <code>M(n) = 91</code> requires reasoning about the <em>total</em> function, not tracing any single call, and is a classic exercise in program verification. McCarthy posed it around 1970, in the first wave of proving programs correct rather than merely running them.</p>
 <h2 id="worked-examples">Worked examples</h2>
 <p>Evaluate <code>A(3, 5)</code>. By the formula <code>A(3, n) = 2ⁿ⁺³ − 3</code>, this should be <code>2⁸ − 3 = 253</code> — and the recursion, unwound through hundreds of nested calls, agrees exactly:</p>
 <pre><code>$ python -m tourbus demo ackermann 3 5
@@ -103,6 +116,7 @@ A(4,2) = 2^65536 - 3 has 19729 digits; refusing to print it all.</code></pre>
   <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
   <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
 </footer>
+<script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>
 </body>
 </html>

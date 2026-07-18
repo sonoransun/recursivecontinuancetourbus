@@ -3,7 +3,7 @@ from fractions import Fraction
 from hypothesis import given
 from hypothesis import strategies as st
 
-from conftest import st_positive_fractions
+from tourbus_testkit import st_positive_fractions
 from tourbus.frontier.continuants import (
     continuant,
     continuant_euler,

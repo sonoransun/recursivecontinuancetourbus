@@ -5,7 +5,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from conftest import st_fractions
+from tourbus_testkit import st_fractions
 from tourbus.cf.constants import phi_cf, sqrt_cf
 from tourbus.cf.expand import cf_from_fraction
 from tourbus.dynamics import (

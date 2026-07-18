@@ -1,9 +1,11 @@
-"""The Express Line: six fringe stops past the end of the main route.
+"""The Express Line: nine fringe stops past the end of the main route.
 
 These are the deeper, stranger avenues — the Markov spectrum, continuants,
 algebraic irrationals, alternative continued fractions, the three-distance
-theorem, and the Gauss-Kuzmin-Wirsing constant. Each still computes live on the
-exact engine. Reached with ``python -m tourbus frontier``.
+theorem, the Gauss-Kuzmin-Wirsing constant, the elastic collisions that
+count out the digits of pi, Conway's topograph river, and Ramanujan's
+q-continued fraction. Each still computes live on the exact engine. Reached
+with ``python -m tourbus frontier``.
 """
 
 from __future__ import annotations
@@ -15,12 +17,11 @@ from . import render
 
 
 def _subhead(c: Console, text: str) -> None:
-    c.emit(" " + c.style(text, "title"))
+    render.subhead(c, text)
 
 
 def _souvenir(c: Console, text: str) -> None:
-    c.emit(" " + c.style(f"{c.glyphs.star} souvenir: ", "marker") + c.style(text, "chrome"))
-    c.emit()
+    render.souvenir(c, text)
 
 
 # --------------------------------------------------------------------------- #
@@ -186,6 +187,73 @@ def express_07_physics(c: Console) -> None:
                  "from two bricks -- see Appendix E for the whole web of ideas.")
 
 
+def express_08_river(c: Console) -> None:
+    from ..numbertheory import topograph as T
+    from ..cf.expand import cf_from_quadratic
+
+    c.paragraph("Conway drew the values of x^2 - d y^2 not as a formula but as a "
+                "landscape. Each region of an infinite trivalent tree carries the "
+                "value of the form on a primitive vector, and the numbers grow "
+                "outward by one arithmetic rule. Running through it all is the RIVER: "
+                "the unique path with positive country on one bank and negative on the "
+                "other -- and the river is exactly the periodic continued fraction of "
+                "sqrt(d) from Stop 6.")
+    c.emit()
+    d = 7
+    _subhead(c, f"Live: the river of x^2 - {d} y^2")
+    for row in T.topograph_strip(d):
+        c.emit("   " + c.style(row, "result"))
+    _subhead(c, "Live: the river IS the continued fraction of sqrt(d)")
+    period = T.river_period(d)
+    head, cf_period = cf_from_quadratic(0, d, 1)
+    c.emit("   " + c.style(f"river period {period}", "result"))
+    c.emit("   " + c.style(f"sqrt({d}) = [{head[0]}; {', '.join(str(t) for t in cf_period)}, ...] "
+                           f"-- same sequence.", "result"))
+    _subhead(c, "Live: a well on the river (Q = 1) is a Pell solution")
+    x, y = T.pell_from_river(d)
+    c.emit("   " + c.style(f"fundamental solution ({x}, {y}): {x}^2 - {d}*{y}^2 = "
+                           f"{x * x - d * y * y}", "result"))
+    _subhead(c, "Live: the same tree-walk runs the Markov triples")
+    c.emit("   " + c.style(f"Vieta neighbors of (1,2,5): {T.markov_edge((1, 2, 5))}", "result"))
+    c.emit("   " + c.style("replace one value by a linear function of the others -- the "
+                           "topograph move and the Markov move (E1) are cousins.", "chrome"))
+    c.emit()
+    _souvenir(c, "Pell, the continued fraction of sqrt(d), and the Markov spectrum are "
+                 "three views of one river through Conway's landscape of forms.")
+
+
+def express_09_ramanujan(c: Console) -> None:
+    from ..frontier import ramanujan as R
+    from fractions import Fraction
+
+    c.paragraph("In his first letter to Hardy in 1913, Ramanujan wrote down a "
+                "continued fraction and its value, with no proof, that Hardy said "
+                "'defeated me completely; I had never seen anything in the least like "
+                "them before.' It is the Rogers-Ramanujan fraction -- a q-continued "
+                "fraction whose partial numerators are powers of q -- and at "
+                "q = e^(-2*pi) the whole infinite object collapses to the golden ratio.")
+    c.emit()
+    _subhead(c, "Live: the Rogers-Ramanujan fraction R(q) at q = 1/2, exact convergents")
+    convs = R.rogers_ramanujan_convergents(Fraction(1, 2), 8)
+    c.emit("   " + c.style("R(q)/q^(1/5) = 1/(1 + q/(1 + q^2/(1 + q^3/(1 + ...))))", "result"))
+    c.emit("   " + c.style(", ".join(str(f) for f in convs[:6]) + ", ...", "result"))
+    c.emit("   " + c.style(f"converging to {float(convs[-1]):.8f}", "chrome"))
+    _subhead(c, "Live: Ramanujan's gift to Hardy -- R(e^(-2*pi)) is built from phi")
+    cf, closed, err = R.rogers_ramanujan_golden()
+    c.emit("   " + c.style(f"from the continued fraction: {cf:.12f}", "result"))
+    c.emit("   " + c.style(f"closed form sqrt((5+sqrt5)/2) - phi: {closed:.12f}", "result"))
+    c.emit("   " + c.style(f"agree to {err:.1e} -- the infinite fraction IS that surd.", "success"))
+    _subhead(c, "Live: Ramanujan's nested radical, 3 = sqrt(1 + 2 sqrt(1 + 3 sqrt(...)))")
+    rows = [[d, f"{R.ramanujan_nested_radical(d):.9f}"] for d in (1, 3, 6, 12, 24)]
+    c.emit(render.table(["depth", "value -> 3"], rows, console=c, right_align=[0, 1]))
+    c.emit("   " + c.style("a puzzle he posed in 1911 that the Journal left unanswered; "
+                           "the general form gives x+1.", "chrome"))
+    c.emit()
+    _souvenir(c, "The golden ratio of Stop 4 returns as the value of an infinite "
+                 "q-fraction -- Ramanujan saw the identity whole, and the proof came "
+                 "later.")
+
+
 EXPRESS_STOPS = [
     ("The Markov Spectrum", "The numbers that come after the golden ratio.", express_01_markov),
     ("Continuants", "The polynomial hiding inside every convergent.", express_02_continuants),
@@ -194,4 +262,6 @@ EXPRESS_STOPS = [
     ("The Three-Distance Theorem", "A surprise in the orbit of an irrational rotation.", express_05_three_distance),
     ("The Gauss-Kuzmin-Wirsing Constant", "Computed from scratch via the transfer operator.", express_06_gkw),
     ("Physics: Colliding Blocks Count Pi", "Where arithmetic, rotation, and mechanics meet.", express_07_physics),
+    ("The River", "Conway's topograph: the river is the continued fraction of sqrt(d).", express_08_river),
+    ("Ramanujan's Continued Fraction", "The Rogers-Ramanujan fraction and a golden-ratio miracle.", express_09_ramanujan),
 ]
