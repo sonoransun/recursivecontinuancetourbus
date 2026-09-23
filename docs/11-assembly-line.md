@@ -101,8 +101,8 @@ grab-bag of tricks from the MIT AI Lab — number theory next to circuit hacks
 next to screen-drawing lore — and item 101 sat inside it, never published as a
 paper, passed around for decades as hacker folklore. Jean Vuillemin's 1990
 IEEE paper finally gave the algorithm formal foundations as exact real
-arithmetic. Heritage stop H6 (Appendix H) places the memo in the long line
-that starts at Euclid.
+arithmetic. [Heritage stop H9](appendix-h-history.md#h9-1972-item-101) places
+the memo in the long line that starts at Euclid.
 
 ## Worked examples
 
@@ -141,6 +141,73 @@ That error message *is* the theorem: exact stream arithmetic cannot decide, in
 finite time, that its output has become rational. The assembly line runs
 forever, and sometimes forever is the honest answer.
 
+## Then, now, next
+
+### Then — from computable numbers to streaming arithmetic
+
+```mermaid
+timeline
+    title Arithmetic that never has to stop
+    section Foundations
+        1936 : Turing's On Computable Numbers - reals as machines that print digits
+        1967 : Bishop rebuilds analysis with reals as algorithms
+    section The memo and after
+        1972 : Gosper's HAKMEM item 101 - exact continued-fraction arithmetic
+        1973 : Raney - finite automata transform continued fractions
+        1975 : Trivedi and Ercegovac - online arithmetic, most significant digit first
+        1990 : Vuillemin founds exact real arithmetic on continued fractions
+    section In your pocket
+        2015 : Android's calculator adopts exact constructive reals
+        2017 : Boehm explains why that calculator is never wrong
+```
+
+The problem Gosper solved is as old as computing itself. Alan Turing's
+famous 1936 paper is titled *On Computable Numbers*: a real number is
+computable if a machine can print its digits one after another forever — a
+stream, exactly like the ones on this stop. What was missing for decades was
+practical *arithmetic* on such streams. Gosper's memo showed how to do it for
+continued fractions with a handful of integers of state, George Raney proved
+in 1973 that the one-input machine is a finite automaton, and Jean Vuillemin's
+1990 paper turned the idea into a theory of exact real arithmetic. In parallel,
+computer architects invented *online arithmetic* (Kishor Trivedi and Miloš
+Ercegovac, 1975), which emits the most significant digits of a result before
+the inputs have finished arriving.
+
+### Now — exact answers in everyday software
+
+- **A calculator that is never wrong.** Since Android 6.0 (2015), the
+  calculator app that ships with Android evaluates expressions with
+  *constructive reals*: every number is a program that can produce more digits
+  on demand, and the display shows only digits it has certified — Gosper's
+  "emit only when sure" rule, in hundreds of millions of pockets (Hans Boehm,
+  *Communications of the ACM*, 2017).
+- **Streams everywhere.** Corecursion is now ordinary programming: Python
+  generators (the engine behind every continued fraction in `tourbus`),
+  Haskell's lazy lists, and reactive stream libraries all describe infinite
+  data by how to produce the next item.
+- **Digits first, in hardware.** Most-significant-digit-first arithmetic is
+  still studied for FPGA designs, where one operation can begin consuming the
+  leading digits of the previous one before it has finished — an assembly line
+  in silicon.
+- **The table-maker's dilemma.** Libraries that promise *correctly rounded*
+  results for functions like `exp` and `sin` face Gosper's stall in miniature:
+  when a value lies extremely close to a rounding boundary, more and more digits
+  are needed to decide which way to round. Projects such as CORE-MATH bound how
+  many are ever needed.
+
+### Next — the stall that cannot be engineered away
+
+The `√2 · √2` stall is not a bug to be fixed; it is a theorem. Daniel
+Richardson proved in 1968 that for expressions built from ordinary functions
+(`π`, `exp`, `sin`, absolute value, and a variable), deciding whether a value is
+*exactly* zero is undecidable. For narrower classes the question is decidable
+only if deep conjectures hold — for the exponential and logarithm, Schanuel's
+conjecture would suffice. Exact real arithmetic therefore lives, permanently,
+with the same honest uncertainty as the stall on this page. The research
+frontier is in *certified* systems — libraries whose every digit comes with a
+proof, some now checked inside proof assistants — and in finding practical
+classes of numbers for which equality *can* be decided.
+
 ## Exercises
 
 1. **(★)** Verify numerically that the `add` result is right: evaluate the
@@ -175,11 +242,13 @@ forever, and sometimes forever is the honest answer.
 
 ## See it move
 
-Open the **Assembly Line** widget:
-[`site/index.html#stop-11-assembly`](../site/index.html#stop-11-assembly). Pick
-two numbers and an operation and watch the eight-integer state update as terms
-are ingested and emitted, with the machine visibly stalling when you ask it for
-`√2 · √2`.
+The Assembly Line's section of the
+[live exposition](../site/index.html#stop-11-assembly) streams the continued
+fraction of `√2 + √3` — a root of `x⁴ − 10x² + 1`, so its expansion never
+repeats — one certified term at a time: press **Emit term** to pull a single
+partial quotient off the line, or **Stream** to let it run. The eight-integer
+Gosper machine itself, and its honest stall on `√2 · √2`, run in the terminal
+with the demos above.
 
 ## Further reading
 
@@ -190,5 +259,11 @@ are ingested and emitted, with the machine visibly stalling when you ask it for
   *IEEE Trans. Computers* (1990).
 - Appendix B of this tour for the definitions of *homographic*, *bihomographic*,
   and *corecursion*.
+- G. N. Raney, "On continued fractions and finite automata," *Mathematische
+  Annalen* 206 (1973).
+- H.-J. Boehm, "Small-data computing: correct calculator arithmetic,"
+  *Communications of the ACM* 60(8) (2017) — exact real arithmetic in a phone.
+- D. Richardson, "Some undecidable problems involving elementary functions of a
+  real variable," *Journal of Symbolic Logic* 33 (1968).
 
 [← Stop 10 — The Casino](10-casino.md) · [Route map](index.md) · [Stop 12 — The Tower →](12-tower.md)

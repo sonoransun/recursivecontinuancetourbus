@@ -280,6 +280,15 @@ body{background:#eceef1}
 .reading li{padding:.35rem 0; border-bottom:1px solid var(--border); font-size:.9rem}
 .reading li:last-child{border-bottom:none}
 .reading .src{font-family:var(--font-data); font-size:.72rem; color:var(--muted)}
+/* ---------- Then · Now · Next strips (history, today, the open road) ---------- */
+.tnn-strip{max-width:880px; margin:1.8rem auto 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.65rem}
+.tnn-item{--k:var(--s1); background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--k); border-radius:4px; padding:.7rem .85rem .8rem}
+.tnn-item.then{--k:var(--s6)} .tnn-item.now{--k:var(--s1)} .tnn-item.next{--k:var(--s5)}
+.tnn-k{font-family:var(--font-data); font-size:.64rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--k)}
+.tnn-item p{margin:.35rem 0 0; font-size:.86rem; line-height:1.5; color:var(--ink-2)}
+.tnn-more{grid-column:1/-1; justify-self:end; font-family:var(--font-sign); font-weight:600; font-size:.82rem}
+.tnn-more::after{content:" \2192"}
+@media (max-width:760px){ .tnn-strip{grid-template-columns:1fr} }
 
 .small{font-size:.8rem; color:var(--ink-2)}
 .hl{color:var(--brass); font-weight:600}
@@ -321,7 +330,7 @@ body{background:#eceef1}
   <div class="rct-mobilenav">
     <div class="rct-progress"><i id="progbar"></i></div>
     <details>
-      <summary>Route map — 15 stops + 2 bonus legs</summary>
+      <summary>Route map — 15 stops + 3 bonus legs</summary>
       <ol id="mobile-stops"></ol>
     </details>
   </div>
@@ -334,7 +343,7 @@ body{background:#eceef1}
         <h1>Recursive Continuance Tour Bus</h1>
         <p class="tagline">A guided ride through the numbers that describe themselves — from Euclid's leftovers to the most irrational number alive.</p>
         <div class="phi-stage" id="phi-stage" aria-label="Animated continued fraction for the golden ratio"></div>
-        <div class="routesummary">Route: <b>Depot</b> &rarr; Golden Milestone &rarr; Cattle Crossing &rarr; The Casino &rarr; Hall of Mirrors &rarr; <b>Terminus</b> &mdash; 15 stops + 2 bonus legs, no transfers.</div>
+        <div class="routesummary">Route: <b>Depot</b> &rarr; Golden Milestone &rarr; Cattle Crossing &rarr; The Casino &rarr; Hall of Mirrors &rarr; <b>Terminus</b> &mdash; 15 stops + 3 bonus legs, no transfers.</div>
       </div>
     </header>
 
@@ -347,6 +356,12 @@ body{background:#eceef1}
         <p>Type a number or a fraction into the machine below and step through it. The quotients pile up as CF terms; the convergents are the running best guesses.</p>
       </div>
       <div class="band"><div id="w1a"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>c. 300 BC: Euclid records the gcd; the Chinese <em>Nine Chapters</em> halve and subtract; Lamé times it in 1844.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>The extended algorithm computes the modular inverses behind RSA and elliptic-curve keys — in constant time since <em>safegcd</em> (2019).</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Can gcd be parallelised? Nobody knows: it is a classic open problem of parallel computation.</p></div>
+        <a class="tnn-more" data-doc href="01-depot.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-2-road">Next stop</a>
     </section>
 
@@ -358,6 +373,12 @@ body{background:#eceef1}
         <p>Run divide-and-flip on an irrational and it simply never terminates. We record the result as <span class="mono">[a<sub>0</sub>; a<sub>1</sub>, a<sub>2</sub>, …]</span> — the semicolon marks the whole-number part, the commas the reciprocal descent. A number is rational exactly when the road ends.</p>
         <p>The machine above handles both: a finite ledger for <span class="mono">p/q</span>, an endless one (certified term-by-term) for π and e.</p>
       </div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Greek <em>anthyphairesis</em> measured incommensurables; Wallis named the fraction (1655); Euler proved rational ⇔ finite (1737).</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Python’s <span class="mono">Fraction.limit_denominator</span> walks this road to turn 3.14159265… back into 355/113.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Hermite’s problem (1848): an expansion that makes the cubic irrationals periodic. Still open in general.</p></div>
+        <a class="tnn-more" data-doc href="02-unfolding-road.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-3-engine">Next stop</a>
     </section>
 
@@ -369,6 +390,12 @@ body{background:#eceef1}
         <p>Convergents are the CF's pistons: <span class="mono">p<sub>n</sub> = a<sub>n</sub>p<sub>n-1</sub> + p<sub>n-2</sub></span>, with the same recurrence driving <span class="mono">q<sub>n</sub></span>. Each convergent is the best rational approximation for its size, with error below <span class="mono">1/q<sub>n</sub>²</span>. That is how π coughs up 22/7, then the uncanny 355/113.</p>
       </div>
       <div class="band"><div id="mini-convergents"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Cataldi (1613), Wallis, and Euler built the recurrence; Euler’s continuants followed in 1764.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>The same recurrence evaluates p-values in statistics libraries and organises record computations of π.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>The engine’s guarantees are being machine-checked in proof assistants such as Lean.</p></div>
+        <a class="tnn-more" data-doc href="03-engine-room.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-4-golden">Next stop</a>
     </section>
 
@@ -381,6 +408,12 @@ body{background:#eceef1}
       </div>
       <div class="band"><div id="w3"></div></div>
       <div class="band"><div id="w4"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Euclid’s “extreme and mean ratio” (c. 300 BC); Indian prosodists’ Fibonacci numbers (c. 700); Hurwitz’s theorem (1891).</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Fibonacci hashing multiplies by 2<sup>64</sup>/φ; quasicrystals (Nobel Prize, 2011) and sunflowers keep the same number.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Fibonacci anyons, with quantum dimension φ, are a leading design for topological quantum computers.</p></div>
+        <a class="tnn-more" data-doc href="04-golden.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-5-overlook">Next stop</a>
     </section>
 
@@ -392,6 +425,12 @@ body{background:#eceef1}
         <p>Stop for the view: convergents are the cheapest rationals that hit a target. Calendars are the case study — 8 leap days every 33 years (Khayyam, 1079) is a convergent of the tropical year; the Gregorian 97/400 is close but, tellingly, <em>not</em> one.</p>
       </div>
       <div class="band"><div id="w9"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Meton’s 19-year cycle is the convergent 235/19; Huygens cut Saturn’s gears to 206/7 in 1682.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Leap seconds are being retired by 2035: no fixed fraction can track a slowing Earth.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Approximating several numbers at once is where Littlewood’s conjecture lives.</p></div>
+        <a class="tnn-more" data-doc href="05-scenic-overlook.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-6-loop">Next stop</a>
     </section>
 
@@ -403,6 +442,12 @@ body{background:#eceef1}
         <p>Here the road bends back on itself. A CF is eventually periodic exactly when its value is a quadratic irrational (Lagrange), so <span class="mono">√d</span> always has a repeating block: <span class="mono">√2 = [1; 2, 2, 2, …] = [1; (2)]</span>.</p>
       </div>
       <div class="band"><div id="mini-sqrtcf"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Euler saw the palindromes; Lagrange proved periodicity (1770); Galois, at seventeen, explained it (1829).</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Walking the loop computes regulators and class numbers of real quadratic fields in computer algebra.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Are there infinitely many real quadratic fields with unique factorisation? Gauss asked; still open.</p></div>
+        <a class="tnn-more" data-doc href="06-loop-road.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-7-cattle">Next stop</a>
     </section>
 
@@ -414,6 +459,12 @@ body{background:#eceef1}
         <p>Pell's equation <span class="mono">x² − d·y² = 1</span> falls out of the convergents of <span class="mono">√d</span>. Fermat's 1657 challenge, <span class="mono">d = 61</span>, has a smallest solution so large it stampedes: <span class="mono">x = 1&nbsp;766&nbsp;319&nbsp;049</span>. Set the dial and watch a convergent land exactly on the fence.</p>
       </div>
       <div class="band"><div id="w7"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Brahmagupta (628) and Bhāskara II (1150) solved it; Fermat’s 1657 challenge, d = 61, was a rerun.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>A quantum computer could solve Pell’s equation in polynomial time (Hallgren, 2002).</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>How often is x² − dy² = −1 solvable? Stevenhagen’s 1993 prediction was proved in 2022.</p></div>
+        <a class="tnn-more" data-doc href="07-cattle-crossing.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-8-family">Next stop</a>
     </section>
 
@@ -425,6 +476,12 @@ body{background:#eceef1}
         <p>The Stern–Brocot tree lists every positive rational exactly once, each fraction the mediant <span class="mono">(a+c)/(b+d)</span> of its neighbours. Turn left or right and you are reading off a continued fraction in disguise.</p>
       </div>
       <div class="band"><div id="w2"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Haros (1802), Farey (1816), then Stern (1858) and the clockmaker Brocot (1861): the tree found twice.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Rademacher’s exact partition formula cuts the circle at Farey fractions; string theorists reuse it.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>The Riemann hypothesis is equivalent to Farey fractions being evenly spread (Franel and Landau, 1924).</p></div>
+        <a class="tnn-more" data-doc href="08-family-tree.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-9-celebrity">Next stop</a>
     </section>
 
@@ -436,6 +493,12 @@ body{background:#eceef1}
         <p>Not all irrationals behave alike. <span class="mono">e = [2; 1, 2, 1, 1, 4, 1, 1, 6, …]</span> hides a crisp arithmetic pattern; π's expansion marches on with no known rule at all — <span class="mono">3, 7, 15, 1, 292, …</span>. Load each into the machine and look.</p>
       </div>
       <div class="band"><div id="w1b"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>e proved irrational by Euler (1737), π by Lambert (1761); both transcendental by 1882.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>μ(e) = 2 exactly, while the best bound for π is 7.1032… (2020). Machines now hunt for new formulas.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Is π + e irrational? Is π·e? Nobody knows — only that at least one is transcendental.</p></div>
+        <a class="tnn-more" data-doc href="09-celebrity.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-10-casino">Next stop</a>
     </section>
 
@@ -448,6 +511,12 @@ body{background:#eceef1}
       </div>
       <div class="band"><div id="w5"></div></div>
       <div class="band"><div id="w6"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Gauss posed the question to Laplace in 1812; Kuzmin (1928), Khinchin (1935), and Wirsing (1974) answered.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>The same statistics predict gcd’s average speed, and govern the chaotic early universe of the BKL model.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>No named constant, π included, has been proved to obey Khinchin’s law.</p></div>
+        <a class="tnn-more" data-doc href="10-casino.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-11-assembly">Next stop</a>
     </section>
 
@@ -459,6 +528,12 @@ body{background:#eceef1}
         <p>Gosper's insight: you can do arithmetic on continued fractions term-by-term, as a stream, never fully evaluating anything. Feed in <span class="mono">√2</span> and <span class="mono">√3</span> and the line emits the CF of their sum, one certified quotient at a time.</p>
       </div>
       <div class="band"><div id="mini-gosper"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Turing’s computable numbers (1936); Gosper’s HAKMEM item 101 (1972); Vuillemin’s theory (1990).</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Android’s calculator (since 2015) computes with exact constructive reals and shows only certified digits.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Deciding whether an expression is exactly zero is undecidable in general (Richardson, 1968).</p></div>
+        <a class="tnn-more" data-doc href="11-assembly-line.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-12-tower">Next stop</a>
     </section>
 
@@ -470,6 +545,12 @@ body{background:#eceef1}
         <p>Recursion can climb terrifyingly fast. Ackermann's <span class="mono">A(4,2) = 2^65536 − 3</span> — a number we can print the size of but never the whole of. The Y combinator, at the other extreme, achieves recursion with no name to call at all: self-reference distilled.</p>
       </div>
       <div class="band"><div id="mini-tower"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Sudan (1927), Ackermann (1928), Péter (1935): functions beyond <span class="mono">for</span>-loops, built for Hilbert’s program.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Union–find runs in inverse-Ackermann time: effectively constant, never above 4 in practice.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>BB(5) was settled in 2024 with a Coq-checked proof; BB(6) may hide a Collatz-like problem.</p></div>
+        <a class="tnn-more" data-doc href="12-tower.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-13-mirrors">Next stop</a>
     </section>
 
@@ -481,6 +562,12 @@ body{background:#eceef1}
         <p>A fractal is a shape that quotes itself. Koch's snowflake has dimension <span class="mono">ln4/ln3 ≈ 1.262</span>; Sierpiński's gasket <span class="mono">ln3/ln2 ≈ 1.585</span>; the dragon and Hilbert curves pack the plane so densely their dimension reaches 2.</p>
       </div>
       <div class="band"><div id="w8"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>The “monsters” of 1872–1915 became Mandelbrot’s fractals in 1975.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Hilbert curves index the planet in geospatial libraries; fractal antennas fit inside phones.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Siegel disks exist exactly for Brjuno numbers (Yoccoz); whether the Mandelbrot set is locally connected is open.</p></div>
+        <a class="tnn-more" data-doc href="13-hall-of-mirrors.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-14-souvenir">Next stop</a>
     </section>
 
@@ -494,6 +581,12 @@ body{background:#eceef1}
       <div class="band"><div id="w10"></div></div>
       <div class="band"><div id="w11"></div></div>
       <div class="band"><div id="w12"></div></div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Zhu Zaiyu’s twelve equal semitones (1584); Collatz (1937); RSA (1977); Wiener’s attack (1990).</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Shor’s quantum algorithm ends with a continued fraction; NIST’s post-quantum standards arrived in 2024.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Collatz is verified below 2<sup>71</sup> and Tao proved almost all orbits fall, but the conjecture stands.</p></div>
+        <a class="tnn-more" data-doc href="14-souvenir-shop.html#then-now-next">The full story in the chapter</a>
+      </aside>
       <a class="next-stop" href="#stop-15-terminus">Next stop</a>
     </section>
 
@@ -507,11 +600,12 @@ body{background:#eceef1}
       <div class="band">
         <div class="terminus">
           <h3>Open track ahead</h3>
-          <p class="small" style="margin-top:.5rem">Three unanswered questions that this very tour walked right past:</p>
+          <p class="small" style="margin-top:.5rem">Four unanswered questions that this very tour walked right past:</p>
           <ul class="reading" style="margin-bottom:1rem">
-            <li><b>Khinchin for π.</b> Numerically, π's partial quotients look like a "typical" real (geometric mean ≈ K₀), but there is no proof π is not exceptional.</li>
-            <li><b>Is K₀ irrational?</b> Khinchin's constant is not known to be irrational, let alone transcendental.</li>
-            <li><b>Collatz.</b> Verified past 2<sup>68</sup> by computer; still unproved for all n.</li>
+            <li><b>Khinchin for π.</b> Numerically, π's partial quotients look like a "typical" real (geometric mean ≈ K₀), but there is no proof π is not exceptional. Watch a typical number converge in the <a href="#w6">Khinchin Lab</a>.</li>
+            <li><b>Is K₀ irrational?</b> Khinchin's constant is known to a million digits, yet not known to be irrational, let alone transcendental. Its dealer is the <a href="#w5">Gauss-map cobweb</a>.</li>
+            <li><b>Collatz.</b> Verified below 2<sup>71</sup> by computer (2025); almost all orbits fall (Tao, 2019); still unproved for all n. Fly your own orbits in the <a href="#w12">Collatz Orbit Plotter</a>.</li>
+            <li><b>Is γ irrational?</b> Euler's constant has been expanded to billions of partial quotients; if it were a fraction, its denominator would need more than 244,000 digits. Nobody can prove it is not.</li>
           </ul>
           <h3>Reading list</h3>
           <ul class="reading">
@@ -523,6 +617,12 @@ body{background:#eceef1}
           <p class="small" style="margin-top:1rem; color:var(--muted)">Mind the gap, and thanks for riding Line R.</p>
         </div>
       </div>
+      <aside class="tnn-strip" aria-label="Then, now, next">
+        <div class="tnn-item then"><span class="tnn-k">Then</span><p>Apéry proved ζ(3) irrational in 1978; the Duffin–Schaeffer conjecture fell in 2019.</p></div>
+        <div class="tnn-item now"><span class="tnn-k">Now</span><p>Ergodic theory, thin groups, and massive computation are pushing on Littlewood and Zaremba.</p></div>
+        <div class="tnn-item next"><span class="tnn-k">Next</span><p>Is γ irrational? Is K₀? Proof assistants and machine-found conjectures may help decide.</p></div>
+        <a class="tnn-more" data-doc href="15-terminus.html#then-now-next">The full story in the chapter</a>
+      </aside>
     </section>
 
     <section id="stop-encore-blocks">
@@ -2181,7 +2281,7 @@ function mountW12(mount){
   const capS=h('div','lbl'); capS.style.margin='.7rem 0 .3rem'; capS.textContent='stopping time (steps → 1) for every n ≤ 1000 — the Collatz "galaxy"';
   body.appendChild(capS);
   const scatter=makeChart(body,{width:760,height:200,padL:44});
-  const note=h('div','card-note'); note.innerHTML='<b>Note.</b> Every orbit tested (verified past 2⁶⁸) reaches 1 — but no proof exists that all do. This is the Collatz conjecture.'; body.appendChild(note);
+  const note=h('div','card-note'); note.innerHTML='<b>Note.</b> Every orbit tested (verified below 2⁷¹) reaches 1 — but no proof exists that all do. This is the Collatz conjecture.'; body.appendChild(note);
 
   const COLS=[0,5,1,3];
   let seeds=[];
@@ -2441,7 +2541,7 @@ function mountW15(mount){
 
   // input + presets
   const r1=h('div','wrow');
-  const inp=h('input'); inp.type='text'; inp.placeholder='decimal or p/q, e.g. 3.14159 or 355/113'; inp.setAttribute('aria-label','number to unfold');
+  const inp=h('input'); inp.type='text'; inp.placeholder='decimal or p/q, e.g. 3.14159 or 355/113'; inp.setAttribute('aria-label','number to unfold'); inp.style.flex='1 1 22rem';
   r1.appendChild(inp); body.appendChild(r1);
 
   const chips=h('div','chips-row');
@@ -2483,7 +2583,7 @@ function mountW15(mount){
   const leg=h('div'); plotBox.appendChild(leg);
 
   let cur=null;
-  const CHART=[ {key:'cf',name:'CF',color:0}, {key:'engel',name:'Engel',color:1}, {key:'pierce',name:'Pierce',color:2}, {key:'egypt',name:'Egyptian',color:3} ];
+  const CHART=[ {key:'cf',name:'CF',color:0}, {key:'engel',name:'Engel',color:1}, {key:'pierce',name:'Pierce',color:2}, {key:'egypt',name:'Egyptian',color:4} ];
   const FLOOR=-26; // deepest log₁₀|error| the chart plots before a stall drops off the bottom
 
   function esc(s){ return (s==null?'':(''+s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -2706,6 +2806,8 @@ function mountAll(){
   DeepLink.apply(); // honor a widget deep link (#w7?d=61 …) present at load
 }
 function fail(id,e){ const m=document.getElementById(id); if(m){ const d=h('div','card-note'); d.style.borderColor='var(--s6)'; d.textContent='['+id+'] failed to load: '+(e&&e.message?e.message:e); m.appendChild(d); } if(window.console) console.error('[RCT '+id+']',e); }
+/* chapter links: docs/explore.html sits beside the chapters; site/index.html is one folder over */
+if(!/explore(\.html)?$/i.test(location.pathname)){ document.querySelectorAll('a[data-doc]').forEach(function(a){ a.setAttribute('href','../docs/'+a.getAttribute('href')); }); }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mountAll); else mountAll();
 window.RCT=RCT;
 })();

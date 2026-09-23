@@ -3,117 +3,164 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Cattle Crossing - Tour Bus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<title>The Cattle Crossing — Stop 7 · Tour Bus</title>
+<meta name="description" content="A herd blocks the road, and the toll is an ancient equation: x² − d·y² = 1, whose solutions fall straight out of the loop we just drove.">
+<meta property="og:title" content="The Cattle Crossing — Stop 7 · Tour Bus">
+<meta property="og:description" content="A herd blocks the road, and the toll is an ancient equation: x² − d·y² = 1, whose solutions fall straight out of the loop we just drove.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eceef1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M24 78V52a26 26 0 0 1 26-26h26' fill='none' stroke='%23b5751a' stroke-width='11' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='78' r='13' fill='%23b5751a'/%3E%3Ccircle cx='76' cy='26' r='13' fill='%23b5751a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/rct-docs.css">
 <script>
 (function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
-<body>
+<body data-line="main" data-page="07-cattle-crossing">
+<div class="progress" aria-hidden="true"><i></i></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
-  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
-  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
+  <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
   <div class="search">
     <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
     <div class="search-results" id="search-results" hidden></div>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  <a class="top-link" href="https://github.com/sonoransun/recursivecontinuancetourbus">GitHub</a>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cycle color theme"><span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Auto</span></button>
 </header>
-<div class="layout">
-  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
-<div class="nav-group">The Tour</div>
-<a href="01-depot.html">1 · The Depot</a>
-<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
-<a href="03-engine-room.html">3 · The Engine Room</a>
-<a href="04-golden.html">4 · The Golden Milestone</a>
-<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
-<a href="06-loop-road.html">6 · The Loop Road</a>
-<a class="on" href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
-<a href="08-family-tree.html">8 · The Family Tree</a>
-<a href="09-celebrity.html">9 · Celebrity Sightings</a>
-<a href="10-casino.html">10 · The Casino</a>
-<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
-<a href="12-tower.html">12 · The Tower</a>
-<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
-<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
-<a href="15-terminus.html">15 · Terminus</a>
-<div class="nav-group">The Express Line</div>
+<div class="layout has-rail">
+  <nav class="sidebar" id="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Route map</a>
+<div class="nav-sec" data-line="main"><div class="nav-group">The Tour</div><ol class="nav-line">
+<li><a class="stn" href="01-depot.html"><span class="stn-n">1</span><span class="stn-t">The Depot</span></a></li>
+<li><a class="stn" href="02-unfolding-road.html"><span class="stn-n">2</span><span class="stn-t">The Unfolding Road</span></a></li>
+<li><a class="stn" href="03-engine-room.html"><span class="stn-n">3</span><span class="stn-t">The Engine Room</span></a></li>
+<li><a class="stn" href="04-golden.html"><span class="stn-n">4</span><span class="stn-t">The Golden Milestone</span></a></li>
+<li><a class="stn" href="05-scenic-overlook.html"><span class="stn-n">5</span><span class="stn-t">Scenic Overlook</span></a></li>
+<li><a class="stn" href="06-loop-road.html"><span class="stn-n">6</span><span class="stn-t">The Loop Road</span></a></li>
+<li><a class="stn on" href="07-cattle-crossing.html" aria-current="page"><span class="stn-n">7</span><span class="stn-t">The Cattle Crossing</span></a></li>
+<li><a class="stn" href="08-family-tree.html"><span class="stn-n">8</span><span class="stn-t">The Family Tree</span></a></li>
+<li><a class="stn" href="09-celebrity.html"><span class="stn-n">9</span><span class="stn-t">Celebrity Sightings</span></a></li>
+<li><a class="stn" href="10-casino.html"><span class="stn-n">10</span><span class="stn-t">The Casino</span></a></li>
+<li><a class="stn" href="11-assembly-line.html"><span class="stn-n">11</span><span class="stn-t">The Infinite Assembly Line</span></a></li>
+<li><a class="stn" href="12-tower.html"><span class="stn-n">12</span><span class="stn-t">The Tower</span></a></li>
+<li><a class="stn" href="13-hall-of-mirrors.html"><span class="stn-n">13</span><span class="stn-t">The Hall of Mirrors</span></a></li>
+<li><a class="stn" href="14-souvenir-shop.html"><span class="stn-n">14</span><span class="stn-t">The Souvenir Shop</span></a></li>
+<li><a class="stn" href="15-terminus.html"><span class="stn-n">15</span><span class="stn-t">Terminus</span></a></li>
+</ol></div>
+<div class="nav-sec" data-line="express"><div class="nav-group">The Express Line</div>
 <a href="appendix-d-frontier.html">Fringe Avenues</a>
-<div class="nav-group">Synthesis</div>
+</div>
+<div class="nav-sec" data-line="web"><div class="nav-group">Synthesis</div>
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
-<div class="nav-group">Cross-Domain</div>
+</div>
+<div class="nav-sec" data-line="cross"><div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
-<div class="nav-group">Heritage</div>
+</div>
+<div class="nav-sec" data-line="heritage"><div class="nav-group">Heritage</div>
 <a href="appendix-h-history.html">A History in Convergents</a>
-<div class="nav-group">Branch</div>
+</div>
+<div class="nav-sec" data-line="branch"><div class="nav-group">Branch</div>
 <a href="appendix-i-branches.html">Other Ways to Unfold</a>
-<div class="nav-group">Reference</div>
-<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
-<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
-<a href="appendix-c-references.html">Appendix C - References</a>
-<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
-<a href="syllabus.html">Syllabus - for instructors</a>
-<div class="nav-group">Interactive</div>
-<a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content" id="main"><p class="chapter-nav"><a href="06-loop-road.html">← Stop 6 — The Loop Road</a> · <a href="index.html">Route map</a> · <a href="08-family-tree.html">Stop 8 — The Family Tree →</a></p>
-<h1 id="stop-7-the-cattle-crossing">Stop 7 — The Cattle Crossing</h1>
-<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
-<blockquote>A herd blocks the road, and the toll is an ancient equation: x² − d·y² = 1, whose solutions fall straight out of the loop we just drove.</blockquote>
-<h2 id="overview">Overview</h2>
+</div>
+<div class="nav-sec" data-line="ref"><div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A — Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B — Glossary</a>
+<a href="appendix-c-references.html">Appendix C — References</a>
+<a href="appendix-g-hints.html">Appendix G — Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus — for instructors</a>
+</div>
+<div class="nav-sec" data-line="explore"><div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a>
+</div></nav>
+  <main class="content" id="main"><header class="page-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Route map</a><span aria-hidden="true">/</span><span>The Tour</span></nav><div class="kicker"><span class="roundel">7</span><span>Main line · Stop 7 of 15</span></div><h1 id="stop-7-the-cattle-crossing">The Cattle Crossing</h1><p class="lede">A herd blocks the road, and the toll is an ancient equation: x² − d·y² = 1, whose solutions fall straight out of the loop we just drove.</p><ul class="page-meta"><li><span class="mk">Reading</span> 8 min</li><li><span class="mk">Run it</span> <code>python -m tourbus stop 7</code></li><li><a class="mlink" href="explore.html#stop-7-cattle">Live widget&nbsp;&#8599;</a></li></ul></header><details class="toc-inline"><summary>On this page</summary><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#convergents-solve-pell">Convergents solve Pell</a></li><li><a href="#the-wild-growth-of-solutions">The wild growth of solutions</a></li><li><a href="#the-chakravala-comes-first">The chakravala comes first</a></li><li><a href="#archimedes-cattle">Archimedes' cattle</a></li><li><a href="#units-in-quadratic-fields">Units in quadratic fields</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-two-thousand-years-at-the-crossing">Then — two thousand years at the crossing</a></li><li><a href="#now-pell-s-equation-at-the-edge-of-computation">Now — Pell's equation at the edge of computation</a></li><li><a href="#next-the-negative-equation">Next — the negative equation</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></details><section class="sec" data-sec="overview">
+<h2 id="overview">Overview<a class="h-anchor" href="#overview" aria-label="Link to this section">#</a></h2>
 <p>The looping road of Stop 6 was not just pretty; it is a solution machine. The period of <code>√d</code> hands us, for free, the smallest solution of <strong>Pell&#x27;s equation</strong></p>
-<pre><code>x² − d·y² = ±1,</code></pre>
+<div class="math-display">x² − d·y² = ±1,</div>
 <p>for any non-square positive integer <code>d</code>. This equation is one of the oldest in number theory — studied in India by Brahmagupta (7th century) and Bhāskara II (12th century), rediscovered by Fermat, and misnamed after John Pell by Euler in a footnote that stuck. It is also, thanks to Archimedes, the reason there is a cattle crossing at this stop at all.</p>
-<h3 id="convergents-solve-pell">Convergents solve Pell</h3>
+<h3 id="convergents-solve-pell">Convergents solve Pell<a class="h-anchor" href="#convergents-solve-pell" aria-label="Link to this section">#</a></h3>
 <p>Here is the connection. Suppose <code>√d</code> has period length <code>ℓ</code>, so <code>√d = [a₀; (a₁, …, aℓ)]</code>. Let <code>p/q = p₍ℓ₋₁₎/q₍ℓ₋₁₎</code> be the convergent taken at the <strong>end of the first period</strong>. Then <code>(x, y) = (p, q)</code> is the <strong>fundamental solution</strong> — the smallest positive solution — of Pell&#x27;s equation. Which sign it solves depends on the <strong>parity of the period</strong>:</p>
 <ul><li>If <code>ℓ</code> is <strong>even</strong>, then <code>p² − d q² = +1</code>. The equation <code>x² − d y² = −1</code> has <strong>no solution</strong> at all.</li><li>If <code>ℓ</code> is <strong>odd</strong>, then <code>p² − d q² = −1</code>. Squaring this <em>unit</em> — that is, taking <code>(p + q√d)²</code> — produces the fundamental solution of the <code>+1</code> equation.</li></ul>
 <p>The reason is the palindrome of Stop 6: the convergent at the period boundary satisfies <code>pₙ² − d qₙ² = (−1)ⁿ</code> by the determinant identity of Stop 3, evaluated right where the road closes its loop. All larger solutions are powers of the fundamental one: if <code>x₁ + y₁√d</code> is fundamental, then <code>xₖ + yₖ√d = (x₁ + y₁√d)ᵏ</code> runs through <em>all</em> positive solutions. One convergent unlocks infinitely many.</p>
-<h3 id="the-wild-growth-of-solutions">The wild growth of solutions</h3>
+<h3 id="the-wild-growth-of-solutions">The wild growth of solutions<a class="h-anchor" href="#the-wild-growth-of-solutions" aria-label="Link to this section">#</a></h3>
 <p>Small <code>d</code> can hide enormous fundamental solutions. For <code>d = 2</code> the answer is a gentle <code>(3, 2)</code>: <code>3² − 2·2² = 9 − 8 = 1</code>. For <code>d = 13</code> it is already <code>(649, 180)</code>. And <code>d = 61</code> — the case <strong>Fermat posed as a challenge in 1657</strong> to the English mathematicians, knowing full well how brutal it is — has fundamental solution</p>
-<pre><code>x = 1766319049,   y = 226153980,</code></pre>
+<div class="math-display">x = 1766319049,   y = 226153980,</div>
 <p>a ten-digit <code>x</code> for a two-digit <code>d</code>. There is no smooth relationship between the size of <code>d</code> and the size of its smallest solution; it depends entirely on the length of the period of <code>√d</code>, which behaves erratically. This is what makes Pell&#x27;s equation a genuine test of method rather than patience — brute-force search over <code>y</code> would never reach <code>226153980</code>, but the continued fraction walks straight to it.</p>
-<h3 id="the-chakravala-comes-first">The chakravala comes first</h3>
+<h3 id="the-chakravala-comes-first">The chakravala comes first<a class="h-anchor" href="#the-chakravala-comes-first" aria-label="Link to this section">#</a></h3>
 <p>Bhāskara II did not merely study <code>d = 61</code> — he solved it, around 1150, by the <strong>chakravala</strong> (&quot;cyclic&quot;) method: compose trial solutions of <code>x² − d·y² = k</code> using Brahmagupta&#x27;s 628 CE <strong>bhāvanā</strong> identity, and turn the wheel until <code>k</code> lands on <code>1</code>. Fermat&#x27;s 1657 challenge was, unknowingly, a rerun of a five-hundred-year-old exercise. The chakravala never mentions a continued fraction, yet it arrives at exactly the convergents of <code>√61</code> — two roads, one summit. Watch it run at Heritage stop H2 (Appendix H).</p>
-<h3 id="archimedes-cattle">Archimedes&#x27; cattle</h3>
-<p>The most famous Pell equation is disguised as a poem. <strong>Archimedes&#x27; cattle problem</strong> (c. 250 BC) asks for the number of bulls and cows of the Sun god&#x27;s herd, in four colours, subject to a list of ratio and square/triangular constraints. Reduced, it becomes a Pell equation <code>x² − 4729494·y² = 1</code>. Its <strong>smallest solution has 206,545 digits</strong> — the total herd is a number so vast it would fill a book. Archimedes almost certainly could not have computed it (it was first fully evaluated in 1965 with a computer), but the fact that the problem is <em>well-posed</em> and has a definite, finite, astronomically large answer is itself a triumph of the continued-fraction method. The herd exists; it just does not fit in the universe.</p>
-<h3 id="units-in-quadratic-fields">Units in quadratic fields</h3>
+<h3 id="archimedes-cattle">Archimedes&#x27; cattle<a class="h-anchor" href="#archimedes-cattle" aria-label="Link to this section">#</a></h3>
+<p>The most famous Pell equation is disguised as a poem. <strong>Archimedes&#x27; cattle problem</strong> (c. 250 BC) asks for the number of bulls and cows of the Sun god&#x27;s herd, in four colours, subject to a list of ratio and square/triangular constraints. Reduced, it becomes the Pell equation <code>x² − 4729494·y² = 1</code>, with one extra condition: <code>y</code> must be divisible by <code>2·4657 = 9314</code>. The fundamental solution already has a 45-digit <code>x</code> (the engine finds it instantly — see the worked examples), but the divisibility condition first holds at its <strong>2329th power</strong>, and the resulting herd — about <code>7.76 × 10²⁰⁶⁵⁴⁴</code> cattle — is a number with <strong>206,545 digits</strong> that would fill a book. Archimedes almost certainly could not have computed it: Amthor counted its digits in 1880, Williams, German, and Zarnke first computed it in full on a computer in 1965, and Harry Nelson printed all 47 pages of it in 1981. But the fact that the problem is <em>well-posed</em> and has a definite, finite, astronomically large answer is itself a triumph of the continued-fraction method. The herd exists; it just does not fit in the universe.</p>
+<h3 id="units-in-quadratic-fields">Units in quadratic fields<a class="h-anchor" href="#units-in-quadratic-fields" aria-label="Link to this section">#</a></h3>
 <p>For the algebraically inclined: solving <code>x² − d y² = ±1</code> is the same as finding the <strong>units</strong> of the ring <code>ℤ[√d]</code> — the elements with a multiplicative inverse. The fundamental solution is the <em>fundamental unit</em>, and Dirichlet&#x27;s unit theorem guarantees exactly this infinite cyclic structure. Pell&#x27;s equation is the first place the continued fraction reaches out of arithmetic and into the algebra of number fields, a thread that runs through much of modern number theory.</p>
-<h2 id="worked-examples">Worked examples</h2>
+</section>
+<section class="sec" data-sec="worked-examples">
+<h2 id="worked-examples">Worked examples<a class="h-anchor" href="#worked-examples" aria-label="Link to this section">#</a></h2>
 <p>Solve Fermat&#x27;s challenge case, <code>d = 61</code>, and watch a two-digit input produce a ten-digit answer — the fundamental solution the continued fraction of <code>√61</code> delivers at the end of its (odd) period, then squared to reach <code>+1</code>:</p>
-<pre><code>$ python -m tourbus demo pell 61
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo pell 61</span>
 x^2 - 61 y^2 = 1  fundamental solution:
   x = 1766319049
   y = 226153980
-  verifies: True</code></pre>
+  verifies: True</code></pre></div>
 <p>Check it by hand if you dare: <code>1766319049² − 61·226153980² = 1</code>, exactly. For contrast, the gentle cases <code>d = 2</code> and <code>d = 13</code> show how wildly the difficulty swings with <code>d</code>:</p>
-<pre><code>$ python -m tourbus demo pell 2
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo pell 2</span>
 x^2 - 2 y^2 = 1  fundamental solution:
   x = 3
   y = 2
-  verifies: True</code></pre>
-<pre><code>$ python -m tourbus demo pell 13
+  verifies: True</code></pre></div>
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo pell 13</span>
 x^2 - 13 y^2 = 1  fundamental solution:
   x = 649
   y = 180
-  verifies: True</code></pre>
+  verifies: True</code></pre></div>
 <p><code>d = 2</code> (period 1, <code>√2 = [1; (2)]</code>) gives <code>(3, 2)</code> from the very first convergent; <code>d = 13</code> needs a longer period and lands on <code>(649, 180)</code>; <code>d = 61</code> explodes. The size of the answer is the length of the loop road, nothing else.</p>
-<h2 id="exercises">Exercises</h2>
-<ol><li><strong>(★)</strong> Verify the <code>d = 2</code> solution by hand, and find the <em>next</em> solution after <code>(3, 2)</code> by computing <code>(3 + 2√2)²</code>. <details><summary>Hint</summary><code>(3 + 2√2)² = 17 + 12√2</code>, so the next solution is <code>(17, 12)</code>; check <code>17² − 2·12² = 1</code>.</details></li></ol>
-<ol><li><strong>(★)</strong> From <code>demo cf sqrt2</code>, read off the convergent at the end of the first period and confirm it is the Pell solution <code>(3, 2)</code>. <details><summary>Hint</summary>The period of <code>√2</code> has length 1, so the fundamental solution is the convergent <code>p₁/q₁ = 3/2</code>.</details></li></ol>
-<ol><li><strong>(★★)</strong> The period of <code>√13</code> is odd. Predict whether <code>x² − 13 y² = −1</code> has a solution, and find the smallest one. <details><summary>Hint</summary>Odd period means <code>−1</code> <em>is</em> solvable; <code>18² − 13·5² = 324 − 325 = −1</code>, so <code>(18, 5)</code> works, and its square gives <code>(649, 180)</code>.</details></li></ol>
-<ol><li><strong>(★★)</strong> Explain why <code>x² − 4 y² = 1</code> has no interesting solutions, connecting to Stop 6. <details><summary>Hint</summary><code>4</code> is a perfect square, so <code>√4 = 2</code> is rational and its continued fraction does not loop — there is no period to read a solution from.</details></li></ol>
-<ol><li><strong>(★★★)</strong> Show that if <code>(x₁, y₁)</code> is the fundamental solution of <code>+1</code>, then every positive solution is <code>(xₖ, yₖ)</code> with <code>xₖ + yₖ√d = (x₁ + y₁√d)ᵏ</code>. <details><summary>Hint</summary>The solutions form a group under multiplication in <code>ℤ[√d]</code>; a fundamental unit generates the whole positive cone. See Appendix A / C on units.</details></li></ol>
-<h2 id="see-it-move">See it move</h2>
-<p>Open the <strong>Cattle Crossing</strong> widget: <a href="explore.html#stop-7-cattle"><code>site/index.html#stop-7-cattle</code></a>. Enter a <code>d</code> and watch the convergents of <code>√d</code> scroll by until the one at the period boundary lights up as the Pell solution, with a running check of <code>x² − d y²</code>.</p>
+<p>Finally, Archimedes&#x27; own equation. The period of <code>√4729494</code> is 92 terms long, and the fundamental solution waiting at its end is a 45-digit number — found in a blink:</p>
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo pell 4729494</span>
+x^2 - 4729494 y^2 = 1  fundamental solution:
+  x = 109931986732829734979866232821433543901088049
+  y = 50549485234315033074477819735540408986340
+  verifies: True</code></pre></div>
+<p>Raise <code>x + y√4729494</code> to the 2329th power and the <code>y</code> becomes divisible by <code>9314</code>, as the poem demands; that power is the 206,545-digit herd.</p>
+</section>
+<section class="sec" data-sec="then-now-next">
+<h2 id="then-now-next">Then, now, next<a class="h-anchor" href="#then-now-next" aria-label="Link to this section">#</a></h2>
+<h3 id="then-two-thousand-years-at-the-crossing"><span class="tnn tnn-then">Then</span><span class="tnn-sep"> — </span>Two thousand years at the crossing<a class="h-anchor" href="#then-two-thousand-years-at-the-crossing" aria-label="Link to this section">#</a></h3>
+<figure class="diagram" role="figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 514" width="640" height="514" role="img" font-family="var(--font-data,monospace)" font-size="13"><title>Pell's equation, which Pell never solved</title><line x1="170" y1="74.5" x2="170" y2="156.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="200.5" x2="170" y2="308.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="370.5" x2="170" y2="478.5" stroke="currentColor" stroke-width="2"/><circle cx="170" cy="80.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="124.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="150.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="206.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="250.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="276.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="302.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="376.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="402.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="428.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="472.5" r="4" fill="var(--brass,#b5751a)"/><text x="320" y="25" text-anchor="middle" fill="currentColor" font-weight="bold">Pell's equation, which Pell never solved</text><text x="24" y="61" fill="var(--brass,#b5751a)" font-weight="bold">ANTIQUITY AND INDIA</text><text x="158" y="85" text-anchor="end" fill="currentColor">c. 250 BC</text><text x="182" y="85" fill="currentColor">Archimedes' cattle problem - a Pell equation in</text><text x="182" y="103" fill="currentColor">verse</text><text x="158" y="129" text-anchor="end" fill="currentColor">628</text><text x="182" y="129" fill="currentColor">Brahmagupta's bhavana composes near-solutions</text><text x="158" y="155" text-anchor="end" fill="currentColor">1150</text><text x="182" y="155" fill="currentColor">Bhaskara II's chakravala dispatches d = 61</text><text x="24" y="187" fill="var(--brass,#b5751a)" font-weight="bold">EUROPE</text><text x="158" y="211" text-anchor="end" fill="currentColor">1657</text><text x="182" y="211" fill="currentColor">Fermat challenges Frenicle and the English with d =</text><text x="182" y="229" fill="currentColor">61</text><text x="158" y="255" text-anchor="end" fill="currentColor">1658</text><text x="182" y="255" fill="currentColor">Brouncker and Wallis reply with a general method</text><text x="158" y="281" text-anchor="end" fill="currentColor">1768</text><text x="182" y="281" fill="currentColor">Lagrange proves a solution always exists</text><text x="158" y="307" text-anchor="end" fill="currentColor">1773</text><text x="182" y="307" fill="currentColor">Lessing publishes the cattle epigram from a</text><text x="182" y="325" fill="currentColor">Wolfenbuttel manuscript</text><text x="24" y="357" fill="var(--brass,#b5751a)" font-weight="bold">MACHINES</text><text x="158" y="381" text-anchor="end" fill="currentColor">1880</text><text x="182" y="381" fill="currentColor">Amthor shows the herd has 206,545 digits</text><text x="158" y="407" text-anchor="end" fill="currentColor">1965</text><text x="182" y="407" fill="currentColor">Williams, German and Zarnke compute the whole herd</text><text x="158" y="433" text-anchor="end" fill="currentColor">1970</text><text x="182" y="433" fill="currentColor">Hilbert's tenth problem falls, with Pell-type</text><text x="182" y="451" fill="currentColor">equations inside</text><text x="158" y="477" text-anchor="end" fill="currentColor">2002</text><text x="182" y="477" fill="currentColor">Hallgren solves Pell's equation on a quantum</text><text x="182" y="495" fill="currentColor">computer, in theory</text></svg></figure>
+<p>The equation is named for John Pell only because Euler, reading Wallis, misattributed Brouncker&#x27;s method to him; Pell&#x27;s own contribution was incidental. The mathematics is far older. Brahmagupta&#x27;s <em>bhāvanā</em> (628) and Bhāskara II&#x27;s <em>chakravala</em> (1150) solved it centuries before Europe asked (<a href="appendix-h-history.html#h2-628-1150-the-cyclic-method">Heritage stop H2</a>), and Fermat&#x27;s 1657 challenge to &quot;the English mathematicians&quot; was, unknowingly, a rerun of a Sanskrit classic. Lagrange proved in 1768 that every non-square <code>d</code> has a solution, and the continued fraction of <code>√d</code> became the standard way to find it. The cattle problem, meanwhile, waited: the epigram was rediscovered by Gotthold Lessing in a manuscript in the ducal library at Wolfenbüttel and published in 1773, and its answer was not written out in full until computers could do it.</p>
+<h3 id="now-pell-s-equation-at-the-edge-of-computation"><span class="tnn tnn-now">Now</span><span class="tnn-sep"> — </span>Pell&#x27;s equation at the edge of computation<a class="h-anchor" href="#now-pell-s-equation-at-the-edge-of-computation" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Undecidability.</strong> Hilbert&#x27;s tenth problem (1900) asked for an algorithm to decide whether any polynomial equation has integer solutions. Julia Robinson showed in the 1950s how Pell-type equations, whose solutions grow exponentially, could encode exponentiation; Yuri Matiyasevich completed the proof in 1970 (his decisive step used Fibonacci numbers, the golden ratio&#x27;s sequence), and the standard modern proof runs through <code>x² − (a² − 1)·y² = 1</code>. The answer is <em>no</em> — there is no such algorithm — a result that ties this stop to the recursion theory of <a href="12-tower.html">Stop 12</a>.</li><li><strong>A quantum speed-up.</strong> Solutions of Pell&#x27;s equation can have exponentially many digits, so algorithms compute the <em>regulator</em> <code>log(x₁ + y₁√d)</code> instead. The best classical methods take subexponential time; in 2002 Sean Hallgren gave a polynomial-time <em>quantum</em> algorithm — one of the few exponential quantum speed-ups known besides Shor&#x27;s factoring algorithm of <a href="14-souvenir-shop.html#then-now-next">Stop 14</a>.</li><li><strong>Compact answers.</strong> Because the solutions are so large, computer-algebra systems store them as products of small factors (&quot;compact representations&quot;) rather than as digits — the only way the cattle herd fits in memory.</li></ul>
+<h3 id="next-the-negative-equation"><span class="tnn tnn-next">Next</span><span class="tnn-sep"> — </span>The negative equation<a class="h-anchor" href="#next-the-negative-equation" aria-label="Link to this section">#</a></h3>
+<p>When is <code>x² − d·y² = −1</code> solvable? By this stop&#x27;s theory, exactly when the period of <code>√d</code> is odd — but <em>how often</em> that happens as <code>d</code> varies was an open question for decades. Peter Stevenhagen conjectured a precise answer in 1993: among the squarefree <code>d</code> for which it could possibly work (those with no prime factor <code>≡ 3 mod 4</code>), the proportion tends to about <strong>58.1%</strong>. Étienne Fouvry and Jürgen Klüners bounded it between two constants in 2010, and in 2022 Peter Koymans and Carlo Pagano announced a proof of the conjecture. Meanwhile, whether Pell&#x27;s equation can be solved in polynomial time on a <em>classical</em> computer remains unknown.</p>
+</section>
+<section class="sec" data-sec="exercises">
+<h2 id="exercises">Exercises<a class="h-anchor" href="#exercises" aria-label="Link to this section">#</a></h2>
+<ol><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Verify the <code>d = 2</code> solution by hand, and find the <em>next</em> solution after <code>(3, 2)</code> by computing <code>(3 + 2√2)²</code>. <details><summary>Hint</summary><code>(3 + 2√2)² = 17 + 12√2</code>, so the next solution is <code>(17, 12)</code>; check <code>17² − 2·12² = 1</code>.</details></li><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> From <code>demo cf sqrt2</code>, read off the convergent at the end of the first period and confirm it is the Pell solution <code>(3, 2)</code>. <details><summary>Hint</summary>The period of <code>√2</code> has length 1, so the fundamental solution is the convergent <code>p₁/q₁ = 3/2</code>.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> The period of <code>√13</code> is odd. Predict whether <code>x² − 13 y² = −1</code> has a solution, and find the smallest one. <details><summary>Hint</summary>Odd period means <code>−1</code> <em>is</em> solvable; <code>18² − 13·5² = 324 − 325 = −1</code>, so <code>(18, 5)</code> works, and its square gives <code>(649, 180)</code>.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Explain why <code>x² − 4 y² = 1</code> has no interesting solutions, connecting to Stop 6. <details><summary>Hint</summary><code>4</code> is a perfect square, so <code>√4 = 2</code> is rational and its continued fraction does not loop — there is no period to read a solution from.</details></li><li><span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Show that if <code>(x₁, y₁)</code> is the fundamental solution of <code>+1</code>, then every positive solution is <code>(xₖ, yₖ)</code> with <code>xₖ + yₖ√d = (x₁ + y₁√d)ᵏ</code>. <details><summary>Hint</summary>The solutions form a group under multiplication in <code>ℤ[√d]</code>; a fundamental unit generates the whole positive cone. See Appendix A / C on units.</details></li></ol>
+</section>
+<section class="sec" data-sec="see-it-move">
+<h2 id="see-it-move">See it move<a class="h-anchor" href="#see-it-move" aria-label="Link to this section">#</a></h2>
+<p>Open the <strong>Pell Playground</strong> (W7) in the <a href="explore.html#stop-7-cattle">live exposition</a>. Enter a <code>d</code> and watch the convergents of <code>√d</code> scroll by until the one at the period boundary lights up as the Pell solution, with a running check of <code>x² − d y²</code>; the <strong>D = 61</strong> button replays Fermat&#x27;s 1657 challenge.</p>
 <p><strong>Try it live:</strong> the Pell Playground preset to <a href="explore.html#w7?d=61">Fermat&#x27;s d = 61</a>.</p>
-<h2 id="further-reading">Further reading</h2>
-<ul><li>H. W. Lenstra, &quot;Solving the Pell Equation,&quot; <em>Notices of the AMS</em> (2002) — a superb modern survey; Appendix C.</li><li>Hardy &amp; Wright, §§10.11–10.12 on Pell&#x27;s equation via continued fractions.</li><li>I. Vardi, &quot;Archimedes&#x27; Cattle Problem,&quot; <em>American Mathematical Monthly</em> (1998).</li><li>Appendix A of this tour for the parity-of-period argument.</li></ul>
-<p class="chapter-nav"><a href="06-loop-road.html">← Stop 6 — The Loop Road</a> · <a href="index.html">Route map</a> · <a href="08-family-tree.html">Stop 8 — The Family Tree →</a></p></main>
+</section>
+<section class="sec" data-sec="further-reading">
+<h2 id="further-reading">Further reading<a class="h-anchor" href="#further-reading" aria-label="Link to this section">#</a></h2>
+<ul><li>H. W. Lenstra, &quot;Solving the Pell Equation,&quot; <em>Notices of the AMS</em> (2002) — a superb modern survey; Appendix C.</li><li>Hardy &amp; Wright, §§10.11–10.12 on Pell&#x27;s equation via continued fractions.</li><li>I. Vardi, &quot;Archimedes&#x27; Cattle Problem,&quot; <em>American Mathematical Monthly</em> (1998).</li><li>Appendix A of this tour for the parity-of-period argument.</li><li>M. Davis, &quot;Hilbert&#x27;s Tenth Problem is Unsolvable,&quot; <em>American Mathematical Monthly</em> 80 (1973) — the whole proof, Pell equation and all.</li><li>S. Hallgren, &quot;Polynomial-time quantum algorithms for Pell&#x27;s equation and the principal ideal problem,&quot; <em>Journal of the ACM</em> 54 (2007).</li><li>P. Koymans &amp; C. Pagano, &quot;On Stevenhagen&#x27;s conjecture&quot; (2022) — how often the negative Pell equation is solvable.</li></ul>
+</section><nav class="pager" aria-label="Previous and next page"><a class="pager-prev" href="06-loop-road.html"><span class="pager-dir">&#8592; Previous</span><span class="pager-title">Stop 6 · The Loop Road</span></a><a class="pager-next" href="08-family-tree.html"><span class="pager-dir">Next &#8594;</span><span class="pager-title">Stop 8 · The Family Tree</span></a></nav></main>
+  <aside class="toc-rail"><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#convergents-solve-pell">Convergents solve Pell</a></li><li><a href="#the-wild-growth-of-solutions">The wild growth of solutions</a></li><li><a href="#the-chakravala-comes-first">The chakravala comes first</a></li><li><a href="#archimedes-cattle">Archimedes' cattle</a></li><li><a href="#units-in-quadratic-fields">Units in quadratic fields</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-two-thousand-years-at-the-crossing">Then — two thousand years at the crossing</a></li><li><a href="#now-pell-s-equation-at-the-edge-of-computation">Now — Pell's equation at the edge of computation</a></li><li><a href="#next-the-negative-equation">Next — the negative equation</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></aside>
 </div>
 <footer class="site-footer">
-  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
-  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
+      <p>A guided tour of recursion and continued fractions. Every number on these pages was
+      computed, exactly, by the <code>tourbus</code> engine: standard-library Python, no dependencies.</p>
+    </div>
+    <div class="foot-col"><div class="foot-h">Ride</div>
+      <a href="01-depot.html">Board at the Depot</a><a href="explore.html">Live exposition</a>
+      <a href="syllabus.html">Syllabus for instructors</a><a href="appendix-c-references.html">Reading list</a></div>
+    <div class="foot-col"><div class="foot-h">Lines</div><a href="appendix-d-frontier.html">The Express Line</a><a href="appendix-e-web-of-ideas.html">The Web of Ideas</a><a href="appendix-f-cross-domain.html">The Cross-Domain Line</a><a href="appendix-h-history.html">The Heritage Line</a><a href="appendix-i-branches.html">The Branch Line</a></div>
+    <div class="foot-col"><div class="foot-h">Project</div>
+      <a href="https://github.com/sonoransun/recursivecontinuancetourbus">Source on GitHub</a><span>MIT licensed</span><span><code>python -m tourbus</code></span></div>
+  </div>
 </footer>
 <script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>

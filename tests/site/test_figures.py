@@ -34,6 +34,7 @@ EXPECTED_NAMES = [
     "fig-zeckendorf.svg",
     "fig-cutting-sequence.svg",
     "fig-rogers-ramanujan.svg",
+    "fig-network.svg",
 ]
 
 # A concrete list (never a generator) for parametrize, in registry order.
@@ -68,3 +69,28 @@ def test_figure_contract(name, fn):
     # Self-contained: no URL anywhere but the SVG namespace declaration.
     without_xmlns = first.replace('xmlns="http://www.w3.org/2000/svg"', "", 1)
     assert "http" not in without_xmlns
+
+
+def test_network_map_matches_the_route_registries():
+    """The transit map's stations are the CLI's stops, line for line."""
+    from tourbus.figures import NETWORK
+    from tourbus.tour.branch import BRANCH_STOPS
+    from tourbus.tour.crossline import CROSS_STOPS
+    from tourbus.tour.express import EXPRESS_STOPS
+    from tourbus.tour.heritage import HERITAGE_STOPS
+    from tourbus.tour.registry import STOPS
+
+    assert len(NETWORK["main"]) == len(STOPS)
+    assert len(NETWORK["express"]) == len(EXPRESS_STOPS)
+    assert len(NETWORK["heritage"]) == len(HERITAGE_STOPS)
+    assert len(NETWORK["cross"]) == len(CROSS_STOPS)
+    assert len(NETWORK["branch"]) == len(BRANCH_STOPS)
+
+
+def test_network_map_colors_fall_back_for_github():
+    """Line colors are palette variables with a literal fallback, so the map
+    follows the site theme when inlined and still has color as an <img>."""
+    svg = FIGURES["fig-network.svg"]()
+    for m in re.findall(r"var\(--[a-z0-9-]+,([^)]*)\)", svg):
+        assert re.fullmatch(r"#(?:[0-9a-f]{3}){1,2}", m), m
+    assert svg.count("<path ") == 5

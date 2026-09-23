@@ -109,6 +109,32 @@ By the end of each week a student should be able to:
 - **Stop 15 — Terminus.** Map the open problems and say where each sits on the
   route.
 
+## Then, now, next: ten minutes a week
+
+Every chapter now closes with a **Then, now, next** section: a timeline of the
+idea's history, where it is at work today, and the open questions it leads to.
+They are written to seed a ten-minute discussion at the end of each class, and
+the prompts below are one way to start it. None needs anything beyond the
+chapter itself; several make good short essays.
+
+| Week | Discussion prompt |
+|---|---|
+| 1 | Euclid's algorithm is 2,300 years old and runs inside every secure web connection. Why did it need a *constant-time* redesign in 2019, and what does "leaking the quotients" mean? |
+| 2 | Why can a computer turn `0.30000000000000004` back into `3/10`? What would Hermite's problem ask of a "cubic" version of this stop? |
+| 3 | The same recurrence evaluates statistics p-values and multiplies record-breaking computations of π. What does associativity of matrix multiplication buy? |
+| 4 | Which golden-ratio claims survive measurement, and which do not? Why is the golden ratio useful in hashing? |
+| 5 | Meton's 235/19 and the Gregorian 97/400: which is the better approximation, and why did the world choose the worse one? Should leap seconds end? |
+| 6 | Gauss conjectured that infinitely many real quadratic fields have unique factorisation. What would a proof have to control about the loop road? |
+| 7 | Pell's equation sits inside the proof that Hilbert's tenth problem is unsolvable. How can equations with enormous solutions encode computation? |
+| 8 | The Riemann hypothesis is equivalent to a statement about Farey fractions. Paraphrase that statement in plain words. |
+| 9 | We know `μ(e) = 2` exactly, but only `μ(π) ≤ 7.1032…`. What does the pattern in `e`'s continued fraction buy that `π`'s lacks? |
+| 10 | Almost every number obeys Khinchin's law, yet no named constant is known to. How can a property be both overwhelmingly common and impossible to verify? |
+| 11 | The Android calculator refuses to show digits it has not certified. What would it have to do with `√2 · √2`, and why can no calculator decide such questions in general? |
+| 12 | Union–find runs in inverse-Ackermann time. Why does a function that grows absurdly fast produce an inverse that is effectively constant? |
+| 13 | A Siegel disk exists exactly for Brjuno rotation numbers. What does the golden ratio's slow convergence have to do with calm in a chaotic picture? |
+| 14 | Shor's algorithm ends with a continued fraction. Which stop's theorem guarantees it works, and why has NIST already standardised post-quantum replacements? |
+| 15 | Pick a problem that fell (Apéry, Duffin–Schaeffer) and one still open (γ, Zaremba). What kind of new idea opened the first? |
+
 ## The other lines
 
 **The Express Line (E1–E9)** is the honors track: nine deeper stops past the

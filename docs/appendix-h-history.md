@@ -21,8 +21,9 @@ or one at a time with `python -m tourbus heritage N`.
 
 ## The route through time
 
-Twenty-six dates, five eras, one recurrence. The nine heritage stops below stop
-at the moments where the story turns.
+Thirty-three dates, six eras, one recurrence. The nine heritage stops below stop
+at the moments where the story turns; every chapter of the main route adds its
+own "Then, now, next" timeline, and the last era here is still being written.
 
 ```mermaid
 timeline
@@ -35,8 +36,8 @@ timeline
     section The Italian prelude
         1572 : Bombelli approximates sqrt(13) with an iterated fraction
         1613 : Cataldi gives the fraction its first notation, on sqrt(18)
-        1655 : Brouncker finds 4/pi and Wallis records it in Arithmetica Infinitorum
-        1695 : Wallis names the continued fraction
+        1655 : Brouncker finds 4/pi and Wallis records it as a fraction continue fracta
+        1695 : Wallis's Opera Mathematica prints the name and the rule for convergents
         1703 : Huygens' planetarium gears, chosen by convergents, appear in print
     section The classical century
         1737 : Euler founds the theory and unfolds e
@@ -54,9 +55,17 @@ timeline
     section The computational era
         1970 : Morrison and Brillhart factor F7 with continued fractions
         1972 : Gosper streams exact continued-fraction arithmetic in HAKMEM item 101
-        1979 : Apery proves zeta(3) irrational with a runaway continued fraction
+        1978 : Apery proves zeta(3) irrational with a runaway continued fraction
         1990 : Wiener breaks short-exponent RSA with convergents and Vuillemin formalizes exact real arithmetic
+        1994 : Shor's quantum factoring algorithm ends with a continued fraction
         2003 : Galperin's colliding blocks count the digits of pi
+    section The present
+        2006 : Einsiedler, Katok and Lindenstrauss - Littlewood's exceptions have dimension zero
+        2014 : Bourgain and Kontorovich - almost every denominator obeys Zaremba
+        2019 : Koukoulopoulos and Maynard prove the Duffin-Schaeffer conjecture
+        2020 : Zeilberger and Zudilin bound the irrationality measure of pi by 7.1032...
+        2022 : Karpenkov's sin-squared algorithm and the totally real case of Hermite's problem
+        2022 : Koymans and Pagano prove Stevenhagen's conjecture on the negative Pell equation
 ```
 
 ---
@@ -239,10 +248,10 @@ dangling "and so on": the object now has a symbol, if not yet a name.
 
 Then 1655: William Brouncker, first president of the Royal Society, produces
 `4/π = 1 + 1²/(2 + 3²/(2 + 5²/(2 + …)))` — the first continued fraction for `π` —
-and John Wallis records it in *Arithmetica Infinitorum*. Wallis later
-christens the whole species in his *Opera Mathematica* (1695), the book that
-put the name "continued fraction" — and the rule for building convergents — in
-print. Order beneath chaos, the theme [Stop 9](09-celebrity.md) states, began
+and John Wallis records it in *Arithmetica Infinitorum*, calling it a fraction
+*continue fracta* — "continually fractioned". His *Opera Mathematica* (1695)
+spelled out the name and the rule for building convergents in full, and the
+English "continued fraction" descends from his Latin. Order beneath chaos, the theme [Stop 9](09-celebrity.md) states, began
 here; Stop 9 already prints Brouncker's formula, so the new thing at this stop
 is watching it computed, and how slowly its beauty converges.
 
@@ -792,7 +801,7 @@ $ python -m tourbus heritage 9 --no-color
 
 The rest of the modern era is scattered along routes you have already ridden:
 Wirsing (1974) measures how fast Gauss's 1812 guess sets in
-([Appendix D, stop E6](appendix-d-frontier.md)); Apéry (1979) proves `ζ(3)`
+([Appendix D, stop E6](appendix-d-frontier.md)); Apéry (1978) proves `ζ(3)`
 irrational with a runaway continued fraction
 ([Appendix F](appendix-f-cross-domain.md)); Wiener (1990) breaks
 short-exponent RSA with convergents ([Stop 14](14-souvenir-shop.md)); Galperin

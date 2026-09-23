@@ -51,6 +51,33 @@ h)` with an eight-integer state, used by Gosper's algorithm to compute `x + y`,
 has three moves — ingest from `x`, ingest from `y`, or emit an output term.
 *([Stop 11](11-assembly-line.md).)*
 
+### Binary gcd
+
+A gcd algorithm that uses only subtraction, halving, and parity tests instead of
+division: if both numbers are even, halve both; if one is even, halve it;
+otherwise subtract the smaller from the larger. Published by Josef Stein in 1967
+and foreshadowed by the "halve if you can" rule of the Chinese *Nine Chapters*,
+it suits binary hardware and underlies constant-time variants used in
+cryptography. *([Stop 1](01-depot.md#then-now-next).)*
+
+### Brjuno number
+
+An irrational `α` whose convergent denominators `qₙ` satisfy
+`Σ log(qₙ₊₁)/qₙ < ∞` — the partial quotients may be large, but not too large
+too often. Brjuno (1971) showed that such rotation numbers produce *Siegel
+disks*, regions of rigid rotation, in complex dynamics; Yoccoz (1988) showed
+the condition is exactly right for quadratic polynomials. Every number with
+bounded partial quotients, such as `φ`, is a Brjuno number.
+*([Stop 13](13-hall-of-mirrors.md#then-now-next).)*
+
+### Busy beaver
+
+`BB(n)`: the largest number of steps any `n`-state Turing machine takes before
+halting, among those that do halt. It grows faster than every computable
+function — faster than Ackermann's — and is known exactly only for tiny `n`;
+`BB(5) = 47,176,870` was proved in 2024 with a computer-checked proof.
+*([Stop 12](12-tower.md#then-now-next).)*
+
 ### CFRAC (continued-fraction factorization)
 
 The factoring algorithm of Morrison and Brillhart (1970) that reads the small
@@ -76,6 +103,14 @@ from position `n` onward. Always `≥ 1` for `n ≥ 1`, and satisfies
 `x = (xₙ pₙ₋₁ + pₙ₋₂)/(xₙ qₙ₋₁ + qₙ₋₂)`. The tool of the error-bound proof in
 Appendix A. *([Appendix A](appendix-a-proofs.md).)*
 
+### Constructive (computable) real
+
+A real number presented as a program that, asked for any precision, returns an
+approximation guaranteed to that precision — Turing's 1936 notion of a
+computable number. Arithmetic on such streams, like Gosper's arithmetic on
+continued fractions, can emit certified digits forever but cannot always decide
+equality. *([Stop 11](11-assembly-line.md#then-now-next).)*
+
 ### Convergent
 
 The rational `pₙ/qₙ = [a₀; a₁, …, aₙ]` obtained by truncating a continued
@@ -89,6 +124,14 @@ A definition scheme that *produces* an infinite structure on demand, rather than
 consuming a finite input down to a base case (ordinary recursion). Gosper's
 stream arithmetic is corecursive: it has no base case and is judged correct by
 how it keeps emitting valid terms forever, not by how it halts. *([Stop 11](11-assembly-line.md).)*
+
+### Duffin–Schaeffer theorem
+
+For a function `ψ ≥ 0`, almost every real `x` has infinitely many fractions
+`p/q` in lowest terms with `|x − p/q| < ψ(q)/q` exactly when
+`Σ φ(q)ψ(q)/q` diverges (`φ` here is Euler's totient). Conjectured by Duffin and
+Schaeffer in 1941, proved by Koukoulopoulos and Maynard in 2019.
+*([Stop 10](10-casino.md#then-now-next).)*
 
 ### Egyptian fraction
 
@@ -136,6 +179,21 @@ A continued fraction whose numerators need not be 1:
 patterned in generalized form — Brouncker's 4/π and Lambert's tan x are the
 classic cases. *([Stop 9](09-celebrity.md).)*
 
+### Half-gcd
+
+A divide-and-conquer gcd algorithm that computes the `2×2` matrix product of
+the first half of Euclid's quotients recursively, reaching quasi-linear time
+(Schönhage, 1971, after Knuth). It is how big-integer libraries compute gcds
+and continued fractions of numbers with millions of digits.
+*([Stop 3](03-engine-room.md#the-engine-as-a-product-of-matrices).)*
+
+### Hermite's problem
+
+Hermite's 1848 question to Jacobi: find an algorithm that expands real numbers
+so that the cubic irrationals, and only they, become periodic — the analogue of
+Lagrange's theorem one degree up. Settled for totally real cubics by Karpenkov
+(2022); open in general. *([Stop 2](02-unfolding-road.md#then-now-next).)*
+
 ### Homographic transform
 
 A function of one variable `z(x) = (a·x + b)/(c·x + d)` with integer state
@@ -144,11 +202,35 @@ one-input building block of Gosper's algorithm, with two moves: ingest an input
 term or emit an output term when the floor is determined. A **purely periodic**
 continued fraction is a fixed point of such a map. *(Stops [11](11-assembly-line.md), [13](13-hall-of-mirrors.md).)*
 
+### Inverse Ackermann function
+
+`α(n)`, the number of rungs of the Ackermann ladder needed to exceed `n`. It
+grows so slowly that it never exceeds 4 for any input that fits in the
+universe, yet it is unbounded — and it is exactly the amortised cost per
+operation of the union–find data structure (Tarjan, 1975).
+*([Stop 12](12-tower.md#then-now-next).)*
+
+### Irrationality measure
+
+The supremum `μ(x)` of the exponents `μ` for which `|x − p/q| < 1/q^μ` has
+infinitely many solutions. Every irrational has `μ ≥ 2`; algebraic irrationals
+have exactly `2` (Roth, 1955), as does `e`; Liouville numbers have `μ = ∞`; and
+`μ(π) ≤ 7.1032…` is the best bound known (2020).
+*([Stop 9](09-celebrity.md#then-now-next).)*
+
 ### Kuṭṭaka (kuttaka)
 
 Āryabhaṭa's 'pulverizer' (499 CE): solve `a·x − b·y = c` in integers by running
 Euclid's quotients backward — the same arithmetic as the Bézout step of Stop 1,
 a thousand years earlier. *([Stop 1](01-depot.md); [Appendix H](appendix-h-history.md).)*
+
+### Lattice reduction
+
+Finding a basis of short, nearly orthogonal vectors for a lattice. In two
+dimensions it is Euclid's algorithm on vectors (Lagrange and Gauss); in any
+dimension the LLL algorithm (1982) and its descendants do it approximately. It
+breaks weak cryptosystems and sets the security margins of lattice-based
+post-quantum cryptography. *([Stop 1](01-depot.md#then-now-next).)*
 
 ### Liouville number
 
@@ -184,6 +266,19 @@ The fraction `(a + c)/(b + d)` formed from `a/b` and `c/d` by adding numerators
 and denominators separately. It lies strictly between two neighbours and is the
 generating operation of the Stern–Brocot tree and the Farey sequences.
 *([Stop 8](08-family-tree.md).)*
+
+### Metonic cycle
+
+The coincidence that 19 tropical years are almost exactly 235 lunar months —
+the convergent `235/19` of the ratio of year to month. Used in Babylon, brought
+to Athens by Meton in 432 BC, and still fixing the Hebrew calendar and the
+Christian date of Easter. *([Stop 5](05-scenic-overlook.md#then-now-next).)*
+
+### Negative Pell equation
+
+`x² − d·y² = −1`, solvable exactly when the period of `√d` is odd. How often
+that happens as `d` varies was predicted by Stevenhagen (1993) and proved by
+Koymans and Pagano (2022). *([Stop 7](07-cattle-crossing.md#then-now-next).)*
 
 ### Nested radical
 
@@ -232,12 +327,28 @@ number of the form `(P + √d)/Q` with `d` a non-square positive integer. By
 **Lagrange's theorem**, these are exactly the numbers with eventually periodic
 continued fractions. *([Stop 6](06-loop-road.md).)*
 
+### Rational reconstruction
+
+Recovering a fraction `u/v` with small numerator and denominator from its
+residue modulo a large number `m`, by running the extended Euclidean algorithm
+on `(m, residue)` and stopping halfway (Wang, 1981). It lets computer algebra
+work with small modular numbers and still return exact rational answers.
+*([Stop 2](02-unfolding-road.md#then-now-next).)*
+
 ### Reduced surd
 
 A quadratic irrational `x` with `x > 1` whose conjugate `x̄` (the other root,
 `√d ↦ −√d`) lies strictly in `(−1, 0)`. By **Galois' theorem**, a surd's
 continued fraction is *purely* periodic (periodic from the very first term) if
 and only if it is reduced. *([Stop 6](06-loop-road.md).)*
+
+### Regulator
+
+For a real quadratic field `ℚ(√d)`, the logarithm `R = log(x₁ + y₁√d)` of its
+fundamental unit — a measure of how large the smallest Pell solution is. It can
+be exponentially large in digits, so algorithms compute `R` rather than the
+solution itself; a quantum computer can do so in polynomial time (Hallgren,
+2002). *([Stop 7](07-cattle-crossing.md#then-now-next); [Stop 6](06-loop-road.md).)*
 
 ### Rogers–Ramanujan continued fraction
 
@@ -254,6 +365,14 @@ An intermediate fraction obtained by using a partial quotient `1 ≤ k < aₙ` i
 convergent recurrence: `(k·pₙ₋₁ + pₙ₋₂)/(k·qₙ₋₁ + qₙ₋₂)`. Semiconvergents fill
 the gaps between successive convergents and appear among the best approximations
 of the first kind, though not the second. *([Stop 5](05-scenic-overlook.md).)*
+
+### Shor's algorithm
+
+Peter Shor's 1994 quantum algorithm for factoring integers and computing
+discrete logarithms in polynomial time. The quantum part estimates a fraction
+`s/r` whose denominator is a period; the classical last step recovers `r` as a
+continued-fraction convergent of the measurement, by Legendre's criterion.
+*([Stop 14](14-souvenir-shop.md#then-now-next).)*
 
 ### Similarity dimension
 
@@ -276,6 +395,15 @@ aperiodic — exactly `n + 1` distinct factors of each length `n`. The **Fibonac
 word** `a b a a b a b a a b …` is the canonical example, read off as the cutting
 sequence of a line of slope `1/φ` across the integer grid: the most balanced
 aperiodic word there is. *([Appendix I](appendix-i-branches.md).)*
+
+### Three-distance theorem
+
+For any `α` and `N`, the points `0, α, 2α, …, (N−1)α` taken modulo 1 cut the
+circle into gaps of at most three different lengths, the largest being the sum
+of the other two. Conjectured by Steinhaus and proved in 1957–58 by Sós,
+Surányi, and Świerczkowski; the gap lengths are governed by the convergents of
+`α`. *([Appendix D](appendix-d-frontier.md#e5-the-three-distance-theorem);
+[Stop 4](04-golden.md#then-now-next).)*
 
 ### Topograph (Conway's)
 

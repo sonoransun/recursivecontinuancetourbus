@@ -1,30 +1,37 @@
 # Recursive Continuance Tour Bus — Documentation
 
-A chapter for each of the fifteen stops on the tour. Every chapter pairs a
-narrative overview with reproducible worked examples (each showing the exact
-`python -m tourbus demo …` command and its output), a set of graded exercises,
-and pointers for further reading. The same route drives the command-line tour
-(`python -m tourbus`) and the web exposition (`site/index.html`).
+A chapter for each of the fifteen stops on the tour, and an appendix for each of
+the four lines that branch off it. Every chapter pairs a narrative overview with
+reproducible worked examples (each showing the exact `python -m tourbus …`
+command and its output), a **Then, now, next** section — the idea's history,
+where it is at work today, and the open road ahead — graded exercises, a link to
+its live widget, and further reading. The same route drives the command-line
+tour (`python -m tourbus`) and the web exposition (`site/index.html`).
+
+The rendered site, with search, dark mode, and the interactive exposition, is at
+**<https://sonoransun.github.io/recursivecontinuancetourbus/>**.
+
+![The network: the fifteen-stop main line, the Heritage Line leaving the Depot for history, the Branch Line leaving the Unfolding Road for the other expansions, the Cross-Domain Line leaving the Engine Room for the sciences, and the Express Line running on past the Terminus to the frontier.](assets/fig-network.svg)
 
 ## The route
 
-| # | Chapter | Demo | Web section |
-|---|---------|------|-------------|
-| 1 | [The Depot](01-depot.md) | `demo euclid 1071 462` | `#stop-1-depot` |
-| 2 | [The Unfolding Road](02-unfolding-road.md) | `demo cf 415/93` | `#stop-2-road` |
-| 3 | [The Engine Room](03-engine-room.md) | `demo cf pi` | `#stop-3-engine` |
-| 4 | [The Golden Milestone](04-golden.md) | `demo cf phi` | `#stop-4-golden` |
-| 5 | [Scenic Overlook](05-scenic-overlook.md) | `demo calendar` | `#stop-5-overlook` |
-| 6 | [The Loop Road](06-loop-road.md) | `demo cf sqrt7` | `#stop-6-loop` |
-| 7 | [The Cattle Crossing](07-cattle-crossing.md) | `demo pell 61` | `#stop-7-cattle` |
-| 8 | [The Family Tree](08-family-tree.md) | `demo stern-brocot 355/113` | `#stop-8-family` |
-| 9 | [Celebrity Sightings](09-celebrity.md) | `demo cf e` | `#stop-9-celebrity` |
-| 10 | [The Casino](10-casino.md) | `demo khinchin` | `#stop-10-casino` |
-| 11 | [The Infinite Assembly Line](11-assembly-line.md) | `demo gosper --op add sqrt2 sqrt3` | `#stop-11-assembly` |
-| 12 | [The Tower](12-tower.md) | `demo ackermann 3 5` | `#stop-12-tower` |
-| 13 | [The Hall of Mirrors](13-hall-of-mirrors.md) | `demo dragon --depth 10` | `#stop-13-mirrors` |
-| 14 | [The Souvenir Shop](14-souvenir-shop.md) | `demo wiener --bits 128` | `#stop-14-souvenir` |
-| 15 | [Terminus](15-terminus.md) | `demo collatz 27` | `#stop-15-terminus` |
+| # | Chapter | Then, now, next — a taste | Demo |
+|---|---------|---------------------------|------|
+| 1 | [The Depot](01-depot.md) | Euclid → constant-time gcd in Bitcoin's crypto library | `demo euclid 1071 462` |
+| 2 | [The Unfolding Road](02-unfolding-road.md) | anthyphairesis → `Fraction.limit_denominator` → Hermite's problem | `demo cf 415/93` |
+| 3 | [The Engine Room](03-engine-room.md) | Cataldi's ledger → Lentz's method in statistics libraries | `demo cf pi` |
+| 4 | [The Golden Milestone](04-golden.md) | Euclid's pentagon → Fibonacci hashing → Fibonacci anyons | `demo cf phi` |
+| 5 | [Scenic Overlook](05-scenic-overlook.md) | Meton's 235/19 → the end of the leap second | `demo calendar` |
+| 6 | [The Loop Road](06-loop-road.md) | Galois at seventeen → class numbers → Gauss's open problem | `demo cf sqrt7` |
+| 7 | [The Cattle Crossing](07-cattle-crossing.md) | Brahmagupta → Hilbert's tenth problem → quantum Pell | `demo pell 61` |
+| 8 | [The Family Tree](08-family-tree.md) | Brocot's clocks → the black hole Farey tail → the Riemann hypothesis | `demo stern-brocot 355/113` |
+| 9 | [Celebrity Sightings](09-celebrity.md) | Lambert and Lindemann → irrationality measures → machine conjectures | `demo cf e` |
+| 10 | [The Casino](10-casino.md) | Gauss's letter to Laplace → the Big Bang → Duffin–Schaeffer | `demo khinchin` |
+| 11 | [The Infinite Assembly Line](11-assembly-line.md) | HAKMEM → the Android calculator → Richardson's theorem | `demo gosper --op add sqrt2 sqrt3` |
+| 12 | [The Tower](12-tower.md) | Hilbert's program → union–find → the busy beaver | `demo ackermann 3 5` |
+| 13 | [The Hall of Mirrors](13-hall-of-mirrors.md) | Koch's monster → Google's Hilbert curves → Siegel disks | `demo dragon --depth 10` |
+| 14 | [The Souvenir Shop](14-souvenir-shop.md) | Zhu Zaiyu → Shor's algorithm → post-quantum cryptography | `demo wiener --bits 128` |
+| 15 | [Terminus](15-terminus.md) | Apéry → Zaremba → is γ irrational? | `demo collatz 27` |
 
 ## The Express Line
 
@@ -59,7 +66,8 @@ computed live with `python -m tourbus crossdomain`.
 The same road, driven through time — Euclid's ladder, the chakravala, Huygens'
 brass Saturn, Lambert's trial of π, Liouville's built-to-order transcendental,
 the tree of Stern and Brocot, CFRAC cracking the Fermat number F₇, and a 1972
-memo, each computed live with `python -m tourbus heritage`.
+memo, each computed live with `python -m tourbus heritage`. Its timeline now
+runs from the *Elements* to the results of the last few years.
 
 - [Appendix H — The Heritage Line: A History in Convergents](appendix-h-history.md)
 
@@ -78,12 +86,12 @@ with `python -m tourbus branch`.
 - [Appendix A — Proofs](appendix-a-proofs.md): the convergent recurrence,
   Lagrange's periodicity theorem, Hurwitz's theorem, and the Wiener bound.
 - [Appendix B — Glossary](appendix-b-glossary.md): the vocabulary of the tour.
-- [Appendix C — References](appendix-c-references.md): where to read more.
+- [Appendix C — References](appendix-c-references.md): where to read more,
+  from Euclid to the papers behind every "Then, now, next".
 - [Appendix G — Hints & selected answers](appendix-g-hints.md): a hint or a
   full worked answer for every exercise on the route.
 - [Appendix H — The Heritage Line: A History in Convergents](appendix-h-history.md):
-  the chronology from Euclid to Gosper, with nine stops computed live and a
-  timeline of the whole road.
+  the chronology from Euclid to the present, with nine stops computed live.
 - [Appendix I — The Branch Line: Other Ways to Unfold a Number](appendix-i-branches.md):
   Engel, Lüroth, Pierce, Egyptian, Zeckendorf, Ostrowski, and Lochs — the
   expansions that are not the continued fraction.
@@ -91,8 +99,8 @@ with `python -m tourbus branch`.
 ## For instructors
 
 The tour rides well as a one-semester course: the [syllabus](syllabus.md) maps
-the prerequisite graph, a fifteen-week pace, and learning objectives for every
-stop.
+the prerequisite graph, a fifteen-week pace, learning objectives for every
+stop, and a discussion prompt for each "Then, now, next".
 
 ## How to read along
 

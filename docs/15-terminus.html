@@ -3,106 +3,147 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terminus - Tour Bus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<title>Terminus — Stop 15 · Tour Bus</title>
+<meta name="description" content="The end of the line is where the map runs out: the questions about continued fractions that no one can yet answer.">
+<meta property="og:title" content="Terminus — Stop 15 · Tour Bus">
+<meta property="og:description" content="The end of the line is where the map runs out: the questions about continued fractions that no one can yet answer.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eceef1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M24 78V52a26 26 0 0 1 26-26h26' fill='none' stroke='%23b5751a' stroke-width='11' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='78' r='13' fill='%23b5751a'/%3E%3Ccircle cx='76' cy='26' r='13' fill='%23b5751a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/rct-docs.css">
 <script>
 (function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
-<body>
+<body data-line="main" data-page="15-terminus">
+<div class="progress" aria-hidden="true"><i></i></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
-  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
-  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
+  <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
   <div class="search">
     <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
     <div class="search-results" id="search-results" hidden></div>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  <a class="top-link" href="https://github.com/sonoransun/recursivecontinuancetourbus">GitHub</a>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cycle color theme"><span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Auto</span></button>
 </header>
-<div class="layout">
-  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
-<div class="nav-group">The Tour</div>
-<a href="01-depot.html">1 · The Depot</a>
-<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
-<a href="03-engine-room.html">3 · The Engine Room</a>
-<a href="04-golden.html">4 · The Golden Milestone</a>
-<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
-<a href="06-loop-road.html">6 · The Loop Road</a>
-<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
-<a href="08-family-tree.html">8 · The Family Tree</a>
-<a href="09-celebrity.html">9 · Celebrity Sightings</a>
-<a href="10-casino.html">10 · The Casino</a>
-<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
-<a href="12-tower.html">12 · The Tower</a>
-<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
-<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
-<a class="on" href="15-terminus.html">15 · Terminus</a>
-<div class="nav-group">The Express Line</div>
+<div class="layout has-rail">
+  <nav class="sidebar" id="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Route map</a>
+<div class="nav-sec" data-line="main"><div class="nav-group">The Tour</div><ol class="nav-line">
+<li><a class="stn" href="01-depot.html"><span class="stn-n">1</span><span class="stn-t">The Depot</span></a></li>
+<li><a class="stn" href="02-unfolding-road.html"><span class="stn-n">2</span><span class="stn-t">The Unfolding Road</span></a></li>
+<li><a class="stn" href="03-engine-room.html"><span class="stn-n">3</span><span class="stn-t">The Engine Room</span></a></li>
+<li><a class="stn" href="04-golden.html"><span class="stn-n">4</span><span class="stn-t">The Golden Milestone</span></a></li>
+<li><a class="stn" href="05-scenic-overlook.html"><span class="stn-n">5</span><span class="stn-t">Scenic Overlook</span></a></li>
+<li><a class="stn" href="06-loop-road.html"><span class="stn-n">6</span><span class="stn-t">The Loop Road</span></a></li>
+<li><a class="stn" href="07-cattle-crossing.html"><span class="stn-n">7</span><span class="stn-t">The Cattle Crossing</span></a></li>
+<li><a class="stn" href="08-family-tree.html"><span class="stn-n">8</span><span class="stn-t">The Family Tree</span></a></li>
+<li><a class="stn" href="09-celebrity.html"><span class="stn-n">9</span><span class="stn-t">Celebrity Sightings</span></a></li>
+<li><a class="stn" href="10-casino.html"><span class="stn-n">10</span><span class="stn-t">The Casino</span></a></li>
+<li><a class="stn" href="11-assembly-line.html"><span class="stn-n">11</span><span class="stn-t">The Infinite Assembly Line</span></a></li>
+<li><a class="stn" href="12-tower.html"><span class="stn-n">12</span><span class="stn-t">The Tower</span></a></li>
+<li><a class="stn" href="13-hall-of-mirrors.html"><span class="stn-n">13</span><span class="stn-t">The Hall of Mirrors</span></a></li>
+<li><a class="stn" href="14-souvenir-shop.html"><span class="stn-n">14</span><span class="stn-t">The Souvenir Shop</span></a></li>
+<li><a class="stn on" href="15-terminus.html" aria-current="page"><span class="stn-n">15</span><span class="stn-t">Terminus</span></a></li>
+</ol></div>
+<div class="nav-sec" data-line="express"><div class="nav-group">The Express Line</div>
 <a href="appendix-d-frontier.html">Fringe Avenues</a>
-<div class="nav-group">Synthesis</div>
+</div>
+<div class="nav-sec" data-line="web"><div class="nav-group">Synthesis</div>
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
-<div class="nav-group">Cross-Domain</div>
+</div>
+<div class="nav-sec" data-line="cross"><div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
-<div class="nav-group">Heritage</div>
+</div>
+<div class="nav-sec" data-line="heritage"><div class="nav-group">Heritage</div>
 <a href="appendix-h-history.html">A History in Convergents</a>
-<div class="nav-group">Branch</div>
+</div>
+<div class="nav-sec" data-line="branch"><div class="nav-group">Branch</div>
 <a href="appendix-i-branches.html">Other Ways to Unfold</a>
-<div class="nav-group">Reference</div>
-<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
-<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
-<a href="appendix-c-references.html">Appendix C - References</a>
-<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
-<a href="syllabus.html">Syllabus - for instructors</a>
-<div class="nav-group">Interactive</div>
-<a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content" id="main"><p class="chapter-nav"><a href="14-souvenir-shop.html">← Stop 14 — The Souvenir Shop</a> · <a href="index.html">Route map</a> · <a href="appendix-a-proofs.html">Appendix A — Proofs →</a></p>
-<h1 id="stop-15-terminus">Stop 15 — Terminus</h1>
-<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
-<blockquote>The end of the line is where the map runs out: the questions about continued fractions that no one can yet answer.</blockquote>
-<h2 id="overview">Overview</h2>
+</div>
+<div class="nav-sec" data-line="ref"><div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A — Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B — Glossary</a>
+<a href="appendix-c-references.html">Appendix C — References</a>
+<a href="appendix-g-hints.html">Appendix G — Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus — for instructors</a>
+</div>
+<div class="nav-sec" data-line="explore"><div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a>
+</div></nav>
+  <main class="content" id="main"><header class="page-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Route map</a><span aria-hidden="true">/</span><span>The Tour</span></nav><div class="kicker"><span class="roundel">15</span><span>Main line · Stop 15 of 15</span></div><h1 id="stop-15-terminus">Terminus</h1><p class="lede">The end of the line is where the map runs out: the questions about continued fractions that no one can yet answer.</p><ul class="page-meta"><li><span class="mk">Reading</span> 9 min</li><li><span class="mk">Run it</span> <code>python -m tourbus stop 15</code></li><li><a class="mlink" href="explore.html#stop-15-terminus">Live widget&nbsp;&#8599;</a></li></ul></header><details class="toc-inline"><summary>On this page</summary><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#is-normal-in-its-continued-fraction">Is π "normal" in its continued fraction?</a></li><li><a href="#is-khinchin-s-constant-irrational">Is Khinchin's constant irrational?</a></li><li><a href="#is-the-euler-mascheroni-constant-irrational">Is the Euler–Mascheroni constant γ irrational?</a></li><li><a href="#zaremba-s-conjecture">Zaremba's conjecture</a></li><li><a href="#the-erd-s-straus-conjecture">The Erdős–Straus conjecture</a></li><li><a href="#the-littlewood-conjecture">The Littlewood conjecture</a></li><li><a href="#where-the-road-goes">Where the road goes</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-doors-that-opened">Then — doors that opened</a></li><li><a href="#now-the-working-frontier">Now — the working frontier</a></li><li><a href="#next-how-the-next-doors-might-open">Next — how the next doors might open</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></details><section class="sec" data-sec="overview">
+<h2 id="overview">Overview<a class="h-anchor" href="#overview" aria-label="Link to this section">#</a></h2>
 <p>The bus comes to rest at Terminus, and the honest thing to show you here is not another theorem but the edge of the map — the places where the road we have been driving simply stops, and open water begins. Continued fractions are among the oldest objects in mathematics, and some of the most natural questions about them remain unsolved after three centuries. This closing stop is a short catalogue of those questions, each one a place where the tour could, in principle, continue if only someone found the way.</p>
-<h3 id="is-normal-in-its-continued-fraction">Is π &quot;normal&quot; in its continued fraction?</h3>
+<h3 id="is-normal-in-its-continued-fraction">Is π &quot;normal&quot; in its continued fraction?<a class="h-anchor" href="#is-normal-in-its-continued-fraction" aria-label="Link to this section">#</a></h3>
 <p>At Stop 9 we saw that <code>π = [3; 7, 15, 1, 292, …]</code> has no discernible pattern, and at Stop 10 that a <em>typical</em> number&#x27;s partial quotients obey the Gauss–Kuzmin statistics with geometric mean tending to Khinchin&#x27;s constant <code>K₀</code>. Does <code>π</code> behave typically? Two precise questions are <strong>open</strong>:</p>
-<ul><li><strong>Are the partial quotients of <code>π</code> bounded?</strong> No one knows. Billions of terms have been computed, occasionally throwing up giants far larger than <code>292</code>, but whether arbitrarily large terms keep appearing forever is unproven. It is not even known whether <code>π</code> has <em>infinitely many</em> partial quotients equal to <code>1</code>.</li><li><strong>Do <code>π</code>&#x27;s partial quotients obey Gauss–Kuzmin, with geometric mean <code>K₀</code>?</strong> Numerically, yes to high precision — but there is no proof. <code>π</code> might be one of the measure-zero exceptions, like <code>e</code>. We cannot rule it out.</li></ul>
-<p>These are humbling. We know <code>π</code> to trillions of digits and can compute its continued fraction as far as we like, yet cannot prove the most basic statistical facts about the sequence we are staring at.</p>
-<h3 id="is-khinchin-s-constant-irrational">Is Khinchin&#x27;s constant irrational?</h3>
-<p>Khinchin&#x27;s constant <code>K₀ = 2.6854520010…</code> is the universal geometric mean of almost every number&#x27;s partial quotients (Stop 10). It has been computed to thousands of digits. And yet <strong>it is not known whether <code>K₀</code> is rational or irrational</strong>, let alone whether it is transcendental. A constant that governs the behaviour of <em>almost all real numbers</em> has a nature we cannot pin down. The same holds for <strong>Lévy&#x27;s constant</strong> <code>e^{π²/(12 ln 2)}</code>.</p>
-<h3 id="is-the-euler-mascheroni-constant-irrational">Is the Euler–Mascheroni constant γ irrational?</h3>
-<p>The constant <code>γ = 0.5772156649…</code>, the limit of <code>1 + 1/2 + … + 1/n − ln n</code>, appears throughout analysis and number theory. Its continued fraction has been computed to hundreds of billions of terms. And still, <strong>it is unknown whether <code>γ</code> is irrational</strong> — the single most embarrassing open problem in the subject, because irrationality is exactly the property continued fractions are <em>built</em> to detect (Stop 2: irrational ⇔ infinite expansion). If <code>γ</code> were rational its denominator would have to be astronomically large, but &quot;very probably infinite&quot; is not a proof.</p>
-<h3 id="zaremba-s-conjecture">Zaremba&#x27;s conjecture</h3>
-<p>Not every question here is about a single constant. <strong>Zaremba&#x27;s conjecture (1972)</strong> asks: is there a constant <code>A</code> such that every positive integer <code>q</code> is the denominator of some fraction <code>p/q</code> whose continued fraction has all partial quotients at most <code>A</code>? (Zaremba proposed <code>A = 5</code>.) This is a question about which <em>denominators</em> admit &quot;well-behaved&quot; continued fractions, with real consequences for pseudo-random number generation and numerical integration. Bourgain and Kontorovich proved in 2014 that <em>almost all</em> <code>q</code> work — a spectacular near-miss — but the full conjecture remains open.</p>
-<h3 id="the-erd-s-straus-conjecture">The Erdős–Straus conjecture</h3>
-<p>Not every open question about unfolding a number is about <em>continued</em> fractions. The greedy Egyptian-fraction expansion of the Branch Line (<a href="appendix-i-branches.html#b3-egyptian-fractions-the-greedy-scribe">Appendix I, stop B3</a>) always terminates, but the shortest such expansions hide a famous unknown: <strong>Erdős and Straus conjectured (1948)</strong> that for every integer <code>n ≥ 2</code> the fraction <code>4/n</code> can be written as a sum of exactly three unit fractions, <code>4/n = 1/x + 1/y + 1/z</code>. A solution has been found for every <code>n</code> ever tested — <code>python -m tourbus demo egyptian</code> builds them live — yet no proof exists that one always does. It is the same theme as the rest of this stop: an algorithm so simple a scribe used it four thousand years ago, guarding a question no one can answer.</p>
-<h3 id="the-littlewood-conjecture">The Littlewood conjecture</h3>
+<ul><li><strong>Are the partial quotients of <code>π</code> bounded?</strong> No one knows. Hundreds of billions of terms have been computed — the giant <code>878,783,625</code> turns up past the eleven-millionth term, and far larger ones deeper still — but whether arbitrarily large terms keep appearing forever is unproven. It is not even known whether <code>π</code> has <em>infinitely many</em> partial quotients equal to <code>1</code>.</li><li><strong>Do <code>π</code>&#x27;s partial quotients obey Gauss–Kuzmin, with geometric mean <code>K₀</code>?</strong> Numerically, yes to high precision — but there is no proof. <code>π</code> might be one of the measure-zero exceptions, like <code>e</code>. We cannot rule it out.</li></ul>
+<p>These are humbling. We know <code>π</code> to hundreds of trillions of digits and can compute its continued fraction as far as we like, yet cannot prove the most basic statistical facts about the sequence we are staring at.</p>
+<h3 id="is-khinchin-s-constant-irrational">Is Khinchin&#x27;s constant irrational?<a class="h-anchor" href="#is-khinchin-s-constant-irrational" aria-label="Link to this section">#</a></h3>
+<p>Khinchin&#x27;s constant <code>K₀ = 2.6854520010…</code> is the universal geometric mean of almost every number&#x27;s partial quotients (Stop 10). It has been computed to a million digits (Carles Simó, 2016). And yet <strong>it is not known whether <code>K₀</code> is rational or irrational</strong>, let alone whether it is transcendental. A constant that governs the behaviour of <em>almost all real numbers</em> has a nature we cannot pin down. The same holds for <strong>Lévy&#x27;s constant</strong> <code>e^{π²/(12 ln 2)}</code>.</p>
+<h3 id="is-the-euler-mascheroni-constant-irrational">Is the Euler–Mascheroni constant γ irrational?<a class="h-anchor" href="#is-the-euler-mascheroni-constant-irrational" aria-label="Link to this section">#</a></h3>
+<p>The constant <code>γ = 0.5772156649…</code>, the limit of <code>1 + 1/2 + … + 1/n − ln n</code>, appears throughout analysis and number theory. Its continued fraction has been computed to more than sixteen billion terms (2021). And still, <strong>it is unknown whether <code>γ</code> is irrational</strong> — the single most embarrassing open problem in the subject, because irrationality is exactly the property continued fractions are <em>built</em> to detect (Stop 2: irrational ⇔ infinite expansion). If <code>γ</code> were a fraction <code>p/q</code>, its denominator would need more than 244,000 digits — a bound proved from its continued fraction in 1998, and dwarfed by what today&#x27;s computations imply — but &quot;very probably infinite&quot; is not a proof.</p>
+<h3 id="zaremba-s-conjecture">Zaremba&#x27;s conjecture<a class="h-anchor" href="#zaremba-s-conjecture" aria-label="Link to this section">#</a></h3>
+<p>Not every question here is about a single constant. <strong>Zaremba&#x27;s conjecture (1972)</strong> asks: is there a constant <code>A</code> such that every positive integer <code>q</code> is the denominator of some fraction <code>p/q</code> whose continued fraction has all partial quotients at most <code>A</code>? (Zaremba proposed <code>A = 5</code>.) This is a question about which <em>denominators</em> admit &quot;well-behaved&quot; continued fractions, with real consequences for pseudo-random number generation and numerical integration. Bourgain and Kontorovich proved in 2014 that <em>almost all</em> <code>q</code> work with <code>A = 50</code>, and ShinnYih Huang brought that down to Zaremba&#x27;s own <code>A = 5</code> in 2015 — a spectacular near-miss — but the full conjecture, for <em>every</em> <code>q</code>, remains open.</p>
+<h3 id="the-erd-s-straus-conjecture">The Erdős–Straus conjecture<a class="h-anchor" href="#the-erd-s-straus-conjecture" aria-label="Link to this section">#</a></h3>
+<p>Not every open question about unfolding a number is about <em>continued</em> fractions. The greedy Egyptian-fraction expansion of the Branch Line (<a href="appendix-i-branches.html#b3-egyptian-fractions-the-greedy-scribe">Appendix I, stop B3</a>) always terminates, but the shortest such expansions hide a famous unknown: <strong>Erdős and Straus conjectured (1948)</strong> that for every integer <code>n ≥ 2</code> the fraction <code>4/n</code> can be written as a sum of exactly three unit fractions, <code>4/n = 1/x + 1/y + 1/z</code>. A solution has been found for every <code>n</code> up to <code>10¹⁷</code> (Salez, 2014) — <code>python -m tourbus demo egyptian</code> builds them live — yet no proof exists that one always does. It is the same theme as the rest of this stop: a notation so simple that Egyptian scribes computed with it nearly four thousand years ago, guarding a question no one can answer.</p>
+<h3 id="the-littlewood-conjecture">The Littlewood conjecture<a class="h-anchor" href="#the-littlewood-conjecture" aria-label="Link to this section">#</a></h3>
 <p>The deepest is <strong>Littlewood&#x27;s conjecture (c. 1930)</strong>: for <em>every</em> pair of real numbers <code>α, β</code>,</p>
-<pre><code>lim inf_{n→∞}  n · ‖nα‖ · ‖nβ‖ = 0,</code></pre>
+<div class="math-display">lim inf_{n→∞}  n · ‖nα‖ · ‖nβ‖ = 0,</div>
 <p>where <code>‖x‖</code> is the distance from <code>x</code> to the nearest integer. It says two numbers cannot <em>both</em> resist rational approximation too stubbornly at the same denominators — a two-dimensional cousin of Hurwitz&#x27;s theorem (Stop 4). Einsiedler, Katok, and Lindenstrauss proved in 2006, using deep ergodic theory of the kind glimpsed at Stop 10, that the set of exceptions (if any) has dimension zero — but whether the set is actually <em>empty</em>, and the conjecture true, is unknown.</p>
-<h3 id="where-the-road-goes">Where the road goes</h3>
+<h3 id="where-the-road-goes">Where the road goes<a class="h-anchor" href="#where-the-road-goes" aria-label="Link to this section">#</a></h3>
 <p>Every stop on this tour touched one of these frontiers. The depot&#x27;s Euclidean descent (Stop 1) becomes the ergodic Gauss map (Stop 10) whose invariant constant <code>K₀</code> we cannot classify. The golden ratio&#x27;s extremal irrationality (Stop 4) becomes Littlewood&#x27;s multidimensional question. The pattern in <code>e</code> (Stop 9) throws the patternlessness of <code>π</code> into relief, and that patternlessness is itself the open problem. The tour is a loop road of its own: the elementary beginning and the unsolved end are the same questions asked at different depths.</p>
-<h2 id="worked-examples">Worked examples</h2>
+</section>
+<section class="sec" data-sec="worked-examples">
+<h2 id="worked-examples">Worked examples<a class="h-anchor" href="#worked-examples" aria-label="Link to this section">#</a></h2>
 <p>There is nothing new to compute at Terminus — only something to sit with. Run the Collatz flight of <code>27</code> one more time, and read it now as a parable for the whole tour: a recursion with the simplest possible rule, whose behaviour we can watch in complete detail and still cannot explain.</p>
-<pre><code>$ python -m tourbus demo collatz 27
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo collatz 27</span>
 Collatz flight of 27:
-  111 steps, peak 9232</code></pre>
+  111 steps, peak 9232</code></pre></div>
 <p>We can compute the orbit exactly. We can compute a billion orbits exactly. What we cannot do is <em>prove</em> the one thing we most want to know — that it always comes home. That gap, between what a recursion <em>does</em> and what we can <em>prove</em> it does, is the country beyond Terminus. The bus stops here; the mathematics does not.</p>
-<h2 id="exercises">Exercises</h2>
-<ol><li><strong>(★)</strong> Look up the largest known partial quotient of <code>π</code> among the first million terms. Does its existence prove the partial quotients are unbounded? <details><summary>Hint</summary>No — a single large term, however large, says nothing about whether they grow <em>without bound</em>. Unboundedness is a statement about the whole infinite tail.</details></li></ol>
-<ol><li><strong>(★)</strong> State, in one sentence each, why proving <code>γ</code> irrational would be a natural use of continued fractions. <details><summary>Hint</summary>A number is irrational exactly when its simple continued fraction is infinite; a proof might exhibit or bound that expansion.</details></li></ol>
-<ol><li><strong>(★★)</strong> Zaremba&#x27;s conjecture with <code>A = 5</code> claims every <code>q</code> has a partner <code>p</code> with all partial quotients <code>≤ 5</code>. Find such a <code>p/q</code> for <code>q = 7</code> and <code>q = 12</code>. <details><summary>Hint</summary><code>3/7 = [0; 2, 3]</code> (quotients ≤ 3); <code>7/12 = [0; 1, 1, 2, 2]</code> (quotients ≤ 2).</details></li></ol>
-<ol><li><strong>(★★)</strong> Explain how Littlewood&#x27;s conjecture generalises the one-dimensional fact that <code>‖nα‖</code> can be made small (Dirichlet&#x27;s theorem) to two numbers at once. <details><summary>Hint</summary>Dirichlet gives <code>n·‖nα‖ &lt; 1</code> infinitely often for one <code>α</code>; Littlewood asks the <em>product</em> of two such quantities to be driven to zero simultaneously.</details></li></ol>
-<ol><li><strong>(★★★)</strong> Pick any open problem above and write a paragraph on which stop of this tour it most directly extends, and what a solution might look like. <details><summary>Hint</summary>There is no single answer — this is an invitation to synthesise the tour. The Khinchin, Gauss–Kuzmin, and Littlewood problems all extend Stop 10; the <code>π</code> and <code>γ</code> questions extend Stops 2 and 9.</details></li></ol>
-<h2 id="see-it-move">See it move</h2>
-<p>Open the <strong>Terminus</strong> panel: <a href="explore.html#stop-15-terminus"><code>site/index.html#stop-15-terminus</code></a>. It gathers the open problems with live links to the relevant widgets from earlier stops — a map of the frontier, with the roads that lead to it lit up.</p>
-<h2 id="further-reading">Further reading</h2>
-<ul><li>The full reading list of the tour is in <a href="appendix-c-references.html">Appendix C — References</a>.</li><li>J. Borwein, A. van der Poorten, et al., <em>Neverending Fractions</em> (2014) — a modern tour of exactly these open questions; Appendix C.</li><li>J. C. Lagarias, &quot;Continued Fractions and the Riemann Zeta Function&quot; and related surveys, for where the subject reaches into modern research.</li><li>On Littlewood: Einsiedler, Katok &amp; Lindenstrauss, <em>Annals of Mathematics</em> (2006); Appendix C.</li></ul>
+</section>
+<section class="sec" data-sec="then-now-next">
+<h2 id="then-now-next">Then, now, next<a class="h-anchor" href="#then-now-next" aria-label="Link to this section">#</a></h2>
+<h3 id="then-doors-that-opened"><span class="tnn tnn-then">Then</span><span class="tnn-sep"> — </span>Doors that opened<a class="h-anchor" href="#then-doors-that-opened" aria-label="Link to this section">#</a></h3>
+<p>The map&#x27;s edge moves. Every problem below was, for a generation, as hopeless as the ones above — and each fell to an idea nobody had when it was posed.</p>
+<figure class="diagram" role="figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 586" width="640" height="586" role="img" font-family="var(--font-data,monospace)" font-size="13"><title>Open roads that were finally driven</title><line x1="170" y1="74.5" x2="170" y2="226.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="288.5" x2="170" y2="388.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="450.5" x2="170" y2="550.5" stroke="currentColor" stroke-width="2"/><circle cx="170" cy="80.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="124.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="150.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="194.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="220.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="294.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="338.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="382.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="456.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="500.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="544.5" r="4" fill="var(--brass,#b5751a)"/><text x="320" y="25" text-anchor="middle" fill="currentColor" font-weight="bold">Open roads that were finally driven</text><text x="24" y="61" fill="var(--brass,#b5751a)" font-weight="bold">IRRATIONALITY AND TRANSCENDENCE</text><text x="158" y="85" text-anchor="end" fill="currentColor">1761</text><text x="182" y="85" fill="currentColor">Lambert proves pi irrational through a continued</text><text x="182" y="103" fill="currentColor">fraction</text><text x="158" y="129" text-anchor="end" fill="currentColor">1882</text><text x="182" y="129" fill="currentColor">Lindemann proves pi transcendental</text><text x="158" y="155" text-anchor="end" fill="currentColor">1978</text><text x="182" y="155" fill="currentColor">Apery proves zeta(3) irrational with a runaway</text><text x="182" y="173" fill="currentColor">recurrence</text><text x="158" y="199" text-anchor="end" fill="currentColor">2000</text><text x="182" y="199" fill="currentColor">Rivoal - infinitely many zeta(2n+1) are irrational</text><text x="158" y="225" text-anchor="end" fill="currentColor">2001</text><text x="182" y="225" fill="currentColor">Zudilin - one of zeta(5), zeta(7), zeta(9), zeta(11)</text><text x="182" y="243" fill="currentColor">is irrational</text><text x="24" y="275" fill="var(--brass,#b5751a)" font-weight="bold">APPROXIMATION</text><text x="158" y="299" text-anchor="end" fill="currentColor">2006</text><text x="182" y="299" fill="currentColor">Einsiedler, Katok, Lindenstrauss - Littlewood's</text><text x="182" y="317" fill="currentColor">exceptions have dimension zero</text><text x="158" y="343" text-anchor="end" fill="currentColor">2014</text><text x="182" y="343" fill="currentColor">Bourgain and Kontorovich - almost every denominator</text><text x="182" y="361" fill="currentColor">obeys Zaremba</text><text x="158" y="387" text-anchor="end" fill="currentColor">2019</text><text x="182" y="387" fill="currentColor">Koukoulopoulos and Maynard prove the Duffin-</text><text x="182" y="405" fill="currentColor">Schaeffer conjecture</text><text x="24" y="437" fill="var(--brass,#b5751a)" font-weight="bold">STRUCTURE</text><text x="158" y="461" text-anchor="end" fill="currentColor">2022</text><text x="182" y="461" fill="currentColor">Karpenkov settles the totally real case of Hermite's</text><text x="182" y="479" fill="currentColor">problem</text><text x="158" y="505" text-anchor="end" fill="currentColor">2022</text><text x="182" y="505" fill="currentColor">Koymans and Pagano prove Stevenhagen's conjecture on</text><text x="182" y="523" fill="currentColor">the negative Pell equation</text><text x="158" y="549" text-anchor="end" fill="currentColor">2024</text><text x="182" y="549" fill="currentColor">Calegari, Dimitrov and Tang prove 1, zeta(2) and</text><text x="182" y="567" fill="currentColor">L(2, chi) linearly independent</text></svg></figure>
+<p>The pattern is instructive. Apéry&#x27;s proof that <code>ζ(3)</code> is irrational (1978) came from a continued fraction and a recurrence so improbable that his 1978 lecture was met with disbelief, and colleagues checked its identities by computer before the proof was accepted — the Cross-Domain Line replays it (<a href="appendix-f-cross-domain.html#the-frontier-ap-ry-s-3">Appendix F</a>). The Littlewood and Zaremba results imported heavy machinery from ergodic theory and from expander graphs and &quot;thin groups&quot;; the Duffin–Schaeffer proof came from combinatorics and graph theory. The next door will likely open from an equally unexpected direction.</p>
+<h3 id="now-the-working-frontier"><span class="tnn tnn-now">Now</span><span class="tnn-sep"> — </span>The working frontier<a class="h-anchor" href="#now-the-working-frontier" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Ergodic theory and homogeneous dynamics</strong> — the descendants of the Gauss map of <a href="10-casino.html">Stop 10</a> — are the main tools for Littlewood&#x27;s conjecture and its relatives.</li><li><strong>Thin groups and expansion</strong> power the attack on Zaremba&#x27;s conjecture: the matrices of <a href="03-engine-room.html#the-engine-as-a-product-of-matrices">Stop 3</a> with bounded partial quotients generate a sparse &quot;thin&quot; subgroup of <code>SL(2, ℤ)</code>, and its expansion properties are what Bourgain and Kontorovich exploited.</li><li><strong>Arithmetic holonomy bounds</strong> (Calegari, Dimitrov, and Tang, 2024) are a new way to prove that numbers are irrational, extending the Apéry-style recurrences of the Cross-Domain Line.</li><li><strong>Computation at scale</strong> keeps testing every conjecture here: hundreds of trillions of digits of <code>π</code>, hundreds of billions of its partial quotients, billions of terms of <code>γ</code>, Erdős–Straus to <code>10¹⁷</code>.</li></ul>
+<h3 id="next-how-the-next-doors-might-open"><span class="tnn tnn-next">Next</span><span class="tnn-sep"> — </span>How the next doors might open<a class="h-anchor" href="#next-how-the-next-doors-might-open" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Machine-checked mathematics.</strong> Proof assistants such as Lean and Coq now hold large libraries of formal number theory, and a growing share of new results arrive with machine-checked proofs.</li><li><strong>Machine-found conjectures.</strong> Programs like the Ramanujan Machine (2021) propose continued fractions for constants faster than people can prove them, and AI systems reached medal-level performance at the International Mathematical Olympiad in 2024–25, some producing proofs a computer can verify. Whether such tools can crack a problem like the irrationality of <code>γ</code> is one of the genuinely open questions of the next decade.</li><li><strong>The old questions stand.</strong> Is <code>γ</code> irrational? Is <code>K₀</code>? Are <code>π</code>&#x27;s partial quotients bounded? Is every Collatz orbit finite? None of these needs more than this tour to <em>state</em>. That is the invitation of the Terminus.</li></ul>
+</section>
+<section class="sec" data-sec="exercises">
+<h2 id="exercises">Exercises<a class="h-anchor" href="#exercises" aria-label="Link to this section">#</a></h2>
+<ol><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Look up the largest known partial quotient of <code>π</code> among the first million terms. Does its existence prove the partial quotients are unbounded? <details><summary>Hint</summary>No — a single large term, however large, says nothing about whether they grow <em>without bound</em>. Unboundedness is a statement about the whole infinite tail.</details></li><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> State, in one sentence each, why proving <code>γ</code> irrational would be a natural use of continued fractions. <details><summary>Hint</summary>A number is irrational exactly when its simple continued fraction is infinite; a proof might exhibit or bound that expansion.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Zaremba&#x27;s conjecture with <code>A = 5</code> claims every <code>q</code> has a partner <code>p</code> with all partial quotients <code>≤ 5</code>. Find such a <code>p/q</code> for <code>q = 7</code> and <code>q = 12</code>. <details><summary>Hint</summary><code>3/7 = [0; 2, 3]</code> (quotients ≤ 3); <code>7/12 = [0; 1, 1, 2, 2]</code> (quotients ≤ 2).</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Explain how Littlewood&#x27;s conjecture generalises the one-dimensional fact that <code>‖nα‖</code> can be made small (Dirichlet&#x27;s theorem) to two numbers at once. <details><summary>Hint</summary>Dirichlet gives <code>n·‖nα‖ &lt; 1</code> infinitely often for one <code>α</code>; Littlewood asks the <em>product</em> of two such quantities to be driven to zero simultaneously.</details></li><li><span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Pick any open problem above and write a paragraph on which stop of this tour it most directly extends, and what a solution might look like. <details><summary>Hint</summary>There is no single answer — this is an invitation to synthesise the tour. The Khinchin, Gauss–Kuzmin, and Littlewood problems all extend Stop 10; the <code>π</code> and <code>γ</code> questions extend Stops 2 and 9.</details></li></ol>
+</section>
+<section class="sec" data-sec="see-it-move">
+<h2 id="see-it-move">See it move<a class="h-anchor" href="#see-it-move" aria-label="Link to this section">#</a></h2>
+<p>The Terminus section of the <a href="explore.html#stop-15-terminus">live exposition</a> lists the open questions this route walked past, each with a link to the widget where you can watch it happen: the <strong>Khinchin Lab</strong> for the statistics of <code>π</code> and <code>K₀</code>, the <strong>Gauss-Map Cobweb</strong> for the dealer itself, and the <strong>Collatz Orbit Plotter</strong> for the recursion nobody can prove halts.</p>
+</section>
+<section class="sec" data-sec="further-reading">
+<h2 id="further-reading">Further reading<a class="h-anchor" href="#further-reading" aria-label="Link to this section">#</a></h2>
+<ul><li>The full reading list of the tour is in <a href="appendix-c-references.html">Appendix C — References</a>.</li><li>J. Borwein, A. van der Poorten, et al., <em>Neverending Fractions</em> (2014) — a modern tour of exactly these open questions; Appendix C.</li><li>J. C. Lagarias, &quot;Euler&#x27;s constant: Euler&#x27;s work and modern developments,&quot; <em>Bulletin of the AMS</em> 50 (2013) — everything known (and not) about <code>γ</code>.</li><li>A. van der Poorten, &quot;A proof that Euler missed: Apéry&#x27;s proof of the irrationality of ζ(3),&quot; <em>Mathematical Intelligencer</em> 1 (1979) — the story of a door opening.</li><li>S. Huang, &quot;An improvement to Zaremba&#x27;s conjecture,&quot; <em>Geometric and Functional Analysis</em> 25 (2015); Bourgain &amp; Kontorovich, <em>Annals</em> (2014).</li><li>On Littlewood: Einsiedler, Katok &amp; Lindenstrauss, <em>Annals of Mathematics</em> (2006); Appendix C.</li></ul>
 <p>Thank you for riding the Recursive Continuance Tour Bus. The route map is always at <a href="index.html">index.md</a>; the engine is always a single <code>python -m tourbus</code> away.</p>
-<p class="chapter-nav"><a href="14-souvenir-shop.html">← Stop 14 — The Souvenir Shop</a> · <a href="index.html">Route map</a> · <a href="appendix-a-proofs.html">Appendix A — Proofs →</a></p></main>
+</section><nav class="pager" aria-label="Previous and next page"><a class="pager-prev" href="14-souvenir-shop.html"><span class="pager-dir">&#8592; Previous</span><span class="pager-title">Stop 14 · The Souvenir Shop</span></a><a class="pager-next" href="appendix-d-frontier.html"><span class="pager-dir">Next &#8594;</span><span class="pager-title">The Express Line</span></a></nav></main>
+  <aside class="toc-rail"><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#is-normal-in-its-continued-fraction">Is π "normal" in its continued fraction?</a></li><li><a href="#is-khinchin-s-constant-irrational">Is Khinchin's constant irrational?</a></li><li><a href="#is-the-euler-mascheroni-constant-irrational">Is the Euler–Mascheroni constant γ irrational?</a></li><li><a href="#zaremba-s-conjecture">Zaremba's conjecture</a></li><li><a href="#the-erd-s-straus-conjecture">The Erdős–Straus conjecture</a></li><li><a href="#the-littlewood-conjecture">The Littlewood conjecture</a></li><li><a href="#where-the-road-goes">Where the road goes</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-doors-that-opened">Then — doors that opened</a></li><li><a href="#now-the-working-frontier">Now — the working frontier</a></li><li><a href="#next-how-the-next-doors-might-open">Next — how the next doors might open</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></aside>
 </div>
 <footer class="site-footer">
-  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
-  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
+      <p>A guided tour of recursion and continued fractions. Every number on these pages was
+      computed, exactly, by the <code>tourbus</code> engine: standard-library Python, no dependencies.</p>
+    </div>
+    <div class="foot-col"><div class="foot-h">Ride</div>
+      <a href="01-depot.html">Board at the Depot</a><a href="explore.html">Live exposition</a>
+      <a href="syllabus.html">Syllabus for instructors</a><a href="appendix-c-references.html">Reading list</a></div>
+    <div class="foot-col"><div class="foot-h">Lines</div><a href="appendix-d-frontier.html">The Express Line</a><a href="appendix-e-web-of-ideas.html">The Web of Ideas</a><a href="appendix-f-cross-domain.html">The Cross-Domain Line</a><a href="appendix-h-history.html">The Heritage Line</a><a href="appendix-i-branches.html">The Branch Line</a></div>
+    <div class="foot-col"><div class="foot-h">Project</div>
+      <a href="https://github.com/sonoransun/recursivecontinuancetourbus">Source on GitHub</a><span>MIT licensed</span><span><code>python -m tourbus</code></span></div>
+  </div>
 </footer>
 <script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>

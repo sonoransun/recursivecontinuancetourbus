@@ -55,6 +55,25 @@ Three consequences follow immediately:
 
 Appendix A proves the identity by a one-line induction on the recurrence.
 
+### The engine as a product of matrices
+
+The recurrence is shorter still in matrix form. Each partial quotient becomes a
+`2×2` matrix, and the convergents are the running product:
+
+```
+⎡pₙ  pₙ₋₁⎤   ⎡a₀  1⎤ ⎡a₁  1⎤       ⎡aₙ  1⎤
+⎣qₙ  qₙ₋₁⎦ = ⎣1   0⎦ ⎣1   0⎦ ··· ⎣1   0⎦
+```
+
+Every factor has determinant `−1`, so the product has determinant
+`(−1)ⁿ⁺¹ = (−1)ⁿ⁻¹` — the determinant identity is nothing more than the rule
+that determinants multiply. The matrix view is also the *fast* one. Matrix
+multiplication is associative, so a long run of quotients can be multiplied in
+a balanced tree instead of strictly left to right, keeping the numbers small
+for as long as possible. That single observation powers the quasi-linear gcd
+algorithms of [Stop 1](01-depot.md#then-now-next) and the "binary splitting"
+behind modern record computations of `π`.
+
 ### How good, and how fast
 
 Combining the straddle with the recurrence gives the headline error bound:
@@ -82,17 +101,6 @@ of convergents already pins a number down to many decimal places — and why the
 slowest-growing case, all `aₙ = 1`, is the golden ratio waiting at Stop 4.
 
 ![Three roads downhill: log-error of the convergents of φ, e, and π. Every road descends at least as fast as 1/q², φ's — all ones — no faster than it must, and the cliff on π's route is a₄ = 292.](assets/fig-convergent-error.svg)
-
-### Where the engine came from
-
-The engine is younger than the fractions it drives. The general rule for
-forming the numerators and denominators of convergents was in print by John
-Wallis's *Opera Mathematica* (1695) — the same book that coined the name
-"continued fraction" — and Cataldi (1613) already held equivalent relations;
-it was Euler's *De fractionibus continuis* (presented 1737) that turned the
-rule into the systematic theory the tour runs on. What you just watched is,
-nearly symbol for symbol, their machine; for the whole story, ride the
-Heritage Line (Appendix H).
 
 ## Worked examples
 
@@ -138,6 +146,71 @@ continued fraction of 415/93:
  3    7  415/93  4.4623655914  +0.00e+00
 ```
 
+## Then, now, next
+
+### Then — from Cataldi's ledger to Euler's continuants
+
+```mermaid
+timeline
+    title Building the convergent engine
+    section The recurrence
+        1613 : Cataldi computes successive convergents of sqrt(18) by hand
+        1695 : Wallis prints the rule that builds each convergent from the two before
+        1737 : Euler makes the recurrence the backbone of a systematic theory
+        1764 : Euler's continuants - the numerators as polynomials in the quotients
+    section The theory of error
+        1770 : Lagrange - convergents are the best approximations
+        1798 : Legendre - closer than 1 over 2q^2 certifies a convergent
+        1813 : Gauss expands ratios of hypergeometric series as continued fractions
+    section Machines
+        1892 : Pade's thesis organizes the rational approximants of a function
+        1971 : Schonhage multiplies quotient matrices divide-and-conquer
+        1976 : Lentz evaluates continued fractions front to back, stopping on demand
+```
+
+The rule on this page was discovered by people who needed numbers, not
+theorems. Cataldi, computing square roots in 1613, already carried each
+approximation forward from the two before it; Wallis put the rule in print;
+and Euler, in the 1737 dissertation that founded the theory, used it to prove
+that the convergents alternate around their target. In 1764 Euler went one
+step further and studied the numerators themselves as polynomials in the
+partial quotients — the **continuants** of the Express Line
+([Appendix D, E2](appendix-d-frontier.md#e2-continuants-the-polynomial-behind-every-convergent)),
+which count tilings by squares and dominoes. Lagrange and Legendre then turned
+the engine's bookkeeping into the theory of best approximation you will meet
+at [Stop 5](05-scenic-overlook.md).
+
+### Now — the same recurrence in your numerical library
+
+The fundamental recurrence is one of the most-run formulas in scientific
+computing, usually without the word "continued fraction" anywhere in sight.
+
+- **Statistics.** The incomplete gamma and beta functions — the machinery
+  behind every chi-squared, Student-t, and F-test p-value — are evaluated in
+  their tails by continued fractions. Libraries in the tradition of *Numerical
+  Recipes* use Lentz's method, which runs this page's recurrence front to back
+  and stops as soon as successive convergents agree.
+- **Rational approximation of functions.** Padé approximants — the
+  function-level convergents of a power series — sit inside math libraries,
+  control-system models, and chip-design tools that shrink huge circuit models
+  to a handful of poles (asymptotic waveform evaluation, 1990, and its
+  Padé-via-Lanczos successors).
+- **Fast arithmetic.** The matrix form above, multiplied in a balanced tree,
+  is how programs that compute constants to trillions of digits organise their
+  work ("binary splitting"), and how quasi-linear gcd algorithms stay fast.
+
+### Next — machine-checked engines and a missing p-adic engine
+
+- **Proofs a computer can check.** The recurrence, the determinant identity,
+  and the error bounds of this stop have been formalised in proof assistants
+  such as Lean's mathematical library, so the engine's guarantees are now
+  certified by machine as well as by hand.
+- **An engine for p-adic numbers.** The `p`-adic numbers, the other natural
+  completion of the rationals, have several continued-fraction algorithms
+  (Ruban, Schneider, Browkin, and others), but none is known to make *every*
+  quadratic irrational periodic the way Lagrange's theorem does for the real
+  numbers. Finding the right `p`-adic engine is an active research question.
+
 ## Exercises
 
 1. **(★)** From the `π` table, verify the determinant identity for the pair
@@ -168,10 +241,13 @@ continued fraction of 415/93:
 
 ## See it move
 
-Open the **Engine Room** widget:
-[`site/index.html#stop-3-engine`](../site/index.html#stop-3-engine). Step the
-recurrence forward one term at a time and see `pₙ, qₙ`, the running error, and
-the alternating straddle bracket the target from above and below.
+The Engine Room's section of the [live exposition](../site/index.html#stop-3-engine)
+tabulates the first six convergents of `π` exactly, flags Archimedes' `22/7`
+and Zu Chongzhi's `355/113`, and shows the error column falling off the cliff
+that `292` digs. To turn the crank yourself, go back to the **CF Expansion
+Machine** (W1) at the Depot: every **Step** adds a row `pₙ/qₙ` to its
+convergents table and a point to its log–log error plot, drawn against the
+dashed `1/q²` guide of this stop's error bound.
 
 ## Further reading
 
@@ -181,5 +257,9 @@ the alternating straddle bracket the target from above and below.
   identity, and approximation).
 - Appendix A of this tour, for the induction proofs of the recurrence, the
   determinant identity, and the error bound.
+- W. H. Press et al., *Numerical Recipes* (3rd ed., 2007), §5.2 — evaluating
+  continued fractions in practice, including the modified Lentz method.
+- G. A. Baker Jr. & P. Graves-Morris, *Padé Approximants* (2nd ed., 1996) — the
+  rational approximation of functions, convergents all the way down.
 
 [← Stop 2 — The Unfolding Road](02-unfolding-road.md) · [Route map](index.md) · [Stop 4 — The Golden Milestone →](04-golden.md)

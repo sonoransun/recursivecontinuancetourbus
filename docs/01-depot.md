@@ -143,6 +143,89 @@ $ python -m tourbus demo euclid 6765 4181
   continued fraction = [1; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
 ```
 
+## Then, now, next
+
+### Then — the oldest algorithm still running
+
+```mermaid
+timeline
+    title The gcd through twenty-three centuries
+    section Antiquity
+        c. 300 BC : Euclid's Elements VII.1-2 - the gcd by mutual subtraction
+        Han dynasty : The Nine Chapters reduce fractions by halving and subtracting
+        499 : Aryabhata's kuttaka runs the quotients backward
+    section Early modern
+        1624 : Bachet proves the integer identity later named for Bezout
+        1779 : Bezout proves it for polynomials
+        1844 : Lame bounds the steps by five times the digits
+    section The machine age
+        1938 : Lehmer speeds up Euclid for multi-word integers
+        1967 : Stein's binary gcd - shifts and subtractions only
+        1971 : Schonhage's half-gcd - Euclid in quasi-linear time
+        1975 : Sugiyama decodes error-correcting codes with polynomial Euclid
+        2019 : Bernstein and Yang's constant-time safegcd
+```
+
+"We might call Euclid's method the granddaddy of all algorithms," wrote Donald
+Knuth, "because it is the oldest nontrivial algorithm that has survived to the
+present day." Euclid recorded it around 300 BC, but it was probably older still
+([Heritage stop H1](appendix-h-history.md#h1-c-300-bc-the-ladder-of-euclid)). The
+Chinese *Nine Chapters on the Mathematical Art*, compiled under the Han, reduce
+fractions with the instruction "if halving is possible, take half; otherwise
+subtract the smaller from the greater" — halving plus subtraction, the heart of
+the *binary* gcd that computers use today. In 499 Āryabhaṭa ran the quotients
+backward to solve linear equations in integers (the *kuṭṭaka*, or
+"pulverizer"); Bachet proved the identity now named for Bézout in 1624; and
+Lamé's 1844 bound — the first theorem about the running time of an algorithm,
+and often called the first practical use of the Fibonacci numbers — closed the
+classical story.
+
+### Now — the gcd inside every secure connection
+
+- **Keys and inverses.** Making an RSA key means computing a private exponent
+  `d = e⁻¹ mod φ(N)`; every elliptic-curve signature needs an inverse modulo
+  the group order. The extended Euclidean algorithm does both, and it is built
+  into Python (3.8 and later) as `pow(e, -1, m)`.
+- **Constant time.** A classical gcd leaks its quotient sequence through
+  timing, and timing leaks keys. Daniel Bernstein and Bo-Yin Yang's *safegcd*
+  (2019) replaces the data-dependent divisions with a fixed schedule of
+  branch-free "division steps"; a version of it has computed the modular
+  inverses in the `libsecp256k1` library behind Bitcoin Core since 2021.
+- **Error correction.** Run Euclid on *polynomials* and it decodes
+  Reed–Solomon codes (Sugiyama and colleagues, 1975) — the codes that let a
+  scratched disc play, a smudged QR code scan, and deep-space probes send
+  pictures home.
+- **Big numbers.** Lehmer's 1938 trick runs Euclid on the leading digits only,
+  and Schönhage's 1971 *half-gcd* multiplies the `2×2` quotient matrices of
+  [Stop 3](03-engine-room.md#the-engine-as-a-product-of-matrices) divide and
+  conquer. Big-integer libraries such as GMP combine both.
+- **Lattices.** Euclid on *vectors* is lattice reduction: Gauss reduced
+  two-dimensional lattices by the same subtract-the-multiple move, and the LLL
+  algorithm (1982) does it in any dimension. Lattice reduction is the main tool
+  for breaking weak cryptosystems — and the yardstick for the new lattice-based
+  standards ML-KEM and ML-DSA that NIST published in 2024 to resist quantum
+  computers.
+
+> [!TIP]
+> In plain Python, `pow(17, -1, 3120)` returns `2753` — the private
+> exponent of the textbook RSA key with `e = 17` and `φ(N) = 3120`, found by the
+> extended Euclidean algorithm. [Stop 14](14-souvenir-shop.md) shows what
+> happens when `d` is chosen too small.
+
+### Next — questions the depot still cannot answer
+
+- **Can gcd be parallelised?** Integer gcd is not known to be efficiently
+  parallelisable (in the complexity class NC), and not known to be inherently
+  sequential (P-complete) either. It is one of the classic open problems of
+  parallel computation.
+- **Is gcd as fast as multiplication?** The half-gcd costs a logarithmic
+  factor more than multiplying two numbers of the same size. Whether that
+  factor is necessary is not known.
+- **How short can lattice vectors get?** The security margins of post-quantum
+  cryptography rest on how well lattice reduction — Euclid in hundreds of
+  dimensions — can be pushed. Every improvement moves the key sizes of the new
+  standards.
+
 ## Exercises
 
 1. **(★)** Run `demo euclid 1071 462` and confirm by hand that
@@ -174,10 +257,12 @@ $ python -m tourbus demo euclid 6765 4181
 
 ## See it move
 
-Open the interactive **Depot** widget:
-[`site/index.html#stop-1-depot`](../site/index.html#stop-1-depot). Type two
-integers and watch the division ladder build itself, with the quotients
-highlighted so you can read off the continued fraction directly.
+The **CF Expansion Machine** (W1) opens the
+[live exposition](../site/index.html#stop-1-depot). Type a fraction such as
+`1071/462` (or a decimal, or tap a preset) and press **Step**: each press adds
+one line to the Euclid ledger — floor, subtract, reciprocate — with the
+quotient highlighted, a row to the convergents table, and a point to the
+log–log error plot, so the continued fraction assembles itself in front of you.
 
 ## Further reading
 
@@ -189,5 +274,12 @@ highlighted so you can read off the continued fraction directly.
   and the Fibonacci worst case in full.
 - D. E. Knuth's account of Lamé (1844) as the birth of algorithmic complexity;
   Appendix C.
+- Knuth, *The Art of Computer Programming*, Vol. 2, §4.5.2 — the binary gcd,
+  its ancient Chinese roots, and Stein's 1967 algorithm.
+- J. Shallit, "Origins of the analysis of the Euclidean algorithm," *Historia
+  Mathematica* 21 (1994) — Lamé's forerunners.
+- D. J. Bernstein & B.-Y. Yang, "Fast constant-time gcd computation and modular
+  inversion," *IACR Transactions on Cryptographic Hardware and Embedded Systems*
+  2019(3) — safegcd.
 
 [Route map](index.md) · [Stop 2 — The Unfolding Road →](02-unfolding-road.md)

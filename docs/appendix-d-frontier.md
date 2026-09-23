@@ -57,6 +57,14 @@ Above **Freiman's constant** (≈ 4.5278) the spectrum stops being discrete and
 becomes a solid ray `[F, ∞)`; the structure in between is a Cantor-like set still
 under active study.
 
+**Then & now.** Andrey Markov found this ladder in 1879–80, and Frobenius
+asked in 1913 whether each Markov number sits atop exactly one triple — the
+*uniqueness conjecture*, still open after more than a century (Martin Aigner's
+2013 book is devoted to it). The triples have since resurfaced far from
+approximation theory, indexing exceptional vector bundles on the projective
+plane and turning up in the combinatorics of cluster algebras, while Gregory
+Freiman located in 1975 exactly where the spectrum becomes a solid ray.
+
 **Exercises.** (★) Verify a Markov triple satisfies the equation. (★★) Show the
 silver ratio `1 + √2` achieves √8 by computing `q²·|x − p/q|` along its
 convergents. (★★★) Prove Vieta jumping never leaves the positive integers.
@@ -84,6 +92,12 @@ Continuant K(1, 2, 3, 4, 5):
   Euler rule = 225
   reversed   = K(5, 4, 3, 2, 1) = 225 (equal)
 ```
+
+**Then & now.** Euler studied these polynomials in 1764 as a device for
+continued fractions. Today every tridiagonal determinant is a continuant, so the
+recurrence above runs inside eigenvalue solvers for tridiagonal matrices — the
+Sturm-sequence counting of [Appendix F](appendix-f-cross-domain.md) — and in the
+three-term recurrences that define the classical orthogonal polynomials.
 
 **Exercises.** (★) Compute `K(a, b, c)` by hand and match `abc + a + c`. (★★)
 Prove the palindrome identity by induction. (★★★) Show `K(1,…,1)` (n ones) is
@@ -121,6 +135,15 @@ Littlewood conjecture (Stop 15). These expansions are computed rigorously: a
 high-precision decimal seed becomes an interval, and only certified terms are
 emitted.
 
+**Then & now.** Klaus Roth proved in 1955 (Fields Medal, 1958) that every
+algebraic irrational has irrationality measure exactly `2`: no algebraic number
+is approximable much better than a random one. But the finer question on this
+stop — whether the partial quotients of `2^(1/3)` stay bounded — remains out of
+reach, because Roth's theorem is *ineffective*: it cannot say how large the rare
+good approximations are. Lang and Trotter (1972) computed cube-root expansions
+and found them statistically indistinguishable from random numbers; nothing
+since has broken the deadlock.
+
 **Exercises.** (★) Confirm the plastic number is a root of `x³ − x − 1`. (★★)
 Compare the geometric mean of the first 40 partial quotients of `2^(1/3)` and of
 `√2`. (★★★) Read about the Littlewood conjecture and its link to bounded partial
@@ -151,6 +174,14 @@ Three continued fractions of 87/32:
 Notice the NICF is shorter (fewer terms for the same number) and carries a
 negative quotient where the regular expansion had a run of 1s.
 
+**Then & now.** Nearest-integer expansions go back to Minnigerode (1873) and
+Hurwitz (1889). The minus expansion is the tool with which Jung (1908) and
+Hirzebruch (1953) resolved surface singularities, each coefficient a
+self-intersection number, and it remains standard in toric geometry. The
+variants keep multiplying: Rosen's continued fractions for Hecke groups (1954)
+and Nakada's α-continued fractions (1981) form whole families whose entropy was
+mapped in detail in the 2000s and 2010s.
+
 **Exercises.** (★) Fold each expansion back to `87/32`. (★★) Find a fraction whose
 NICF is strictly shorter than its regular CF. (★★★) Look up how the minus-CF of
 `n/q` gives the resolution of the `1/n(1, q)` cyclic quotient singularity.
@@ -175,6 +206,13 @@ Three-distance theorem for a=8/13, N=12:
   2 distinct gap lengths: 1/13, 2/13
   largest = sum of the others: True
 ```
+
+**Then & now.** Hugo Steinhaus posed the question; Vera T. Sós, János Surányi,
+and Stanisław Świerczkowski proved it independently in 1957–58. It is why
+golden-ratio hashing and the golden angle of sunflowers spread points so evenly
+([Stop 4](04-golden.md#then-now-next)). In higher dimensions "three" fails, and
+the right generalisations — gap statistics read off flows on the space of
+lattices (Marklof and Strömbergsson, 2017) — are an active research area.
 
 **Exercises.** (★) Verify the three-gap property for α = 1/φ ≈ Fibonacci ratios.
 (★★) Show the gap lengths total 1. (★★★) Relate the three lengths to `‖qₖα‖` for
@@ -207,6 +245,13 @@ Gauss-Kuzmin-Wirsing constant (from the transfer operator):
   computed  lambda = -0.3036601
   Wirsing's value  = -0.3036630 (error 2.9e-06)
 ```
+
+**Then & now.** Eduard Wirsing found `λ` in 1974; Babenko (1978) and Mayer
+(1991) set the transfer operator in a wider theory that ties it to the Selberg
+zeta function of the modular surface, and `λ` is now known to hundreds of
+digits. No closed form has ever been found. Because the same operator governs
+the average-case speed of Euclid's algorithm ([Stop 10](10-casino.md#then-now-next)),
+this constant turns up in the analysis of gcd algorithms.
 
 **Exercises.** (★) Confirm the leading eigenvalue is 1 to three digits. (★★) Show
 `∫₀¹ (Lf) dx = ∫₀¹ f dx` (the reason 1 is an eigenvalue). (★★★) Improve the
@@ -257,6 +302,12 @@ velocity stays rational forever. Ride the stop with `python -m tourbus frontier
 live:** watch [the mass-ratio 100² run](../site/index.html#w13?n=2) count out
 `314` collisions.
 
+**Then & now.** Gregory Galperin published the result in 2003; in 2019 a
+3Blue1Brown video made it famous; and in 2020 the physicist Adam Brown showed
+that the colliding blocks are mathematically the same as **Grover's quantum
+search algorithm** — each collision a step of the search, with the same
+rotation (and the same `π`) counting both.
+
 **Exercises.** (★) Trace the three equal-mass collisions by hand — equal elastic
 masses simply exchange velocities. (★★) Show that for `m = M` the wedge angle is
 `θ = π/4`, so the bounce count `⌈π/θ⌉ − 1` is exactly `3`. (★★★) The formulas
@@ -304,6 +355,14 @@ tree-walk — replace one value by a linear function of the other two — is the
 Vieta jumping that grows the Markov triples of [stop E1](#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio):
 the topograph and the Markov tree are cousins on different forms. Ride the stop
 with `python -m tourbus frontier 8`.
+
+**Then & now.** Conway introduced the topograph in *The Sensual (Quadratic)
+Form* (1997), building on Gauss's reduction theory of 1801. It has become a
+favourite of teachers: Allen Hatcher's *Topology of Numbers* (2022) builds a
+whole course on it. The trivalent tree it lives on is the dual of the Farey
+tessellation of the hyperbolic plane — the geometry behind the loops of
+[Stop 6](06-loop-road.md#then-now-next) and the fractions of
+[Stop 8](08-family-tree.md#then-now-next).
 
 **Exercises.** (★) Verify the climbing lemma at one node of the figure — pick a
 region off the river and check its value exceeds both neighbours toward the
@@ -366,6 +425,14 @@ Mathematical Society* in 1911 that went unanswered in print. Its general form,
 `x + 1 = √(1 + x√(1 + (x+1)√(…)))`, converges to `x + 1` for every `x`. Ride the
 stop with `python -m tourbus frontier 9`; his history is told at
 [Appendix H](appendix-h-history.md#interlude-spectra-and-measure-1873-1936).
+
+**Then & now.** Rogers found the identities in 1894, Ramanujan rediscovered
+them and the fraction around 1913, and sixty years later they reappeared in
+physics: Rodney Baxter's 1980 exact solution of the *hard-hexagon model* of
+statistical mechanics rests on the Rogers–Ramanujan identities, which also
+count states in conformal field theory. In 2021 the Ramanujan Machine turned
+the hunt for formulas like the one on this stop into an algorithm
+([Stop 9](09-celebrity.md#then-now-next)).
 
 **Exercises.** (★) Compute the first four convergents of `R(1/2)` by hand and
 confirm they bracket the limit. (★★) Evaluate the nested radical to depth 4 and

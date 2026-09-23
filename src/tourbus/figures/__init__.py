@@ -57,6 +57,8 @@ __all__ = [
     "fig_zeckendorf",
     "fig_cutting_sequence",
     "fig_rogers_ramanujan",
+    "fig_network",
+    "NETWORK",
     "FIGURES",
 ]
 
@@ -1228,6 +1230,202 @@ def fig_rogers_ramanujan() -> str:
     return _themed(doc)
 
 
+# --------------------------------------------------------------------------- #
+#  18. The network map: the main line and its four branches (docs landing).
+# --------------------------------------------------------------------------- #
+
+# Short station names for the map, one tuple per line in route order. The
+# counts must match the tour registries (tests/site/test_figures.py checks
+# them against STOPS, EXPRESS_STOPS, HERITAGE_STOPS, CROSS_STOPS and
+# BRANCH_STOPS), so the map can never silently drift from the CLI.
+NETWORK: dict[str, tuple[str, ...]] = {
+    "main": (
+        "The Depot", "Unfolding Road", "Engine Room", "Golden Milestone",
+        "Scenic Overlook", "Loop Road", "Cattle Crossing", "Family Tree",
+        "Celebrity Sightings", "The Casino", "Assembly Line", "The Tower",
+        "Hall of Mirrors", "Souvenir Shop", "Terminus",
+    ),
+    "heritage": (
+        "Euclid", "Chakravala", "First print", "Huygens", "Lambert",
+        "Liouville", "Stern–Brocot", "CFRAC", "Item 101",
+    ),
+    "cross": (
+        "Molecules", "Solids", "Butterfly", "Mode-locking", "Circuits",
+        "Padé & Apéry", "Phyllotaxis",
+    ),
+    "express": (
+        "Markov", "Continuants", "Cube roots", "Variants", "Three gaps",
+        "GKW", "Blocks = π", "The River", "Ramanujan",
+    ),
+    "branch": (
+        "Engel", "Lüroth–Pierce", "Egyptian", "Zeckendorf", "Cutting seq.",
+        "Lochs",
+    ),
+}
+
+# Heritage stop years, printed under the heritage stations.
+_NETWORK_YEARS = (
+    "c. 300 BC", "628–1150", "1572–1655", "1682", "1761", "1844",
+    "1858–61", "1970", "1972",
+)
+
+# Line colors: a site palette variable (so the inlined map follows the page
+# theme) with a mid-tone fallback that reads on both GitHub themes.
+_NETWORK_COLORS = {
+    "main": "var(--brass,#b5751a)",
+    "heritage": "var(--s6,#d1483f)",
+    "cross": "var(--s1,#2a78d6)",
+    "express": "var(--s5,#7a68d8)",
+    "branch": "var(--s2,#1baf7a)",
+}
+
+_SANS = "Helvetica, Arial, sans-serif"
+
+
+def _net_text(x: float, y: float, s: str, *, size: float = 11.0, anchor: str = "middle",
+              weight: str = "normal", fill: str = "currentColor", extra: str = "") -> str:
+    """A sans-serif map label; ``fill`` may be a palette ``style`` color."""
+    paint = (f'fill="{fill}"' if fill == "currentColor"
+             else f'style="fill:{fill}"')
+    at = f" {extra}" if extra else ""
+    return (
+        f'<text x="{_svg.fmt(x)}" y="{_svg.fmt(y)}" font-family="{_SANS}" '
+        f'font-size="{_svg.fmt(size)}" font-weight="{weight}" '
+        f'text-anchor="{anchor}" {paint}{at}>{_svg.escape(s)}</text>'
+    )
+
+
+def _net_path(points: list[tuple[float, float]], color: str, width: float = 7.0) -> str:
+    """One thick transit line through ``points`` (round caps and joins)."""
+    d = "M" + " L".join(f"{_svg.fmt(x)} {_svg.fmt(y)}" for x, y in points)
+    return (
+        f'<path d="{d}" fill="none" stroke-width="{_svg.fmt(width)}" '
+        f'stroke-linecap="round" stroke-linejoin="round" style="stroke:{color}"/>'
+    )
+
+
+def _net_roundel(x: float, y: float, code: str, color: str, *, r: float = 10.0,
+                 interchange: bool = False) -> str:
+    """A station roundel with its code inside; interchanges get an ink ring."""
+    out = []
+    if interchange:
+        out.append(
+            f'<circle cx="{_svg.fmt(x)}" cy="{_svg.fmt(y)}" r="{_svg.fmt(r + 4.5)}" '
+            f'stroke="currentColor" stroke-width="2.5" style="fill:var(--surface,#fff)"/>'
+        )
+    out.append(
+        f'<circle cx="{_svg.fmt(x)}" cy="{_svg.fmt(y)}" r="{_svg.fmt(r)}" '
+        f'stroke-width="3" style="fill:var(--surface,#fff);stroke:{color}"/>'
+    )
+    size = 9.5 if len(code) <= 2 else 8.0
+    out.append(_net_text(x, y + size * 0.36, code, size=size, weight="bold"))
+    return "".join(out)
+
+
+def fig_network() -> str:
+    """The whole route as a transit map: one main line, four branch lines.
+
+    The fifteen numbered stops run left to right; the Heritage Line leaves
+    the Depot for history, the Branch Line leaves the Unfolding Road for the
+    other expansions, the Cross-Domain Line leaves the Engine Room for the
+    sciences, and the Express Line runs on past the Terminus to the frontier.
+
+    >>> svg = fig_network()
+    >>> svg.startswith('<svg')
+    True
+    >>> import xml.dom.minidom as m
+    >>> m.parseString(svg).documentElement.tagName
+    'svg'
+    >>> svg.count('<path ')  # one path per line
+    5
+    """
+    w, h = 930.0, 574.0
+    y_her, y_main, y_cross, y_exp, y_branch = 64.0, 210.0, 336.0, 432.0, 528.0
+    col = _NETWORK_COLORS
+    main_x = [150.0 + 47.0 * k for k in range(len(NETWORK["main"]))]
+    her_x = [238.0 + 70.0 * i for i in range(len(NETWORK["heritage"]))]
+    cross_x = [330.0 + 72.0 * i for i in range(len(NETWORK["cross"]))]
+    exp_x = [822.0 - 62.0 * i for i in range(len(NETWORK["express"]))]
+    branch_x = [292.0 + 84.0 * i for i in range(len(NETWORK["branch"]))]
+    d1, d2, d3, d15 = main_x[0], main_x[1], main_x[2], main_x[-1]
+    bend = 42.0  # the run of every 45-degree bend
+
+    lines: list[str] = []
+    # Heritage: up from the Depot, then east along the top row.
+    lines.append(_net_path([(d1, y_main), (d1, y_her + bend), (d1 + bend, y_her),
+                            (her_x[-1] + 30.0, y_her)], col["heritage"]))
+    # Branch: down from the Unfolding Road to the bottom row.
+    lines.append(_net_path([(d2, y_main), (d2, y_branch - bend), (d2 + bend, y_branch),
+                            (branch_x[-1] + 30.0, y_branch)], col["branch"]))
+    # Cross-Domain: down from the Engine Room to the middle row.
+    lines.append(_net_path([(d3, y_main), (d3, y_cross - bend), (d3 + bend, y_cross),
+                            (cross_x[-1] + 30.0, y_cross)], col["cross"]))
+    # Express: on past the Terminus, down the east side, then back west.
+    ex = d15 + 84.0
+    lines.append(_net_path([(d15, y_main), (ex - bend, y_main), (ex, y_main + bend),
+                            (ex, y_exp - bend), (ex - bend, y_exp),
+                            (exp_x[-1] - 30.0, y_exp)], col["express"]))
+    # The main line itself, drawn last so it sits on top at the junctions.
+    lines.append(_net_path([(d1 - 34.0, y_main), (d15, y_main)], col["main"], width=8.0))
+
+    marks: list[str] = []
+    # terminal bars at the two open ends of the network
+    for (x, y, c) in ((d1 - 34.0, y_main, col["main"]), (exp_x[-1] - 30.0, y_exp, col["express"])):
+        marks.append(
+            f'<line x1="{_svg.fmt(x)}" y1="{_svg.fmt(y - 11)}" x2="{_svg.fmt(x)}" '
+            f'y2="{_svg.fmt(y + 11)}" stroke-width="6" stroke-linecap="round" '
+            f'style="stroke:{c}"/>'
+        )
+
+    labels: list[str] = []
+    junctions = {0, 1, 2, len(main_x) - 1}
+    for k, (x, name) in enumerate(zip(main_x, NETWORK["main"])):
+        marks.append(_net_roundel(x, y_main, str(k + 1), col["main"], r=11.0,
+                                  interchange=k in junctions))
+        # names climb away from the line at 40 degrees, transit-map style
+        lx, ly = x + 6.0, y_main - 18.0
+        labels.append(_net_text(lx, ly, name, size=11.5, anchor="start",
+                                extra=f'transform="rotate(-40 {_svg.fmt(lx)} {_svg.fmt(ly)})"'))
+    for i, (x, name) in enumerate(zip(her_x, NETWORK["heritage"])):
+        marks.append(_net_roundel(x, y_her, f"H{i + 1}", col["heritage"]))
+        labels.append(_net_text(x, y_her - 20.0, name, size=11.0))
+        labels.append(_net_text(x, y_her + 26.0, _NETWORK_YEARS[i], size=9.0,
+                                extra='opacity="0.8"'))
+    for i, (x, name) in enumerate(zip(cross_x, NETWORK["cross"])):
+        marks.append(_net_roundel(x, y_cross, f"C{i + 1}", col["cross"]))
+        labels.append(_net_text(x, y_cross + 27.0, name, size=10.5))
+    for i, (x, name) in enumerate(zip(exp_x, NETWORK["express"])):
+        marks.append(_net_roundel(x, y_exp, f"E{i + 1}", col["express"]))
+        labels.append(_net_text(x, y_exp + 27.0, name, size=10.5))
+    for i, (x, name) in enumerate(zip(branch_x, NETWORK["branch"])):
+        marks.append(_net_roundel(x, y_branch, f"B{i + 1}", col["branch"]))
+        labels.append(_net_text(x, y_branch + 27.0, name, size=10.5))
+
+    # line names, signage style, down the west margin and at the east turn
+    heads = (
+        (y_her, "HERITAGE", "history, computed", col["heritage"]),
+        (y_main, "MAIN LINE", "15 stops", col["main"]),
+        (y_cross, "CROSS-DOMAIN", "the sciences", col["cross"]),
+        (y_exp, "EXPRESS", "the frontier", col["express"]),
+        (y_branch, "BRANCH", "other expansions", col["branch"]),
+    )
+    for y, name, sub, c in heads:
+        labels.append(_net_text(20.0, y - 1.0, name, size=11.0, anchor="start",
+                                weight="bold", fill=c, extra='letter-spacing="1.2"'))
+        labels.append(_net_text(20.0, y + 13.0, sub, size=9.5, anchor="start",
+                                extra='opacity="0.75"'))
+
+    body = "".join(lines) + "".join(marks) + "".join(labels)
+    doc = _svg.document(
+        body,
+        viewbox_str=_svg.viewbox(0, 0, w, h),
+        title=("The Recursive Continuance Tour Bus network: the fifteen-stop main "
+               "line and the Heritage, Branch, Cross-Domain and Express lines"),
+    )
+    doc = doc.replace("<svg ", f'<svg font-family="{_SANS}" ', 1)
+    return _themed(doc)
+
+
 FIGURES: dict[str, Callable[[], str]] = {
     "fig-calltree.svg": fig_calltree,
     "fig-convergent-error.svg": fig_convergent_error,
@@ -1246,4 +1444,5 @@ FIGURES: dict[str, Callable[[], str]] = {
     "fig-zeckendorf.svg": fig_zeckendorf,
     "fig-cutting-sequence.svg": fig_cutting_sequence,
     "fig-rogers-ramanujan.svg": fig_rogers_ramanujan,
+    "fig-network.svg": fig_network,
 }

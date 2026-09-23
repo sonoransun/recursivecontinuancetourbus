@@ -3,121 +3,175 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Souvenir Shop - Tour Bus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<title>The Souvenir Shop — Stop 14 · Tour Bus</title>
+<meta name="description" content="Three things to take home: why the piano is tuned the way it is, how a careless RSA key falls in seconds, and a five-line function nobody can prove halts.">
+<meta property="og:title" content="The Souvenir Shop — Stop 14 · Tour Bus">
+<meta property="og:description" content="Three things to take home: why the piano is tuned the way it is, how a careless RSA key falls in seconds, and a five-line function nobody can prove halts.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eceef1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M24 78V52a26 26 0 0 1 26-26h26' fill='none' stroke='%23b5751a' stroke-width='11' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='78' r='13' fill='%23b5751a'/%3E%3Ccircle cx='76' cy='26' r='13' fill='%23b5751a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/rct-docs.css">
 <script>
 (function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
-<body>
+<body data-line="main" data-page="14-souvenir-shop">
+<div class="progress" aria-hidden="true"><i></i></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
-  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
-  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
+  <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
   <div class="search">
     <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
     <div class="search-results" id="search-results" hidden></div>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  <a class="top-link" href="https://github.com/sonoransun/recursivecontinuancetourbus">GitHub</a>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cycle color theme"><span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Auto</span></button>
 </header>
-<div class="layout">
-  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
-<div class="nav-group">The Tour</div>
-<a href="01-depot.html">1 · The Depot</a>
-<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
-<a href="03-engine-room.html">3 · The Engine Room</a>
-<a href="04-golden.html">4 · The Golden Milestone</a>
-<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
-<a href="06-loop-road.html">6 · The Loop Road</a>
-<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
-<a href="08-family-tree.html">8 · The Family Tree</a>
-<a href="09-celebrity.html">9 · Celebrity Sightings</a>
-<a href="10-casino.html">10 · The Casino</a>
-<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
-<a href="12-tower.html">12 · The Tower</a>
-<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
-<a class="on" href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
-<a href="15-terminus.html">15 · Terminus</a>
-<div class="nav-group">The Express Line</div>
+<div class="layout has-rail">
+  <nav class="sidebar" id="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Route map</a>
+<div class="nav-sec" data-line="main"><div class="nav-group">The Tour</div><ol class="nav-line">
+<li><a class="stn" href="01-depot.html"><span class="stn-n">1</span><span class="stn-t">The Depot</span></a></li>
+<li><a class="stn" href="02-unfolding-road.html"><span class="stn-n">2</span><span class="stn-t">The Unfolding Road</span></a></li>
+<li><a class="stn" href="03-engine-room.html"><span class="stn-n">3</span><span class="stn-t">The Engine Room</span></a></li>
+<li><a class="stn" href="04-golden.html"><span class="stn-n">4</span><span class="stn-t">The Golden Milestone</span></a></li>
+<li><a class="stn" href="05-scenic-overlook.html"><span class="stn-n">5</span><span class="stn-t">Scenic Overlook</span></a></li>
+<li><a class="stn" href="06-loop-road.html"><span class="stn-n">6</span><span class="stn-t">The Loop Road</span></a></li>
+<li><a class="stn" href="07-cattle-crossing.html"><span class="stn-n">7</span><span class="stn-t">The Cattle Crossing</span></a></li>
+<li><a class="stn" href="08-family-tree.html"><span class="stn-n">8</span><span class="stn-t">The Family Tree</span></a></li>
+<li><a class="stn" href="09-celebrity.html"><span class="stn-n">9</span><span class="stn-t">Celebrity Sightings</span></a></li>
+<li><a class="stn" href="10-casino.html"><span class="stn-n">10</span><span class="stn-t">The Casino</span></a></li>
+<li><a class="stn" href="11-assembly-line.html"><span class="stn-n">11</span><span class="stn-t">The Infinite Assembly Line</span></a></li>
+<li><a class="stn" href="12-tower.html"><span class="stn-n">12</span><span class="stn-t">The Tower</span></a></li>
+<li><a class="stn" href="13-hall-of-mirrors.html"><span class="stn-n">13</span><span class="stn-t">The Hall of Mirrors</span></a></li>
+<li><a class="stn on" href="14-souvenir-shop.html" aria-current="page"><span class="stn-n">14</span><span class="stn-t">The Souvenir Shop</span></a></li>
+<li><a class="stn" href="15-terminus.html"><span class="stn-n">15</span><span class="stn-t">Terminus</span></a></li>
+</ol></div>
+<div class="nav-sec" data-line="express"><div class="nav-group">The Express Line</div>
 <a href="appendix-d-frontier.html">Fringe Avenues</a>
-<div class="nav-group">Synthesis</div>
+</div>
+<div class="nav-sec" data-line="web"><div class="nav-group">Synthesis</div>
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
-<div class="nav-group">Cross-Domain</div>
+</div>
+<div class="nav-sec" data-line="cross"><div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
-<div class="nav-group">Heritage</div>
+</div>
+<div class="nav-sec" data-line="heritage"><div class="nav-group">Heritage</div>
 <a href="appendix-h-history.html">A History in Convergents</a>
-<div class="nav-group">Branch</div>
+</div>
+<div class="nav-sec" data-line="branch"><div class="nav-group">Branch</div>
 <a href="appendix-i-branches.html">Other Ways to Unfold</a>
-<div class="nav-group">Reference</div>
-<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
-<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
-<a href="appendix-c-references.html">Appendix C - References</a>
-<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
-<a href="syllabus.html">Syllabus - for instructors</a>
-<div class="nav-group">Interactive</div>
-<a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content" id="main"><p class="chapter-nav"><a href="13-hall-of-mirrors.html">← Stop 13 — The Hall of Mirrors</a> · <a href="index.html">Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus →</a></p>
-<h1 id="stop-14-the-souvenir-shop">Stop 14 — The Souvenir Shop</h1>
-<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
-<blockquote>Three things to take home: why the piano is tuned the way it is, how a careless RSA key falls in seconds, and a five-line function nobody can prove halts.</blockquote>
-<h2 id="overview">Overview</h2>
+</div>
+<div class="nav-sec" data-line="ref"><div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A — Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B — Glossary</a>
+<a href="appendix-c-references.html">Appendix C — References</a>
+<a href="appendix-g-hints.html">Appendix G — Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus — for instructors</a>
+</div>
+<div class="nav-sec" data-line="explore"><div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a>
+</div></nav>
+  <main class="content" id="main"><header class="page-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Route map</a><span aria-hidden="true">/</span><span>The Tour</span></nav><div class="kicker"><span class="roundel">14</span><span>Main line · Stop 14 of 15</span></div><h1 id="stop-14-the-souvenir-shop">The Souvenir Shop</h1><p class="lede">Three things to take home: why the piano is tuned the way it is, how a careless RSA key falls in seconds, and a five-line function nobody can prove halts.</p><ul class="page-meta"><li><span class="mk">Reading</span> 9 min</li><li><span class="mk">Run it</span> <code>python -m tourbus stop 14</code></li><li><a class="mlink" href="explore.html#stop-14-souvenir">Live widget&nbsp;&#8599;</a></li></ul></header><details class="toc-inline"><summary>On this page</summary><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#souvenir-1-why-twelve-notes">Souvenir 1: why twelve notes?</a></li><li><a href="#souvenir-2-breaking-rsa-with-a-continued-fraction">Souvenir 2: breaking RSA with a continued fraction</a></li><li><a href="#souvenir-3-the-collatz-conjecture">Souvenir 3: the Collatz conjecture</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-three-souvenirs-three-histories">Then — three souvenirs, three histories</a></li><li><a href="#now-the-continued-fraction-inside-a-quantum-computer">Now — the continued fraction inside a quantum computer</a></li><li><a href="#next-how-big-a-quantum-computer-and-will-3x-1-ever-fall">Next — how big a quantum computer, and will 3x + 1 ever fall?</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></details><section class="sec" data-sec="overview">
+<h2 id="overview">Overview<a class="h-anchor" href="#overview" aria-label="Link to this section">#</a></h2>
 <p>The last working stop is a shop of applications — three souvenirs showing the continued fraction and the recursion at work far from pure number theory. One tunes a musical scale, one breaks a cipher, and one is a problem so simple a child can state it and no mathematician can solve it. Each is a convergent, an approximation, or an orbit — the tour&#x27;s ideas, out in the world.</p>
-<h3 id="souvenir-1-why-twelve-notes">Souvenir 1: why twelve notes?</h3>
+<h3 id="souvenir-1-why-twelve-notes">Souvenir 1: why twelve notes?<a class="h-anchor" href="#souvenir-1-why-twelve-notes" aria-label="Link to this section">#</a></h3>
 <p>A musical fifth — the most consonant interval after the octave — is the frequency ratio <code>3/2</code>. An octave is a doubling, ratio <code>2</code>. To build a keyboard we want to stack fifths and land back on an octave, i.e. we want integers <code>m, n</code> with <code>(3/2)ᵐ ≈ 2ⁿ</code>. Taking logs, this is asking for a good rational approximation to</p>
-<pre><code>log₂(3/2) = 0.5849625007…</code></pre>
+<div class="math-display">log₂(3/2) = 0.5849625007…</div>
 <p>The convergents of this number are exactly the historically important scales. <code>7/12</code> says: twelve equal steps per octave, with the fifth at seven of them — <strong>12-tone equal temperament</strong>, the tuning of the modern piano. The <code>12</code> in &quot;the chromatic scale has twelve notes&quot; is a continued-fraction convergent. The fifth it produces is off from the pure <code>3/2</code> by only <code>−1.955</code> cents (hundredths of a semitone), imperceptibly flat — the compromise that lets you play in every key on one set of strings. The next convergents, <code>24/41</code> and <code>31/53</code>, give microtonal scales (41-TET, 53-TET) that are <em>more</em> accurate still and are used in some experimental and historical instruments.</p>
-<p>The convergents were tuning instruments long before anyone wrote them down as convergents. Zhu Zaiyu computed the twelve exactly equal semitones — root-extractions to nine digits, on an abacus — in Ming-dynasty China (1584), with Simon Stevin reaching the same tuning in Europe within a few years; and the finer 53-note convergent was anticipated by Jing Fang in the first century BC, who counted 53 fifths against 31 octaves, then rediscovered by Nicholas Mercator in the seventeenth century. The piano obeys <code>7/12</code>; the theory arrived two millennia after the practice.</p>
-<h3 id="souvenir-2-breaking-rsa-with-a-continued-fraction">Souvenir 2: breaking RSA with a continued fraction</h3>
+<p>The convergents were tuning instruments long before anyone wrote them down as convergents. Zhu Zaiyu computed the twelve exactly equal semitones — twelfth roots of 2, extracted on an abacus to many digits — in Ming-dynasty China (1584), and Simon Stevin reached the same tuning in Europe around 1605, in a manuscript not printed until 1884; and the finer 53-note convergent was anticipated by Jing Fang in the first century BC, who counted 53 fifths against 31 octaves, then rediscovered by Nicholas Mercator in the seventeenth century. The piano obeys <code>7/12</code>; the theory arrived two millennia after the practice.</p>
+<h3 id="souvenir-2-breaking-rsa-with-a-continued-fraction">Souvenir 2: breaking RSA with a continued fraction<a class="h-anchor" href="#souvenir-2-breaking-rsa-with-a-continued-fraction" aria-label="Link to this section">#</a></h3>
 <p>RSA encryption uses a public modulus <code>N = pq</code> and a public exponent <code>e</code>, with a secret exponent <code>d</code> satisfying <code>e·d ≡ 1 (mod φ(N))</code>, so that <code>e·d = 1 + kφ(N)</code> for some integer <code>k</code>. Choosing a <em>small</em> <code>d</code> speeds up decryption — a tempting shortcut. <strong>Michael Wiener showed in 1990</strong> that it is a fatal one:</p>
 <blockquote>If the private exponent satisfies <code>d &lt; N^{1/4}/3</code>, then RSA is broken. The fraction <code>k/d</code> appears among the <strong>convergents of <code>e/N</code></strong>, so an attacker who knows only the public key <code>(e, N)</code> can read off <code>d</code> in seconds.</blockquote>
 <p>The mechanism is pure Stop 5. Because <code>e·d = 1 + kφ(N)</code> and <code>φ(N) ≈ N</code>, the public fraction <code>e/N</code> is <em>extremely close</em> to the secret fraction <code>k/d</code> — close enough (when <code>d</code> is small) to satisfy <strong>Legendre&#x27;s criterion</strong> <code>|e/N − k/d| &lt; 1/(2d²)</code>. Legendre&#x27;s criterion then <em>guarantees</em> <code>k/d</code> is a convergent of <code>e/N</code>. The attacker expands <code>e/N</code> as a continued fraction, tries each convergent&#x27;s denominator as a candidate <code>d</code>, and checks it — one of them is the key. The secret exponent, chosen too small, betrays itself through the same best-approximation theory that gave us <code>355/113</code>. Appendix A works through why the bound is exactly <code>N^{1/4}</code>.</p>
-<h3 id="souvenir-3-the-collatz-conjecture">Souvenir 3: the Collatz conjecture</h3>
+<h3 id="souvenir-3-the-collatz-conjecture">Souvenir 3: the Collatz conjecture<a class="h-anchor" href="#souvenir-3-the-collatz-conjecture" aria-label="Link to this section">#</a></h3>
 <p>Finally, the shop&#x27;s cheapest and most maddening souvenir. Define, for a positive integer <code>n</code>, the <strong>Collatz map</strong>:</p>
-<pre><code>n → n/2       if n is even,
+<pre class="formula"><code>n → n/2       if n is even,
 n → 3n + 1    if n is odd.</code></pre>
-<p>Iterate. The conjecture — stated by Lothar Collatz around 1937 and still open — is that <strong>every</strong> starting <code>n</code> eventually reaches <code>1</code> (after which it cycles <code>1 → 4 → 2 → 1</code>). The orbit of <code>27</code> is famous: it climbs to a peak of <code>9232</code> before finally crashing to <code>1</code> after <code>111</code> steps, a wildly erratic flight from a tiny start. The conjecture has been verified by computer for every <code>n</code> up to about <code>2⁶⁸</code> — and yet no proof exists. Paul Erdős said of it, &quot;Mathematics is not yet ready for such problems.&quot; It is a recursion whose <em>termination</em> — the one property Euclid&#x27;s algorithm wore on its sleeve at Stop 1 — is, for Collatz, an utter mystery. The tour began with a recursion we could prove always halts; it ends its working stops with one we cannot.</p>
-<h2 id="worked-examples">Worked examples</h2>
+<p>Iterate. The conjecture — stated by Lothar Collatz around 1937 and still open — is that <strong>every</strong> starting <code>n</code> eventually reaches <code>1</code> (after which it cycles <code>1 → 4 → 2 → 1</code>). The orbit of <code>27</code> is famous: it climbs to a peak of <code>9232</code> before finally crashing to <code>1</code> after <code>111</code> steps, a wildly erratic flight from a tiny start. The conjecture has been verified by computer for every <code>n</code> below <code>2⁷¹ ≈ 2.4 × 10²¹</code> (David Bařina, 2025) — and yet no proof exists. Paul Erdős said of it, &quot;Mathematics is not yet ready for such problems.&quot; It is a recursion whose <em>termination</em> — the one property Euclid&#x27;s algorithm wore on its sleeve at Stop 1 — is, for Collatz, an utter mystery. The tour began with a recursion we could prove always halts; it ends its working stops with one we cannot.</p>
+</section>
+<section class="sec" data-sec="worked-examples">
+<h2 id="worked-examples">Worked examples<a class="h-anchor" href="#worked-examples" aria-label="Link to this section">#</a></h2>
 <p>The <code>temperament</code> demo lists the convergents of <code>log₂(3/2)</code> with the size of the resulting fifth&#x27;s error in cents. Read down to <code>7/12</code> and you have found the piano:</p>
-<pre><code>$ python -m tourbus demo temperament
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo temperament</span>
 Equal temperament from convergents of log2(3/2):
  convergent  notes/octave  fifth error (cents)
  ----------  ------------  -------------------
- 1/2                    2              -101.955
+ 1/2                    2             -101.955
  3/5                    5              +18.045
  7/12                  12               -1.955
  24/41                 41               +0.484
- 31/53                 53               -0.068</code></pre>
+ 31/53                 53               -0.068</code></pre></div>
 <p><code>2</code> notes per octave is useless, <code>5</code> (the pentatonic scale) is crude at <code>+18</code> cents, but <code>12</code> brings the error down to a nearly inaudible <code>−1.955</code> cents — the sweet spot of accuracy versus playability that the world settled on. The finer scales <code>41</code> and <code>53</code> are more accurate but need far more keys.</p>
 <p>Now break a weak RSA key. The <code>wiener</code> demo builds a 128-bit modulus with a deliberately small <code>d</code>, then recovers <code>d</code> from the public <code>(e, N)</code> alone by walking the convergents of <code>e/N</code>:</p>
-<pre><code>$ python -m tourbus demo wiener --bits 128
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo wiener --bits 128</span>
 vulnerable RSA key (128-bit):
-  n = 112744406089147775988680812810091346007
-  e = 68144262240283900109239142501105545933
-  recovered d = 265862677 (true d = 265862677)
-  attack succeeded</code></pre>
+  n = 122250945719100867655670202480874160429
+  e = 29964784625008676707046981096637415439
+  recovered d = 257044079 (true d = 257044079)
+  attack succeeded</code></pre></div>
 <p>The recovered <code>d</code> matches the true secret exactly — extracted from public data in the time it takes to expand one continued fraction, because the key&#x27;s owner chose <code>d</code> below Wiener&#x27;s <code>N^{1/4}/3</code> threshold.</p>
 <p>Finally, the Collatz flight of <code>27</code> — a small number that soars before it falls:</p>
-<pre><code>$ python -m tourbus demo collatz 27
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo collatz 27</span>
 Collatz flight of 27:
-  111 steps, peak 9232</code></pre>
+  111 steps, peak 9232</code></pre></div>
 <p>One hundred and eleven steps and a peak of <code>9232</code>, from a start of <code>27</code>, with no theorem to say why it ever comes down at all.</p>
-<h2 id="exercises">Exercises</h2>
-<ol><li><strong>(★)</strong> From the <code>temperament</code> table, which scale first brings the fifth&#x27;s error under 1 cent? How many notes per octave does it need? <details><summary>Hint</summary><code>24/41</code> gives <code>+0.484</code> cents — the 41-note scale.</details></li></ol>
-<ol><li><strong>(★)</strong> Run <code>demo collatz 97</code> and compare its peak to <code>27</code>&#x27;s. Do different starts share a peak? <details><summary>Hint</summary><code>97</code> also peaks at <code>9232</code>, because its orbit merges into <code>27</code>&#x27;s — many trajectories funnel through the same high point.</details></li></ol>
-<ol><li><strong>(★★)</strong> Explain, using Legendre&#x27;s criterion (Stop 5), why Wiener&#x27;s attack requires <code>d</code> to be <em>small</em>. <details><summary>Hint</summary>Only when <code>d</code> is small enough is <code>|e/N − k/d| &lt; 1/(2d²)</code>, the bound that forces <code>k/d</code> to be a convergent.</details></li></ol>
-<ol><li><strong>(★★)</strong> The pure fifth is <code>3/2 = 701.955</code> cents; a stack of twelve fifths is <code>12 × 701.955</code> cents. By how much does it overshoot seven octaves (the &quot;Pythagorean comma&quot;)? <details><summary>Hint</summary><code>12 × 701.955 − 7 × 1200 = 23.46</code> cents — which spread over twelve fifths is the <code>1.955</code>-cent flattening of each.</details></li></ol>
-<ol><li><strong>(★★★)</strong> Show that the Collatz map cannot have a cycle other than <code>1 → 4 → 2 → 1</code> among numbers below the verified bound, and explain why this does <em>not</em> prove the conjecture. <details><summary>Hint</summary>Verification checks each starting value reaches 1, ruling out small cycles; but &quot;no counterexample below <code>2⁶⁸</code>&quot; says nothing about arbitrarily large <code>n</code>.</details></li></ol>
-<h2 id="see-it-move">See it move</h2>
-<p>Open the <strong>Souvenir Shop</strong> widget: <a href="explore.html#stop-14-souvenir"><code>site/index.html#stop-14-souvenir</code></a>. Tune a scale by dragging the note count, watch a weak RSA key crack as its convergents scroll past, and trace any Collatz flight as a rising-and-falling graph.</p>
+</section>
+<section class="sec" data-sec="then-now-next">
+<h2 id="then-now-next">Then, now, next<a class="h-anchor" href="#then-now-next" aria-label="Link to this section">#</a></h2>
+<h3 id="then-three-souvenirs-three-histories"><span class="tnn tnn-then">Then</span><span class="tnn-sep"> — </span>Three souvenirs, three histories<a class="h-anchor" href="#then-three-souvenirs-three-histories" aria-label="Link to this section">#</a></h3>
+<figure class="diagram" role="figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 548" width="640" height="548" role="img" font-family="var(--font-data,monospace)" font-size="13"><title>Tuning, secrets, and an unruly sequence</title><line x1="170" y1="74.5" x2="170" y2="164.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="208.5" x2="170" y2="360.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="404.5" x2="170" y2="530.5" stroke="currentColor" stroke-width="2"/><circle cx="170" cy="80.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="106.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="132.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="158.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="214.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="240.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="266.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="310.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="354.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="410.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="436.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="480.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="524.5" r="4" fill="var(--brass,#b5751a)"/><text x="320" y="25" text-anchor="middle" fill="currentColor" font-weight="bold">Tuning, secrets, and an unruly sequence</text><text x="24" y="61" fill="var(--brass,#b5751a)" font-weight="bold">TUNING</text><text x="158" y="85" text-anchor="end" fill="currentColor">c. 40 BC</text><text x="182" y="85" fill="currentColor">Jing Fang counts 53 fifths against 31 octaves</text><text x="158" y="111" text-anchor="end" fill="currentColor">1584</text><text x="182" y="111" fill="currentColor">Zhu Zaiyu computes twelve equal semitones</text><text x="158" y="137" text-anchor="end" fill="currentColor">c. 1605</text><text x="182" y="137" fill="currentColor">Stevin reaches equal temperament in Europe</text><text x="158" y="163" text-anchor="end" fill="currentColor">1950</text><text x="182" y="163" fill="currentColor">Fokker's 31-tone organ is built in Haarlem</text><text x="24" y="195" fill="var(--brass,#b5751a)" font-weight="bold">SECRETS</text><text x="158" y="219" text-anchor="end" fill="currentColor">1977</text><text x="182" y="219" fill="currentColor">Rivest, Shamir and Adleman publish RSA</text><text x="158" y="245" text-anchor="end" fill="currentColor">1990</text><text x="182" y="245" fill="currentColor">Wiener breaks small-exponent RSA with convergents</text><text x="158" y="271" text-anchor="end" fill="currentColor">1994</text><text x="182" y="271" fill="currentColor">Shor - a quantum computer would factor, finishing</text><text x="182" y="289" fill="currentColor">with a continued fraction</text><text x="158" y="315" text-anchor="end" fill="currentColor">1999</text><text x="182" y="315" fill="currentColor">Boneh and Durfee push the small-exponent attack to</text><text x="182" y="333" fill="currentColor">N^0.292</text><text x="158" y="359" text-anchor="end" fill="currentColor">2024</text><text x="182" y="359" fill="currentColor">NIST publishes its first post-quantum standards</text><text x="24" y="391" fill="var(--brass,#b5751a)" font-weight="bold">THE 3X + 1 PROBLEM</text><text x="158" y="415" text-anchor="end" fill="currentColor">1937</text><text x="182" y="415" fill="currentColor">Collatz poses the problem</text><text x="158" y="441" text-anchor="end" fill="currentColor">1972</text><text x="182" y="441" fill="currentColor">Conway - generalized Collatz problems are</text><text x="182" y="459" fill="currentColor">undecidable</text><text x="158" y="485" text-anchor="end" fill="currentColor">2019</text><text x="182" y="485" fill="currentColor">Tao - almost all orbits fall to almost bounded</text><text x="182" y="503" fill="currentColor">values</text><text x="158" y="529" text-anchor="end" fill="currentColor">2025</text><text x="182" y="529" fill="currentColor">Verified for every starting value below 2^71</text></svg></figure>
+<p>Each souvenir has a long pedigree. Equal temperament was computed in Ming China and in Holland within a generation, but Western keyboards took two more centuries to adopt it; Bach&#x27;s <em>Well-Tempered Clavier</em> (1722) was written for &quot;well-tempered&quot; tunings that most historians believe were unequal, not the equal temperament of modern pianos. RSA appeared in 1977; Wiener&#x27;s 1990 attack, Coppersmith&#x27;s lattice methods, and Boneh and Durfee&#x27;s 1999 extension to <code>d &lt; N^0.292</code> taught cryptographers exactly how small a secret exponent may <em>not</em> be. The <code>3x + 1</code> problem circulated by word of mouth from the 1930s, and in 1972 John Conway proved that a natural generalisation of it is <em>undecidable</em>: no algorithm can predict the fate of every orbit of every Collatz-like map. The special case on this page might be decidable — nobody knows.</p>
+<h3 id="now-the-continued-fraction-inside-a-quantum-computer"><span class="tnn tnn-now">Now</span><span class="tnn-sep"> — </span>The continued fraction inside a quantum computer<a class="h-anchor" href="#now-the-continued-fraction-inside-a-quantum-computer" aria-label="Link to this section">#</a></h3>
+<p>The most striking modern use of this stop&#x27;s mathematics is in <strong>Shor&#x27;s algorithm</strong> (1994), the quantum algorithm that would break RSA outright. A quantum computer cannot print the period <code>r</code> of <code>aˣ mod N</code> directly; it measures an integer <code>y</code> for which <code>y/2ᵐ</code> is extremely close to some fraction <code>s/r</code>. Recovering <code>r</code> is then a purely classical problem — and it is Legendre&#x27;s criterion from <a href="05-scenic-overlook.html">Stop 5</a>: the measured fraction lies within <code>1/(2r²)</code> of <code>s/r</code>, so <code>s/r</code> <em>must</em> be one of its convergents.</p>
+<p>For a toy case, factor <code>N = 21</code> with <code>a = 2</code>, measuring with nine qubits (<code>2⁹ = 512</code>). Suppose the machine reports <code>y = 427</code>. Expand <code>427/512</code>:</p>
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo cf 427/512</span>
+continued fraction of 427/512:
+  [0; 1, 5, 42, 2]
+
+ n  a_n  p/q             value      error
+ -  ---  -------  ------------  ---------
+ 0    0  0/1      0.0000000000  +8.34e-01
+ 1    1  1/1      1.0000000000  -1.66e-01
+ 2    5  5/6      0.8333333333  +6.51e-04
+ 3   42  211/253  0.8339920949  -7.72e-06
+ 4    2  427/512  0.8339843750  +0.00e+00</code></pre></div>
+<p>The convergent <code>5/6</code> is the one with a denominator below <code>21</code>, so the candidate period is <code>r = 6</code> — and indeed <code>2⁶ = 64 ≡ 1 (mod 21)</code>. Then <code>gcd(2³ − 1, 21) = 7</code> and <code>gcd(2³ + 1, 21) = 3</code>: the factors, found by a continued fraction at the end of a quantum computation.</p>
+<ul><li><strong>Defences in the standards.</strong> The U.S. signature standard (FIPS 186-4 and 186-5) now <em>requires</em> RSA private exponents larger than <code>2^(nlen/2)</code> — roughly <code>√N</code> — which rules out both Wiener&#x27;s attack and Boneh–Durfee&#x27;s. Wiener&#x27;s attack survives as a classic audit check and a staple of security competitions.</li><li><strong>Beyond RSA.</strong> Because Shor&#x27;s algorithm would break RSA and elliptic-curve cryptography alike, NIST published its first post-quantum standards in August 2024: ML-KEM for key exchange and ML-DSA and SLH-DSA for signatures. The lattice problems underneath ML-KEM and ML-DSA are attacked with the &quot;Euclid in many dimensions&quot; of <a href="01-depot.html#then-now-next">Stop 1</a>.</li><li><strong>Tunings.</strong> Twelve-tone equal temperament is the global default, but the other convergents are alive: Adriaan Fokker&#x27;s 31-tone organ (1950) still plays in Amsterdam, Turkish makam theory divides the whole tone into nine commas of a 53-tone octave, and the MIDI Tuning Standard lets electronic instruments play any temperament you can compute.</li></ul>
+<h3 id="next-how-big-a-quantum-computer-and-will-3x-1-ever-fall"><span class="tnn tnn-next">Next</span><span class="tnn-sep"> — </span>How big a quantum computer, and will 3x + 1 ever fall?<a class="h-anchor" href="#next-how-big-a-quantum-computer-and-will-3x-1-ever-fall" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>The quantum clock.</strong> Estimates of the quantum resources needed to factor a 2048-bit RSA modulus have fallen steeply — from around twenty million noisy qubits in 2019 to under a million in a 2025 estimate by Craig Gidney. No machine is close yet, but the migration to post-quantum cryptography has begun, because data encrypted today can be recorded and decrypted later.</li><li><strong>Collatz.</strong> Terence Tao proved in 2019 that almost every Collatz orbit eventually drops below any function tending to infinity — the strongest result so far — yet the full conjecture remains, in Erdős&#x27;s words, beyond the mathematics we have. Collatz-like maps have even turned up inside the busy beaver problem of <a href="12-tower.html#then-now-next">Stop 12</a>: some six-state machines halt only if a <code>3x + 1</code>-style sequence misbehaves.</li></ul>
+</section>
+<section class="sec" data-sec="exercises">
+<h2 id="exercises">Exercises<a class="h-anchor" href="#exercises" aria-label="Link to this section">#</a></h2>
+<ol><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> From the <code>temperament</code> table, which scale first brings the fifth&#x27;s error under 1 cent? How many notes per octave does it need? <details><summary>Hint</summary><code>24/41</code> gives <code>+0.484</code> cents — the 41-note scale.</details></li><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Run <code>demo collatz 97</code> and compare its peak to <code>27</code>&#x27;s. Do different starts share a peak? <details><summary>Hint</summary><code>97</code> also peaks at <code>9232</code>, because its orbit merges into <code>27</code>&#x27;s — many trajectories funnel through the same high point.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Explain, using Legendre&#x27;s criterion (Stop 5), why Wiener&#x27;s attack requires <code>d</code> to be <em>small</em>. <details><summary>Hint</summary>Only when <code>d</code> is small enough is <code>|e/N − k/d| &lt; 1/(2d²)</code>, the bound that forces <code>k/d</code> to be a convergent.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> The pure fifth is <code>3/2 = 701.955</code> cents; a stack of twelve fifths is <code>12 × 701.955</code> cents. By how much does it overshoot seven octaves (the &quot;Pythagorean comma&quot;)? <details><summary>Hint</summary><code>12 × 701.955 − 7 × 1200 = 23.46</code> cents — which spread over twelve fifths is the <code>1.955</code>-cent flattening of each.</details></li><li><span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Show that the Collatz map cannot have a cycle other than <code>1 → 4 → 2 → 1</code> among numbers below the verified bound, and explain why this does <em>not</em> prove the conjecture. <details><summary>Hint</summary>Verification checks each starting value reaches 1, ruling out small cycles; but &quot;no counterexample below <code>2⁷¹</code>&quot; says nothing about arbitrarily large <code>n</code>.</details></li></ol>
+</section>
+<section class="sec" data-sec="see-it-move">
+<h2 id="see-it-move">See it move<a class="h-anchor" href="#see-it-move" aria-label="Link to this section">#</a></h2>
+<p>Three widgets stock the Souvenir Shop in the <a href="explore.html#stop-14-souvenir">live exposition</a>. The <strong>Temperament Studio</strong> (W10) compares tunings and lets you <em>hear</em> the difference between a pure fifth and a tempered one. The <strong>Wiener Attack Stepper</strong> (W11) generates a deliberately weak RSA key and walks the convergents of <code>e/N</code> until the secret exponent falls out. The <strong>Collatz Orbit Plotter</strong> (W12) races flights of your choosing — <code>27</code>&#x27;s 111-step climb to <code>9232</code> among them.</p>
 <p><strong>Try it live:</strong> <a href="explore.html#w10?t=just">just intonation versus equal temperament</a>, or watch <a href="explore.html#w11?b=128&amp;auto=1">a 128-bit weak key break itself</a>.</p>
-<h2 id="further-reading">Further reading</h2>
-<ul><li>M. Wiener, &quot;Cryptanalysis of Short RSA Secret Exponents,&quot; <em>IEEE Trans. Information Theory</em> (1990) — the original attack. See Appendix C.</li><li>J. C. Lagarias, ed., <em>The Ultimate Challenge: The 3x+1 Problem</em> (2010) — the definitive Collatz survey; Appendix C.</li><li>D. Benson, <em>Music: A Mathematical Offering</em>, for temperament and the continued-fraction derivation of 12-TET.</li><li>Appendix A of this tour for the derivation of Wiener&#x27;s <code>N^{1/4}</code> bound.</li></ul>
-<p class="chapter-nav"><a href="13-hall-of-mirrors.html">← Stop 13 — The Hall of Mirrors</a> · <a href="index.html">Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus →</a></p></main>
+</section>
+<section class="sec" data-sec="further-reading">
+<h2 id="further-reading">Further reading<a class="h-anchor" href="#further-reading" aria-label="Link to this section">#</a></h2>
+<ul><li>M. Wiener, &quot;Cryptanalysis of Short RSA Secret Exponents,&quot; <em>IEEE Trans. Information Theory</em> (1990) — the original attack. See Appendix C.</li><li>J. C. Lagarias, ed., <em>The Ultimate Challenge: The 3x+1 Problem</em> (2010) — the definitive Collatz survey; Appendix C.</li><li>D. Benson, <em>Music: A Mathematical Offering</em>, for temperament and the continued-fraction derivation of 12-TET.</li><li>Appendix A of this tour for the derivation of Wiener&#x27;s <code>N^{1/4}</code> bound.</li><li>P. W. Shor, &quot;Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer,&quot; <em>SIAM Journal on Computing</em> 26 (1997) — the continued fraction at the end of the quantum algorithm.</li><li>D. Boneh &amp; G. Durfee, &quot;Cryptanalysis of RSA with private key d less than N^0.292,&quot; <em>IEEE Transactions on Information Theory</em> 46 (2000).</li><li>T. Tao, &quot;Almost all orbits of the Collatz map attain almost bounded values,&quot; <em>Forum of Mathematics, Pi</em> 10 (2022).</li></ul>
+</section><nav class="pager" aria-label="Previous and next page"><a class="pager-prev" href="13-hall-of-mirrors.html"><span class="pager-dir">&#8592; Previous</span><span class="pager-title">Stop 13 · The Hall of Mirrors</span></a><a class="pager-next" href="15-terminus.html"><span class="pager-dir">Next &#8594;</span><span class="pager-title">Stop 15 · Terminus</span></a></nav></main>
+  <aside class="toc-rail"><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#souvenir-1-why-twelve-notes">Souvenir 1: why twelve notes?</a></li><li><a href="#souvenir-2-breaking-rsa-with-a-continued-fraction">Souvenir 2: breaking RSA with a continued fraction</a></li><li><a href="#souvenir-3-the-collatz-conjecture">Souvenir 3: the Collatz conjecture</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-three-souvenirs-three-histories">Then — three souvenirs, three histories</a></li><li><a href="#now-the-continued-fraction-inside-a-quantum-computer">Now — the continued fraction inside a quantum computer</a></li><li><a href="#next-how-big-a-quantum-computer-and-will-3x-1-ever-fall">Next — how big a quantum computer, and will 3x + 1 ever fall?</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></aside>
 </div>
 <footer class="site-footer">
-  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
-  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
+      <p>A guided tour of recursion and continued fractions. Every number on these pages was
+      computed, exactly, by the <code>tourbus</code> engine: standard-library Python, no dependencies.</p>
+    </div>
+    <div class="foot-col"><div class="foot-h">Ride</div>
+      <a href="01-depot.html">Board at the Depot</a><a href="explore.html">Live exposition</a>
+      <a href="syllabus.html">Syllabus for instructors</a><a href="appendix-c-references.html">Reading list</a></div>
+    <div class="foot-col"><div class="foot-h">Lines</div><a href="appendix-d-frontier.html">The Express Line</a><a href="appendix-e-web-of-ideas.html">The Web of Ideas</a><a href="appendix-f-cross-domain.html">The Cross-Domain Line</a><a href="appendix-h-history.html">The Heritage Line</a><a href="appendix-i-branches.html">The Branch Line</a></div>
+    <div class="foot-col"><div class="foot-h">Project</div>
+      <a href="https://github.com/sonoransun/recursivecontinuancetourbus">Source on GitHub</a><span>MIT licensed</span><span><code>python -m tourbus</code></span></div>
+  </div>
 </footer>
 <script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>

@@ -21,37 +21,39 @@ at Stop 10 that a *typical* number's partial quotients obey the Gauss–Kuzmin
 statistics with geometric mean tending to Khinchin's constant `K₀`. Does `π`
 behave typically? Two precise questions are **open**:
 
-- **Are the partial quotients of `π` bounded?** No one knows. Billions of terms
-  have been computed, occasionally throwing up giants far larger than `292`, but
-  whether arbitrarily large terms keep appearing forever is unproven. It is not
-  even known whether `π` has *infinitely many* partial quotients equal to `1`.
+- **Are the partial quotients of `π` bounded?** No one knows. Hundreds of
+  billions of terms have been computed — the giant `878,783,625` turns up past
+  the eleven-millionth term, and far larger ones deeper still — but whether
+  arbitrarily large terms keep appearing forever is unproven. It is not even
+  known whether `π` has *infinitely many* partial quotients equal to `1`.
 - **Do `π`'s partial quotients obey Gauss–Kuzmin, with geometric mean `K₀`?**
   Numerically, yes to high precision — but there is no proof. `π` might be one of
   the measure-zero exceptions, like `e`. We cannot rule it out.
 
-These are humbling. We know `π` to trillions of digits and can compute its
-continued fraction as far as we like, yet cannot prove the most basic statistical
-facts about the sequence we are staring at.
+These are humbling. We know `π` to hundreds of trillions of digits and can
+compute its continued fraction as far as we like, yet cannot prove the most basic
+statistical facts about the sequence we are staring at.
 
 ### Is Khinchin's constant irrational?
 
 Khinchin's constant `K₀ = 2.6854520010…` is the universal geometric mean of
-almost every number's partial quotients (Stop 10). It has been computed to
-thousands of digits. And yet **it is not known whether `K₀` is rational or
-irrational**, let alone whether it is transcendental. A constant that governs the
-behaviour of *almost all real numbers* has a nature we cannot pin down. The same
-holds for **Lévy's constant** `e^{π²/(12 ln 2)}`.
+almost every number's partial quotients (Stop 10). It has been computed to a
+million digits (Carles Simó, 2016). And yet **it is not known whether `K₀` is
+rational or irrational**, let alone whether it is transcendental. A constant
+that governs the behaviour of *almost all real numbers* has a nature we cannot
+pin down. The same holds for **Lévy's constant** `e^{π²/(12 ln 2)}`.
 
 ### Is the Euler–Mascheroni constant γ irrational?
 
 The constant `γ = 0.5772156649…`, the limit of `1 + 1/2 + … + 1/n − ln n`,
 appears throughout analysis and number theory. Its continued fraction has been
-computed to hundreds of billions of terms. And still, **it is unknown whether `γ`
-is irrational** — the single most embarrassing open problem in the subject,
-because irrationality is exactly the property continued fractions are *built* to
-detect (Stop 2: irrational ⇔ infinite expansion). If `γ` were rational its
-denominator would have to be astronomically large, but "very probably infinite"
-is not a proof.
+computed to more than sixteen billion terms (2021). And still, **it is unknown
+whether `γ` is irrational** — the single most embarrassing open problem in the
+subject, because irrationality is exactly the property continued fractions are
+*built* to detect (Stop 2: irrational ⇔ infinite expansion). If `γ` were a
+fraction `p/q`, its denominator would need more than 244,000 digits — a bound
+proved from its continued fraction in 1998, and dwarfed by what today's
+computations imply — but "very probably infinite" is not a proof.
 
 ### Zaremba's conjecture
 
@@ -61,8 +63,9 @@ the denominator of some fraction `p/q` whose continued fraction has all partial
 quotients at most `A`? (Zaremba proposed `A = 5`.) This is a question about which
 *denominators* admit "well-behaved" continued fractions, with real consequences
 for pseudo-random number generation and numerical integration. Bourgain and
-Kontorovich proved in 2014 that *almost all* `q` work — a spectacular near-miss —
-but the full conjecture remains open.
+Kontorovich proved in 2014 that *almost all* `q` work with `A = 50`, and
+ShinnYih Huang brought that down to Zaremba's own `A = 5` in 2015 — a
+spectacular near-miss — but the full conjecture, for *every* `q`, remains open.
 
 ### The Erdős–Straus conjecture
 
@@ -72,11 +75,11 @@ The greedy Egyptian-fraction expansion of the Branch Line
 always terminates, but the shortest such expansions hide a famous unknown:
 **Erdős and Straus conjectured (1948)** that for every integer `n ≥ 2` the
 fraction `4/n` can be written as a sum of exactly three unit fractions,
-`4/n = 1/x + 1/y + 1/z`. A solution has been found for every `n` ever tested —
-`python -m tourbus demo egyptian` builds them live — yet no proof exists that one
-always does. It is the same theme as the rest of this stop: an algorithm so
-simple a scribe used it four thousand years ago, guarding a question no one can
-answer.
+`4/n = 1/x + 1/y + 1/z`. A solution has been found for every `n` up to `10¹⁷`
+(Salez, 2014) — `python -m tourbus demo egyptian` builds them live — yet no
+proof exists that one always does. It is the same theme as the rest of this
+stop: a notation so simple that Egyptian scribes computed with it nearly four
+thousand years ago, guarding a question no one can answer.
 
 ### The Littlewood conjecture
 
@@ -123,6 +126,73 @@ we cannot do is *prove* the one thing we most want to know — that it always co
 home. That gap, between what a recursion *does* and what we can *prove* it does,
 is the country beyond Terminus. The bus stops here; the mathematics does not.
 
+## Then, now, next
+
+### Then — doors that opened
+
+The map's edge moves. Every problem below was, for a generation, as hopeless as
+the ones above — and each fell to an idea nobody had when it was posed.
+
+```mermaid
+timeline
+    title Open roads that were finally driven
+    section Irrationality and transcendence
+        1761 : Lambert proves pi irrational through a continued fraction
+        1882 : Lindemann proves pi transcendental
+        1978 : Apery proves zeta(3) irrational with a runaway recurrence
+        2000 : Rivoal - infinitely many zeta(2n+1) are irrational
+        2001 : Zudilin - one of zeta(5), zeta(7), zeta(9), zeta(11) is irrational
+    section Approximation
+        2006 : Einsiedler, Katok, Lindenstrauss - Littlewood's exceptions have dimension zero
+        2014 : Bourgain and Kontorovich - almost every denominator obeys Zaremba
+        2019 : Koukoulopoulos and Maynard prove the Duffin-Schaeffer conjecture
+    section Structure
+        2022 : Karpenkov settles the totally real case of Hermite's problem
+        2022 : Koymans and Pagano prove Stevenhagen's conjecture on the negative Pell equation
+        2024 : Calegari, Dimitrov and Tang prove 1, zeta(2) and L(2, chi) linearly independent
+```
+
+The pattern is instructive. Apéry's proof that `ζ(3)` is irrational (1978) came
+from a continued fraction and a recurrence so improbable that his 1978 lecture
+was met with disbelief, and colleagues checked its identities by computer before
+the proof was accepted — the Cross-Domain Line replays it ([Appendix F](appendix-f-cross-domain.md#the-frontier-ap-ry-s-3)).
+The Littlewood and Zaremba results imported heavy machinery from ergodic theory
+and from expander graphs and "thin groups"; the Duffin–Schaeffer proof came from
+combinatorics and graph theory. The next door will likely open from an equally
+unexpected direction.
+
+### Now — the working frontier
+
+- **Ergodic theory and homogeneous dynamics** — the descendants of the Gauss
+  map of [Stop 10](10-casino.md) — are the main tools for Littlewood's
+  conjecture and its relatives.
+- **Thin groups and expansion** power the attack on Zaremba's conjecture: the
+  matrices of [Stop 3](03-engine-room.md#the-engine-as-a-product-of-matrices)
+  with bounded partial quotients generate a sparse "thin" subgroup of
+  `SL(2, ℤ)`, and its expansion properties are what Bourgain and Kontorovich
+  exploited.
+- **Arithmetic holonomy bounds** (Calegari, Dimitrov, and Tang, 2024) are a new
+  way to prove that numbers are irrational, extending the Apéry-style
+  recurrences of the Cross-Domain Line.
+- **Computation at scale** keeps testing every conjecture here: hundreds of
+  trillions of digits of `π`, hundreds of billions of its partial quotients,
+  billions of terms of `γ`, Erdős–Straus to `10¹⁷`.
+
+### Next — how the next doors might open
+
+- **Machine-checked mathematics.** Proof assistants such as Lean and Coq now
+  hold large libraries of formal number theory, and a growing share of new
+  results arrive with machine-checked proofs.
+- **Machine-found conjectures.** Programs like the Ramanujan Machine (2021)
+  propose continued fractions for constants faster than people can prove them,
+  and AI systems reached medal-level performance at the International
+  Mathematical Olympiad in 2024–25, some producing proofs a computer can
+  verify. Whether such tools can crack a problem like the irrationality of `γ`
+  is one of the genuinely open questions of the next decade.
+- **The old questions stand.** Is `γ` irrational? Is `K₀`? Are `π`'s partial
+  quotients bounded? Is every Collatz orbit finite? None of these needs more
+  than this tour to *state*. That is the invitation of the Terminus.
+
 ## Exercises
 
 1. **(★)** Look up the largest known partial quotient of `π` among the first
@@ -157,10 +227,11 @@ is the country beyond Terminus. The bus stops here; the mathematics does not.
 
 ## See it move
 
-Open the **Terminus** panel:
-[`site/index.html#stop-15-terminus`](../site/index.html#stop-15-terminus). It
-gathers the open problems with live links to the relevant widgets from earlier
-stops — a map of the frontier, with the roads that lead to it lit up.
+The Terminus section of the [live exposition](../site/index.html#stop-15-terminus)
+lists the open questions this route walked past, each with a link to the widget
+where you can watch it happen: the **Khinchin Lab** for the statistics of `π`
+and `K₀`, the **Gauss-Map Cobweb** for the dealer itself, and the **Collatz
+Orbit Plotter** for the recursion nobody can prove halts.
 
 ## Further reading
 
@@ -168,8 +239,13 @@ stops — a map of the frontier, with the roads that lead to it lit up.
   [Appendix C — References](appendix-c-references.md).
 - J. Borwein, A. van der Poorten, et al., *Neverending Fractions* (2014) — a
   modern tour of exactly these open questions; Appendix C.
-- J. C. Lagarias, "Continued Fractions and the Riemann Zeta Function" and
-  related surveys, for where the subject reaches into modern research.
+- J. C. Lagarias, "Euler's constant: Euler's work and modern developments,"
+  *Bulletin of the AMS* 50 (2013) — everything known (and not) about `γ`.
+- A. van der Poorten, "A proof that Euler missed: Apéry's proof of the
+  irrationality of ζ(3)," *Mathematical Intelligencer* 1 (1979) — the story of
+  a door opening.
+- S. Huang, "An improvement to Zaremba's conjecture," *Geometric and
+  Functional Analysis* 25 (2015); Bourgain & Kontorovich, *Annals* (2014).
 - On Littlewood: Einsiedler, Katok & Lindenstrauss, *Annals of Mathematics*
   (2006); Appendix C.
 

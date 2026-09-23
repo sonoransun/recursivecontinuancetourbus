@@ -62,8 +62,9 @@ purposes, it is called out.
 
 - **J. Wallis, *Arithmetica Infinitorum* (1655).** Records Brouncker's 4/π —
   the first infinite continued fraction for a named constant — beside Wallis's
-  own product for π/2. The term "continued fraction" arrives later, in his
-  *Opera Mathematica* (1695). *[Stop 9; Heritage H3.]*
+  own product for π/2, and calls such a fraction *continue fracta*,
+  "continually fractioned." His *Opera Mathematica* (1695) spells out the name
+  and the rule for convergents. *[Stops 2, 3, 9; Heritage H3.]*
 
 - **C. Huygens, *Descriptio automati planetarii* (1703, posthumous; the machine
   designed c. 1680–82).** Convergents as an engineering rule: which gear pair
@@ -75,9 +76,9 @@ purposes, it is called out.
   machinery made systematic. *[Stops 3, 6, 9.]*
 
 - **J. H. Lambert, "Mémoire sur quelques propriétés remarquables des quantités
-  transcendantes circulaires et logarithmiques" (presented 1761; published
-  1768).** tan x as a continued fraction, and from it the first proof that π is
-  irrational. *[Stop 9; Heritage H5.]*
+  transcendantes circulaires et logarithmiques" (in the Berlin Academy's
+  *Mémoires* for 1761, printed 1768).** tan x as a continued fraction, and from
+  it the first proof that π is irrational. *[Stop 9; Heritage H5.]*
 
 - **J.-L. Lagrange, "Additions au mémoire sur la résolution des équations
   numériques" (1770).** Periodicity of quadratic irrationals proved, and Pell's
@@ -105,7 +106,7 @@ purposes, it is called out.
 
 - **A. Brocot, "Calcul des rouages par approximation, nouvelle méthode"
   (1861).** A clockmaker's tables of mediants for choosing gear trains: the
-  Stern–Brocot tree, born on a workbench. *[Stop 8; Heritage H4.]*
+  Stern–Brocot tree, born on a workbench. *[Stop 8; Heritage H7.]*
 
 - **L. J. Rogers, "Second memoir on the expansion of certain infinite products"
   (*Proc. London Math. Soc.* 25, 1894).** The identities — and the continued
@@ -201,7 +202,7 @@ purposes, it is called out.
 
 - **R. W. Gosper, "Continued Fraction Arithmetic," in M. Beeler, R. W. Gosper &
   R. Schroeppel, *HAKMEM* (MIT AI Memo 239, 1972), item 101.** The origin of
-  exact homographic and bihomographic stream arithmetic. *[Stop 11.]*
+  exact homographic and bihomographic stream arithmetic. *[Stop 11; Heritage H9.]*
 
 - **J. Vuillemin, "Exact Real Computer Arithmetic with Continued Fractions,"
   *IEEE Transactions on Computers* 39 (1990).** A rigorous modern development of
@@ -247,11 +248,188 @@ purposes, it is called out.
 
 - **M. Einsiedler, A. Katok & E. Lindenstrauss, "Invariant measures and the set
   of exceptions to Littlewood's conjecture," *Annals of Mathematics* 164 (2006).**
-  The measure-zero result on Littlewood's conjecture. *[Stop 15.]*
+  The exceptions to Littlewood's conjecture, if any, form a set of Hausdorff
+  dimension zero. *[Stop 15.]*
 
 - **J. Bourgain & A. Kontorovich, "On Zaremba's conjecture," *Annals of
-  Mathematics* 180 (2014).** The density-one theorem toward Zaremba's conjecture.
+  Mathematics* 180 (2014).** The density-one theorem toward Zaremba's conjecture,
+  with partial quotients up to 50; ShinnYih Huang brought the bound down to 5
+  (*Geometric and Functional Analysis* 25, 2015). *[Stop 15.]*
+
+- **D. Koukoulopoulos & J. Maynard, "On the Duffin–Schaeffer conjecture,"
+  *Annals of Mathematics* 192 (2020).** The 1941 conjecture of metric
+  Diophantine approximation, proved. *[Stops 10, 15.]*
+
+- **D. Zeilberger & W. Zudilin, "The irrationality measure of π is at most
+  7.103205334137…," *Moscow Journal of Combinatorics and Number Theory* 9
+  (2020).** The current record. *[Stops 9, 15.]*
+
+- **J. C. Lagarias, "Euler's constant: Euler's work and modern developments,"
+  *Bulletin of the AMS* 50 (2013).** Everything known, and not known, about `γ`.
   *[Stop 15.]*
+
+- **F. Calegari, V. Dimitrov & Y. Tang, "The linear independence of 1, ζ(2),
+  and L(2, χ₋₃)" (2024).** Arithmetic holonomy bounds, a new route to
+  irrationality proofs. *[Stop 15.]*
+
+## Then, now, next: history
+
+The sources behind the history in each chapter's "Then, now, next".
+
+- **C. Brezinski, *History of Continued Fractions and Padé Approximants*
+  (Springer, 1991).** The standard history of the subject, from Bombelli to the
+  twentieth century. *[Stops 2, 3.]*
+
+- **D. Fowler, *The Mathematics of Plato's Academy* (2nd ed., 1999).** Greek
+  ratio theory reconstructed from anthyphairesis. *[Stops 1, 2; Heritage H1.]*
+
+- **J. Shallit, "Origins of the analysis of the Euclidean algorithm," *Historia
+  Mathematica* 21 (1994).** Lamé and his forerunners. *[Stop 1.]*
+
+- **E. G. Richards, *Mapping Time: The Calendar and its History* (Oxford,
+  1998).** The Metonic, Julian, Jalali, and Gregorian calendars. *[Stop 5.]*
+
+- **T. Freeth et al., "Decoding the ancient Greek astronomical calculator known
+  as the Antikythera Mechanism," *Nature* 444 (2006).** The Metonic and Saros
+  cycles in bronze gears. *[Stop 5.]*
+
+- **G. Markowsky, "Misconceptions about the golden ratio," *College Mathematics
+  Journal* 23 (1992).** The golden-ratio myths, measured. *[Stop 4.]*
+
+- **M. Davis, "Hilbert's Tenth Problem is Unsolvable," *American Mathematical
+  Monthly* 80 (1973).** The Robinson–Matiyasevich theorem, with the Pell
+  equation at its heart. *[Stops 7, 12.]*
+
+- **R. M. Robinson, "Recursion and double recursion," *Bulletin of the AMS* 54
+  (1948).** The modern form of the Ackermann–Péter function, and its history
+  from Sudan (1927) and Ackermann (1928) to Péter (1935). *[Stop 12.]*
+
+- **B. Mandelbrot, "How long is the coast of Britain?," *Science* 156 (1967),
+  and *The Fractal Geometry of Nature* (1982).** Monsters become models.
+  *[Stop 13.]*
+
+- **A. van der Poorten, "A proof that Euler missed," *Mathematical
+  Intelligencer* 1 (1979).** Apéry's irrationality proof for `ζ(3)`, told as it
+  happened. *[Stop 15; Appendix F.]*
+
+## Then, now, next: algorithms and computation
+
+- **D. H. Lehmer, "Euclid's algorithm for large numbers," *American
+  Mathematical Monthly* 45 (1938); J. Stein, "Computational problems associated
+  with Racah algebra," *Journal of Computational Physics* 1 (1967).** Lehmer's
+  leading-digit gcd and the binary gcd. *[Stop 1.]*
+
+- **A. Schönhage, "Schnelle Berechnung von Kettenbruchentwicklungen," *Acta
+  Informatica* 1 (1971).** Continued fractions and gcd in quasi-linear time — the
+  half-gcd. *[Stops 1, 3.]*
+
+- **D. J. Bernstein & B.-Y. Yang, "Fast constant-time gcd computation and
+  modular inversion," *IACR Transactions on Cryptographic Hardware and Embedded
+  Systems* 2019(3).** Safegcd. *[Stop 1.]*
+
+- **Y. Sugiyama, M. Kasahara, S. Hirasawa & T. Namekawa, "A method for solving
+  key equation for decoding Goppa codes," *Information and Control* 27
+  (1975).** The Euclidean decoder for Reed–Solomon-type codes. *[Stop 1.]*
+
+- **H. Heilbronn (1969); J. W. Porter, "On a theorem of Heilbronn,"
+  *Mathematika* 22 (1975); B. Vallée, "Euclidean dynamics," *Discrete and
+  Continuous Dynamical Systems* 15 (2006).** The average-case analysis of
+  Euclid's algorithm, and its dynamical explanation. *[Stops 1, 10.]*
+
+- **P. S. Wang, "A p-adic algorithm for univariate partial fractions,"
+  *SYMSAC '81* (1981).** Rational number reconstruction. *[Stop 2.]*
+
+- **W. J. Lentz, *Applied Optics* 15 (1976); I. J. Thompson & A. R. Barnett,
+  *Journal of Computational Physics* 64 (1986).** Evaluating continued fractions
+  front to back — the method inside statistical function libraries.
+  *[Stop 3.]*
+
+- **G. N. Raney, "On continued fractions and finite automata," *Mathematische
+  Annalen* 206 (1973); K. S. Trivedi & M. D. Ercegovac, "On-line algorithms for
+  division and multiplication," *IEEE Transactions on Computers* C-26 (1977).**
+  Streams of digits in theory and in hardware. *[Stop 11.]*
+
+- **H.-J. Boehm, "Small-data computing: correct calculator arithmetic,"
+  *Communications of the ACM* 60(8) (2017).** Exact real arithmetic in the
+  Android calculator. *[Stop 11.]*
+
+- **D. Richardson, "Some undecidable problems involving elementary functions of a
+  real variable," *Journal of Symbolic Logic* 33 (1968).** Why exact arithmetic
+  can stall forever. *[Stop 11.]*
+
+- **R. E. Tarjan, "Efficiency of a good but not linear set union algorithm,"
+  *Journal of the ACM* 22 (1975).** Union–find and the inverse Ackermann
+  function. *[Stop 12.]*
+
+- **S. Aaronson, "The Busy Beaver Frontier," *SIGACT News* 51 (2020); the
+  bbchallenge collaboration, "Determination of the fifth Busy Beaver value"
+  (2025).** `BB(5) = 47,176,870`, with a Coq-checked proof. *[Stop 12.]*
+
+- **G. Raayoni et al., "Generating conjectures on fundamental constants with the
+  Ramanujan Machine," *Nature* 590 (2021).** Algorithms that conjecture
+  continued fractions. *[Stops 9, 15.]*
+
+## Then, now, next: cryptography, physics, and the sciences
+
+- **P. W. Shor, "Polynomial-time algorithms for prime factorization and discrete
+  logarithms on a quantum computer," *SIAM Journal on Computing* 26 (1997).**
+  The quantum algorithm whose last step is a continued fraction. *[Stop 14.]*
+
+- **S. Hallgren, "Polynomial-time quantum algorithms for Pell's equation and the
+  principal ideal problem," *Journal of the ACM* 54 (2007).** *[Stop 7.]*
+
+- **D. Boneh & G. Durfee, "Cryptanalysis of RSA with private key d less than
+  N^0.292," *IEEE Transactions on Information Theory* 46 (2000).** Wiener's
+  attack extended by lattice methods. *[Stop 14.]*
+
+- **NIST, FIPS 186-5, *Digital Signature Standard* (2023), and FIPS 203, 204,
+  205 (2024).** Minimum RSA private exponents, and the first post-quantum
+  standards. *[Stops 1, 14.]*
+
+- **P. Koymans & C. Pagano, "On Stevenhagen's conjecture" (2022); É. Fouvry &
+  J. Klüners, "On the negative Pell equation," *Annals of Mathematics* 172
+  (2010).** How often `x² − d·y² = −1` is solvable. *[Stop 7.]*
+
+- **T. Tao, "Almost all orbits of the Collatz map attain almost bounded
+  values," *Forum of Mathematics, Pi* 10 (2022); D. Bařina, "Improved
+  verification limit for the convergence of the Collatz conjecture," *Journal
+  of Supercomputing* 81 (2025).** *[Stop 14.]*
+
+- **J. H. Conway, "Unpredictable iterations," *Proceedings of the 1972 Number
+  Theory Conference* (Boulder, 1972).** Generalised Collatz problems are
+  undecidable. *[Stop 14.]*
+
+- **D. Shechtman, I. Blech, D. Gratias & J. W. Cahn, "Metallic phase with
+  long-range orientational order and no translational symmetry," *Physical
+  Review Letters* 53 (1984).** Quasicrystals. *[Stop 4; Appendix F.]*
+
+- **H. Vogel, "A better way to construct the sunflower head," *Mathematical
+  Biosciences* 44 (1979); S. Douady & Y. Couder, *Physical Review Letters* 68
+  (1992).** Phyllotaxis, modelled and reproduced. *[Stop 4.]*
+
+- **J. M. Greene, "A method for determining a stochastic transition," *Journal
+  of Mathematical Physics* 20 (1979).** The golden circle, last to break.
+  *[Stop 4; Appendix E.]*
+
+- **M. Freedman, M. Larsen & Z. Wang, "A modular functor which is universal for
+  quantum computation," *Communications in Mathematical Physics* 227 (2002).**
+  Fibonacci anyons. *[Stop 4.]*
+
+- **I. M. Khalatnikov, E. M. Lifshitz, K. M. Khanin, L. N. Shchur & Ya. G.
+  Sinai, "On the stochasticity in relativistic cosmology," *Journal of
+  Statistical Physics* 38 (1985).** The Gauss map near the Big Bang. *[Stop 10.]*
+
+- **D. H. Mayer, "The thermodynamic formalism approach to Selberg's zeta
+  function for PSL(2, ℤ)," *Bulletin of the AMS* 25 (1991).** *[Stop 10.]*
+
+- **R. Dijkgraaf, J. Maldacena, G. Moore & E. Verlinde, "A black hole Farey
+  tail" (2000).** Farey sums in quantum gravity. *[Stop 8.]*
+
+- **J.-C. Yoccoz, "Théorème de Siegel, nombres de Bruno et polynômes
+  quadratiques," *Astérisque* 231 (1995); M. Shishikura, "The Hausdorff
+  dimension of the boundary of the Mandelbrot set and Julia sets," *Annals of
+  Mathematics* 147 (1998).** Continued fractions inside complex dynamics.
+  *[Stop 13.]*
 
 ---
 

@@ -66,6 +66,11 @@ Engel expansion of 3/7:
   3/7 = 1/3 + 1/12 + 1/84
 ```
 
+**Then & now.** The expansion is named for Friedrich Engel, who studied it in
+1913. Its metric theory was settled by Erdős, Rényi, and Szüsz in 1958: for
+almost every `x` the digits grow geometrically, with `aₙ^(1/n) → e` — the
+constant that owns the expansion's showpiece turning up again in its statistics.
+
 **Exercises.** (★) Engel-expand `5/8` by hand and check the digits do not
 decrease. (★★) Prove the expansion terminates if and only if `x` is rational.
 (★★★) Show that the Engel digits of `e − 1` are `1, 2, 3, …`, straight from the
@@ -121,6 +126,13 @@ Pierce and Luroth expansions of 5/17:
   Pierce of 1/phi = [1, 2, 4, 17, 19, 5777, 5779] (pairs straddling Lucas numbers)
 ```
 
+**Then & now.** Jacob Lüroth introduced his series in 1883, and T. A. Pierce
+his alternating one in 1929, as a tool for approximating roots of equations.
+Today the Lüroth map — the Gauss map with its curved branches straightened into
+lines — is a standard test bed of ergodic theory, where results about digits,
+entropy, and fractal dimension are often proved first before being transferred
+to continued fractions.
+
 **Exercises.** (★) Fold the Lüroth string `[4, 2, 17]` back to `5/17` term by
 term. (★★) Verify `P(digit = k) = 1/(k(k−1))` from the lengths of the Lüroth
 digit intervals. (★★★) Prove that Pierce digits are strictly increasing.
@@ -167,6 +179,14 @@ Fibonacci-Sylvester greedy Egyptian fraction of 5/121:
   Erdos-Straus 4/5 = 1/2 + 1/4 + 1/20 (conjectured possible for every n; open since 1948)
 ```
 
+**Then & now.** Unit fractions are the oldest arithmetic on this tour — the
+Rhind papyrus dates from about 1650 BC — and still a live research area. The
+Erdős–Straus conjecture has been checked for every `n` up to `10¹⁷` (Salez,
+2014). In 2021 Thomas Bloom proved a 1980 conjecture of Erdős and Graham: any set
+of whole numbers of positive upper density contains a finite subset whose
+reciprocals add up to exactly `1` — and within months the proof had been
+checked line by line in the Lean proof assistant.
+
 **Exercises.** (★) Greedy-expand `4/17` and watch the numerators fall. (★★) Prove
 the greedy algorithm terminates for every rational. (★★★) Verify the
 Erdős–Straus conjecture for all `n ≤ 100` using the residue-class rules mod 4.
@@ -207,6 +227,12 @@ Zeckendorf representation of 100:
   100 = 89 + 8 + 3  (non-consecutive Fibonacci)
   in base phi: 1001001010.0001001001  (no two consecutive 1s)
 ```
+
+**Then & now.** The theorem was first published by Gerrit Lekkerkerker in
+1952, twenty years before Édouard Zeckendorf's own paper (1972); George Bergman
+invented base `φ` in 1957, at the age of twelve. Fibonacci coding (Apostolico and
+Fraenkel, 1987) turns the representation into a universal, self-synchronising
+code for integers of any size, and it is used in data compression.
 
 **Exercises.** (★) Find the Zeckendorf representation of `2026`. (★★) Prove that
 the greedy algorithm never selects two consecutive Fibonacci numbers. (★★★) Show
@@ -259,6 +285,14 @@ Ostrowski numeration of 100 against 1/phi:
   Fibonacci word (golden cutting sequence): 1011010110110101101011011010
 ```
 
+**Then & now.** Elwin Christoffel described these words in 1875, Marston Morse
+and Gustav Hedlund named Sturmian sequences in 1940, and Alexander Ostrowski's
+numeration dates from 1922. Today Sturmian words model one-dimensional
+quasicrystals (the Fibonacci chain of [Appendix F](appendix-f-cross-domain.md)),
+every straight line a computer rasterises is a Christoffel word, and in music
+theory the step pattern of the diatonic scale is one too — the "maximally even"
+scales are Sturmian.
+
 **Exercises.** (★) Generate the first 13 letters of the Fibonacci word by hand
 from a line of slope `1/φ`. (★★) Show the Fibonacci word is not eventually
 periodic. (★★★) Relate the gap lengths of Appendix D's E5 to `‖qₖ·α‖` through the
@@ -304,6 +338,13 @@ Lochs' theorem: the digit/term exchange rate on pi:
   almost-sure limit 1/0.9703 = 1.0306 decimals per term (Lochs, 1964)
   the rate is 6 ln2 ln10 / pi^2 -- the entropy of the continued-fraction map.
 ```
+
+**Then & now.** Gustav Lochs proved the theorem in 1964. It is at heart a
+statement about *entropy*: the Gauss map's entropy `π²/(6 ln 2)` set against the
+decimal shift's `ln 10`. The same ratio predicts how many continued-fraction
+terms a record decimal computation will certify — about `0.97` per digit —
+which is how computations of `π`'s continued fraction to hundreds of billions of
+terms are planned.
 
 **Exercises.** (★) Compute Lochs' constant from Lévy's constant and `ln10`.
 (★★) Test the rate empirically on the first several decimals of `e`. (★★★)

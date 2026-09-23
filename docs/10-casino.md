@@ -135,6 +135,75 @@ predictions because the sample draws finite truncations of dyadic rationals, a
 mild bias; with longer, less structured expansions the two columns converge.)
 The dealer's odds are visible even in a rough sample.
 
+## Then, now, next
+
+### Then — a question Gauss could not answer
+
+```mermaid
+timeline
+    title Writing the casino's rulebook
+    section The question
+        1812 : Gauss writes to Laplace - the invariant measure, and an error term he cannot bound
+    section The laws
+        1928 : Kuzmin proves Gauss's law with a rate of convergence
+        1929 : Levy sharpens the rate to geometric decay
+        1935 : Khinchin - almost every geometric mean tends to one constant
+        1936 : Levy computes the growth rate of the denominators
+        1951 : Ryll-Nardzewski proves the Gauss map ergodic
+    section The spectrum
+        1974 : Wirsing pins the optimal rate at -0.30366...
+        1991 : Mayer links the transfer operator to Selberg's zeta function
+        2006 : Vallee's dynamical analysis explains why gcd algorithms are fast
+```
+
+In a letter to Laplace of 30 January 1812, Gauss stated that after many turns
+of the map the chance that the remainder falls below `t` tends to
+`log₂(1 + t)` — the law from which the digit odds above follow — admitted that he
+could not bound the error, and asked whether Laplace could. Nobody could for
+more than a century. Rodion Kuzmin's 1928 proof, and Paul Lévy's sharper one a
+year later, founded what is now called the *metric theory* of numbers. Aleksandr
+Khinchin's slim 1935 book *Continued Fractions* — still the best introduction —
+made the constants of this stop famous; Czesław Ryll-Nardzewski's 1951 proof
+that the Gauss map is ergodic explained why they exist; and Eduard Wirsing's
+1974 analysis of the transfer operator found the exact speed at which the
+casino converges (the constant computed from scratch at
+[Express stop E6](appendix-d-frontier.md#e6-the-gauss-kuzmin-wirsing-constant-from-scratch)).
+
+### Now — the casino's odds, working for a living
+
+- **Why gcd is fast on average.** Lamé's theorem ([Stop 1](01-depot.md)) bounds
+  the *worst* case of Euclid's algorithm. The *typical* case is a Gauss-map
+  question: Heilbronn (1969) and Porter (1975) showed that, over all `m < n`
+  coprime to `n`, Euclid's algorithm on `(n, m)` takes on average
+  `(12 ln 2/π²) ln n + 0.467…` division steps, counted as `demo euclid` counts
+  them. For `n = 999983` that is about 12.1 steps, while the worst pair below a
+  million — Lamé's Fibonacci pair `(832040, 514229)` — takes 28. The constant `12 ln 2/π² ≈ 0.843` is the reciprocal of `π²/(12 ln 2)`, the
+  exponent in Lévy's constant above — the depot and the casino are one machine. Brigitte Vallée's *dynamical analysis*
+  (1990s–2000s) extends this to the binary, Lehmer, and other gcd algorithms
+  used in computer-algebra systems.
+- **At the edge of the Big Bang.** In the BKL scenario for a generic
+  cosmological singularity, the universe near `t = 0` oscillates chaotically
+  between Kasner epochs, and the rule that selects each new era is the Gauss
+  map; the statistics of the eras follow the Gauss measure of this stop
+  (Barrow, 1982; Khalatnikov, Lifshitz, Khanin, Shchur, and Sinai, 1985).
+- **A window on quantum chaos.** Dieter Mayer showed in 1991 that the Gauss
+  map's transfer operator — the operator of E6 — computes the Selberg zeta
+  function of the modular surface, tying the casino to the spectral theory of
+  hyperbolic geometry.
+- **The newest law.** Khinchin's 1924 theorem says when `|x − p/q| < ψ(q)/q`
+  has infinitely many solutions for almost every `x`. In 1941 Duffin and
+  Schaeffer conjectured the definitive version for fractions in lowest terms;
+  Dimitris Koukoulopoulos and James Maynard proved it in 2019, a breakthrough
+  that was part of Maynard's 2022 Fields Medal citation.
+
+### Next — is anyone we know actually typical?
+
+Almost every number obeys the laws of this stop, yet no *specific* number that
+anyone can name has been proved to. Is `π` typical? Is `K₀` itself irrational?
+Is there a closed form for Wirsing's constant `−0.3036630028…`? The questions
+are catalogued at [Stop 15](15-terminus.md#is-normal-in-its-continued-fraction);
+each would be a landmark.
+
 ## Exercises
 
 1. **(★)** Compute the Gauss–Kuzmin probabilities for `k = 1, 2, 3` by hand and
@@ -166,12 +235,16 @@ The dealer's odds are visible even in a rough sample.
 
 ## See it move
 
-Open the **Casino** widget:
-[`site/index.html#stop-10-casino`](../site/index.html#stop-10-casino). Spin up
-thousands of random continued fractions and watch the Gauss–Kuzmin histogram
-fill in and the running geometric mean settle toward Khinchin's constant.
+Two tables are open in the Casino's section of the
+[live exposition](../site/index.html#stop-10-casino). The **Gauss-Map Cobweb**
+(W5) iterates `T(x) = {1/x}` from any seed you type, dealing one partial
+quotient per bounce of the cobweb. The **Khinchin Lab** (W6) samples a thousand
+random reals per click, charting the running geometric mean of their partial
+quotients against `K₀` and the observed digit frequencies against the
+Gauss–Kuzmin prediction.
 
 **Try it live:** the Gauss-map cobweb [seeded at 0.415926](../site/index.html#w5?x=0.415926).
+
 ## Further reading
 
 - Khinchin, *Continued Fractions*, §§14–16 — the source, including the proof of
@@ -182,5 +255,11 @@ fill in and the running geometric mean settle toward Khinchin's constant.
   *Math. Comp.* (1997), for high-precision computation of `K₀`.
 - P. Lévy, *Théorie de l'addition des variables aléatoires* (1937), for Lévy's
   constant.
+- D. E. Knuth, *The Art of Computer Programming*, Vol. 2, §4.5.3 — the
+  Heilbronn–Porter average for Euclid's algorithm, derived from the Gauss map.
+- B. Vallée, "Euclidean dynamics," *Discrete and Continuous Dynamical Systems*
+  15 (2006) — the analysis of gcd algorithms as dynamical systems.
+- D. Koukoulopoulos & J. Maynard, "On the Duffin–Schaeffer conjecture,"
+  *Annals of Mathematics* 192 (2020).
 
 [← Stop 9 — Celebrity Sightings](09-celebrity.md) · [Route map](index.md) · [Stop 11 — The Infinite Assembly Line →](11-assembly-line.md)

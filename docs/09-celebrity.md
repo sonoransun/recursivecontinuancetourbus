@@ -52,10 +52,10 @@ good). Worse, some of the most basic questions are *open problems*:
 - Do the partial quotients follow the Gauss–Kuzmin statistics of a "random"
   number (Stop 10)? Believed yes, unproven.
 
-We have computed billions of terms and they *look* random, but "looks random"
-is not a theorem. The regular continued fraction of `π`, unlike `e`'s, has never
-revealed a usable structure — a humbling fact given how much we know about `π`
-in every other respect. This gap is the seed of Stop 15's open-problems chapter.
+Hundreds of billions of terms have now been computed and they *look* random,
+but "looks random" is not a theorem. The regular continued fraction of `π`,
+unlike `e`'s, has never revealed a usable structure — a humbling fact given how
+much we know about `π` in every other respect. This gap is the seed of Stop 15's open-problems chapter.
 
 ### Generalized continued fractions: order restored
 
@@ -75,9 +75,20 @@ found
 4/π = 1 + 1²/(2 + 3²/(2 + 5²/(2 + 7²/(2 + …)))),
 ```
 
-with the odd squares `1², 3², 5², …` marching up the numerators. There is also
-the classical `π/4 = 1 − 1/3 + 1/5 − …` (Leibniz), which a generalized continued
-fraction converges far faster than.
+with the odd squares `1², 3², 5², …` marching up the numerators. It is
+beautiful, and a little deceptive. Euler later showed that any series can be
+rewritten as a continued fraction with the *same* partial sums, and Brouncker's
+convergents are exactly the partial sums of Leibniz's
+`π/4 = 1 − 1/3 + 1/5 − …` — so they crawl just as slowly: ten terms still get
+only the leading `3` right. Other generalized fractions sprint. The one hiding
+inside the arctangent,
+
+```
+π = 4/(1 + 1²/(3 + 2²/(5 + 3²/(7 + …)))),
+```
+
+gains about three correct digits for every four terms; twenty terms already
+pin `π` down to fifteen decimal places.
 
 The deepest of these is **Lambert's continued fraction for the tangent** (1761):
 
@@ -143,6 +154,71 @@ continued fraction of pi:
 Put the two tables side by side: `e`'s terms are a machine you can predict; `π`'s
 are, for all anyone can prove, a coin toss.
 
+## Then, now, next
+
+### Then — from irrational to transcendental
+
+```mermaid
+timeline
+    title Unmasking e and pi
+    section Irrational
+        1655 : Brouncker's fraction for 4/pi - lawful, and slow
+        1737 : Euler finds the pattern in e and proves e irrational
+        1761 : Lambert's fraction for tan x proves pi irrational
+        1794 : Legendre proves pi squared irrational
+    section Transcendental
+        1844 : Liouville builds the first provably transcendental numbers
+        1873 : Hermite proves e transcendental
+        1882 : Lindemann proves pi transcendental - the circle cannot be squared
+        1934 : Gelfond and Schneider settle Hilbert's seventh problem
+    section Measured
+        2020 : Zeilberger and Zudilin - pi's irrationality measure is at most 7.1032...
+        2021 : The Ramanujan Machine conjectures new continued fractions for constants
+        2025 : Pi is computed to more than 300 trillion digits
+```
+
+Continued fractions carried the celebrities through their first two trials.
+Euler's pattern made `e` irrational in 1737, and Lambert's tangent fraction did
+the same for `π` in 1761 ([Heritage stop H5](appendix-h-history.md#h5-1761-lambert-puts-on-trial)).
+The next question — is either number the root of *any* polynomial with integer
+coefficients? — needed new tools. Liouville showed in 1844 that numbers
+approximated *too* well by fractions cannot be algebraic
+([H6](appendix-h-history.md#h6-1844-the-skyscraper-of-liouville)); Hermite proved
+`e` transcendental in 1873, and Lindemann extended his method to `π` in 1882,
+ending the 2,000-year-old quest to square the circle with ruler and compass.
+
+### Now — measuring how irrational a number is
+
+- **The irrationality measure.** How closely can fractions crowd a number?
+  The *irrationality measure* `μ(x)` is the largest exponent for which
+  `|x − p/q| < 1/q^μ` has infinitely many solutions. Every irrational has
+  `μ ≥ 2` (Stop 3), and almost every number has exactly `μ = 2`. Euler's
+  pattern lets us compute `μ(e) = 2` exactly: its partial quotients grow too
+  slowly to make any convergent unusually good. For `π` the best bound, due to
+  Doron Zeilberger and Wadim Zudilin (2020), is `μ(π) ≤ 7.1032…`. Everyone
+  expects the truth to be `2`; the gap is a measure of our ignorance.
+- **Digits as a benchmark.** `π` has been computed to more than 300 trillion
+  digits (2025), work that now serves mainly to stress-test hardware and
+  multiplication algorithms. For contrast, NASA's interplanetary navigation uses
+  fifteen decimal places.
+- **Machines that conjecture.** The *Ramanujan Machine* project (published in
+  *Nature*, 2021) searches algorithmically for generalized continued fractions
+  that match famous constants to hundreds of digits, then hands the surviving
+  conjectures to humans (and increasingly to other programs) to prove.
+
+### Next — questions a child can ask
+
+- **Is `π + e` irrational? Is `π·e`?** Nobody knows. It is known that *at least
+  one* of them is transcendental — both would be algebraic only if `π` and `e`
+  were — but not which one. The same ignorance covers `π^e`, `e^e`, and `π^π`.
+- **Does `π` have a pattern after all?** Its regular continued fraction could,
+  for all anyone can prove, have bounded partial quotients, or fail Khinchin's
+  law ([Stop 10](10-casino.md)). The terminus ([Stop 15](15-terminus.md)) takes
+  these questions up in full.
+- **From conjecture to proof, automatically.** Machine-found formulas raise a
+  new question for the coming decade: which of them come with machine-checkable
+  proofs, and what new constants they will let us classify.
+
 ## Exercises
 
 1. **(★)** From the `e` demo, write down partial quotients `a₈` through `a₁₄`
@@ -177,10 +253,12 @@ are, for all anyone can prove, a coin toss.
 
 ## See it move
 
-Open the **Celebrity Sightings** widget:
-[`site/index.html#stop-9-celebrity`](../site/index.html#stop-9-celebrity).
-Toggle between `e` and `π` and watch one expansion fall into lockstep while the
-other refuses to, with Brouncker's generalized fraction rendered alongside.
+The Celebrity Sightings section of the
+[live exposition](../site/index.html#stop-9-celebrity) mounts a second **CF
+Expansion Machine** (W1), preloaded with `e`. Step it and Euler's `1, 2k, 1`
+blocks click into place one certified term at a time; tap **π** on the same
+machine and the pattern vanishes, while the convergents table and error plot
+show `355/113` owing its accuracy to the `292` that follows it.
 
 ## Further reading
 
@@ -191,5 +269,11 @@ other refuses to, with Brouncker's generalized fraction rendered alongside.
 - Hardy & Wright, §§11.6–11.7, on the continued fractions of `e` and `π`.
 - C. D. Olds, "The Simple Continued Fraction Expansion of e," *Amer. Math.
   Monthly* (1970).
+- A. Baker, *Transcendental Number Theory* (1975) — Hermite, Lindemann, and
+  Gelfond–Schneider in one slim volume.
+- D. Zeilberger & W. Zudilin, "The irrationality measure of π is at most
+  7.103205334137…," *Moscow J. Combinatorics and Number Theory* 9 (2020).
+- G. Raayoni et al., "Generating conjectures on fundamental constants with the
+  Ramanujan Machine," *Nature* 590 (2021).
 
 [← Stop 8 — The Family Tree](08-family-tree.md) · [Route map](index.md) · [Stop 10 — The Casino →](10-casino.md)

@@ -3,87 +3,103 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Loop Road - Tour Bus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<title>The Loop Road — Stop 6 · Tour Bus</title>
+<meta name="description" content="Some roads circle back: a continued fraction repeats forever exactly when the number is the root of a quadratic.">
+<meta property="og:title" content="The Loop Road — Stop 6 · Tour Bus">
+<meta property="og:description" content="Some roads circle back: a continued fraction repeats forever exactly when the number is the root of a quadratic.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eceef1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M24 78V52a26 26 0 0 1 26-26h26' fill='none' stroke='%23b5751a' stroke-width='11' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='78' r='13' fill='%23b5751a'/%3E%3Ccircle cx='76' cy='26' r='13' fill='%23b5751a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/rct-docs.css">
 <script>
 (function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
-<body>
+<body data-line="main" data-page="06-loop-road">
+<div class="progress" aria-hidden="true"><i></i></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
-  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
-  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
+  <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
   <div class="search">
     <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
     <div class="search-results" id="search-results" hidden></div>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  <a class="top-link" href="https://github.com/sonoransun/recursivecontinuancetourbus">GitHub</a>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cycle color theme"><span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Auto</span></button>
 </header>
-<div class="layout">
-  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
-<div class="nav-group">The Tour</div>
-<a href="01-depot.html">1 · The Depot</a>
-<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
-<a href="03-engine-room.html">3 · The Engine Room</a>
-<a href="04-golden.html">4 · The Golden Milestone</a>
-<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
-<a class="on" href="06-loop-road.html">6 · The Loop Road</a>
-<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
-<a href="08-family-tree.html">8 · The Family Tree</a>
-<a href="09-celebrity.html">9 · Celebrity Sightings</a>
-<a href="10-casino.html">10 · The Casino</a>
-<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
-<a href="12-tower.html">12 · The Tower</a>
-<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
-<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
-<a href="15-terminus.html">15 · Terminus</a>
-<div class="nav-group">The Express Line</div>
+<div class="layout has-rail">
+  <nav class="sidebar" id="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Route map</a>
+<div class="nav-sec" data-line="main"><div class="nav-group">The Tour</div><ol class="nav-line">
+<li><a class="stn" href="01-depot.html"><span class="stn-n">1</span><span class="stn-t">The Depot</span></a></li>
+<li><a class="stn" href="02-unfolding-road.html"><span class="stn-n">2</span><span class="stn-t">The Unfolding Road</span></a></li>
+<li><a class="stn" href="03-engine-room.html"><span class="stn-n">3</span><span class="stn-t">The Engine Room</span></a></li>
+<li><a class="stn" href="04-golden.html"><span class="stn-n">4</span><span class="stn-t">The Golden Milestone</span></a></li>
+<li><a class="stn" href="05-scenic-overlook.html"><span class="stn-n">5</span><span class="stn-t">Scenic Overlook</span></a></li>
+<li><a class="stn on" href="06-loop-road.html" aria-current="page"><span class="stn-n">6</span><span class="stn-t">The Loop Road</span></a></li>
+<li><a class="stn" href="07-cattle-crossing.html"><span class="stn-n">7</span><span class="stn-t">The Cattle Crossing</span></a></li>
+<li><a class="stn" href="08-family-tree.html"><span class="stn-n">8</span><span class="stn-t">The Family Tree</span></a></li>
+<li><a class="stn" href="09-celebrity.html"><span class="stn-n">9</span><span class="stn-t">Celebrity Sightings</span></a></li>
+<li><a class="stn" href="10-casino.html"><span class="stn-n">10</span><span class="stn-t">The Casino</span></a></li>
+<li><a class="stn" href="11-assembly-line.html"><span class="stn-n">11</span><span class="stn-t">The Infinite Assembly Line</span></a></li>
+<li><a class="stn" href="12-tower.html"><span class="stn-n">12</span><span class="stn-t">The Tower</span></a></li>
+<li><a class="stn" href="13-hall-of-mirrors.html"><span class="stn-n">13</span><span class="stn-t">The Hall of Mirrors</span></a></li>
+<li><a class="stn" href="14-souvenir-shop.html"><span class="stn-n">14</span><span class="stn-t">The Souvenir Shop</span></a></li>
+<li><a class="stn" href="15-terminus.html"><span class="stn-n">15</span><span class="stn-t">Terminus</span></a></li>
+</ol></div>
+<div class="nav-sec" data-line="express"><div class="nav-group">The Express Line</div>
 <a href="appendix-d-frontier.html">Fringe Avenues</a>
-<div class="nav-group">Synthesis</div>
+</div>
+<div class="nav-sec" data-line="web"><div class="nav-group">Synthesis</div>
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
-<div class="nav-group">Cross-Domain</div>
+</div>
+<div class="nav-sec" data-line="cross"><div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
-<div class="nav-group">Heritage</div>
+</div>
+<div class="nav-sec" data-line="heritage"><div class="nav-group">Heritage</div>
 <a href="appendix-h-history.html">A History in Convergents</a>
-<div class="nav-group">Branch</div>
+</div>
+<div class="nav-sec" data-line="branch"><div class="nav-group">Branch</div>
 <a href="appendix-i-branches.html">Other Ways to Unfold</a>
-<div class="nav-group">Reference</div>
-<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
-<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
-<a href="appendix-c-references.html">Appendix C - References</a>
-<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
-<a href="syllabus.html">Syllabus - for instructors</a>
-<div class="nav-group">Interactive</div>
-<a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content" id="main"><p class="chapter-nav"><a href="05-scenic-overlook.html">← Stop 5 — Scenic Overlook</a> · <a href="index.html">Route map</a> · <a href="07-cattle-crossing.html">Stop 7 — The Cattle Crossing →</a></p>
-<h1 id="stop-6-the-loop-road">Stop 6 — The Loop Road</h1>
-<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav>
-<blockquote>Some roads circle back: a continued fraction repeats forever exactly when the number is the root of a quadratic.</blockquote>
-<h2 id="overview">Overview</h2>
+</div>
+<div class="nav-sec" data-line="ref"><div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A — Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B — Glossary</a>
+<a href="appendix-c-references.html">Appendix C — References</a>
+<a href="appendix-g-hints.html">Appendix G — Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus — for instructors</a>
+</div>
+<div class="nav-sec" data-line="explore"><div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a>
+</div></nav>
+  <main class="content" id="main"><header class="page-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Route map</a><span aria-hidden="true">/</span><span>The Tour</span></nav><div class="kicker"><span class="roundel">6</span><span>Main line · Stop 6 of 15</span></div><h1 id="stop-6-the-loop-road">The Loop Road</h1><p class="lede">Some roads circle back: a continued fraction repeats forever exactly when the number is the root of a quadratic.</p><ul class="page-meta"><li><span class="mk">Reading</span> 7 min</li><li><span class="mk">Run it</span> <code>python -m tourbus stop 6</code></li><li><a class="mlink" href="explore.html#stop-6-loop">Live widget&nbsp;&#8599;</a></li></ul></header><details class="toc-inline"><summary>On this page</summary><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#lagrange-s-theorem">Lagrange's theorem</a></li><li><a href="#why-quadratic-surds-must-loop">Why quadratic surds must loop</a></li><li><a href="#the-shape-of-the-loop">The shape of the loop</a></li><li><a href="#galois-and-purely-periodic-surds">Galois and purely periodic surds</a></li><li><a href="#metallic-means">Metallic means</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-loops-seen-loops-proved">Then — loops seen, loops proved</a></li><li><a href="#now-loops-as-the-skeleton-of-number-fields">Now — loops as the skeleton of number fields</a></li><li><a href="#next-the-loops-nobody-can-predict">Next — the loops nobody can predict</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></details><section class="sec" data-sec="overview">
+<h2 id="overview">Overview<a class="h-anchor" href="#overview" aria-label="Link to this section">#</a></h2>
 <p>So far our infinite roads have wandered without pattern (<code>π</code>) or marched in a trivial cycle (<code>φ</code>&#x27;s endless <code>1</code>s). At this stop we characterise <em>exactly</em> which numbers ride a looping road — a continued fraction that eventually repeats a fixed block forever. The answer is one of the most elegant theorems in the subject, and it ties the geometry of the road to the algebra of the number.</p>
-<h3 id="lagrange-s-theorem">Lagrange&#x27;s theorem</h3>
+<h3 id="lagrange-s-theorem">Lagrange&#x27;s theorem<a class="h-anchor" href="#lagrange-s-theorem" aria-label="Link to this section">#</a></h3>
 <p>A <strong>quadratic irrational</strong> (or <em>quadratic surd</em>) is an irrational root of a quadratic <code>ax² + bx + c = 0</code> with integer coefficients — a number of the form <code>(P + √d)/Q</code> with <code>d</code> a non-square positive integer. Euler noticed in <strong>1737</strong> that any eventually periodic continued fraction is such a number; <strong>Lagrange proved the converse in 1770</strong>, giving the complete characterisation:</p>
 <blockquote>A continued fraction is <strong>eventually periodic</strong> if and only if its value is a <strong>quadratic irrational</strong>.</blockquote>
 <p>We write the repeating block in parentheses: <code>√2 = [1; (2)]</code> means <code>[1; 2, 2, 2, …]</code>, and <code>√7 = [2; (1, 1, 1, 4)]</code> means <code>[2; 1, 1, 1, 4, 1, 1, 1, 4, …]</code>. The &quot;if&quot; direction is the fixed-point argument of Stop 4 generalised: a purely periodic tail <code>y = [(a₁, …, aₖ)]</code> satisfies <code>y = (some integer combination of y)</code>, a <em>quadratic</em> in <code>y</code>. The &quot;only if&quot; direction — that every quadratic surd loops — is the deeper half, and rests on a finiteness argument sketched below and proved in Appendix A.</p>
-<h3 id="why-quadratic-surds-must-loop">Why quadratic surds must loop</h3>
+<h3 id="why-quadratic-surds-must-loop">Why quadratic surds must loop<a class="h-anchor" href="#why-quadratic-surds-must-loop" aria-label="Link to this section">#</a></h3>
 <p>Run the expansion of <code>x₀ = (P₀ + √d)/Q₀</code> and each remainder stays of the same form <code>xₙ = (Pₙ + √d)/Qₙ</code> with <strong>integer</strong> <code>Pₙ, Qₙ</code>. The recurrences are</p>
-<pre><code>aₙ = ⌊xₙ⌋,   Pₙ₊₁ = aₙ Qₙ − Pₙ,   Qₙ₊₁ = (d − Pₙ₊₁²)/Qₙ,</code></pre>
+<div class="math-display">aₙ = ⌊xₙ⌋,   Pₙ₊₁ = aₙ Qₙ − Pₙ,   Qₙ₊₁ = (d − Pₙ₊₁²)/Qₙ,</div>
 <p>and one can show the pairs <code>(Pₙ, Qₙ)</code> stay <strong>bounded</strong> — they are confined to a finite range determined by <code>d</code>. A sequence drawn forever from a finite set must repeat a value, and once <code>(Pₙ, Qₙ)</code> recurs the whole future of the expansion recurs with it. The state space is finite, so the road <em>must</em> close into a loop. This is exactly the pigeonhole structure behind Stop 12&#x27;s totality arguments and Stop 13&#x27;s fractal fixed points: a bounded recursion on a finite state cannot avoid cycling.</p>
-<h3 id="the-shape-of-the-loop">The shape of the loop</h3>
+<h3 id="the-shape-of-the-loop">The shape of the loop<a class="h-anchor" href="#the-shape-of-the-loop" aria-label="Link to this section">#</a></h3>
 <p>The periods of square roots have beautiful structure:</p>
-<ul><li><strong>√2 = [1; (2)]</strong>, period 1. <strong>√3 = [1; (1, 2)]</strong>, period 2. <strong>√7 = [2; (1, 1, 1, 4)]</strong>, period 4.</li><li>The repeating block of <code>√d</code> is a <strong>palindrome followed by a single term equal to <code>2⌊√d⌋</code></strong>. In <code>√7 = [2; (1, 1, 1, 4)]</code> the block is the palindrome <code>1,1,1</code> capped by <code>4 = 2·⌊√7⌋ = 2·2</code>. This palindromic law (Galois, 1829) is not decoration; the palindrome is what makes the Pell-equation machinery of Stop 7 work, and its position determines the sign in <code>x² − d y² = ±1</code>.</li></ul>
+<ul><li><strong>√2 = [1; (2)]</strong>, period 1. <strong>√3 = [1; (1, 2)]</strong>, period 2. <strong>√7 = [2; (1, 1, 1, 4)]</strong>, period 4.</li><li>The repeating block of <code>√d</code> is a <strong>palindrome followed by a single term equal to <code>2⌊√d⌋</code></strong>. In <code>√7 = [2; (1, 1, 1, 4)]</code> the block is the palindrome <code>1,1,1</code> capped by <code>4 = 2·⌊√7⌋ = 2·2</code>. This palindromic law — spotted by Euler in his tables of square roots, proved by Legendre, and explained in one line by Galois&#x27;s 1829 theorem below — is not decoration; the palindrome is what makes the Pell-equation machinery of Stop 7 work, and its position determines the sign in <code>x² − d y² = ±1</code>.</li></ul>
 <figure class="figure"><svg color="#6e7781" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380"><title>Period lengths of sqrt(d) for nonsquare d up to 99</title><text x="380" y="22" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">Period of the continued fraction of sqrt(d)</text><line x1="62" y1="48" x2="62" y2="330" stroke="currentColor" stroke-width="1.2"/><line x1="62" y1="330" x2="744" y2="330" stroke="currentColor" stroke-width="1.2"/><line x1="57" y1="330" x2="62" y2="330" stroke="currentColor" stroke-width="1"/><text x="53" y="334" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">0</text><line x1="57" y1="259.5" x2="62" y2="259.5" stroke="currentColor" stroke-width="1"/><text x="53" y="263.5" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">4</text><line x1="57" y1="189" x2="62" y2="189" stroke="currentColor" stroke-width="1"/><text x="53" y="193" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">8</text><line x1="57" y1="118.5" x2="62" y2="118.5" stroke="currentColor" stroke-width="1"/><text x="53" y="122.5" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">12</text><line x1="57" y1="48" x2="62" y2="48" stroke="currentColor" stroke-width="1"/><text x="53" y="52" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">16</text><line x1="62" y1="330" x2="62" y2="335" stroke="currentColor" stroke-width="1"/><text x="62" y="350" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">2</text><line x1="223.7113" y1="330" x2="223.7113" y2="335" stroke="currentColor" stroke-width="1"/><text x="223.7113" y="350" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">25</text><line x1="399.4845" y1="330" x2="399.4845" y2="335" stroke="currentColor" stroke-width="1"/><text x="399.4845" y="350" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">50</text><line x1="575.2577" y1="330" x2="575.2577" y2="335" stroke="currentColor" stroke-width="1"/><text x="575.2577" y="350" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">75</text><line x1="744" y1="330" x2="744" y2="335" stroke="currentColor" stroke-width="1"/><text x="744" y="350" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">99</text><text x="403" y="368" font-family="monospace" font-size="12" text-anchor="middle" fill="currentColor">d (nonsquare)</text><text x="20" y="189" font-family="monospace" font-size="12" text-anchor="middle" fill="currentColor" transform="rotate(-90 20 189)">period length</text><rect x="59.5" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="66.5309" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="80.5928" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="87.6237" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="94.6546" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="101.6856" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="115.7474" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="122.7784" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="129.8093" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="136.8402" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="143.8711" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="150.9021" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="164.9639" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="171.9948" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="179.0258" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="186.0567" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="193.0876" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="200.1186" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="207.1495" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="214.1804" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="228.2423" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="235.2732" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="242.3041" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="249.3351" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="256.366" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="263.3969" y="189" width="5" height="141" fill="currentColor"/><rect x="270.4278" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="277.4588" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="284.4897" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="291.5206" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="305.5825" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="312.6134" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="319.6443" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="326.6753" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="333.7062" y="277.125" width="5" height="52.875" fill="currentColor"/><rect x="340.7371" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="347.768" y="153.75" width="5" height="176.25" fill="currentColor"/><rect x="354.799" y="189" width="5" height="141" fill="currentColor"/><rect x="361.8299" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="368.8608" y="118.5" width="5" height="211.5" fill="currentColor"/><rect x="375.8918" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="382.9227" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="396.9845" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="404.0155" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="411.0464" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="418.0773" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="425.1082" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="432.1392" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="439.1701" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="446.201" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="453.232" y="206.625" width="5" height="123.375" fill="currentColor"/><rect x="460.2629" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="467.2938" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="474.3247" y="136.125" width="5" height="193.875" fill="currentColor"/><rect x="481.3557" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="488.3866" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="502.4485" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="509.4794" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="516.5103" y="153.75" width="5" height="176.25" fill="currentColor"/><rect x="523.5412" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="530.5722" y="189" width="5" height="141" fill="currentColor"/><rect x="537.6031" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="544.634" y="189" width="5" height="141" fill="currentColor"/><rect x="551.6649" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="558.6959" y="206.625" width="5" height="123.375" fill="currentColor"/><rect x="565.7268" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="572.7577" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="579.7887" y="118.5" width="5" height="211.5" fill="currentColor"/><rect x="586.8196" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="593.8505" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="600.8814" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="607.9124" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="621.9742" y="312.375" width="5" height="17.625" fill="currentColor"/><rect x="629.0052" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="636.0361" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="643.067" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="650.0979" y="153.75" width="5" height="176.25" fill="currentColor"/><rect x="657.1289" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="664.1598" y="224.25" width="5" height="105.75" fill="currentColor"/><rect x="671.1907" y="241.875" width="5" height="88.125" fill="currentColor"/><rect x="678.2216" y="294.75" width="5" height="35.25" fill="currentColor"/><rect x="685.2526" y="189" width="5" height="141" fill="currentColor"/><rect x="692.2835" y="189" width="5" height="141" fill="currentColor"/><rect x="699.3144" y="153.75" width="5" height="176.25" fill="currentColor"/><rect x="706.3454" y="48" width="5" height="282" fill="currentColor"/><rect x="713.3763" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="720.4072" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="727.4381" y="136.125" width="5" height="193.875" fill="currentColor"/><rect x="734.4691" y="259.5" width="5" height="70.5" fill="currentColor"/><rect x="741.5" y="294.75" width="5" height="35.25" fill="currentColor"/><text x="476.8247" y="129.125" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">d=61</text><text x="708.8454" y="41" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">d=94</text></svg><figcaption>Period lengths of √d for d up to 99: no formula, no pattern, erratic as weather — and, at the next stop, the whole reason Pell&#x27;s equation swings from trivial to brutal.</figcaption></figure>
-<h3 id="galois-and-purely-periodic-surds">Galois and purely periodic surds</h3>
+<h3 id="galois-and-purely-periodic-surds">Galois and purely periodic surds<a class="h-anchor" href="#galois-and-purely-periodic-surds" aria-label="Link to this section">#</a></h3>
 <p>When does the road loop <em>from the very start</em>, with no lead-in <code>a₀</code>? <strong>Galois</strong> answered this too. A quadratic surd <code>x</code> is <strong>reduced</strong> if <code>x &gt; 1</code> and its conjugate <code>x̄</code> (the other root of its quadratic, obtained by flipping the sign of <code>√d</code>) lies strictly in <code>(−1, 0)</code>. Then:</p>
 <blockquote>The continued fraction of <code>x</code> is <strong>purely periodic</strong> if and only if <code>x</code> is a reduced surd.</blockquote>
-<p>Moreover the reversed period expands <code>−1/x̄</code>. <code>√7</code> itself is not reduced (its conjugate <code>−√7 ≈ −2.65</code> is outside <code>(−1, 0)</code>), which is why it has the lead-in <code>2</code> before the loop; but <code>1 + √7</code> shifted appropriately is.</p>
-<h3 id="metallic-means">Metallic means</h3>
+<p>Moreover the reversed period expands <code>−1/x̄</code>. <code>√7</code> itself is not reduced (its conjugate <code>−√7 ≈ −2.65</code> is outside <code>(−1, 0)</code>), which is why it has the lead-in <code>2</code> before the loop; but <code>2 + √7 ≈ 4.65</code> is reduced — its conjugate <code>2 − √7 ≈ −0.65</code> lies in <code>(−1, 0)</code> — and indeed <code>2 + √7 = [(4, 1, 1, 1)]</code> loops from the very first term. Apply the reversal rule to <code>⌊√d⌋ + √d</code> in general and the palindrome of the period of <code>√d</code> drops out at once.</p>
+<h3 id="metallic-means">Metallic means<a class="h-anchor" href="#metallic-means" aria-label="Link to this section">#</a></h3>
 <p>The all-<code>n</code> roads <code>[n; (n)] = [n; n, n, …]</code> satisfy <code>x = n + 1/x</code>, i.e. <code>x² − nx − 1 = 0</code>, giving <code>x = (n + √(n²+4))/2</code> — the <strong>metallic means</strong>. <code>n = 1</code> is the golden ratio <code>φ</code> (Stop 4); <code>n = 2</code> is the silver ratio <code>1 + √2</code>; <code>n = 3</code> the bronze ratio. Each is the simplest periodic surd with period 1, and each is the &quot;most irrational&quot; number of its own family.</p>
-<h2 id="worked-examples">Worked examples</h2>
+</section>
+<section class="sec" data-sec="worked-examples">
+<h2 id="worked-examples">Worked examples<a class="h-anchor" href="#worked-examples" aria-label="Link to this section">#</a></h2>
 <p>Expand <code>√7</code>. The road settles into the four-term loop <code>(1, 1, 1, 4)</code>, printed by <code>tourbus</code> in parentheses, and the convergents alternately over- and under-shoot:</p>
-<pre><code>$ python -m tourbus demo cf sqrt7
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo cf sqrt7</span>
 continued fraction of sqrt(7):
   [2; (1, 1, 1, 4)]
 
@@ -96,10 +112,10 @@ continued fraction of sqrt(7):
  4    4  37/14   2.6428571429  +2.89e-03
  5    1  45/17   2.6470588235  -1.31e-03
  6    1  82/31   2.6451612903  +5.90e-04
- 7    1  127/48  2.6458333333  -8.20e-05</code></pre>
+ 7    1  127/48  2.6458333333  -8.20e-05</code></pre></div>
 <p>The block ends in <code>4 = 2·⌊√7⌋</code>, and the three terms before it — <code>1, 1, 1</code> — form a palindrome, exactly as Galois&#x27; law predicts.</p>
 <p>Two more square roots show the pattern in miniature. <code>√2</code> has period 1, the shortest possible; <code>√3</code> has period 2 and its block <code>(1, 2)</code> again ends in <code>2·⌊√3⌋ = 2</code>:</p>
-<pre><code>$ python -m tourbus demo cf sqrt2
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo cf sqrt2</span>
 continued fraction of sqrt(2):
   [1; (2)]
 
@@ -112,8 +128,8 @@ continued fraction of sqrt(2):
  4    2  41/29    1.4137931034  +4.20e-04
  5    2  99/70    1.4142857143  -7.22e-05
  6    2  239/169  1.4142011834  +1.24e-05
- 7    2  577/408  1.4142156863  -2.12e-06</code></pre>
-<pre><code>$ python -m tourbus demo cf sqrt3
+ 7    2  577/408  1.4142156863  -2.12e-06</code></pre></div>
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo cf sqrt3</span>
 continued fraction of sqrt(3):
   [1; (1, 2)]
 
@@ -126,22 +142,46 @@ continued fraction of sqrt(3):
  4    2  19/11  1.7272727273  +4.78e-03
  5    1  26/15  1.7333333333  -1.28e-03
  6    2  71/41  1.7317073171  +3.43e-04
- 7    1  97/56  1.7321428571  -9.20e-05</code></pre>
-<h2 id="exercises">Exercises</h2>
-<ol><li><strong>(★)</strong> Identify the period and its palindromic core for <code>√2</code>, <code>√3</code>, and <code>√7</code> from the demos above. What is the last term of each block, in terms of <code>⌊√d⌋</code>? <details><summary>Hint</summary>Each block ends in <code>2⌊√d⌋</code>: <code>2</code> for <code>√2</code> and <code>√3</code>, <code>4</code> for <code>√7</code>.</details></li></ol>
-<ol><li><strong>(★)</strong> The golden ratio <code>[1; (1)]</code> and silver ratio <code>[2; (2)]</code> are metallic means. Write the quadratic each satisfies and solve it. <details><summary>Hint</summary><code>[n; (n)]</code> gives <code>x = n + 1/x</code>, so <code>x² − nx − 1 = 0</code>.</details></li></ol>
-<ol><li><strong>(★★)</strong> Verify the state recurrence for <code>√7</code>: starting from <code>(P₀, Q₀) = (0, 1)</code>, compute <code>(P₁, Q₁)</code> and <code>(P₂, Q₂)</code> and check they stay integers. <details><summary>Hint</summary><code>a₀ = ⌊√7⌋ = 2</code>; then <code>P₁ = 2·1 − 0 = 2</code>, <code>Q₁ = (7 − 4)/1 = 3</code>, and <code>a₁ = ⌊(2+√7)/3⌋ = 1</code>.</details></li></ol>
-<ol><li><strong>(★★)</strong> Show that <code>(1 + √5)/2 = φ</code> is a reduced surd (Galois) and hence its continued fraction is purely periodic. <details><summary>Hint</summary><code>φ ≈ 1.618 &gt; 1</code>, and its conjugate <code>(1 − √5)/2 ≈ −0.618</code> lies in <code>(−1, 0)</code>.</details></li></ol>
-<ol><li><strong>(★★★)</strong> Prove that the <code>(Pₙ, Qₙ)</code> state pairs for <code>√d</code> are bounded, and conclude Lagrange&#x27;s theorem. <details><summary>Hint</summary>Show <code>0 &lt; Qₙ &lt; 2√d</code> and <code>|Pₙ| &lt; √d</code> once the expansion is past its lead-in; a finite state set must cycle. See Appendix A.</details></li></ol>
-<h2 id="see-it-move">See it move</h2>
-<p>Open the <strong>Loop Road</strong> widget: <a href="explore.html#stop-6-loop"><code>site/index.html#stop-6-loop</code></a>. Type any <code>√d</code> and watch the <code>(Pₙ, Qₙ)</code> state trace a closed cycle, with the palindrome of the repeating block highlighted as it forms.</p>
-<h2 id="further-reading">Further reading</h2>
-<ul><li>Khinchin, <em>Continued Fractions</em>, §§10–13 (quadratic irrationals and periodicity). See Appendix C.</li><li>Hardy &amp; Wright, §§10.9–10.12 for Lagrange&#x27;s and Galois&#x27; theorems.</li><li>Rockett &amp; Szüsz, <em>Continued Fractions</em>, Chapter III, for the palindrome law and reduced surds; Appendix C.</li><li>Appendix A of this tour for the finiteness proof of periodicity.</li></ul>
-<p class="chapter-nav"><a href="05-scenic-overlook.html">← Stop 5 — Scenic Overlook</a> · <a href="index.html">Route map</a> · <a href="07-cattle-crossing.html">Stop 7 — The Cattle Crossing →</a></p></main>
+ 7    1  97/56  1.7321428571  -9.20e-05</code></pre></div>
+</section>
+<section class="sec" data-sec="then-now-next">
+<h2 id="then-now-next">Then, now, next<a class="h-anchor" href="#then-now-next" aria-label="Link to this section">#</a></h2>
+<h3 id="then-loops-seen-loops-proved"><span class="tnn tnn-then">Then</span><span class="tnn-sep"> — </span>Loops seen, loops proved<a class="h-anchor" href="#then-loops-seen-loops-proved" aria-label="Link to this section">#</a></h3>
+<figure class="diagram" role="figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 516" width="640" height="516" role="img" font-family="var(--font-data,monospace)" font-size="13"><title>From noticing loops to explaining them</title><line x1="170" y1="74.5" x2="170" y2="174.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="236.5" x2="170" y2="380.5" stroke="currentColor" stroke-width="2"/><line x1="170" y1="424.5" x2="170" y2="480.5" stroke="currentColor" stroke-width="2"/><circle cx="170" cy="80.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="124.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="168.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="242.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="286.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="330.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="374.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="430.5" r="4" fill="var(--brass,#b5751a)"/><circle cx="170" cy="474.5" r="4" fill="var(--brass,#b5751a)"/><text x="320" y="25" text-anchor="middle" fill="currentColor" font-weight="bold">From noticing loops to explaining them</text><text x="24" y="61" fill="var(--brass,#b5751a)" font-weight="bold">SEEN</text><text x="158" y="85" text-anchor="end" fill="currentColor">1572</text><text x="182" y="85" fill="currentColor">Bombelli's fraction for sqrt(13) keeps repeating</text><text x="182" y="103" fill="currentColor">itself</text><text x="158" y="129" text-anchor="end" fill="currentColor">1737</text><text x="182" y="129" fill="currentColor">Euler - every periodic continued fraction is a</text><text x="182" y="147" fill="currentColor">quadratic irrational</text><text x="158" y="173" text-anchor="end" fill="currentColor">1759</text><text x="182" y="173" fill="currentColor">Euler tabulates the periods of sqrt(d) and notices</text><text x="182" y="191" fill="currentColor">the palindromes</text><text x="24" y="223" fill="var(--brass,#b5751a)" font-weight="bold">PROVED</text><text x="158" y="247" text-anchor="end" fill="currentColor">1770</text><text x="182" y="247" fill="currentColor">Lagrange - every quadratic irrational eventually</text><text x="182" y="265" fill="currentColor">loops</text><text x="158" y="291" text-anchor="end" fill="currentColor">1801</text><text x="182" y="291" fill="currentColor">Gauss's Disquisitiones - cycles of reduced quadratic</text><text x="182" y="309" fill="currentColor">forms</text><text x="158" y="335" text-anchor="end" fill="currentColor">1808</text><text x="182" y="335" fill="currentColor">Legendre's Essai proves the palindrome and the</text><text x="182" y="353" fill="currentColor">closing 2a0</text><text x="158" y="379" text-anchor="end" fill="currentColor">1829</text><text x="182" y="379" fill="currentColor">Galois, aged seventeen - purely periodic iff reduced</text><text x="24" y="411" fill="var(--brass,#b5751a)" font-weight="bold">STRUCTURE</text><text x="158" y="435" text-anchor="end" fill="currentColor">1972</text><text x="182" y="435" fill="currentColor">Shanks finds the infrastructure of a real quadratic</text><text x="182" y="453" fill="currentColor">field</text><text x="158" y="479" text-anchor="end" fill="currentColor">1984</text><text x="182" y="479" fill="currentColor">Cohen and Lenstra model how class groups are</text><text x="182" y="497" fill="currentColor">distributed</text></svg></figure>
+<p>Periodicity was noticed long before it was understood: Bombelli&#x27;s square-root fraction of 1572 visibly repeats, and Euler, filling tables of <code>√d</code> for <code>d</code> up to 120, saw both the loops and their mirror symmetry. Lagrange&#x27;s 1770 proof that <em>every</em> quadratic irrational loops was the first deep theorem of the subject; Gauss, in the <em>Disquisitiones Arithmeticae</em> of 1801, found the same cycles among reduced quadratic forms; and the seventeen-year-old Galois — whose first published paper, in April 1829, was on exactly this — showed which loops start at once, and why every period of <code>√d</code> reads the same backwards.</p>
+<h3 id="now-loops-as-the-skeleton-of-number-fields"><span class="tnn tnn-now">Now</span><span class="tnn-sep"> — </span>Loops as the skeleton of number fields<a class="h-anchor" href="#now-loops-as-the-skeleton-of-number-fields" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Class numbers and regulators.</strong> In the field <code>ℚ(√d)</code>, the loop of <code>√d</code> is a cycle of reduced ideals. Walking it computes the <em>regulator</em> (how big the field&#x27;s fundamental unit is — <a href="07-cattle-crossing.html">Stop 7</a>) and helps count the <em>class number</em> (how badly unique factorisation fails). Daniel Shanks&#x27;s 1972 discovery that this cycle has an &quot;infrastructure&quot; — a notion of distance that lets you take giant steps along it — is used in computer-algebra systems such as PARI/GP and Magma, and inspired key-exchange proposals based on real quadratic fields (Buchmann and Williams, 1989).</li><li><strong>Geometry.</strong> Each loop is also a <em>closed geodesic</em> on the modular surface, the hyperbolic surface that the modular group carves out of the upper half plane (Artin, 1924; Series, 1985). Counting loops is counting geodesics, and Peter Sarnak&#x27;s 1982 thesis used the prime geodesic theorem to count class numbers of indefinite forms on average.</li></ul>
+<h3 id="next-the-loops-nobody-can-predict"><span class="tnn tnn-next">Next</span><span class="tnn-sep"> — </span>The loops nobody can predict<a class="h-anchor" href="#next-the-loops-nobody-can-predict" aria-label="Link to this section">#</a></h3>
+<ul><li><strong>Gauss&#x27;s class-number-one problem.</strong> Gauss conjectured that infinitely many real quadratic fields have unique factorisation (class number <code>1</code>). The Cohen–Lenstra heuristics even predict the proportion — about <strong>75.4%</strong> of fields <code>ℚ(√p)</code> with prime <code>p ≡ 1 (mod 4)</code> — and computations up to <code>2·10¹¹</code> agree. Yet no one can prove there are infinitely many.</li><li><strong>How long is the loop?</strong> The period of <code>√d</code> is at most a small multiple of <code>√d · log d</code>, and it wanders erratically in between (the period wheel above). How its length is distributed as <code>d</code> varies — the quantity that decides whether Pell&#x27;s equation is easy or brutal — is not understood.</li><li><strong>Beyond quadratics.</strong> No known algorithm makes the <em>cubic</em> irrationals loop; that is Hermite&#x27;s problem, the open road at the end of <a href="02-unfolding-road.html#then-now-next">Stop 2</a>.</li></ul>
+</section>
+<section class="sec" data-sec="exercises">
+<h2 id="exercises">Exercises<a class="h-anchor" href="#exercises" aria-label="Link to this section">#</a></h2>
+<ol><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Identify the period and its palindromic core for <code>√2</code>, <code>√3</code>, and <code>√7</code> from the demos above. What is the last term of each block, in terms of <code>⌊√d⌋</code>? <details><summary>Hint</summary>Each block ends in <code>2⌊√d⌋</code>: <code>2</code> for <code>√2</code> and <code>√3</code>, <code>4</code> for <code>√7</code>.</details></li><li><span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> The golden ratio <code>[1; (1)]</code> and silver ratio <code>[2; (2)]</code> are metallic means. Write the quadratic each satisfies and solve it. <details><summary>Hint</summary><code>[n; (n)]</code> gives <code>x = n + 1/x</code>, so <code>x² − nx − 1 = 0</code>.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Verify the state recurrence for <code>√7</code>: starting from <code>(P₀, Q₀) = (0, 1)</code>, compute <code>(P₁, Q₁)</code> and <code>(P₂, Q₂)</code> and check they stay integers. <details><summary>Hint</summary><code>a₀ = ⌊√7⌋ = 2</code>; then <code>P₁ = 2·1 − 0 = 2</code>, <code>Q₁ = (7 − 4)/1 = 3</code>, and <code>a₁ = ⌊(2+√7)/3⌋ = 1</code>.</details></li><li><span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Show that <code>(1 + √5)/2 = φ</code> is a reduced surd (Galois) and hence its continued fraction is purely periodic. <details><summary>Hint</summary><code>φ ≈ 1.618 &gt; 1</code>, and its conjugate <code>(1 − √5)/2 ≈ −0.618</code> lies in <code>(−1, 0)</code>.</details></li><li><span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Prove that the <code>(Pₙ, Qₙ)</code> state pairs for <code>√d</code> are bounded, and conclude Lagrange&#x27;s theorem. <details><summary>Hint</summary>Show <code>0 &lt; Qₙ &lt; 2√d</code> and <code>|Pₙ| &lt; √d</code> once the expansion is past its lead-in; a finite state set must cycle. See Appendix A.</details></li></ol>
+</section>
+<section class="sec" data-sec="see-it-move">
+<h2 id="see-it-move">See it move<a class="h-anchor" href="#see-it-move" aria-label="Link to this section">#</a></h2>
+<p>The Loop Road&#x27;s section of the <a href="explore.html#stop-6-loop">live exposition</a> has a <code>√d</code> dial. Type any <code>d</code> — or tap <code>√2</code>, <code>√3</code>, <code>√7</code>, <code>√13</code>, <code>√61</code> — and it prints the expansion with the repeating block overlined, the period length, and the closing term <code>2a₀</code>, so you can check the palindrome by eye. Try <code>√61</code>, whose eleven-term loop is the reason Fermat chose it (Stop 7).</p>
+</section>
+<section class="sec" data-sec="further-reading">
+<h2 id="further-reading">Further reading<a class="h-anchor" href="#further-reading" aria-label="Link to this section">#</a></h2>
+<ul><li>Khinchin, <em>Continued Fractions</em>, §§10–13 (quadratic irrationals and periodicity). See Appendix C.</li><li>Hardy &amp; Wright, §§10.9–10.12 for Lagrange&#x27;s and Galois&#x27; theorems.</li><li>Rockett &amp; Szüsz, <em>Continued Fractions</em>, Chapter III, for the palindrome law and reduced surds; Appendix C.</li><li>Appendix A of this tour for the finiteness proof of periodicity.</li><li>H. Davenport, <em>The Higher Arithmetic</em> (8th ed., 2008), Chapter IV — periodic continued fractions and Pell&#x27;s equation, told with unusual clarity.</li><li>É. Galois, &quot;Démonstration d&#x27;un théorème sur les fractions continues périodiques,&quot; <em>Annales de Gergonne</em> 19 (1829) — his first paper, published at seventeen.</li><li>H. Cohen, <em>A Course in Computational Algebraic Number Theory</em> (1993), Chapter 5 — real quadratic fields, regulators, and Shanks&#x27;s infrastructure.</li></ul>
+</section><nav class="pager" aria-label="Previous and next page"><a class="pager-prev" href="05-scenic-overlook.html"><span class="pager-dir">&#8592; Previous</span><span class="pager-title">Stop 5 · Scenic Overlook</span></a><a class="pager-next" href="07-cattle-crossing.html"><span class="pager-dir">Next &#8594;</span><span class="pager-title">Stop 7 · The Cattle Crossing</span></a></nav></main>
+  <aside class="toc-rail"><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#overview">Overview</a><ol><li><a href="#lagrange-s-theorem">Lagrange's theorem</a></li><li><a href="#why-quadratic-surds-must-loop">Why quadratic surds must loop</a></li><li><a href="#the-shape-of-the-loop">The shape of the loop</a></li><li><a href="#galois-and-purely-periodic-surds">Galois and purely periodic surds</a></li><li><a href="#metallic-means">Metallic means</a></li></ol></li><li><a href="#worked-examples">Worked examples</a></li><li><a href="#then-now-next">Then, now, next</a><ol><li><a href="#then-loops-seen-loops-proved">Then — loops seen, loops proved</a></li><li><a href="#now-loops-as-the-skeleton-of-number-fields">Now — loops as the skeleton of number fields</a></li><li><a href="#next-the-loops-nobody-can-predict">Next — the loops nobody can predict</a></li></ol></li><li><a href="#exercises">Exercises</a></li><li><a href="#see-it-move">See it move</a></li><li><a href="#further-reading">Further reading</a></li></ol></nav></aside>
 </div>
 <footer class="site-footer">
-  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
-  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
+      <p>A guided tour of recursion and continued fractions. Every number on these pages was
+      computed, exactly, by the <code>tourbus</code> engine: standard-library Python, no dependencies.</p>
+    </div>
+    <div class="foot-col"><div class="foot-h">Ride</div>
+      <a href="01-depot.html">Board at the Depot</a><a href="explore.html">Live exposition</a>
+      <a href="syllabus.html">Syllabus for instructors</a><a href="appendix-c-references.html">Reading list</a></div>
+    <div class="foot-col"><div class="foot-h">Lines</div><a href="appendix-d-frontier.html">The Express Line</a><a href="appendix-e-web-of-ideas.html">The Web of Ideas</a><a href="appendix-f-cross-domain.html">The Cross-Domain Line</a><a href="appendix-h-history.html">The Heritage Line</a><a href="appendix-i-branches.html">The Branch Line</a></div>
+    <div class="foot-col"><div class="foot-h">Project</div>
+      <a href="https://github.com/sonoransun/recursivecontinuancetourbus">Source on GitHub</a><span>MIT licensed</span><span><code>python -m tourbus</code></span></div>
+  </div>
 </footer>
 <script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>

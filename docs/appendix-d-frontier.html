@@ -3,74 +3,91 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Express Line - Tour Bus</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%8C%3C/text%3E%3C/svg%3E">
+<title>Fringe Avenues — Appendix D · The Express Line · Tour Bus</title>
+<meta name="description" content="Past the end of the main route lie nine deeper, stranger stops. Each still computes live and exactly (or rigorously) on the same engine. Ride them all with">
+<meta property="og:title" content="Fringe Avenues — Appendix D · The Express Line · Tour Bus">
+<meta property="og:description" content="Past the end of the main route lie nine deeper, stranger stops. Each still computes live and exactly (or rigorously) on the same engine. Ride them all with">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#eceef1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0e13" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M24 78V52a26 26 0 0 1 26-26h26' fill='none' stroke='%23b5751a' stroke-width='11' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='78' r='13' fill='%23b5751a'/%3E%3Ccircle cx='76' cy='26' r='13' fill='%23b5751a'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/rct-docs.css">
 <script>
 (function(){try{var t=localStorage.getItem('rct-theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 </head>
-<body>
+<body data-line="express" data-page="appendix-d-frontier">
+<div class="progress" aria-hidden="true"><i></i></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="topbar">
-  <button class="menu-btn" aria-label="Toggle navigation" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
-  <a class="wordmark" href="index.html">Recursive Continuance <b>Tour&nbsp;Bus</b></a>
+  <button class="menu-btn" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">&#9776;</button>
+  <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
   <div class="search">
     <input id="search-input" type="search" placeholder="Search the tour" aria-label="Search the tour" autocomplete="off" spellcheck="false">
+    <kbd class="search-kbd" aria-hidden="true">/</kbd>
     <div class="search-results" id="search-results" hidden></div>
   </div>
-  <button class="theme-toggle" id="theme-toggle" aria-label="Cycle color theme">Theme: Auto</button>
+  <a class="top-link" href="https://github.com/sonoransun/recursivecontinuancetourbus">GitHub</a>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cycle color theme"><span class="tt-icon" aria-hidden="true"></span><span class="tt-label">Auto</span></button>
 </header>
-<div class="layout">
-  <nav class="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Home</a>
-<div class="nav-group">The Tour</div>
-<a href="01-depot.html">1 · The Depot</a>
-<a href="02-unfolding-road.html">2 · The Unfolding Road</a>
-<a href="03-engine-room.html">3 · The Engine Room</a>
-<a href="04-golden.html">4 · The Golden Milestone</a>
-<a href="05-scenic-overlook.html">5 · Scenic Overlook</a>
-<a href="06-loop-road.html">6 · The Loop Road</a>
-<a href="07-cattle-crossing.html">7 · The Cattle Crossing</a>
-<a href="08-family-tree.html">8 · The Family Tree</a>
-<a href="09-celebrity.html">9 · Celebrity Sightings</a>
-<a href="10-casino.html">10 · The Casino</a>
-<a href="11-assembly-line.html">11 · The Infinite Assembly Line</a>
-<a href="12-tower.html">12 · The Tower</a>
-<a href="13-hall-of-mirrors.html">13 · The Hall of Mirrors</a>
-<a href="14-souvenir-shop.html">14 · The Souvenir Shop</a>
-<a href="15-terminus.html">15 · Terminus</a>
-<div class="nav-group">The Express Line</div>
+<div class="layout has-rail">
+  <nav class="sidebar" id="sidebar" aria-label="Route"><a class="nav-home" href="index.html">Route map</a>
+<div class="nav-sec" data-line="main"><div class="nav-group">The Tour</div><ol class="nav-line">
+<li><a class="stn" href="01-depot.html"><span class="stn-n">1</span><span class="stn-t">The Depot</span></a></li>
+<li><a class="stn" href="02-unfolding-road.html"><span class="stn-n">2</span><span class="stn-t">The Unfolding Road</span></a></li>
+<li><a class="stn" href="03-engine-room.html"><span class="stn-n">3</span><span class="stn-t">The Engine Room</span></a></li>
+<li><a class="stn" href="04-golden.html"><span class="stn-n">4</span><span class="stn-t">The Golden Milestone</span></a></li>
+<li><a class="stn" href="05-scenic-overlook.html"><span class="stn-n">5</span><span class="stn-t">Scenic Overlook</span></a></li>
+<li><a class="stn" href="06-loop-road.html"><span class="stn-n">6</span><span class="stn-t">The Loop Road</span></a></li>
+<li><a class="stn" href="07-cattle-crossing.html"><span class="stn-n">7</span><span class="stn-t">The Cattle Crossing</span></a></li>
+<li><a class="stn" href="08-family-tree.html"><span class="stn-n">8</span><span class="stn-t">The Family Tree</span></a></li>
+<li><a class="stn" href="09-celebrity.html"><span class="stn-n">9</span><span class="stn-t">Celebrity Sightings</span></a></li>
+<li><a class="stn" href="10-casino.html"><span class="stn-n">10</span><span class="stn-t">The Casino</span></a></li>
+<li><a class="stn" href="11-assembly-line.html"><span class="stn-n">11</span><span class="stn-t">The Infinite Assembly Line</span></a></li>
+<li><a class="stn" href="12-tower.html"><span class="stn-n">12</span><span class="stn-t">The Tower</span></a></li>
+<li><a class="stn" href="13-hall-of-mirrors.html"><span class="stn-n">13</span><span class="stn-t">The Hall of Mirrors</span></a></li>
+<li><a class="stn" href="14-souvenir-shop.html"><span class="stn-n">14</span><span class="stn-t">The Souvenir Shop</span></a></li>
+<li><a class="stn" href="15-terminus.html"><span class="stn-n">15</span><span class="stn-t">Terminus</span></a></li>
+</ol></div>
+<div class="nav-sec" data-line="express"><div class="nav-group">The Express Line</div>
 <a class="on" href="appendix-d-frontier.html">Fringe Avenues</a>
-<div class="nav-group">Synthesis</div>
+</div>
+<div class="nav-sec" data-line="web"><div class="nav-group">Synthesis</div>
 <a href="appendix-e-web-of-ideas.html">The Web of Ideas</a>
-<div class="nav-group">Cross-Domain</div>
+</div>
+<div class="nav-sec" data-line="cross"><div class="nav-group">Cross-Domain</div>
 <a href="appendix-f-cross-domain.html">The Same Recurrence</a>
-<div class="nav-group">Heritage</div>
+</div>
+<div class="nav-sec" data-line="heritage"><div class="nav-group">Heritage</div>
 <a href="appendix-h-history.html">A History in Convergents</a>
-<div class="nav-group">Branch</div>
+</div>
+<div class="nav-sec" data-line="branch"><div class="nav-group">Branch</div>
 <a href="appendix-i-branches.html">Other Ways to Unfold</a>
-<div class="nav-group">Reference</div>
-<a href="appendix-a-proofs.html">Appendix A - Proofs</a>
-<a href="appendix-b-glossary.html">Appendix B - Glossary</a>
-<a href="appendix-c-references.html">Appendix C - References</a>
-<a href="appendix-g-hints.html">Appendix G - Hints &amp; selected answers</a>
-<a href="syllabus.html">Syllabus - for instructors</a>
-<div class="nav-group">Interactive</div>
-<a href="explore.html">Live Exposition ↗</a></nav>
-  <main class="content" id="main"><p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus</a></p>
-<h1 id="appendix-d-the-express-line-fringe-avenues">Appendix D — The Express Line: Fringe Avenues</h1>
-<nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio</a></li><li><a href="#e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent</a></li><li><a href="#e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem</a></li><li><a href="#e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and &quot;minus&quot;</a></li><li><a href="#e5-the-three-distance-theorem">E5 — The three-distance theorem</a></li><li><a href="#e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch</a></li><li><a href="#e7-physics-colliding-blocks-count">E7 — Physics: colliding blocks count π</a></li><li><a href="#e8-the-river-conway-s-topograph">E8 — The River: Conway&#x27;s topograph</a></li><li><a href="#e9-ramanujan-s-continued-fraction">E9 — Ramanujan&#x27;s Continued Fraction</a></li></ol></nav>
+</div>
+<div class="nav-sec" data-line="ref"><div class="nav-group">Reference</div>
+<a href="appendix-a-proofs.html">Appendix A — Proofs</a>
+<a href="appendix-b-glossary.html">Appendix B — Glossary</a>
+<a href="appendix-c-references.html">Appendix C — References</a>
+<a href="appendix-g-hints.html">Appendix G — Hints &amp; selected answers</a>
+<a href="syllabus.html">Syllabus — for instructors</a>
+</div>
+<div class="nav-sec" data-line="explore"><div class="nav-group">Interactive</div>
+<a href="explore.html">Live Exposition ↗</a>
+</div></nav>
+  <main class="content" id="main"><header class="page-head"><nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Route map</a><span aria-hidden="true">/</span><span>The Express Line</span></nav><div class="kicker"><span class="roundel roundel-dot" aria-hidden="true"></span><span>Appendix D · The Express Line</span></div><h1 id="appendix-d-the-express-line-fringe-avenues">Fringe Avenues</h1><ul class="page-meta"><li><span class="mk">Reading</span> 12 min</li><li><span class="mk">Run it</span> <code>python -m tourbus frontier</code></li><li><a class="mlink" href="explore.html#stop-encore-blocks">Live widget&nbsp;&#8599;</a></li></ul></header><details class="toc-inline"><summary>On this page</summary><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio</a></li><li><a href="#e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent</a></li><li><a href="#e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem</a></li><li><a href="#e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and "minus"</a></li><li><a href="#e5-the-three-distance-theorem">E5 — The three-distance theorem</a></li><li><a href="#e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch</a></li><li><a href="#e7-physics-colliding-blocks-count">E7 — Physics: colliding blocks count π</a></li><li><a href="#e8-the-river-conway-s-topograph">E8 — The River: Conway's topograph</a></li><li><a href="#e9-ramanujan-s-continued-fraction">E9 — Ramanujan's Continued Fraction</a></li></ol></nav></details><div class="intro">
 <p>Past the end of the main route lie nine deeper, stranger stops. Each still computes live and exactly (or rigorously) on the same engine. Ride them all with</p>
-<pre><code>python -m tourbus frontier</code></pre>
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus frontier</span></code></pre></div>
 <p>or one at a time with <code>python -m tourbus frontier N</code>, or reach the individual demonstrations through <code>python -m tourbus demo &lt;name&gt;</code>.</p>
 <hr>
-<h2 id="e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio</h2>
+</div>
+<section class="sec" data-sec="e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">
+<h2 id="e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio<a class="h-anchor" href="#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio" aria-label="Link to this section">#</a></h2>
 <p>The Golden Milestone (Stop 4) crowned φ the hardest number to approximate, with Hurwitz&#x27;s constant √5. What is <em>second</em>-hardest? The answer is a discrete ladder — the <strong>Lagrange spectrum</strong> below 3 — governed by the <strong>Markov equation</strong></p>
-<pre><code>x² + y² + z² = 3·x·y·z.</code></pre>
+<div class="math-display">x² + y² + z² = 3·x·y·z.</div>
 <p>Its positive integer solutions, the <strong>Markov triples</strong>, grow from <code>(1, 1, 1)</code> by <em>Vieta jumping</em>: fix two coordinates and the third satisfies a quadratic with a second integer root. The largest entries are the <strong>Markov numbers</strong> 1, 2, 5, 13, 29, 34, 89, …; each <code>m</code> gives a <strong>Lagrange number</strong> <code>L_m = √(9m² − 4)/m</code>, and these are exactly the spectrum below 3, accumulating at 3.</p>
 <figure class="figure"><svg color="#6e7781" xmlns="http://www.w3.org/2000/svg" viewBox="-91.2 -49.2 686.4 476.4"><title>The Markov tree grown by Vieta jumping</title><line x1="252" y1="24" x2="252" y2="78" stroke="currentColor" stroke-width="1.2"/><line x1="252" y1="116" x2="252" y2="170" stroke="currentColor" stroke-width="1.2"/><line x1="252" y1="208" x2="84" y2="262" stroke="currentColor" stroke-width="1.2"/><line x1="252" y1="208" x2="420" y2="262" stroke="currentColor" stroke-width="1.2"/><line x1="84" y1="300" x2="0" y2="354" stroke="currentColor" stroke-width="1.2"/><line x1="84" y1="300" x2="168" y2="354" stroke="currentColor" stroke-width="1.2"/><line x1="420" y1="300" x2="336" y2="354" stroke="currentColor" stroke-width="1.2"/><line x1="420" y1="300" x2="504" y2="354" stroke="currentColor" stroke-width="1.2"/><text x="252" y="4" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">1</text><text x="252" y="19" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(1,1,1)</text><text x="252" y="96" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">2</text><text x="252" y="111" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(1,1,2)</text><text x="252" y="188" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">5</text><text x="252" y="203" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(1,2,5)</text><text x="84" y="280" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">13</text><text x="84" y="295" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(1,5,13)</text><text x="420" y="280" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">29</text><text x="420" y="295" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(2,5,29)</text><text x="0" y="372" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">34</text><text x="0" y="387" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(1,13,34)</text><text x="168" y="372" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">194</text><text x="168" y="387" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(5,13,194)</text><text x="336" y="372" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">169</text><text x="336" y="387" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(2,29,169)</text><text x="504" y="372" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">433</text><text x="504" y="387" font-family="monospace" font-size="9" text-anchor="middle" fill="currentColor">(5,29,433)</text></svg><figcaption>The Markov triples grow as a binary tree under Vieta jumping; every number in it is a rung of the Lagrange spectrum, climbing toward 3.</figcaption></figure>
 <p>The miracle that ties it back to continued fractions: <code>L_m</code> is the <strong>Markov value</strong> of a periodic CF word in {1, 2} — the largest, over all cyclic positions, of the forward continued fraction plus the backward one. φ = <code>[1;(1)]</code> sits at √5; the silver ratio <code>1 + √2 = [2;(2)]</code> at √8; the word <code>[2,2,1,1]</code> at √221/5.</p>
-<pre><code>$ python -m tourbus demo markov
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo markov</span>
 The Markov / Lagrange spectrum below 3:
  Markov m  L_m                    value
  --------  ------------------  --------
@@ -82,69 +99,87 @@ The Markov / Lagrange spectrum below 3:
        34  10/17*sqrt(26)      2.999423
        89  1/89*sqrt(71285)    2.999916
       169  1/169*sqrt(257045)  2.999977
-      194  2/97*sqrt(21170)    2.999982</code></pre>
+      194  2/97*sqrt(21170)    2.999982</code></pre></div>
 <p>Above <strong>Freiman&#x27;s constant</strong> (≈ 4.5278) the spectrum stops being discrete and becomes a solid ray <code>[F, ∞)</code>; the structure in between is a Cantor-like set still under active study.</p>
-<p><strong>Exercises.</strong> (★) Verify a Markov triple satisfies the equation. (★★) Show the silver ratio <code>1 + √2</code> achieves √8 by computing <code>q²·|x − p/q|</code> along its convergents. (★★★) Prove Vieta jumping never leaves the positive integers.</p>
+<p><strong>Then &amp; now.</strong> Andrey Markov found this ladder in 1879–80, and Frobenius asked in 1913 whether each Markov number sits atop exactly one triple — the <em>uniqueness conjecture</em>, still open after more than a century (Martin Aigner&#x27;s 2013 book is devoted to it). The triples have since resurfaced far from approximation theory, indexing exceptional vector bundles on the projective plane and turning up in the combinatorics of cluster algebras, while Gregory Freiman located in 1975 exactly where the spectrum becomes a solid ray.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Verify a Markov triple satisfies the equation. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Show the silver ratio <code>1 + √2</code> achieves √8 by computing <code>q²·|x − p/q|</code> along its convergents. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Prove Vieta jumping never leaves the positive integers.</p>
 <hr>
-<h2 id="e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent</h2>
+</section>
+<section class="sec" data-sec="e2-continuants-the-polynomial-behind-every-convergent">
+<h2 id="e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent<a class="h-anchor" href="#e2-continuants-the-polynomial-behind-every-convergent" aria-label="Link to this section">#</a></h2>
 <p>The convergent numerators and denominators are not merely numbers; they are values of one polynomial family, the <strong>continuants</strong> <code>K(a₁, …, aₙ)</code>, defined by the <em>same</em> three-term recurrence and satisfying <code>pₙ = K(a₀, …, aₙ)</code>, <code>qₙ = K(a₁, …, aₙ)</code>. Two gems:</p>
 <ul><li><strong>Palindrome:</strong> <code>K(a₁, …, aₙ) = K(aₙ, …, a₁)</code> — reversing the partial quotients leaves the value unchanged.</li><li><strong>Euler&#x27;s rule:</strong> the continuant equals the sum, over every way of striking out disjoint <em>adjacent</em> pairs, of the product of what remains. So <code>K(1, 1, …, 1)</code> (n ones) counts domino-and-square tilings and equals the Fibonacci number <code>F_{n+1}</code>.</li></ul>
-<pre><code>$ python -m tourbus demo continuant 1 2 3 4 5
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo continuant 1 2 3 4 5</span>
 Continuant K(1, 2, 3, 4, 5):
   recurrence = 225
   Euler rule = 225
-  reversed   = K(5, 4, 3, 2, 1) = 225 (equal)</code></pre>
-<p><strong>Exercises.</strong> (★) Compute <code>K(a, b, c)</code> by hand and match <code>abc + a + c</code>. (★★) Prove the palindrome identity by induction. (★★★) Show <code>K(1,…,1)</code> (n ones) is <code>F_{n+1}</code>.</p>
+  reversed   = K(5, 4, 3, 2, 1) = 225 (equal)</code></pre></div>
+<p><strong>Then &amp; now.</strong> Euler studied these polynomials in 1764 as a device for continued fractions. Today every tridiagonal determinant is a continuant, so the recurrence above runs inside eigenvalue solvers for tridiagonal matrices — the Sturm-sequence counting of <a href="appendix-f-cross-domain.html">Appendix F</a> — and in the three-term recurrences that define the classical orthogonal polynomials.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Compute <code>K(a, b, c)</code> by hand and match <code>abc + a + c</code>. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Prove the palindrome identity by induction. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Show <code>K(1,…,1)</code> (n ones) is <code>F_{n+1}</code>.</p>
 <hr>
-<h2 id="e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem</h2>
+</section>
+<section class="sec" data-sec="e3-algebraic-irrationals-cube-roots-and-an-open-problem">
+<h2 id="e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem<a class="h-anchor" href="#e3-algebraic-irrationals-cube-roots-and-an-open-problem" aria-label="Link to this section">#</a></h2>
 <p>Quadratic irrationals have periodic continued fractions (Lagrange, Stop 6). Cube roots do <strong>not</strong> — and, remarkably, <em>nobody knows whether their partial quotients are bounded</em>. Numerically they behave like a &quot;random&quot; real: geometric mean near Khinchin&#x27;s constant, with occasional enormous terms.</p>
-<pre><code>$ python -m tourbus demo cbrt 2
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo cbrt 2</span>
 Continued fraction of 2^(1/3):
   [1, 3, 1, 5, 1, 1, 4, 1, 1, 8, 1, 14, 1, 10, 2, 1] ...
-  max term 534, geometric mean 2.763 (Khinchin-typical; boundedness OPEN)</code></pre>
+  max term 534, geometric mean 2.763 (Khinchin-typical; boundedness OPEN)</code></pre></div>
 <p>The <strong>plastic number</strong> ρ (real root of <code>x³ = x + 1</code>, the cubic cousin of φ) is a famous specimen — its expansion produces a <code>141</code> at position 12, out of nowhere:</p>
-<pre><code>$ python -m tourbus demo plastic
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo plastic</span>
 The plastic number (x^3 = x + 1):
   [1, 3, 12, 1, 1, 3, 2, 3, 2, 4, 2, 141, 80, 2] ...
-  note the 141 at position 12 -- out of nowhere.</code></pre>
+  note the 141 at position 12 -- out of nowhere.</code></pre></div>
 <p>Contrast with √2 = <code>[1; (2)]</code>, whose partial quotients are eternally bounded by 2. Whether <code>2^(1/3)</code> has bounded partial quotients is open, a relative of the Littlewood conjecture (Stop 15). These expansions are computed rigorously: a high-precision decimal seed becomes an interval, and only certified terms are emitted.</p>
-<p><strong>Exercises.</strong> (★) Confirm the plastic number is a root of <code>x³ − x − 1</code>. (★★) Compare the geometric mean of the first 40 partial quotients of <code>2^(1/3)</code> and of <code>√2</code>. (★★★) Read about the Littlewood conjecture and its link to bounded partial quotients.</p>
+<p><strong>Then &amp; now.</strong> Klaus Roth proved in 1955 (Fields Medal, 1958) that every algebraic irrational has irrationality measure exactly <code>2</code>: no algebraic number is approximable much better than a random one. But the finer question on this stop — whether the partial quotients of <code>2^(1/3)</code> stay bounded — remains out of reach, because Roth&#x27;s theorem is <em>ineffective</em>: it cannot say how large the rare good approximations are. Lang and Trotter (1972) computed cube-root expansions and found them statistically indistinguishable from random numbers; nothing since has broken the deadlock.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Confirm the plastic number is a root of <code>x³ − x − 1</code>. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Compare the geometric mean of the first 40 partial quotients of <code>2^(1/3)</code> and of <code>√2</code>. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Read about the Littlewood conjecture and its link to bounded partial quotients.</p>
 <hr>
-<h2 id="e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and &quot;minus&quot;</h2>
+</section>
+<section class="sec" data-sec="e4-continued-fraction-variants-nearest-integer-and-minus">
+<h2 id="e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and &quot;minus&quot;<a class="h-anchor" href="#e4-continued-fraction-variants-nearest-integer-and-minus" aria-label="Link to this section">#</a></h2>
 <p>The floor is not the only way to unfold a number.</p>
 <ul><li>The <strong>nearest-integer continued fraction (NICF)</strong> rounds to the <em>closest</em> integer at each step, allowing negative partial quotients with <code>|aᵢ| ≥ 2</code>. It converges faster than the regular expansion.</li><li>The <strong>minus (Hirzebruch–Jung) continued fraction</strong> writes <code>a₀ − 1/(a₁ − 1/(a₂ − …))</code> with every <code>aᵢ ≥ 2</code>. It is the language algebraic geometers use to resolve cyclic quotient singularities: the <code>aᵢ</code> are the self-intersection numbers of the exceptional curves.</li></ul>
-<pre><code>$ python -m tourbus demo nicf 87/32
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo nicf 87/32</span>
 Three continued fractions of 87/32:
   regular:         [2, 1, 2, 1, 1, 4]
   nearest-integer: [3, -4, 2, 4]
-  minus (a&gt;=2):    [3, 4, 3, 2, 2, 2]</code></pre>
+  minus (a&gt;=2):    [3, 4, 3, 2, 2, 2]</code></pre></div>
 <p>Notice the NICF is shorter (fewer terms for the same number) and carries a negative quotient where the regular expansion had a run of 1s.</p>
-<p><strong>Exercises.</strong> (★) Fold each expansion back to <code>87/32</code>. (★★) Find a fraction whose NICF is strictly shorter than its regular CF. (★★★) Look up how the minus-CF of <code>n/q</code> gives the resolution of the <code>1/n(1, q)</code> cyclic quotient singularity.</p>
+<p><strong>Then &amp; now.</strong> Nearest-integer expansions go back to Minnigerode (1873) and Hurwitz (1889). The minus expansion is the tool with which Jung (1908) and Hirzebruch (1953) resolved surface singularities, each coefficient a self-intersection number, and it remains standard in toric geometry. The variants keep multiplying: Rosen&#x27;s continued fractions for Hecke groups (1954) and Nakada&#x27;s α-continued fractions (1981) form whole families whose entropy was mapped in detail in the 2000s and 2010s.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Fold each expansion back to <code>87/32</code>. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Find a fraction whose NICF is strictly shorter than its regular CF. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Look up how the minus-CF of <code>n/q</code> gives the resolution of the <code>1/n(1, q)</code> cyclic quotient singularity.</p>
 <hr>
-<h2 id="e5-the-three-distance-theorem">E5 — The three-distance theorem</h2>
+</section>
+<section class="sec" data-sec="e5-the-three-distance-theorem">
+<h2 id="e5-the-three-distance-theorem">E5 — The three-distance theorem<a class="h-anchor" href="#e5-the-three-distance-theorem" aria-label="Link to this section">#</a></h2>
 <p>Scatter the points <code>0, α, 2α, …, (N−1)α</code> (mod 1) around a circle. However you choose α and N, they cut the circle into arcs of <strong>at most three distinct lengths</strong> — and when there are three, the largest is the sum of the other two. Steinhaus conjectured it; it was proved in the 1950s.</p>
 <p>The continued fraction of α is exactly what controls it: the gap lengths are the quantities <code>‖qₖ·α‖</code> at the convergent denominators, so the point set&#x27;s &quot;resolution&quot; jumps precisely at the convergents. Rational approximation and equidistribution turn out to be one subject.</p>
-<pre><code>$ python -m tourbus demo three-distance 8/13 12
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo three-distance 8/13 12</span>
 Three-distance theorem for a=8/13, N=12:
   2 distinct gap lengths: 1/13, 2/13
-  largest = sum of the others: True</code></pre>
-<p><strong>Exercises.</strong> (★) Verify the three-gap property for α = 1/φ ≈ Fibonacci ratios. (★★) Show the gap lengths total 1. (★★★) Relate the three lengths to <code>‖qₖα‖</code> for consecutive convergent denominators.</p>
+  largest = sum of the others: True</code></pre></div>
+<p><strong>Then &amp; now.</strong> Hugo Steinhaus posed the question; Vera T. Sós, János Surányi, and Stanisław Świerczkowski proved it independently in 1957–58. It is why golden-ratio hashing and the golden angle of sunflowers spread points so evenly (<a href="04-golden.html#then-now-next">Stop 4</a>). In higher dimensions &quot;three&quot; fails, and the right generalisations — gap statistics read off flows on the space of lattices (Marklof and Strömbergsson, 2017) — are an active research area.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Verify the three-gap property for α = 1/φ ≈ Fibonacci ratios. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Show the gap lengths total 1. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Relate the three lengths to <code>‖qₖα‖</code> for consecutive convergent denominators.</p>
 <hr>
-<h2 id="e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch</h2>
+</section>
+<section class="sec" data-sec="e6-the-gauss-kuzmin-wirsing-constant-from-scratch">
+<h2 id="e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch<a class="h-anchor" href="#e6-the-gauss-kuzmin-wirsing-constant-from-scratch" aria-label="Link to this section">#</a></h2>
 <p>How fast does the Gauss–Kuzmin distribution (Stop 10) set in? The rate is the <strong>second eigenvalue</strong> of the Gauss map&#x27;s <em>transfer operator</em></p>
-<pre><code>(L f)(x) = Σ_{n≥1}  1/(n+x)² · f(1/(n+x)).</code></pre>
+<div class="math-display">(L f)(x) = Σ_{n≥1}  1/(n+x)² · f(1/(n+x)).</div>
 <p>Its largest eigenvalue is exactly 1 (with the Gauss density as eigenfunction); the second is the <strong>Gauss–Kuzmin–Wirsing constant</strong> λ ≈ −0.30366300289…, and the error in the Gauss–Kuzmin theorem decays like <code>|λ|ⁿ</code>. Wirsing computed it in 1974; no closed form is known.</p>
 <p>We recover it with no special functions: discretize <code>L</code> as a matrix on a grid, then power-iterate from a <strong>mean-zero</strong> start (because <code>L</code> preserves the integral, the eigenvalue-1 component of a mean-zero function is zero, so the iteration lands on the second eigenvalue).</p>
-<pre><code>$ python -m tourbus demo gkw
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo gkw</span>
 Gauss-Kuzmin-Wirsing constant (from the transfer operator):
   computed  lambda = -0.3036601
-  Wirsing&#x27;s value  = -0.3036630 (error 2.9e-06)</code></pre>
-<p><strong>Exercises.</strong> (★) Confirm the leading eigenvalue is 1 to three digits. (★★) Show <code>∫₀¹ (Lf) dx = ∫₀¹ f dx</code> (the reason 1 is an eigenvalue). (★★★) Improve the estimate by refining the grid, and watch the error shrink.</p>
+  Wirsing&#x27;s value  = -0.3036630 (error 2.9e-06)</code></pre></div>
+<p><strong>Then &amp; now.</strong> Eduard Wirsing found <code>λ</code> in 1974; Babenko (1978) and Mayer (1991) set the transfer operator in a wider theory that ties it to the Selberg zeta function of the modular surface, and <code>λ</code> is now known to hundreds of digits. No closed form has ever been found. Because the same operator governs the average-case speed of Euclid&#x27;s algorithm (<a href="10-casino.html#then-now-next">Stop 10</a>), this constant turns up in the analysis of gcd algorithms.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Confirm the leading eigenvalue is 1 to three digits. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Show <code>∫₀¹ (Lf) dx = ∫₀¹ f dx</code> (the reason 1 is an eigenvalue). <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Improve the estimate by refining the grid, and watch the error shrink.</p>
 <hr>
-<h2 id="e7-physics-colliding-blocks-count">E7 — Physics: colliding blocks count π</h2>
+</section>
+<section class="sec" data-sec="e7-physics-colliding-blocks-count">
+<h2 id="e7-physics-colliding-blocks-count">E7 — Physics: colliding blocks count π<a class="h-anchor" href="#e7-physics-colliding-blocks-count" aria-label="Link to this section">#</a></h2>
 <p>The last express stop is a bridge from arithmetic to the physical world. Put a small block between a wall and a much heavier one, send the heavy block in, and count <strong>every</strong> perfectly elastic collision — block-on-block and block-on-wall alike. <strong>Galperin&#x27;s theorem (2003)</strong>: if the mass ratio is <code>100ⁿ</code>, the total number of collisions is the integer formed by the <strong>first n+1 digits of π</strong>. Equal masses collide exactly <code>3</code> times; a ratio of <code>100</code> gives <code>31</code>; a ratio of <code>10000</code> gives <code>314</code>.</p>
 <p>Why on earth π? Rescale the coordinates by the square roots of the masses and the two-block system becomes a single billiard ball bouncing inside a <strong>wedge</strong> of angle <code>θ = arctan(√(m/M))</code>; each collision is one bounce, and unfolding the wedge by reflections straightens the trajectory into a line, which can cross the mirrored walls <code>⌈π/θ⌉ − 1</code> times (that is <code>⌊π/θ⌋</code> whenever <code>π/θ</code> is not an integer). For <code>m/M = 100⁻ⁿ</code> the angle is <code>arctan(10⁻ⁿ) ≈ 10⁻ⁿ</code>, so the count reads off <code>⌊π·10ⁿ⌋</code> — the digits of π. The collision count is a <strong>rotation number</strong>, the very quantity continued fractions were built to measure (Stop 8), and π appears because it is the half-turn.</p>
-<pre><code>$ python -m tourbus demo blocks
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo blocks</span>
 Galperin&#x27;s colliding blocks: physics counts the digits of pi
  mass ratio  collisions (sim)  digits of pi
  ----------  ----------------  ------------
@@ -154,27 +189,33 @@ Galperin&#x27;s colliding blocks: physics counts the digits of pi
  100^3                   3141          3141
  100^4                  31415         31415
  100^5                 314159        314159
-  two elastic blocks, count every collision -&gt; the digits of pi.</code></pre>
+  two elastic blocks, count every collision -&gt; the digits of pi.</code></pre></div>
 <p>The <code>collisions</code> column is an event-driven simulation of the mechanics; the <code>digits of pi</code> column is Galperin&#x27;s closed form <code>⌊π·10ⁿ⌋</code>, computed in high precision without simulating a single collision. They agree row for row — and the count is robust, because with integer masses and rational initial data every velocity stays rational forever. Ride the stop with <code>python -m tourbus frontier 7</code>; Appendix E (§6) places the experiment in the wider web of ideas. <strong>Try it live:</strong> watch <a href="explore.html#w13?n=2">the mass-ratio 100² run</a> count out <code>314</code> collisions.</p>
-<p><strong>Exercises.</strong> (★) Trace the three equal-mass collisions by hand — equal elastic masses simply exchange velocities. (★★) Show that for <code>m = M</code> the wedge angle is <code>θ = π/4</code>, so the bounce count <code>⌈π/θ⌉ − 1</code> is exactly <code>3</code>. (★★★) The formulas <code>⌈π/arctan(10⁻ⁿ)⌉ − 1</code> and <code>⌊π·10ⁿ⌋</code> agree for every <code>n</code> ever checked; show that a disagreement would require a long run of <code>9</code>s in the digits of π just after position <code>n</code>.</p>
+<p><strong>Then &amp; now.</strong> Gregory Galperin published the result in 2003; in 2019 a 3Blue1Brown video made it famous; and in 2020 the physicist Adam Brown showed that the colliding blocks are mathematically the same as <strong>Grover&#x27;s quantum search algorithm</strong> — each collision a step of the search, with the same rotation (and the same <code>π</code>) counting both.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Trace the three equal-mass collisions by hand — equal elastic masses simply exchange velocities. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Show that for <code>m = M</code> the wedge angle is <code>θ = π/4</code>, so the bounce count <code>⌈π/θ⌉ − 1</code> is exactly <code>3</code>. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> The formulas <code>⌈π/arctan(10⁻ⁿ)⌉ − 1</code> and <code>⌊π·10ⁿ⌋</code> agree for every <code>n</code> ever checked; show that a disagreement would require a long run of <code>9</code>s in the digits of π just after position <code>n</code>.</p>
 <hr>
-<h2 id="e8-the-river-conway-s-topograph">E8 — The River: Conway&#x27;s topograph</h2>
+</section>
+<section class="sec" data-sec="e8-the-river-conway-s-topograph">
+<h2 id="e8-the-river-conway-s-topograph">E8 — The River: Conway&#x27;s topograph<a class="h-anchor" href="#e8-the-river-conway-s-topograph" aria-label="Link to this section">#</a></h2>
 <p>John Conway drew binary quadratic forms not as formulas but as a <strong>landscape</strong>. Take the form <code>x² − d·y²</code> and evaluate it on primitive integer vectors; arrange those values on the infinite trivalent tree of <em>superbases</em>, and the numbers grow outward by one arithmetic rule (across every edge, the value opposite a region is <code>2·(sum of its two neighbours) − (the value across the edge)</code>). The result — Conway&#x27;s <strong>topograph</strong> — organizes the whole theory of the form into a picture you can walk.</p>
 <p>Running through the landscape of an indefinite form like <code>x² − d·y²</code> is a unique periodic path with <strong>positive country on one bank and negative on the other</strong>: the <strong>river</strong>. And the river <em>is</em> the periodic continued fraction of <code>√d</code> from <a href="06-loop-road.html">Stop 6</a>. Each step along it is a partial quotient; each place the river touches a region of value <code>+1</code> — a <strong>well</strong> — is a solution of Pell&#x27;s equation (<a href="07-cattle-crossing.html">Stop 7</a>), read straight off the map with no fractions in sight. The <strong>climbing lemma</strong> guarantees that once you leave the river the values only grow, so the river is the single valley of an otherwise rising terrain.</p>
 <figure class="figure"><svg color="#6e7781" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300"><title>Conway topograph river of x^2 - 7 y^2</title><text x="380" y="26" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">The river of x^2 - 7 y^2</text><text x="380" y="44" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">positive country above, negative below</text><polyline points="44,153 128,163 212,153 296,163 380,153 464,163 548,153 632,163 716,153" fill="none" stroke="currentColor" stroke-width="2.4"/><text x="86" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+2</text><text x="86" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="86" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="44" y1="158" x2="86" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="44" y1="158" x2="86" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="44" cy="153" r="2.6" fill="currentColor"/><text x="170" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+2</text><text x="170" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="170" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="128" y1="158" x2="170" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="128" y1="158" x2="170" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="128" cy="163" r="2.6" fill="currentColor"/><text x="254" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+1</text><text x="254" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="254" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="212" y1="158" x2="254" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="212" y1="158" x2="254" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="212" cy="153" r="2.6" fill="currentColor"/><text x="338" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+1</text><text x="338" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="338" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=4</text><line x1="296" y1="158" x2="338" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="296" y1="158" x2="338" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="296" cy="163" r="2.6" fill="currentColor"/><text x="422" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+2</text><text x="422" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="422" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="380" y1="158" x2="422" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="380" y1="158" x2="422" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="380" cy="153" r="2.6" fill="currentColor"/><text x="506" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+2</text><text x="506" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="506" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="464" y1="158" x2="506" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="464" y1="158" x2="506" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="464" cy="163" r="2.6" fill="currentColor"/><text x="590" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+1</text><text x="590" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="590" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=1</text><line x1="548" y1="158" x2="590" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="548" y1="158" x2="590" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="548" cy="153" r="2.6" fill="currentColor"/><text x="674" y="96" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">+1</text><text x="674" y="224" font-family="monospace" font-size="15" text-anchor="middle" fill="currentColor">-3</text><text x="674" y="146" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">a=4</text><line x1="632" y1="158" x2="674" y2="102" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><line x1="632" y1="158" x2="674" y2="218" stroke="currentColor" stroke-width="0.8" opacity="0.5"/><circle cx="632" cy="163" r="2.6" fill="currentColor"/><line x1="44" y1="262" x2="380" y2="262" stroke="currentColor" stroke-width="1.2"/><line x1="44" y1="262" x2="44" y2="256" stroke="currentColor" stroke-width="1.2"/><line x1="380" y1="262" x2="380" y2="256" stroke="currentColor" stroke-width="1.2"/><text x="212" y="278" font-family="monospace" font-size="11" text-anchor="middle" fill="currentColor">one period = Pell solved</text></svg><figcaption>The river of x² − 7y²: positive values above, negative below, and the one periodic road between them — Stop 6&#x27;s loop road, drawn as a landscape, with one period bracketed as the Pell solution.</figcaption></figure>
-<pre><code>$ python -m tourbus demo topograph 7
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo topograph 7</span>
 Conway&#x27;s topograph: the river of x^2 - 7 y^2:
         +2      +1
   o~a=1~o~a=1~o~a=1~o~a=4~o
     -3      -3
   river period [1, 1, 1, 4] = continued fraction period of sqrt(7)
-  the river&#x27;s Q=1 well gives Pell: 8^2 - 7*3^2 = 1</code></pre>
+  the river&#x27;s Q=1 well gives Pell: 8^2 - 7*3^2 = 1</code></pre></div>
 <p>The river&#x27;s partial quotients <code>[1, 1, 1, 4]</code> are exactly the period of <code>√7</code>, and its <code>Q = 1</code> well hands back the fundamental Pell solution <code>(8, 3)</code>. The same tree-walk — replace one value by a linear function of the other two — is the Vieta jumping that grows the Markov triples of <a href="#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">stop E1</a>: the topograph and the Markov tree are cousins on different forms. Ride the stop with <code>python -m tourbus frontier 8</code>.</p>
-<p><strong>Exercises.</strong> (★) Verify the climbing lemma at one node of the figure — pick a region off the river and check its value exceeds both neighbours toward the bank. (★★) Read the Pell solution <code>(8, 3)</code> for <code>d = 7</code> off the river and confirm <code>8² − 7·3² = 1</code>. (★★★) Prove the river is periodic: the reduced forms along it are finite in number, so the path must close.</p>
+<p><strong>Then &amp; now.</strong> Conway introduced the topograph in <em>The Sensual (Quadratic) Form</em> (1997), building on Gauss&#x27;s reduction theory of 1801. It has become a favourite of teachers: Allen Hatcher&#x27;s <em>Topology of Numbers</em> (2022) builds a whole course on it. The trivalent tree it lives on is the dual of the Farey tessellation of the hyperbolic plane — the geometry behind the loops of <a href="06-loop-road.html#then-now-next">Stop 6</a> and the fractions of <a href="08-family-tree.html#then-now-next">Stop 8</a>.</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Verify the climbing lemma at one node of the figure — pick a region off the river and check its value exceeds both neighbours toward the bank. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Read the Pell solution <code>(8, 3)</code> for <code>d = 7</code> off the river and confirm <code>8² − 7·3² = 1</code>. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Prove the river is periodic: the reduced forms along it are finite in number, so the path must close.</p>
 <hr>
-<h2 id="e9-ramanujan-s-continued-fraction">E9 — Ramanujan&#x27;s Continued Fraction</h2>
+</section>
+<section class="sec" data-sec="e9-ramanujan-s-continued-fraction">
+<h2 id="e9-ramanujan-s-continued-fraction">E9 — Ramanujan&#x27;s Continued Fraction<a class="h-anchor" href="#e9-ramanujan-s-continued-fraction" aria-label="Link to this section">#</a></h2>
 <p>The last express stop belongs to <strong>Srinivasa Ramanujan</strong>. In his first letter to G. H. Hardy in 1913 he wrote down, without proof, the <strong>Rogers–Ramanujan continued fraction</strong></p>
-<pre><code>              q^(1/5)
+<pre class="formula"><code>              q^(1/5)
 R(q) = ---------------------------
          1 +      q
              -----------------
@@ -186,22 +227,35 @@ R(q) = ---------------------------
 <p>a <em><code>q</code>-continued fraction</em> — its partial numerators are the powers <code>q, q², q³, …</code> rather than the constant <code>1</code> of a simple continued fraction. For any rational <code>q</code> the convergents are exact rationals, and successive ones bracket the limit from alternating sides, the same enclosure property every continued fraction has.</p>
 <figure class="figure"><svg color="#6e7781" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380"><title>Rogers-Ramanujan continued-fraction convergents bracketing their limit</title><text x="384" y="24" font-family="monospace" font-size="14" text-anchor="middle" fill="currentColor">Rogers-Ramanujan convergents bracket their limit (q = 1/2)</text><line x1="74" y1="50" x2="74" y2="328" stroke="currentColor" stroke-width="1.2"/><line x1="74" y1="328" x2="694" y2="328" stroke="currentColor" stroke-width="1.2"/><line x1="69" y1="328" x2="74" y2="328" stroke="currentColor" stroke-width="1"/><text x="65" y="332" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">0.572</text><line x1="69" y1="258.5" x2="74" y2="258.5" stroke="currentColor" stroke-width="1"/><text x="65" y="262.5" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">0.586</text><line x1="69" y1="189" x2="74" y2="189" stroke="currentColor" stroke-width="1"/><text x="65" y="193" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">0.600</text><line x1="69" y1="119.5" x2="74" y2="119.5" stroke="currentColor" stroke-width="1"/><text x="65" y="123.5" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">0.614</text><line x1="69" y1="50" x2="74" y2="50" stroke="currentColor" stroke-width="1"/><text x="65" y="54" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">0.628</text><line x1="74" y1="328" x2="74" y2="333" stroke="currentColor" stroke-width="1"/><text x="74" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">1</text><line x1="162.5714" y1="328" x2="162.5714" y2="333" stroke="currentColor" stroke-width="1"/><text x="162.5714" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">2</text><line x1="251.1429" y1="328" x2="251.1429" y2="333" stroke="currentColor" stroke-width="1"/><text x="251.1429" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">3</text><line x1="339.7143" y1="328" x2="339.7143" y2="333" stroke="currentColor" stroke-width="1"/><text x="339.7143" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">4</text><line x1="428.2857" y1="328" x2="428.2857" y2="333" stroke="currentColor" stroke-width="1"/><text x="428.2857" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">5</text><line x1="516.8571" y1="328" x2="516.8571" y2="333" stroke="currentColor" stroke-width="1"/><text x="516.8571" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">6</text><line x1="605.4286" y1="328" x2="605.4286" y2="333" stroke="currentColor" stroke-width="1"/><text x="605.4286" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">7</text><line x1="694" y1="328" x2="694" y2="333" stroke="currentColor" stroke-width="1"/><text x="694" y="348" font-family="monospace" font-size="10" text-anchor="middle" fill="currentColor">8</text><text x="384" y="366" font-family="monospace" font-size="12" text-anchor="middle" fill="currentColor">convergent index n</text><line x1="74" y1="99.5516" x2="694" y2="99.5516" stroke="currentColor" stroke-width="1.4" stroke-dasharray="6 4"/><text x="690" y="91.5516" font-family="monospace" font-size="11" text-anchor="end" fill="currentColor">limit = 0.61802</text><polyline points="74,286.4636 162.5714,80.6702 251.1429,100.5857 339.7143,99.5215 428.2857,99.5521 516.8571,99.5516 605.4286,99.5516 694,99.5516" fill="none" stroke="currentColor" stroke-width="1.6" opacity="0.7"/><circle cx="74" cy="286.4636" r="3.6" fill="currentColor"/><circle cx="162.5714" cy="80.6702" r="3.6" fill="currentColor"/><circle cx="251.1429" cy="100.5857" r="3.6" fill="currentColor"/><circle cx="339.7143" cy="99.5215" r="3.6" fill="currentColor"/><circle cx="428.2857" cy="99.5521" r="3.6" fill="currentColor"/><circle cx="516.8571" cy="99.5516" r="3.6" fill="currentColor"/><circle cx="605.4286" cy="99.5516" r="3.6" fill="currentColor"/><circle cx="694" cy="99.5516" r="3.6" fill="currentColor"/></svg><figcaption>The convergents of the Rogers–Ramanujan fraction at q = 1/2 fall alternately above and below their limit and close in fast — the continued-fraction bracket, tightening toward the value Ramanujan could see whole.</figcaption></figure>
 <p>Then the miracle. At <code>q = e^{−2π}</code> the entire infinite fraction collapses to a closed form built out of nothing but the golden ratio of <a href="04-golden.html">Stop 4</a>:</p>
-<pre><code>R(e^{−2π}) = √((5 + √5) / 2) − φ = 0.28407904384…</code></pre>
+<div class="math-display">R(e^{−2π}) = √((5 + √5) / 2) − φ = 0.28407904384…</div>
 <p>Hardy called the identities in that letter ones that &quot;must be true, because, if they were not true, no one would have had the imagination to invent them.&quot; The tour sums the fraction numerically and compares it to the surd — they agree to machine precision.</p>
-<pre><code>$ python -m tourbus demo ramanujan
+<div class="terminal"><div class="term-bar" aria-hidden="true"><i></i><i></i><i></i><span>tourbus</span></div><pre><code><span class="tp">$</span> <span class="tc">python -m tourbus demo ramanujan</span>
 Ramanujan&#x27;s Rogers-Ramanujan continued fraction:
   R(1/2)/q^(1/5) convergents: [&#x27;2/3&#x27;, &#x27;5/7&#x27;, &#x27;22/31&#x27;, &#x27;93/131&#x27;, &#x27;766/1079&#x27;, &#x27;6221/8763&#x27;]
   R(e^-2pi) from the fraction = 0.2840790438
              sqrt((5+sqrt5)/2) - phi = 0.2840790438  (agree 2e-16)
-  nested radical sqrt(1+2sqrt(1+3sqrt(...))) -&gt; 3.0000000 (= 3)</code></pre>
+  nested radical sqrt(1+2sqrt(1+3sqrt(...))) -&gt; 3.0000000 (= 3)</code></pre></div>
 <p>The same stop runs a second Ramanujan signature: the <strong>nested radical</strong> <code>3 = √(1 + 2√(1 + 3√(1 + 4√(…))))</code>, a puzzle he posed to the <em>Journal of the Indian Mathematical Society</em> in 1911 that went unanswered in print. Its general form, <code>x + 1 = √(1 + x√(1 + (x+1)√(…)))</code>, converges to <code>x + 1</code> for every <code>x</code>. Ride the stop with <code>python -m tourbus frontier 9</code>; his history is told at <a href="appendix-h-history.html#interlude-spectra-and-measure-1873-1936">Appendix H</a>.</p>
-<p><strong>Exercises.</strong> (★) Compute the first four convergents of <code>R(1/2)</code> by hand and confirm they bracket the limit. (★★) Evaluate the nested radical to depth 4 and watch it approach <code>3</code>. (★★★) Ramanujan&#x27;s identity <code>R(e^{−2π}) = √((5+√5)/2) − φ</code> is a <em>specific</em> value of a <em>general</em> fraction; explain why a numerical match to 16 digits is strong evidence but not a proof, and what a proof would require.</p>
+<p><strong>Then &amp; now.</strong> Rogers found the identities in 1894, Ramanujan rediscovered them and the fraction around 1913, and sixty years later they reappeared in physics: Rodney Baxter&#x27;s 1980 exact solution of the <em>hard-hexagon model</em> of statistical mechanics rests on the Rogers–Ramanujan identities, which also count states in conformal field theory. In 2021 the Ramanujan Machine turned the hunt for formulas like the one on this stop into an algorithm (<a href="09-celebrity.html#then-now-next">Stop 9</a>).</p>
+<p><strong>Exercises.</strong> <span class="diff diff-1" title="Difficulty: warm-up" aria-label="Difficulty 1 of 3">★</span> Compute the first four convergents of <code>R(1/2)</code> by hand and confirm they bracket the limit. <span class="diff diff-2" title="Difficulty: standard" aria-label="Difficulty 2 of 3">★★</span> Evaluate the nested radical to depth 4 and watch it approach <code>3</code>. <span class="diff diff-3" title="Difficulty: challenge" aria-label="Difficulty 3 of 3">★★★</span> Ramanujan&#x27;s identity <code>R(e^{−2π}) = √((5+√5)/2) − φ</code> is a <em>specific</em> value of a <em>general</em> fraction; explain why a numerical match to 16 digits is strong evidence but not a proof, and what a proof would require.</p>
 <hr>
-<p class="chapter-nav"><a href="index.html">← Route map</a> · <a href="15-terminus.html">Stop 15 — Terminus</a></p></main>
+</section><nav class="pager" aria-label="Previous and next page"><a class="pager-prev" href="15-terminus.html"><span class="pager-dir">&#8592; Previous</span><span class="pager-title">Stop 15 · Terminus</span></a><a class="pager-next" href="appendix-e-web-of-ideas.html"><span class="pager-dir">Next &#8594;</span><span class="pager-title">The Web of Ideas</span></a></nav></main>
+  <aside class="toc-rail"><nav class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><ol><li><a href="#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio">E1 — The Markov Spectrum: the numbers after the golden ratio</a></li><li><a href="#e2-continuants-the-polynomial-behind-every-convergent">E2 — Continuants: the polynomial behind every convergent</a></li><li><a href="#e3-algebraic-irrationals-cube-roots-and-an-open-problem">E3 — Algebraic irrationals: cube roots and an open problem</a></li><li><a href="#e4-continued-fraction-variants-nearest-integer-and-minus">E4 — Continued-fraction variants: nearest-integer and "minus"</a></li><li><a href="#e5-the-three-distance-theorem">E5 — The three-distance theorem</a></li><li><a href="#e6-the-gauss-kuzmin-wirsing-constant-from-scratch">E6 — The Gauss–Kuzmin–Wirsing constant, from scratch</a></li><li><a href="#e7-physics-colliding-blocks-count">E7 — Physics: colliding blocks count π</a></li><li><a href="#e8-the-river-conway-s-topograph">E8 — The River: Conway's topograph</a></li><li><a href="#e9-ramanujan-s-continued-fraction">E9 — Ramanujan's Continued Fraction</a></li></ol></nav></aside>
 </div>
 <footer class="site-footer">
-  <span>Recursive Continuance Tour Bus &middot; a guided tour of recursion &amp; continued fractions</span>
-  <span>Built from the <code>tourbus</code> engine &middot; <code>python -m tourbus</code></span>
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <a class="wordmark" href="index.html"><svg class="logo" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M24 78V52a26 26 0 0 1 26-26h26" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><circle cx="24" cy="78" r="14" fill="currentColor"/><circle cx="76" cy="26" r="14" fill="currentColor"/></svg><span>Recursive Continuance <b>Tour&nbsp;Bus</b></span></a>
+      <p>A guided tour of recursion and continued fractions. Every number on these pages was
+      computed, exactly, by the <code>tourbus</code> engine: standard-library Python, no dependencies.</p>
+    </div>
+    <div class="foot-col"><div class="foot-h">Ride</div>
+      <a href="01-depot.html">Board at the Depot</a><a href="explore.html">Live exposition</a>
+      <a href="syllabus.html">Syllabus for instructors</a><a href="appendix-c-references.html">Reading list</a></div>
+    <div class="foot-col"><div class="foot-h">Lines</div><a href="appendix-d-frontier.html">The Express Line</a><a href="appendix-e-web-of-ideas.html">The Web of Ideas</a><a href="appendix-f-cross-domain.html">The Cross-Domain Line</a><a href="appendix-h-history.html">The Heritage Line</a><a href="appendix-i-branches.html">The Branch Line</a></div>
+    <div class="foot-col"><div class="foot-h">Project</div>
+      <a href="https://github.com/sonoransun/recursivecontinuancetourbus">Source on GitHub</a><span>MIT licensed</span><span><code>python -m tourbus</code></span></div>
+  </div>
 </footer>
 <script src="assets/search-index.js"></script>
 <script src="assets/rct-docs.js"></script>

@@ -34,7 +34,7 @@ no meaningful decimal representation.
 ### The Ackermann–Péter function
 
 The **Ackermann function** packages this whole ladder into one two-argument
-recursion. In Rózsa Péter's tidy form:
+recursion. In the tidy two-argument form of Rózsa Péter and Raphael Robinson:
 
 ```
 A(0, n)     = n + 1
@@ -47,8 +47,9 @@ The `m` coordinate selects the rung of the hyperoperation ladder:
 `A(4, n) = 2↑↑(n+3) − 3` is tetrational. The function is **total** (it halts for
 every input) and **computable** (the definition above is a program), yet it is
 **not primitive recursive** — it grows faster than any function you can build
-from bounded `for`-loops alone. Ackermann's 1928 function was the first concrete
-example proving that the total computable functions strictly *contain* the
+from bounded `for`-loops alone. Ackermann's 1928 function (anticipated a year
+earlier by his fellow Hilbert student Gabriel Sudan) was among the first
+concrete proofs that the total computable functions strictly *contain* the
 primitive recursive ones: some things are computable only with unbounded
 recursion (`while`), not mere iteration.
 
@@ -62,10 +63,11 @@ which is why the `tourbus` demo politely refuses to print it in full.
 The function has a purpose as well as a punchline: Wilhelm Ackermann was David
 Hilbert's student, and the 1928 paper ("Zum Hilbertschen Aufbau der reellen
 Zahlen") served Hilbert's program of building analysis from finitary
-recursions — the function was evidence about what recursion *is*. The tidy
-two-argument form used here is due to Rózsa Péter (1935), whose work made
-recursion theory a discipline of its own. The name "Ackermann–Péter function"
-credits them both.
+recursions — the function was evidence about what recursion *is*. Ackermann's
+original had three arguments; Rózsa Péter (1935) reduced it to two, and her
+work made recursion theory a discipline of its own; Raphael Robinson (1948)
+simplified her version slightly to the exact form used here. The name
+"Ackermann–Péter function" credits the two founders.
 
 ### The Y combinator: recursion from nothing
 
@@ -100,8 +102,9 @@ textbook case of a recursion whose *behaviour* is far simpler than its
 *definition* — a reminder that a nested recursion can hide a trivial function,
 just as Gosper's stall (Stop 11) hid a trivial answer. Proving `M(n) = 91`
 requires reasoning about the *total* function, not tracing any single call, and
-is a classic exercise in program verification. McCarthy posed it around 1970,
-in the first wave of proving programs correct rather than merely running them.
+is a classic exercise in program verification. It appeared in 1968–70 in work
+by Zohar Manna, Amir Pnueli, and John McCarthy — the first wave of proving
+programs correct rather than merely running them.
 
 ## Worked examples
 
@@ -141,6 +144,76 @@ definite, computable integer, and it is already too large to write down. Climb
 one more rung to `A(4, 3)` and the number of *digits* itself becomes
 astronomical.
 
+## Then, now, next
+
+### Then — what "computable" means
+
+```mermaid
+timeline
+    title Climbing the tower
+    section Recursion defined
+        1926 : Hilbert's On the Infinite sketches a function beyond primitive recursion
+        1927 : Sudan publishes a recursive function that is not primitive recursive
+        1928 : Ackermann's three-argument function
+        1935 : Peter's two-argument form - recursion theory becomes a field
+        1936 : Church, Kleene and Turing - three definitions of computable, one idea
+        1948 : Robinson's simplification - the function on this page
+    section Recursion put to work
+        1969 : Manna and Pnueli analyse McCarthy's 91 function
+        1975 : Tarjan - union-find runs in inverse-Ackermann time
+        1976 : Knuth's up-arrow notation
+    section Recursion at its limits
+        2024 : BB(5) = 47,176,870, with a computer-checked proof
+        2025 : A six-state machine shows BB(6) exceeds 2↑↑↑5
+```
+
+The tower was built to answer a philosophical question. In the 1920s David
+Hilbert hoped to ground all of mathematics in finitary, mechanical reasoning,
+and his students Sudan and Ackermann found functions that are perfectly
+mechanical yet grow faster than any tower of `for`-loops. In 1936 Alonzo Church
+(with the lambda calculus of this stop's Y combinator), Stephen Kleene (with
+general recursive functions), and Alan Turing (with his machines) gave three
+different definitions of "computable" — and proved them equivalent. The
+Ackermann–Péter function sits exactly at the first rung above the primitive
+recursive functions in that hierarchy, which is why it remains the standard
+example.
+
+### Now — the tower in working software
+
+- **Union–find.** The data structure that merges sets and asks "are these two
+  in the same set?" — used in Kruskal's minimum-spanning-tree algorithm, in
+  image segmentation, in compilers that unify types, and in percolation
+  simulations — runs in time proportional to `m·α(n)`, where `α` is the
+  *inverse* Ackermann function (Tarjan, 1975; the bound is optimal, Fredman and
+  Saks, 1989). Because `A` explodes, `α` crawls: it never exceeds 4 for any
+  input that could fit in the observable universe.
+- **Termination checkers.** Proof assistants such as Lean, Coq, and Agda must
+  refuse definitions that might loop forever. They accept Ackermann's function
+  because every recursive call decreases the pair `(m, n)` in lexicographic
+  order; the McCarthy 91 function, whose termination is subtler, is a standard
+  benchmark for program verifiers.
+- **Fixed points in practice.** Fixed-point combinators are how recursion is
+  implemented in languages and calculi that have no named functions, and they
+  gave a famous startup accelerator its name: Y Combinator's founders call it
+  "a program that runs programs" — and themselves "a company that helps start
+  companies."
+
+### Next — the busy beaver frontier
+
+How fast can a *computable* process grow before it stops? The **busy beaver**
+number `BB(n)` is the longest any halting `n`-state Turing machine can run, and
+it outgrows every computable function, Ackermann's included. After decades of
+work, an online collaboration (bbchallenge) proved in 2024 that
+`BB(5) = 47,176,870`, with the proof checked by the Coq proof assistant. `BB(6)`
+is another matter: in 2025 a six-state machine was found that runs for more
+than `2↑↑↑5` steps, and among the six-state machines whose behaviour is still
+unknown is one nicknamed *Antihydra*, which halts only if a Collatz-like
+sequence misbehaves — so pinning down `BB(6)` may require solving a problem as
+hard as the Collatz conjecture of [Stop 14](14-souvenir-shop.md). Further up,
+logic takes over: Goodstein's theorem (1944) describes sequences that grow like
+a tower and still always return to zero, a fact true but unprovable in ordinary
+Peano arithmetic (Kirby and Paris, 1982).
+
 ## Exercises
 
 1. **(★)** Compute `A(1, 5)` and `A(2, 2)` by hand from the recurrence and check
@@ -170,10 +243,12 @@ astronomical.
 
 ## See it move
 
-Open the **Tower** widget:
-[`site/index.html#stop-12-tower`](../site/index.html#stop-12-tower). Watch the
-Ackermann call tree unfold — the nested `A(m, A(m+1, n))` calls fanning out —
-and see the digit count of `A(4, n)` outrun the screen.
+The Tower's section of the [live exposition](../site/index.html#stop-12-tower)
+computes `A(4, 2) = 2^65536 − 3` exactly, in your browser's own big-integer
+arithmetic, and reports its 19,729 digits with the first and last few shown —
+then sets the Y combinator beside it, recursion's other extreme. The call tree
+of a doubly recursive function, drawn by the engine, is the figure at
+[Stop 1](01-depot.md#how-fast-lam-s-theorem).
 
 ## Further reading
 
@@ -184,5 +259,12 @@ and see the digit count of `A(4, n)` outrun the screen.
 - H. P. Barendregt, *The Lambda Calculus*, for the Y combinator and fixed-point
   theory.
 - Z. Manna & J. McCarthy on the 91 function and recursion induction.
+- R. M. Robinson, "Recursion and double recursion," *Bulletin of the AMS* 54
+  (1948) — the modern form of the Ackermann–Péter function.
+- R. E. Tarjan, "Efficiency of a good but not linear set union algorithm,"
+  *Journal of the ACM* 22 (1975) — where the inverse Ackermann function earns
+  its keep.
+- S. Aaronson, "The Busy Beaver Frontier," *SIGACT News* 51 (2020), and the
+  bbchallenge collaboration's proof that `BB(5) = 47,176,870` (2024).
 
 [← Stop 11 — The Infinite Assembly Line](11-assembly-line.md) · [Route map](index.md) · [Stop 13 — The Hall of Mirrors →](13-hall-of-mirrors.md)

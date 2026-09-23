@@ -73,10 +73,15 @@ summit. Watch it run at Heritage stop H2 (Appendix H).
 The most famous Pell equation is disguised as a poem. **Archimedes' cattle
 problem** (c. 250 BC) asks for the number of bulls and cows of the Sun god's
 herd, in four colours, subject to a list of ratio and square/triangular
-constraints. Reduced, it becomes a Pell equation `x² − 4729494·y² = 1`. Its
-**smallest solution has 206,545 digits** — the total herd is a number so vast it
-would fill a book. Archimedes almost certainly could not have computed it (it was
-first fully evaluated in 1965 with a computer), but the fact that the problem is
+constraints. Reduced, it becomes the Pell equation `x² − 4729494·y² = 1`, with
+one extra condition: `y` must be divisible by `2·4657 = 9314`. The fundamental
+solution already has a 45-digit `x` (the engine finds it instantly — see the
+worked examples), but the divisibility condition first holds at its **2329th
+power**, and the resulting herd — about `7.76 × 10²⁰⁶⁵⁴⁴` cattle — is a number
+with **206,545 digits** that would fill a book. Archimedes almost certainly
+could not have computed it: Amthor counted its digits in 1880, Williams, German,
+and Zarnke first computed it in full on a computer in 1965, and Harry Nelson
+printed all 47 pages of it in 1981. But the fact that the problem is
 *well-posed* and has a definite, finite, astronomically large answer is itself a
 triumph of the continued-fraction method. The herd exists; it just does not fit
 in the universe.
@@ -129,6 +134,88 @@ x^2 - 13 y^2 = 1  fundamental solution:
 convergent; `d = 13` needs a longer period and lands on `(649, 180)`; `d = 61`
 explodes. The size of the answer is the length of the loop road, nothing else.
 
+Finally, Archimedes' own equation. The period of `√4729494` is 92 terms long,
+and the fundamental solution waiting at its end is a 45-digit number — found in
+a blink:
+
+```
+$ python -m tourbus demo pell 4729494
+x^2 - 4729494 y^2 = 1  fundamental solution:
+  x = 109931986732829734979866232821433543901088049
+  y = 50549485234315033074477819735540408986340
+  verifies: True
+```
+
+Raise `x + y√4729494` to the 2329th power and the `y` becomes divisible by
+`9314`, as the poem demands; that power is the 206,545-digit herd.
+
+## Then, now, next
+
+### Then — two thousand years at the crossing
+
+```mermaid
+timeline
+    title Pell's equation, which Pell never solved
+    section Antiquity and India
+        c. 250 BC : Archimedes' cattle problem - a Pell equation in verse
+        628 : Brahmagupta's bhavana composes near-solutions
+        1150 : Bhaskara II's chakravala dispatches d = 61
+    section Europe
+        1657 : Fermat challenges Frenicle and the English with d = 61
+        1658 : Brouncker and Wallis reply with a general method
+        1768 : Lagrange proves a solution always exists
+        1773 : Lessing publishes the cattle epigram from a Wolfenbuttel manuscript
+    section Machines
+        1880 : Amthor shows the herd has 206,545 digits
+        1965 : Williams, German and Zarnke compute the whole herd
+        1970 : Hilbert's tenth problem falls, with Pell-type equations inside
+        2002 : Hallgren solves Pell's equation on a quantum computer, in theory
+```
+
+The equation is named for John Pell only because Euler, reading Wallis,
+misattributed Brouncker's method to him; Pell's own contribution was
+incidental. The mathematics is far older. Brahmagupta's *bhāvanā* (628) and
+Bhāskara II's *chakravala* (1150) solved it centuries before Europe asked
+([Heritage stop H2](appendix-h-history.md#h2-628-1150-the-cyclic-method)),
+and Fermat's 1657 challenge to "the English mathematicians" was, unknowingly,
+a rerun of a Sanskrit classic. Lagrange proved in 1768 that every non-square
+`d` has a solution, and the continued fraction of `√d` became the standard
+way to find it. The cattle problem, meanwhile, waited: the epigram was
+rediscovered by Gotthold Lessing in a manuscript in the ducal library at
+Wolfenbüttel and published in 1773, and its answer was not written out in full
+until computers could do it.
+
+### Now — Pell's equation at the edge of computation
+
+- **Undecidability.** Hilbert's tenth problem (1900) asked for an algorithm to
+  decide whether any polynomial equation has integer solutions. Julia Robinson
+  showed in the 1950s how Pell-type equations, whose solutions grow
+  exponentially, could encode exponentiation; Yuri Matiyasevich completed the
+  proof in 1970 (his decisive step used Fibonacci numbers, the golden ratio's
+  sequence), and the standard modern proof runs through
+  `x² − (a² − 1)·y² = 1`. The answer is *no* — there is no such algorithm — a
+  result that ties this stop to the recursion theory of [Stop 12](12-tower.md).
+- **A quantum speed-up.** Solutions of Pell's equation can have exponentially
+  many digits, so algorithms compute the *regulator* `log(x₁ + y₁√d)` instead.
+  The best classical methods take subexponential time; in 2002 Sean Hallgren
+  gave a polynomial-time *quantum* algorithm — one of the few exponential
+  quantum speed-ups known besides Shor's factoring algorithm of
+  [Stop 14](14-souvenir-shop.md#then-now-next).
+- **Compact answers.** Because the solutions are so large, computer-algebra
+  systems store them as products of small factors ("compact representations")
+  rather than as digits — the only way the cattle herd fits in memory.
+
+### Next — the negative equation
+
+When is `x² − d·y² = −1` solvable? By this stop's theory, exactly when the
+period of `√d` is odd — but *how often* that happens as `d` varies was an open
+question for decades. Peter Stevenhagen conjectured a precise answer in 1993:
+among the squarefree `d` for which it could possibly work (those with no prime
+factor `≡ 3 mod 4`), the proportion tends to about **58.1%**. Étienne Fouvry and Jürgen Klüners
+bounded it between two constants in 2010, and in 2022 Peter Koymans and Carlo
+Pagano announced a proof of the conjecture. Meanwhile, whether Pell's equation
+can be solved in polynomial time on a *classical* computer remains unknown.
+
 ## Exercises
 
 1. **(★)** Verify the `d = 2` solution by hand, and find the *next* solution
@@ -161,12 +248,14 @@ explodes. The size of the answer is the length of the loop road, nothing else.
 
 ## See it move
 
-Open the **Cattle Crossing** widget:
-[`site/index.html#stop-7-cattle`](../site/index.html#stop-7-cattle). Enter a `d`
-and watch the convergents of `√d` scroll by until the one at the period boundary
-lights up as the Pell solution, with a running check of `x² − d y²`.
+Open the **Pell Playground** (W7) in the
+[live exposition](../site/index.html#stop-7-cattle). Enter a `d` and watch the
+convergents of `√d` scroll by until the one at the period boundary lights up as
+the Pell solution, with a running check of `x² − d y²`; the **D = 61** button
+replays Fermat's 1657 challenge.
 
 **Try it live:** the Pell Playground preset to [Fermat's d = 61](../site/index.html#w7?d=61).
+
 ## Further reading
 
 - H. W. Lenstra, "Solving the Pell Equation," *Notices of the AMS* (2002) — a
@@ -174,5 +263,11 @@ lights up as the Pell solution, with a running check of `x² − d y²`.
 - Hardy & Wright, §§10.11–10.12 on Pell's equation via continued fractions.
 - I. Vardi, "Archimedes' Cattle Problem," *American Mathematical Monthly* (1998).
 - Appendix A of this tour for the parity-of-period argument.
+- M. Davis, "Hilbert's Tenth Problem is Unsolvable," *American Mathematical
+  Monthly* 80 (1973) — the whole proof, Pell equation and all.
+- S. Hallgren, "Polynomial-time quantum algorithms for Pell's equation and the
+  principal ideal problem," *Journal of the ACM* 54 (2007).
+- P. Koymans & C. Pagano, "On Stevenhagen's conjecture" (2022) — how often the
+  negative Pell equation is solvable.
 
 [← Stop 6 — The Loop Road](06-loop-road.md) · [Route map](index.md) · [Stop 8 — The Family Tree →](08-family-tree.md)

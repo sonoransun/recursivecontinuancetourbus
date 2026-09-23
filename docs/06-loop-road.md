@@ -56,9 +56,11 @@ The periods of square roots have beautiful structure:
   **√7 = [2; (1, 1, 1, 4)]**, period 4.
 - The repeating block of `√d` is a **palindrome followed by a single term equal
   to `2⌊√d⌋`**. In `√7 = [2; (1, 1, 1, 4)]` the block is the palindrome `1,1,1`
-  capped by `4 = 2·⌊√7⌋ = 2·2`. This palindromic law (Galois, 1829) is not
-  decoration; the palindrome is what makes the Pell-equation machinery of Stop 7
-  work, and its position determines the sign in `x² − d y² = ±1`.
+  capped by `4 = 2·⌊√7⌋ = 2·2`. This palindromic law — spotted by Euler in his
+  tables of square roots, proved by Legendre, and explained in one line by
+  Galois's 1829 theorem below — is not decoration; the palindrome is what makes
+  the Pell-equation machinery of Stop 7 work, and its position determines the
+  sign in `x² − d y² = ±1`.
 
 ![Period lengths of √d for d up to 99: no formula, no pattern, erratic as weather — and, at the next stop, the whole reason Pell's equation swings from trivial to brutal.](assets/fig-period-wheel.svg)
 
@@ -74,7 +76,10 @@ conjugate `x̄` (the other root of its quadratic, obtained by flipping the sign 
 
 Moreover the reversed period expands `−1/x̄`. `√7` itself is not reduced (its
 conjugate `−√7 ≈ −2.65` is outside `(−1, 0)`), which is why it has the lead-in
-`2` before the loop; but `1 + √7` shifted appropriately is.
+`2` before the loop; but `2 + √7 ≈ 4.65` is reduced — its conjugate
+`2 − √7 ≈ −0.65` lies in `(−1, 0)` — and indeed `2 + √7 = [(4, 1, 1, 1)]` loops
+from the very first term. Apply the reversal rule to `⌊√d⌋ + √d` in general and
+the palindrome of the period of `√d` drops out at once.
 
 ### Metallic means
 
@@ -148,6 +153,67 @@ continued fraction of sqrt(3):
  7    1  97/56  1.7321428571  -9.20e-05
 ```
 
+## Then, now, next
+
+### Then — loops seen, loops proved
+
+```mermaid
+timeline
+    title From noticing loops to explaining them
+    section Seen
+        1572 : Bombelli's fraction for sqrt(13) keeps repeating itself
+        1737 : Euler - every periodic continued fraction is a quadratic irrational
+        1759 : Euler tabulates the periods of sqrt(d) and notices the palindromes
+    section Proved
+        1770 : Lagrange - every quadratic irrational eventually loops
+        1801 : Gauss's Disquisitiones - cycles of reduced quadratic forms
+        1808 : Legendre's Essai proves the palindrome and the closing 2a0
+        1829 : Galois, aged seventeen - purely periodic iff reduced
+    section Structure
+        1972 : Shanks finds the infrastructure of a real quadratic field
+        1984 : Cohen and Lenstra model how class groups are distributed
+```
+
+Periodicity was noticed long before it was understood: Bombelli's square-root
+fraction of 1572 visibly repeats, and Euler, filling tables of `√d` for `d` up
+to 120, saw both the loops and their mirror symmetry. Lagrange's 1770 proof
+that *every* quadratic irrational loops was the first deep theorem of the
+subject; Gauss, in the *Disquisitiones Arithmeticae* of 1801, found the same
+cycles among reduced quadratic forms; and the seventeen-year-old Galois — whose
+first published paper, in April 1829, was on exactly this — showed which loops
+start at once, and why every period of `√d` reads the same backwards.
+
+### Now — loops as the skeleton of number fields
+
+- **Class numbers and regulators.** In the field `ℚ(√d)`, the loop of `√d` is
+  a cycle of reduced ideals. Walking it computes the *regulator* (how big the
+  field's fundamental unit is — [Stop 7](07-cattle-crossing.md)) and helps count
+  the *class number* (how badly unique factorisation fails). Daniel Shanks's
+  1972 discovery that this cycle has an "infrastructure" — a notion of distance
+  that lets you take giant steps along it — is used in computer-algebra systems
+  such as PARI/GP and Magma, and inspired key-exchange proposals based on real
+  quadratic fields (Buchmann and Williams, 1989).
+- **Geometry.** Each loop is also a *closed geodesic* on the modular surface,
+  the hyperbolic surface that the modular group carves out of the upper half
+  plane (Artin, 1924; Series, 1985). Counting loops is counting geodesics, and
+  Peter Sarnak's 1982 thesis used the prime geodesic theorem to count class
+  numbers of indefinite forms on average.
+
+### Next — the loops nobody can predict
+
+- **Gauss's class-number-one problem.** Gauss conjectured that infinitely many
+  real quadratic fields have unique factorisation (class number `1`). The
+  Cohen–Lenstra heuristics even predict the proportion — about **75.4%** of
+  fields `ℚ(√p)` with prime `p ≡ 1 (mod 4)` — and computations up to `2·10¹¹`
+  agree. Yet no one can prove there are infinitely many.
+- **How long is the loop?** The period of `√d` is at most a small multiple of
+  `√d · log d`, and it wanders erratically in between (the period wheel above).
+  How its length is distributed as `d` varies — the quantity that decides
+  whether Pell's equation is easy or brutal — is not understood.
+- **Beyond quadratics.** No known algorithm makes the *cubic* irrationals loop;
+  that is Hermite's problem, the open road at the end of
+  [Stop 2](02-unfolding-road.md#then-now-next).
+
 ## Exercises
 
 1. **(★)** Identify the period and its palindromic core for `√2`, `√3`, and
@@ -180,10 +246,11 @@ continued fraction of sqrt(3):
 
 ## See it move
 
-Open the **Loop Road** widget:
-[`site/index.html#stop-6-loop`](../site/index.html#stop-6-loop). Type any `√d`
-and watch the `(Pₙ, Qₙ)` state trace a closed cycle, with the palindrome of the
-repeating block highlighted as it forms.
+The Loop Road's section of the [live exposition](../site/index.html#stop-6-loop)
+has a `√d` dial. Type any `d` — or tap `√2`, `√3`, `√7`, `√13`, `√61` — and it
+prints the expansion with the repeating block overlined, the period length, and
+the closing term `2a₀`, so you can check the palindrome by eye. Try `√61`, whose
+eleven-term loop is the reason Fermat chose it (Stop 7).
 
 ## Further reading
 
@@ -193,5 +260,12 @@ repeating block highlighted as it forms.
 - Rockett & Szüsz, *Continued Fractions*, Chapter III, for the palindrome law
   and reduced surds; Appendix C.
 - Appendix A of this tour for the finiteness proof of periodicity.
+- H. Davenport, *The Higher Arithmetic* (8th ed., 2008), Chapter IV — periodic
+  continued fractions and Pell's equation, told with unusual clarity.
+- É. Galois, "Démonstration d'un théorème sur les fractions continues
+  périodiques," *Annales de Gergonne* 19 (1829) — his first paper, published at
+  seventeen.
+- H. Cohen, *A Course in Computational Algebraic Number Theory* (1993),
+  Chapter 5 — real quadratic fields, regulators, and Shanks's infrastructure.
 
 [← Stop 5 — Scenic Overlook](05-scenic-overlook.md) · [Route map](index.md) · [Stop 7 — The Cattle Crossing →](07-cattle-crossing.md)

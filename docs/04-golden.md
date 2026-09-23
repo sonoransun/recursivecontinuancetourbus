@@ -114,6 +114,86 @@ signature of the most irrational number. Notice, too, that each error is very
 nearly `1/(√5 q²)`: at `n = 7`, `1/(√5·21²) ≈ 1.01e-3`, matching the table's
 `-1.01e-03` to the digit.
 
+## Then, now, next
+
+### Then — the extreme and mean ratio
+
+```mermaid
+timeline
+    title The golden ratio, measured and misremembered
+    section Geometry and verse
+        c. 300 BC : Euclid cuts a line in extreme and mean ratio to build the pentagon
+        c. 700 : Virahanka counts Sanskrit metres by the numbers later called Fibonacci
+        1202 : Fibonacci's Liber Abaci breeds rabbits by the same rule
+        1509 : Pacioli's Divina proportione, drawn by Leonardo
+    section Analysis
+        1608 : Kepler notes the Fibonacci ratios close in on the golden section
+        1730 : De Moivre's closed form for the Fibonacci numbers, later Binet's
+        1753 : Simson proves the ratios converge to phi
+        1891 : Hurwitz - phi is the hardest number to approximate
+    section Science
+        1979 : Greene - in the standard map the golden circle is the last to break
+        1982 : Shechtman sees fivefold symmetry in a metal - Nobel Prize 2011
+```
+
+Euclid needed the golden ratio to build regular pentagons and the
+icosahedron, and called it simply the division of a line in "extreme and mean
+ratio" (*Elements* VI, Definition 3). Its all-ones continued fraction was
+hiding in plain sight in a different tradition: Indian prosodists from Virahanka
+(c. 700) to Hemachandra (c. 1150) counted poetic metres of long and short
+syllables and found the numbers `1, 2, 3, 5, 8, 13, …` centuries before
+Fibonacci's rabbits of 1202. The adjective "golden" appeared in German
+textbooks in the eighteenth century and was popularised by Martin Ohm in 1835;
+the letter `φ` was suggested by the American engineer Mark Barr around 1909.
+The precise sense in which `φ` is extreme — Hurwitz's theorem on this page —
+arrived only in 1891.
+
+> [!WARNING]
+> Many popular claims — that the Parthenon, the Great Pyramid, the *Mona Lisa*,
+> or the "most beautiful" rectangle are built on `φ` — do not survive careful
+> measurement (G. Markowsky, "Misconceptions about the golden ratio," 1992).
+> The mathematics of this stop gives `φ` a better reputation: it is the number
+> that rational approximation reaches most slowly.
+
+### Now — the golden ratio at work
+
+- **Hashing.** Knuth's *Fibonacci hashing* multiplies a key by `⌊2⁶⁴/φ⌋`,
+  written `0x9E3779B97F4A7C15` in hexadecimal, and keeps the top bits. Because
+  multiples of `1/φ` spread around a circle more evenly than multiples of any
+  other number (the three-distance theorem of
+  [Express stop E5](appendix-d-frontier.md#e5-the-three-distance-theorem)),
+  consecutive keys land far apart. The same constant seeds widely used hash
+  functions and random-number generators.
+- **Search and sampling.** Golden-section search (Kiefer, 1953) finds the
+  minimum of a one-humped function with the fewest evaluations; Fibonacci heaps
+  (Fredman and Tarjan, 1987) owe their name and their speed to Fibonacci growth;
+  and "golden" point sets — `n·φ` modulo 1, or the Fibonacci lattice on a
+  sphere — are standard tools for spreading samples evenly in graphics and
+  numerical integration.
+- **Plants and materials.** Sunflower seeds follow the golden angle because
+  that is what a growing tip produces when each new primordium appears where
+  there is most room: Hellmut Vogel's 1979 model reproduced the pattern, and in
+  1992 Stéphane Douady and Yves Couder made it happen with droplets of
+  ferrofluid in a magnetic field. In 1982 Dan Shechtman found a metal alloy with
+  fivefold, golden-ratio symmetry that crystallography said was impossible —
+  the *quasicrystals* of [Appendix F](appendix-f-cross-domain.md) — and won the
+  2011 Nobel Prize in Chemistry.
+
+### Next — golden computers and golden orbits
+
+- **Fibonacci anyons.** In the leading theory of *topological* quantum
+  computing, quasiparticles called Fibonacci anyons have "quantum dimension"
+  exactly `φ`, and braiding them around one another can perform any quantum
+  computation (Freedman, Larsen, and Wang, 2002). In 2024 researchers braided
+  Fibonacci anyons simulated on a superconducting quantum processor; building
+  hardware where they occur naturally is an open engineering challenge.
+- **The last circle to break.** In Hamiltonian dynamics, the orbits with
+  golden rotation number are the most robust against perturbation — John
+  Greene's 1979 calculations found the golden invariant circle of the standard
+  map to be the last one to break, at a coupling of about `0.9716`. It is
+  overwhelming numerical evidence; a proof is still missing. The story continues
+  in [Appendix E](appendix-e-web-of-ideas.md#3-irrationality-as-a-physical-quantity).
+
 ## Exercises
 
 1. **(★)** From the table, check that `8/5` and `13/8` satisfy the determinant
@@ -148,12 +228,16 @@ nearly `1/(√5 q²)`: at `n = 7`, `1/(√5·21²) ≈ 1.01e-3`, matching the ta
 
 ## See it move
 
-Open the **Golden Milestone** widget:
-[`site/index.html#stop-4-golden`](../site/index.html#stop-4-golden). Add `1`s to
-the road one at a time and watch the Fibonacci convergents spiral in on `φ`,
-with a golden-spiral animation showing why the convergence is so reluctant.
+Two widgets wait at the Golden Milestone in the
+[live exposition](../site/index.html#stop-4-golden). The **Golden Spiral Lab**
+(W3) draws the spiral of squares at any depth, for `φ` or any ratio you type,
+so you can watch a non-golden spiral drift out of true. The **Irrationality
+Racer** (W4) plots `qₙ²·|x − pₙ/qₙ|` along the convergents of `φ`, `e`, and `π`:
+the lower a curve dips, the easier its number is to approximate, and `φ`'s
+hugs Hurwitz's floor `1/√5 ≈ 0.447` from the first term to the last.
 
 **Try it live:** the spiral preset to [depth 9 at ratio φ](../site/index.html#w3?d=9&r=phi).
+
 ## Further reading
 
 - Hurwitz, "Ueber die angenäherte Darstellung der Irrationalzahlen durch
@@ -161,5 +245,11 @@ with a golden-spiral animation showing why the convergence is so reluctant.
 - Hardy & Wright, §11.8, for a full proof of Hurwitz's theorem.
 - M. Livio, *The Golden Ratio* — a readable cultural and mathematical history.
 - Appendix A of this tour for the Fibonacci-ratio limit and Binet's formula.
+- G. Markowsky, "Misconceptions about the golden ratio," *College Mathematics
+  Journal* 23 (1992) — the myths, measured.
+- D. E. Knuth, *The Art of Computer Programming*, Vol. 3, §6.4 — multiplicative
+  (Fibonacci) hashing.
+- S. Douady & Y. Couder, "Phyllotaxis as a physical self-organized growth
+  process," *Physical Review Letters* 68 (1992).
 
 [← Stop 3 — The Engine Room](03-engine-room.md) · [Route map](index.md) · [Stop 5 — Scenic Overlook →](05-scenic-overlook.md)

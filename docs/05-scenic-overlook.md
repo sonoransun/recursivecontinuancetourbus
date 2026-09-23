@@ -53,11 +53,13 @@ entire problem of calendar design. We need a leap-year rule: a fraction
 
 - `1/4` — one leap year every four years, the **Julian calendar** (46 BC).
   Slightly too many; the year drifts by about 11 minutes annually.
-- `7/29` and then `8/33` — eight leap years every 33 years, the rule of the
-  **Jalali calendar** designed by a committee including Omar Khayyam in
-  **1079**, and astonishingly accurate.
-- `31/128` — thirty-one leap years per 128 years, more accurate still and
-  occasionally proposed as a reform.
+- `7/29` and then `8/33` — eight leap years every 33 years, the cycle long
+  associated with the **Jalali calendar** of **1079**, whose reform committee
+  included Omar Khayyam. (The Jalali calendar itself followed the observed
+  spring equinox; the 33-year cycle is its arithmetic shadow, and an
+  astonishingly accurate one.)
+- `31/128` — thirty-one leap years per 128 years, more accurate still, and
+  proposed as a reform by the astronomer Johann Heinrich Mädler in 1864.
 
 The familiar **Gregorian** rule (`97/400` — drop three leap days every four
 centuries) is *not* a convergent. It is a deliberate administrative compromise:
@@ -65,16 +67,19 @@ centuries) is *not* a convergent. It is a deliberate administrative compromise:
 century boundaries are far easier to teach and remember than a 33-year cycle. It
 is a rare case where humanity knowingly chose a *worse* approximation for the
 sake of usability — the exception that proves how strong the convergents' pull
-normally is.
+normally is. (The comparison is a little kinder to Pope Gregory than it looks:
+his 1582 reform aimed to hold the *spring equinox* near 21 March, and the
+equinox-to-equinox year, about `365.2424` days, sits closer to `97/400` than the
+mean tropical year does.)
 
 ### Clockwork and gears
 
 The same problem appears whenever two rotations must be linked by a gear train:
 the ratio of teeth must approximate an irrational or awkward ratio. **Christiaan
-Huygens**, building a mechanical planetarium in the 1680s, needed a gear ratio
-for Saturn's period relative to Earth's — roughly `2640858/77708431`. He used a
-continued-fraction convergent, `206/7`, cutting gears of 206 and 7 teeth
-instead of tens of thousands. The convergent is the best ratio achievable with a
+Huygens**, building a mechanical planetarium in 1682, needed a gear ratio for
+Saturn's period, which his data put at `77708431/2640858 ≈ 29.4254` years. He
+used a continued-fraction convergent, `206/7`, cutting gears of 206 and 7 teeth
+instead of tens of millions. The convergent is the best ratio achievable with a
 gear you can actually machine.
 
 ### π and the race for 355/113
@@ -86,8 +91,9 @@ Two are legendary:
 - `355/113 ≈ 3.14159292`, found by **Zu Chongzhi** around **480 AD**, accurate
   to *six* decimals. It is so good because the next partial quotient, `292`, is
   huge (Stop 3): `355/113` is the best rational approximation to `π` with a
-  denominator under **16600**, and it held that record unmatched for over a
-  thousand years.
+  denominator below **16604** (the first better fraction is `52163/16604`), and
+  it stood as the world's most accurate value of `π` for nearly a thousand
+  years.
 
 ## Worked examples
 
@@ -108,7 +114,7 @@ Leap-year rules from the convergents of 0.2422:
 Notice the values straddle `0.2422` in the alternating pattern the determinant
 identity guarantees: `0.25` (over), `0.2414` (under), `0.2424` (over),
 `0.2422` (under). Each is the best leap-year rule with a cycle no longer than
-its denominator — and `8/33`, the 900-year-old Jalali rule, is more accurate
+its denominator — and `8/33`, the 900-year-old Jalali cycle, is more accurate
 than the Gregorian calendar the world actually uses.
 
 The `π` convergents underlie the whole story of approximating the circle. Run
@@ -131,6 +137,94 @@ continued fraction of pi:
  6    1  208341/66317  3.1415926535  +1.22e-10
  7    1  312689/99532  3.1415926536  -2.91e-11
 ```
+
+## Then, now, next
+
+### Then — the sky's cycles, caught in fractions
+
+```mermaid
+timeline
+    title Best approximations in stone, bronze, and brass
+    section Antiquity
+        c. 500 BC : Babylon adopts a 19-year cycle of 235 lunar months
+        432 BC : Meton brings the 19-year cycle to Athens
+        c. 250 BC : Archimedes traps pi between 223/71 and 22/7
+        2nd c. BC : The Antikythera mechanism turns the Metonic and Saros cycles in bronze
+        46 BC : Julius Caesar's calendar - one leap day in four years
+    section From Zu to Huygens
+        c. 480 : Zu Chongzhi's 355/113
+        1079 : The Jalali reform, and its 8-in-33 shadow
+        1582 : Pope Gregory's reform - 97 leap days in 400 years
+        1682 : Huygens' planetarium turns Saturn on 206 and 7 teeth
+        1798 : Legendre - a close enough fraction must be a convergent
+    section Modern
+        1864 : Madler proposes 31 leap days in 128 years
+        2022 : The CGPM votes to let leap seconds lapse by 2035
+```
+
+Calendars were the first great customer of best approximation. A lunisolar
+calendar must fit whole months into whole years, and the ratio of the tropical
+year to the lunar month has its own continued fraction — which the engine will
+unfold for you:
+
+```
+$ python -m tourbus demo cf 12.368266
+continued fraction of 12.368266:
+  [12; 2, 1, 2, 1, 1, 17, 3, 2, 25, 1, 7]
+
+ n  a_n  p/q                 value      error
+ -  ---  ----------  -------------  ---------
+ 0   12  12/1        12.0000000000  +3.68e-01
+ 1    2  25/2        12.5000000000  -1.32e-01
+ 2    1  37/3        12.3333333333  +3.49e-02
+ 3    2  99/8        12.3750000000  -6.73e-03
+ 4    1  136/11      12.3636363636  +4.63e-03
+ 5    1  235/19      12.3684210526  -1.55e-04
+ 6   17  4131/334    12.3682634731  +2.53e-06
+ 7    3  12628/1021  12.3682664055  -4.05e-07
+```
+
+Two rows are ancient institutions. `99/8` is the Greek *octaeteris*, 99 months
+in 8 years; `235/19` is the **Metonic cycle**, 235 months in 19 years, used in
+Babylon from about 500 BC, brought to Athens by Meton in 432 BC, and still
+running today: it fixes the Hebrew calendar, and the Christian computus for the
+date of Easter labels each year by its place in the cycle, its *golden number*.
+The `17` that follows it is why the cycle was good enough to last 2,500 years.
+Around the second century BC a Greek workshop even cut the Metonic and
+223-month Saros eclipse cycles into the bronze gear trains of the
+**Antikythera mechanism**, the oldest known geared computer.
+
+### Now — best approximation in software and standards
+
+- **Your language already does it.** Python's `Fraction.limit_denominator`
+  (see [Stop 2](02-unfolding-road.md#then-now-next)) walks convergents and
+  semiconvergents to return the best fraction under a denominator cap — the
+  theorem of this stop as a library call.
+- **Clocks and frequencies.** Whenever hardware must turn one frequency into
+  another with integer dividers — a phase-locked loop, a fractional clock
+  divider, a sample-rate converter, a gear train in a mechanical watch — the
+  engineer is choosing a good rational approximation with small parts.
+- **Leap seconds.** Earth's rotation is irregular and slowly braking, so no
+  fixed rule can keep atomic time aligned with the sun; since 1972 leap seconds
+  have been inserted by observation. In 2022 the General Conference on Weights
+  and Measures decided to let the difference grow larger by 2035 — in effect
+  retiring the leap second.
+
+> [!TIP]
+> The Gregorian rule drifts by about one day in 3,200 years against the mean
+> tropical year. Try `python -m tourbus demo cf 0.24219` to see which leap-year
+> rules a mathematician would have chosen instead.
+
+### Next — a moving target
+
+The target of this stop is not fixed. The tropical year shortens by about half
+a second per century, and the day lengthens as tides slow the Earth, so the
+"best" leap-year rule of the year 5000 will differ from today's; John Herschel's
+1849 suggestion of dropping one more leap day every 4,000 years and Mädler's
+`31/128` are both answers to a question whose answer drifts. More broadly,
+best approximation in *several* numbers at once — simultaneous Diophantine
+approximation — is where Littlewood's conjecture and Hermite's problem live
+([Stop 15](15-terminus.md), [Stop 2](02-unfolding-road.md#then-now-next)).
 
 ## Exercises
 
@@ -166,18 +260,27 @@ continued fraction of pi:
 
 ## See it move
 
-Open the **Scenic Overlook** widget:
-[`site/index.html#stop-5-overlook`](../site/index.html#stop-5-overlook). Drag a
-slider for the target ratio and watch the best-approximation fractions update
-live, with the calendar, gear, and π presets one click away.
+The **Calendar Designer** (W9) in the
+[live exposition](../site/index.html#stop-5-overlook) steps through the
+convergents of the tropical year's leftover `0.242190` days as leap-year rules
+— the Julian `1/4`, the Jalali `8/33`, Mädler's `31/128`, and beyond — showing
+each rule's drift in days per millennium beside the Gregorian `97/400`, which is
+*not* a convergent. Set a drift budget with the slider and it picks the simplest
+rule that meets it, then charts the cumulative drift over 3,000 years.
 
 **Try it live:** the calendar preset to [a tolerance of 2.5 days per millennium](../site/index.html#w9?b=2.5).
+
 ## Further reading
 
 - Khinchin, *Continued Fractions*, §6 (best approximations, Legendre's
   criterion). See Appendix C.
 - Hardy & Wright, §§10.15–10.16 on the theory of best approximation.
-- V. F. Rich / J. Dutka on the history of calendar reform and the 33-year cycle.
+- E. G. Richards, *Mapping Time: The Calendar and its History* (Oxford, 1998) —
+  the Metonic, Julian, Jalali, and Gregorian calendars in full.
+- J. Dutka, "On the Gregorian revision of the Julian calendar," *Mathematical
+  Intelligencer* 10 (1988).
+- T. Freeth et al., "Decoding the ancient Greek astronomical calculator known as
+  the Antikythera Mechanism," *Nature* 444 (2006).
 - Appendix A of this tour for the approximation bounds behind Legendre's
   criterion.
 

@@ -43,15 +43,6 @@ fraction `d` measures exactly where it sits.
 
 ![The attractor, approached: each frame is one more application of "replace me with smaller copies of myself." The limit is the fixed point.](assets/fig-koch-sierpinski.svg)
 
-Every exhibit in this hall is older than its label. Cantor's set (1883), the
-Koch curve (1904), and Sierpiński's triangle (1915) were built as
-counterexamples — "monsters" meant to break the era's intuitions about curves —
-and the dragon was folded by physicists Heighway, Banks, and Harter in the
-1960s and spread by Martin Gardner's 1967 column. Only in 1975 did Benoit
-Mandelbrot coin *fractal* and argue the monsters were the rule, not the
-exception — coastlines, lungs, markets. The gallery had been open for ninety
-years before anyone hung a sign.
-
 ### Space-filling curves
 
 Push the branching further and a curve can fill an entire region — dimension
@@ -141,6 +132,87 @@ step closer to the attractor; the byte counts climb because each level multiplie
 the number of segments by the branching factor `N`. Open the web widget to watch
 these draw themselves stroke by recursive stroke.
 
+## Then, now, next
+
+### Then — monsters first, models later
+
+```mermaid
+timeline
+    title From monsters to models
+    section The monsters
+        1872 : Weierstrass - a curve continuous everywhere and smooth nowhere
+        1883 : Cantor's set - uncountably many points, total length zero
+        1890 : Peano's curve fills a square
+        1904 : Koch's snowflake - infinite length around a finite area
+        1915 : Sierpinski's triangle
+        1918 : Hausdorff defines dimension for sets of any roughness
+        1918 : Julia and Fatou iterate maps of the complex plane
+    section The models
+        1967 : Mandelbrot asks how long the coast of Britain is
+        1968 : Lindenmayer grows plants by rewriting strings
+        1975 : Mandelbrot coins the word fractal
+        1981 : Hutchinson - every contracting system has one attractor
+        1998 : Shishikura - the Mandelbrot set's boundary has dimension 2
+```
+
+Every exhibit in this hall is older than its label. Weierstrass's nowhere-smooth
+curve, Cantor's set, Peano's square-filling curve, Koch's snowflake, and
+Sierpiński's triangle were built between 1872 and 1915 as counterexamples —
+"monsters" meant to break the era's intuitions about curves and lengths — and
+Felix Hausdorff's 1918 definition of fractional dimension was a tool for
+measuring them. Around the same time Gaston Julia and Pierre Fatou studied what
+happens when a rational map of the complex plane is iterated, and found the
+boundaries now called Julia sets; without computers they could not see them.
+The dragon was folded by the NASA physicists Heighway, Banks, and Harter in the
+1960s and spread by Martin Gardner's 1967 column. Then Benoit Mandelbrot, at
+IBM, asked in 1967 how long the coast of Britain is (it depends on your ruler),
+coined *fractal* in 1975, and argued that the monsters were the rule, not the
+exception: coastlines, lungs, clouds, and markets. The gallery had been open
+for ninety years before anyone hung a sign.
+
+### Now — fractals at work
+
+- **Indexing the planet.** Space-filling curves turn two-dimensional data
+  into a one-dimensional order that keeps neighbours together. Google's S2
+  geometry library numbers cells on the Earth's surface along Hilbert curves on
+  the six faces of a cube; the related Z-order (Morton) curve lays out keys in
+  databases and textures in GPU memory.
+- **Antennas.** A self-similar antenna resonates at several scales at once.
+  Nathan Cohen built the first fractal antenna in 1988 and published the idea
+  in 1995; compact multi-band fractal antennas have since been used inside
+  mobile phones.
+- **Growing worlds.** Lindenmayer's L-systems (the rewriting rules behind this
+  stop's curves) and iterated function systems generate plants, terrain, and
+  clouds in films and games, and fractal image compression (Arnaud Jacquin,
+  1992) was a lively research field of the 1990s.
+- **Measuring the rough.** Box-counting dimension is a standard measurement
+  for rough surfaces, porous materials, and branching structures from
+  river networks to blood vessels.
+
+### Next — continued fractions inside the fractals
+
+The deepest open questions of complex dynamics are continued-fraction
+questions in disguise.
+
+- **Siegel disks and Brjuno numbers.** Iterate `z ↦ e^{2πiα}z + z²` and a
+  disk of calm, rigid rotation — a *Siegel disk* — surrounds `0` exactly when
+  `α` is a *Brjuno number*: the sum `Σ log(qₙ₊₁)/qₙ` over its convergent
+  denominators converges. Alexander Brjuno proved the condition sufficient
+  (1971) and Jean-Christophe Yoccoz proved it exactly right for this family
+  (1988), work cited in his 1994 Fields Medal. The golden mean, with the
+  slowest-growing denominators of all, gives the most famous Siegel disk; for
+  higher-degree maps, whether Brjuno's condition is still the right one is open.
+- **Is the Mandelbrot set locally connected?** The *MLC conjecture* would
+  imply that the Mandelbrot set's picture is essentially complete. It remains
+  open; Mikhail Lyubich, Dzmitry Dudko, and others have proved it at more and
+  more kinds of parameters, several of them described by the continued
+  fractions of rotation numbers.
+- **Fractals made of continued fractions.** The numbers whose partial
+  quotients are all `1` or `2` form a Cantor set of dimension about `0.5313`.
+  How the dimension grows as more digits are allowed is exactly what the
+  attack on Zaremba's conjecture ([Stop 15](15-terminus.md#zaremba-s-conjecture))
+  needs; the hall of mirrors and the terminus meet here.
+
 ## Exercises
 
 1. **(★)** Compute the similarity dimension of the Sierpiński carpet (a square
@@ -176,6 +248,7 @@ depth slider and watch the dragon, Koch, Sierpiński, and Hilbert curves converg
 on their fixed-point attractors one recursive level at a time.
 
 **Try it live:** the Fractal Lab preset to [the dragon at depth 10](../site/index.html#w8?f=dragon&d=10).
+
 ## Further reading
 
 - K. Falconer, *Fractal Geometry: Mathematical Foundations and Applications* —
@@ -185,5 +258,12 @@ on their fixed-point attractors one recursive level at a time.
 - M. Barnsley, *Fractals Everywhere*, for the IFS / attractor viewpoint.
 - C. Series, "The Modular Surface and Continued Fractions," for the Möbius /
   surd connection; Appendix C.
+- B. Mandelbrot, *The Fractal Geometry of Nature* (1982) — the manifesto, with
+  the monsters and the coastlines side by side.
+- P. Prusinkiewicz & A. Lindenmayer, *The Algorithmic Beauty of Plants* (1990) —
+  L-systems, free online from the authors' lab.
+- J.-C. Yoccoz, "Théorème de Siegel, nombres de Bruno et polynômes
+  quadratiques," *Astérisque* 231 (1995) — where continued fractions decide the
+  shape of a Julia set.
 
 [← Stop 12 — The Tower](12-tower.md) · [Route map](index.md) · [Stop 14 — The Souvenir Shop →](14-souvenir-shop.md)

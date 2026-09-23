@@ -129,6 +129,84 @@ continued fraction of 51/22:
  2    7  51/22  2.3181818182  +0.00e+00
 ```
 
+## Then, now, next
+
+### Then — a road older than its name
+
+```mermaid
+timeline
+    title Writing a number as nested reciprocals
+    section Before the notation
+        c. 370 BC : Theaetetus and the Academy study incommensurables by anthyphairesis
+        c. 300 BC : Euclid's Elements X.2 - a measuring that never ends means incommensurable
+    section Notation and name
+        1572 : Bombelli feeds a fraction into itself to approximate sqrt(13)
+        1613 : Cataldi unfolds sqrt(18) and invents a notation for the dangling tail
+        1655 : Wallis calls such a fraction continue fracta - continually fractioned
+    section The theory
+        1737 : Euler - rational if and only if the expansion is finite
+        1770 : Lagrange builds best approximation on the convergents
+        1848 : Hermite asks for a higher-dimensional expansion that sees cubics
+        1913 : Perron's treatise becomes the standard reference
+```
+
+The road was walked long before anyone paved it. Greek geometers compared two
+lengths by *anthyphairesis* — "subtracting in turn": take the shorter from the
+longer as often as it fits, swap, repeat. The sequence of "how many times"
+counts is exactly the list of partial quotients, and Book X of Euclid's
+*Elements* turns it into a test: if the measuring never stops, the two lengths
+have no common unit. Historians such as David Fowler have argued that this is
+how Plato's circle — Theaetetus in particular — first handled irrational
+ratios like the side and diagonal of a square, long before anyone could write
+`√2` as a number (see [Heritage stop H1](appendix-h-history.md#h1-c-300-bc-the-ladder-of-euclid)).
+
+The written notation arrived two thousand years later. Bombelli (1572) and
+Cataldi (1613) fed fractions into themselves to approximate square roots;
+Wallis gave the object its name; and Euler's 1737 dissertation made the
+characterisation on this page — rational exactly when finite — into a
+theorem. Everything since has been refinement of one question: *what does the
+sequence of quotients know about the number?*
+
+### Now — the fraction behind the float
+
+The unfolding road runs quietly inside modern software whenever a computer has
+to turn a number back into a fraction.
+
+- **"What fraction is this?"** Python's `Fraction.limit_denominator` answers by
+  walking the continued fraction of its argument and returning the best
+  convergent or semiconvergent under a denominator cap. It is how a tool can
+  print `0.30000000000000004` back as `3/10`, or `π` as `355/113`.
+- **Rational reconstruction.** Computer-algebra systems often work modulo a
+  large prime to keep numbers small, then must recover an exact answer like
+  `-17/42` from its residue. Running the extended Euclidean algorithm on the
+  modulus and the residue, and stopping halfway down the road, recovers the
+  fraction (P. S. Wang, 1981). The halting point is Legendre's criterion from
+  [Stop 5](05-scenic-overlook.md) in disguise.
+- **Recognising constants.** The continued fraction finds an integer relation
+  `a·x − b = 0` between a number and `1`. Integer-relation algorithms such as
+  PSLQ (Ferguson and Bailey, 1990s) generalise the same idea to many numbers at
+  once, and are how experimental mathematicians turn a 100-digit decimal into a
+  closed-form formula.
+
+> [!TIP]
+> In plain Python, `Fraction(math.pi).limit_denominator(1000)` returns
+> `Fraction(355, 113)`, and raising the cap to `16603` still returns it. The
+> first better fraction, `52163/16604`, needs a denominator more than a hundred
+> times larger.
+
+### Next — the unfolding road in higher dimensions
+
+A single real number has one canonical expansion. Two numbers approximated
+*simultaneously* have none, and that gap is one of the oldest open roads in
+the subject. In an 1848 letter to Jacobi, Charles Hermite asked for an
+algorithm that represents real numbers so that the cubic irrationals show up
+as periodic, just as quadratic irrationals do at [Stop 6](06-loop-road.md).
+Jacobi's own attempt, later developed by Perron into the Jacobi–Perron
+algorithm, and many successors (Brun, Selmer, and others) are still studied
+for their convergence and ergodic behaviour. In 2022 Oleg Karpenkov settled
+the *totally real* cubic case with a new "sin²" algorithm. The general problem
+— cubic fields with complex roots — remains open after more than 175 years.
+
 ## Exercises
 
 1. **(★)** Expand `[3; 4, 12, 4]` back into an ordinary fraction by hand, then
@@ -160,10 +238,11 @@ continued fraction of 51/22:
 
 ## See it move
 
-Open the **Unfolding Road** widget:
-[`site/index.html#stop-2-road`](../site/index.html#stop-2-road). Type any
-rational or a named constant and watch the fraction unfold one nested reciprocal
-at a time, with each partial quotient peeled off as it is computed.
+The Unfolding Road's section of the [live exposition](../site/index.html#stop-2-road)
+sends you back to the **CF Expansion Machine** (widget W1) at the Depot, which
+drives both kinds of road. Type `415/93` and its Euclid ledger stops after four
+rows; press **π** and it keeps going, each partial quotient certified from a
+60-digit seed before it is shown.
 
 ## Further reading
 
@@ -172,5 +251,11 @@ at a time, with each partial quotient peeled off as it is computed.
 - Hardy & Wright, *An Introduction to the Theory of Numbers*, Chapter X, §§10.1–10.5.
 - C. D. Olds, *Continued Fractions* (MAA New Mathematical Library), an
   approachable book-length introduction; Appendix C.
+- D. Fowler, *The Mathematics of Plato's Academy* (2nd ed., 1999) — the case
+  that Greek ratio theory was built on anthyphairesis.
+- C. Brezinski, *History of Continued Fractions and Padé Approximants*
+  (Springer, 1991) — the standard history, from Bombelli to the twentieth century.
+- O. Karpenkov, *Acta Arithmetica* 203 (2022) — the sin² algorithm and the
+  totally real case of Hermite's problem.
 
 [← Stop 1 — The Depot](01-depot.md) · [Route map](index.md) · [Stop 3 — The Engine Room →](03-engine-room.md)

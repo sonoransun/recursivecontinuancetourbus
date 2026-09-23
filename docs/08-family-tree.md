@@ -141,6 +141,74 @@ The runs are `LL` (2), `R` (1), `L` (1). Reading `[0; 2, 1, 2]`: the leading `0`
 means we start by turning left, the runs `2, 1` match the middle quotients, and
 the final quotient `2` shows up as `1 + 1` across the last two runs.
 
+## Then, now, next
+
+### Then — a clockmaker, a geologist, and a number theorist
+
+```mermaid
+timeline
+    title Listing every fraction exactly once
+    section Rows of fractions
+        1802 : Haros tabulates fractions by denominator to convert decimals
+        1816 : Farey announces the mediant property - Cauchy proves it that year
+    section The tree
+        1858 : Stern grows the tree from his diatomic sequence
+        1861 : Brocot, a Paris clockmaker, grows it again to choose gear trains
+        1904 : Minkowski's question-mark function reads the tree in binary
+    section The twentieth century
+        1924 : Franel and Landau tie Farey fractions to the Riemann hypothesis
+        1937 : Rademacher's exact partition formula cuts the circle into Farey arcs
+        1938 : Ford draws a circle on every fraction
+        1976 : Dijkstra names Stern's sequence fusc
+        2000 : Calkin and Wilf recount the rationals
+```
+
+The family tree has a tangled genealogy. The sequences called *Farey* were
+tabulated first by the French engineer Charles Haros in 1802, who needed to
+convert the new metric decimals back into common fractions; John Farey, a
+geologist, noticed the mediant property in a short 1816 note without a proof,
+and Cauchy supplied one within months — and gave the discovery Farey's name.
+The tree itself was found twice in four years: by Moritz Stern in Göttingen,
+as a piece of pure number theory, and by Achille Brocot in Paris, who used it
+to design clock gear trains and published his tables for fellow horologists. Both
+stories are replayed live at [Heritage stop H7](appendix-h-history.md#h7-1858-1861-the-tree-in-the-workshop).
+
+### Now — fractions as a data structure
+
+- **Search and simplification.** Descending the tree is binary search over
+  the rationals: it finds the *simplest* fraction in any interval (the one with
+  the smallest denominator), which is what you want when turning a measured
+  ratio — a frame rate, a gear ratio, a probability — into a clean fraction.
+- **Digital geometry.** A straight line drawn in pixels is a sequence of short
+  and long runs — a *Christoffel word* — whose slope is a fraction on this tree;
+  image-analysis algorithms that recognise digital straight segments walk the
+  Stern–Brocot tree to do it (the same words reappear as the cutting sequences
+  of [Appendix I, B5](appendix-i-branches.md#b5-cutting-sequences-ostrowski-sturmian-words-and-the-three-distances)).
+- **The circle method.** Hardy and Ramanujan's asymptotic formula for the
+  partition function `p(n)` became, in Hans Rademacher's hands (1937), an
+  *exact* convergent series, obtained by cutting the unit circle into arcs at
+  the Farey fractions; his 1943 simplification used Ford's circles. The same
+  "Rademacher expansions" returned in string theory as the famous *black hole
+  Farey tail* (Dijkgraaf, Maldacena, Moore, and Verlinde, 2000), where a sum
+  over Farey fractions counts the microscopic states of a black hole.
+
+### Next — the Riemann hypothesis, written in fractions
+
+- **Farey fractions and the zeta zeros.** In 1924 Jérôme Franel and Edmund
+  Landau proved that the Riemann hypothesis is *equivalent* to a statement about
+  this stop's sequences: the Farey fractions of order `N` are spread evenly
+  along `[0, 1]`, their total displacement from perfectly equal spacing growing
+  no faster than `N^(1/2 + ε)`. Proving that the fractions of this stop are that
+  well behaved would settle the most famous open problem in mathematics.
+- **The question mark's derivative.** Where Minkowski's `?(x)` has a
+  derivative, it is `0` or `∞` — and which one is decided by the *average size*
+  of the partial quotients of `x`. Pinning down the exact thresholds is an
+  active line of research.
+- **Markov's uniqueness conjecture.** The Markov numbers of the Express Line
+  ([E1](appendix-d-frontier.md#e1-the-markov-spectrum-the-numbers-after-the-golden-ratio))
+  grow on a tree built from this one, and Frobenius asked in 1913 whether each
+  Markov number sits atop exactly one Markov triple. The question is still open.
+
 ## Exercises
 
 1. **(★)** Compute the mediant of `1/2` and `2/3`, and confirm it lies between
@@ -169,12 +237,14 @@ the final quotient `2` shows up as `1 + 1` across the last two runs.
 
 ## See it move
 
-Open the **Family Tree** widget:
-[`site/index.html#stop-8-family`](../site/index.html#stop-8-family). Click L and
-R to descend the Stern–Brocot tree, or type a fraction and watch the path light
-up, with the mediant computed at every branch.
+Open the **Stern–Brocot Explorer** (W2) in the
+[live exposition](../site/index.html#stop-8-family). Press **L** and **R** (or
+the arrow keys, or click a child node) to descend the tree one mediant at a
+time, with **Undo** to climb back; or type a fraction and press **Find** to watch
+its address light up, run by run, as its continued fraction.
 
 **Try it live:** descend straight to [355/113](../site/index.html#w2?f=355/113).
+
 ## Further reading
 
 - Graham, Knuth & Patashnik, *Concrete Mathematics*, §4.5 — the definitive
@@ -183,5 +253,11 @@ up, with the mediant computed at every branch.
   (2000).
 - Hardy & Wright, §3.1–3.7 on Farey sequences.
 - A. Denjoy / H. Minkowski on the question-mark function; see Appendix C.
+- L. R. Ford, "Fractions," *American Mathematical Monthly* 45 (1938) — the
+  circles, and a beautiful proof of the Farey properties.
+- A. Hatcher, *Topology of Numbers* (AMS, 2022) — the Farey diagram, continued
+  fractions, and Conway's topograph as one picture.
+- R. Dijkgraaf, J. Maldacena, G. Moore & E. Verlinde, "A Black Hole Farey Tail"
+  (2000) — Farey sums in quantum gravity.
 
 [← Stop 7 — The Cattle Crossing](07-cattle-crossing.md) · [Route map](index.md) · [Stop 9 — Celebrity Sightings →](09-celebrity.md)
